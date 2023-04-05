@@ -33,3 +33,7 @@ body{
 .d-none{
     display: none;
 }
+
+.pointer{
+    cursor: pointer;
+}
