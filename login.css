@@ -1,5 +1,6 @@
 body {    
     margin: 0;
+    font-family: 'Inter';
 }
 
 .loginBody {
@@ -47,5 +48,5 @@ body {
 .loginHeaderQuestion {
     margin: 0;
     font-size: 24px;
-    font-weight: 100;
+    font-weight: 300;
 }
