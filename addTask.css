@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2{
+    font-size: 3em;
+}
+
+.addTask-content {
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20%;
+}
+
+.addTask-form {
+    height: 60%;
+    width: 70%;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    padding-left: 10%;
+    padding-right: 10%;
+    gap: 10%;
+}
+
+.addTask-form-left-container {
+    height: 100%;
+    width: 50%;
+}
+
+.addTask-form-right-container {
+    height: 100%;
+    width: 50%;
+}
+
+.addTask-form-headlines{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.addTask-prio-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
