@@ -54,17 +54,17 @@
                 <div>
                     <h4 class="addTask-form-headlines">Prio</h4>
                     <div class="addTask-prio-container">
-                        <div class="prio red-highlight">
+                        <div class="prio red-highlight" onclick="true">
                             <span>Urgent</span>
-                            <img>
+                            <img src="./img/prio_urgent.png">
                         </div>
-                        <div class="prio yellow-highlight">
+                        <div class="prio yellow-highlight" onclick="true">
                             <span>Medium</span>
-                            <img>
+                            <img src="./img/prio_medium.png" class="extra">
                         </div>
-                        <div class="prio green-highlight">
+                        <div class="prio green-highlight" onclick="true">
                             <span>Low</span>
-                            <img>
+                            <img src="./img/prio_low.png">
                         </div>
                     </div>
                 </div>
@@ -72,11 +72,15 @@
                     <h4 class="addTask-form-headlines">Subtasks</h4>
                     <input placeholder="Add new subtask">
                 </div>
+                <div class="addTask-subtask-container">
+                    <input id="subtask1" type="checkbox" class="subtask-checkbox">
+                    <label for="subtask1">Subtask 1</label>
+                </div>
             </div>
         </form>
         <div class="addTask-commit-buttons">
-            <button>Clear  x</button>
-            <button class="addTask-submit-btn">Create Task  ✓</button>
+            <button>Clear x</button>
+            <button class="addTask-submit-btn">Create Task ✓</button>
         </div>
     </div>
 </body>

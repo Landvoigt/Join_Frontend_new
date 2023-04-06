@@ -107,11 +107,26 @@ textarea::placeholder {
     gap: 7px;
 }
 
+.addTask-prio-container img {
+    margin-left: 8px;
+    height: 12px;
+    width: 16px;
+}
+
+.extra {
+    height: 8px !important;
+    width: 14px !important;
+}
+
 .prio {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding-bottom: 8px;
     padding-top: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 8px;
     border: 1px solid rgb(236, 236, 236);
     background-color: white;
@@ -126,19 +141,26 @@ textarea::placeholder {
         -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
 }
 
+.prio:active img {
+    filter: brightness(0) invert(1);
+}
+
 .red-highlight:active {
-    background-color: red;
+    background-color: #ff3d00;
     border: 0;
+    color: white;
 }
 
 .yellow-highlight:active {
-    background-color: yellow;
+    background-color: #ffa800;
     border: 0;
+    color: white;
 }
 
 .green-highlight:active {
-    background-color: lightgreen;
+    background-color: #7ae229;
     border: 0;
+    color: white;
 }
 
 .addTask-commit-buttons {
@@ -163,11 +185,26 @@ textarea::placeholder {
     color: rgba(0, 0, 59, 0.8);
 }
 
-.addTask-submit-btn{
-    background-color: rgba(0, 0, 54, 0.8) !important;
+.addTask-submit-btn {
+    background-color: #2a3647 !important;
     color: white !important;
 }
 
-.addTask-submit-btn:hover{
-    background-color: rgb(71, 120, 211) !important;
+.addTask-submit-btn:hover {
+    background-color: #29abe2 !important;
+}
+
+.addTask-subtask-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 0.8em;
+    font-weight: 500;
+    gap: 8px;
+}
+
+.subtask-checkbox{
+    height: 15px !important;
+    width: 15px !important;
 }
