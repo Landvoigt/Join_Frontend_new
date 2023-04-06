@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +10,12 @@
     <link rel="stylesheet" href="summary.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
 </head>
-<body>
+
+<body onload="loadDate()">
     <div class="summary-content">
         <div class="headline-summary">
             <h2>Summary</h2>
@@ -34,26 +38,42 @@
                         <div class="single-task-description">Awaiting<br>feedback</div>
                     </div>
                 </div>
-                <div class="second-row">
-                    <div class="second-row-left">
-                        <img src="img/Group 7.png" alt="">
-                        <div style="display: flex; flex-direction: column;">
-                            <span style="font-size: 46px; text-align: center;"><b>1</b></span>Urgent
+                    <div class="second-row">
+                        <div class="d-flex">
+                            <img src="img/Group 7.png" alt="">
+                            <div class="flex-column">
+                                <span style="font-size: 46px; text-align: center;"><b>1</b></span>Urgent
+                            </div>
+                        </div>
+                        <div class="vertical-line-2"></div>
+                        <div class="second-row-right">
+                            <b id="date"></b>
+                            <span>Upcoming Deadline</span>
                         </div>
                     </div>
-                    <div>
 
+                <div class="third-row">
+                    <div class="to-do-status">
+                        <img src="img/to-do.png" alt="">
+                        <div class="flex-column" style="font-weight: 500;">
+                            <span style="font-size: 50px; text-align: center;"><b>1</b></span>To-Do
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div></div>
-                    <div></div>
+                    <div class="to-do-status">
+                        <img src="img/done.png" alt="">
+                        <div class="flex-column" style="font-weight: 500;">
+                            <span style="font-size: 50px; text-align: center;"><b>1</b></span>Done
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="greeting">
-
+                <span style="font-weight: 600;font-size: 44px;">Good Morning,</span><span class="name">Sofia
+                    Müller</span>
             </div>
         </div>
+
     </div>
 </body>
+
 </html>
