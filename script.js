@@ -2,7 +2,10 @@ const MAINPAGE_ID = 'mainpage'
 const PRIVACY_ID = 'privacy'
 
 let currentPage = MAINPAGE_ID;
-
+/**
+ * this function is used to include HTML Template
+ * 
+ */
 async function initialize(){
     await includeHTML();
     
