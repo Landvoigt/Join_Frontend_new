@@ -139,10 +139,133 @@ body{
 }
 
 .header-content{
-    height: 60px;
-    width: 100vw;
     z-index: 1;
-    background-color: grey;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px 20px 348px;
+    gap: 34px;
+
+    position: absolute;
+    height: 89px;
+    left: 0;
+    top: 0;
+    right: 0;
+
+    background: #FFFFFF;
+/* Barra superior */
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profileImageHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 26px;
+
+    width: 106px;
+    height: 49px;
+
+
+/* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.headerHelp {
+    width: 31px;
+    height: 31px;
+
+    color: #CDCDCD;
+
+/* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.profilePictureContainer {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    border: 3px solid #2EA1DC;
+    border-radius: 100%;
+
+    width: 49px;
+    height: 49px;
+
+
+/* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.ChristinaProfileImage {
+    position: absolute;
+    object-fit: cover;
+    left: 1.44px;
+    top: 1.44px;
+    border-radius: 100%;
+    width: 46.12px;
+    height: 46.12px;
+}
+
+.profileImgInBorderContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    isolation: isolate;
+
+    position: absolute;
+    width: 46.12px;
+    height: 46.12px;
+    left: 1.44px;
+    top: 47.56px;
+
+/* Style */
+
+    background: linear-gradient(90deg, #9327FF 0%, #2EA1DC 100%);
+    border-radius: 559px;
+    transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.spanHeader {
+    width: 335px;
+    height: 25px;
+
+/* Version 2/t6 */
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+/* or 25px */
+
+
+    color: #000000;
+
+
+/* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
 }
 
 .mainpage-content{
