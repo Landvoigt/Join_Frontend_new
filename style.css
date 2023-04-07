@@ -297,3 +297,7 @@ body{
 .pointer{
     cursor: pointer;
 }
+
+.bgdHover:hover {
+    background-color: #091931 !important;
+}
