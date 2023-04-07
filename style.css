@@ -224,11 +224,10 @@ body{
 .ChristinaProfileImage {
     position: absolute;
     object-fit: cover;
-    left: 1.44px;
-    top: 1.44px;
     border-radius: 100%;
-    width: 46.12px;
-    height: 46.12px;
+    width: 43px;
+    height: 43px;
+    padding: 1.5px;
 }
 
 .profileImgInBorderContainer {
