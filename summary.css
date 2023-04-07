@@ -1,21 +1,7 @@
-html {
-    scroll-behavior: smooth;
-}
-
 *,
 ::after,
 ::before {
     box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-}
-
-h2 {
-    font-size: 4em;
-    padding-left: 10%;
 }
 
 .summary-content {
@@ -125,10 +111,6 @@ h2 {
 #date {
     font-size: 21px;
     margin-bottom: 14px;
-}
-
-.d-flex {
-    display: flex;
 }
 
 .flex-column {

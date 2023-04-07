@@ -1,14 +1,17 @@
-const MAINPAGE_ID = 'mainpage'
+const SUMMARY_ID = 'summary'
 const PRIVACY_ID = 'privacy'
+const ADDTASK_ID = 'addTask'
+const LEGALNOTICE_ID = 'legalNotice'
+const LOGIN_ID = 'login'
 
-let currentPage = MAINPAGE_ID;
+let currentPage = SUMMARY_ID;
 /**
  * this function is used to include HTML Template
  * 
  */
 async function initialize(){
     await includeHTML();
-    
+    loadDate();
 }
 
 async function includeHTML() {
