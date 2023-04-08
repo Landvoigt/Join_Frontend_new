@@ -78,3 +78,63 @@ body {
     font-size: 24px;
     font-weight: 300;
 }
+
+.cardHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginH1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    text-align: center;
+    color: #000000;
+}
+
+.underlineForH1 {
+    width: 150px;
+    height: 0;
+    border: 3px solid #29ABE2;
+}
+
+.loginInputFields {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: 422px;
+}
+
+.loginInputField {
+    position: relative;
+    height: 44px;
+    margin-bottom: 40px;
+}
+
+.inputImg {
+    position: absolute;
+    right: 0;
+    top: 40%;
+}
+
+.loginE-Mail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 8%;
+    gap: 10px;
+    width: 380px;
+    height: 50px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+}
