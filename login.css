@@ -122,6 +122,12 @@ body {
     top: 40%;
 }
 
+.passwordImg {
+    height: 20px;
+    width: 20px;
+    opacity: 0.5;
+}
+
 .loginE-Mail {
     display: flex;
     flex-direction: row;
