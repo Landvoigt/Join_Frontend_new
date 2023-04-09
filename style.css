@@ -301,3 +301,12 @@ body{
 .bgdHover:hover {
     background-color: #091931 !important;
 }
+
+.margin {
+    margin: 0;
+}
+
+.margin-left-rifht-5 {
+    margin-left: 5px;
+    margin-right: 5px;
+}

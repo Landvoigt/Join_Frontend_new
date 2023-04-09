@@ -83,6 +83,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .loginH1 {
@@ -92,6 +94,8 @@ body {
     line-height: 120%;
     text-align: center;
     color: #000000;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 .underlineForH1 {
@@ -104,7 +108,7 @@ body {
     display: flex;
     flex-direction: column;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 0px;
     gap: 8px;
     width: 422px;
@@ -143,4 +147,63 @@ body {
     font-weight: 400;
     font-size: 21px;
     line-height: 120%;
+}
+
+.loginFooter {
+    display: flex;
+}
+
+.rememberMe {
+    font-size: 16px;
+}
+
+.forgotPass {
+    color: #29ABE2;
+    font-size: 16px;
+}
+
+.loginFooterBtns {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.loginBtn {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    color: #FFFFFF;
+    background-color: #2A3547;
+    padding: 10px 30px;
+    gap: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.loginBtn:hover {
+    background-color: #29ABE2;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
+
+.guestBtn {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    color: #2A3547;
+    background-color: #FFFFFF;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid #2A3547;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.guestBtn:hover {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
