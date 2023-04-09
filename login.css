@@ -15,6 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 35px 0px;
     gap: 35px;
     width: 652px;
@@ -118,11 +119,12 @@ body {
     position: relative;
     height: 44px;
     margin-bottom: 40px;
+    width: 100%;
 }
 
 .inputImg {
     position: absolute;
-    right: 0;
+    right: 8%;
     top: 40%;
 }
 
