@@ -11,7 +11,7 @@ body {
     display: flex;
 }
 
-.a-i-center{
+.a-i-center {
     align-items: center;
 }
 
@@ -372,16 +372,18 @@ body {
 }
 
 .incl-cont-side {
+    min-height: 100vh;
     height: 100%;
     width: 100%;
     padding-left: 314px;
     padding-right: 82px;
     padding-top: 144px;
     padding-bottom: 52px;
+    background-color: rgba(211, 211, 211, 0.2);
 }
 
 h3 {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: 700;
     margin-top: 2em;
 }
