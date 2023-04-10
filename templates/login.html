@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="fonts.css">
-    <script src="login.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../fonts.css">
+    <script src="../js/login.js"></script>
 </head>
 
 <body>
     <div class="loginBody">
         <div class="loginHeader">
-            <img src="./img/logo.svg" alt="Join Logo" class="logoImage">
+            <img src="../img/logo.svg" alt="Join Logo" class="logoImage">
             <div class="loginHeaderRight">
                 <p class="loginHeaderQuestion">Not a Join user?</p>
                 <button class="openSignUpPopupBtn pointer">Sign up</button>
@@ -29,11 +29,11 @@
             <div class="loginInputFields">
                 <div class="loginInputField">
                     <input class="loginE-Mail pointer" type="text" required placeholder="E-mail">
-                    <img class="inputImg" src="./img/email.svg" alt="E-Mail">
+                    <img class="inputImg" src="../img/email.svg" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
-                    <input class="loginE-Mail pointer" type="password" required id="passwordInput" placeholder="Password">
-                    <img class="inputImg passwordImg pointer" id="passwordImg" src="./img/visibility.png" alt="Password" onclick="showPassword()">
+                    <input class="loginE-Mail pointer" type="password" required id="passwordInput" placeholder="Password" onkeydown="changePWSymbol()">
+                    <img class="inputImg passwordImg pointer" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
                 </div>
                 <div class="loginFooter">
                     <input class="loginCheckbox margin-left-rifht-5 margin pointer" type="checkbox"> 
