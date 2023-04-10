@@ -328,6 +328,28 @@ body {
     z-index: 0;
 }
 
+.backImgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 120%;
+    top: 20%;
+    width: 37px;
+    height: 37px;
+}
+
+.signupHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.signupFooterBtn {
+    margin-bottom: 20px;
+}
+
 .d-none {
     display: none;
 }

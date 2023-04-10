@@ -12,39 +12,17 @@
     <script src="../js/login.js"></script>
 </head>
 
-<body>
+<body onload="renderLogin()">
     <div class="loginBody">
         <div class="loginHeader">
             <img src="../img/logo.svg" alt="Join Logo" class="logoImage">
-            <div class="loginHeaderRight">
+            <div class="loginHeaderRight" id="loginHeaderRight">
                 <p class="loginHeaderQuestion">Not a Join user?</p>
-                <button class="openSignUpPopupBtn pointer">Sign up</button>
+                <button class="openSignUpPopupBtn pointer" onclick="signUp()">Sign up</button>
             </div>
         </div>
-        <div class="loginForm">
-            <div class="cardHeaderContainer">
-                <h1 class="loginH1">Log In</h1>
-                <span class="underlineForH1"></span>
-            </div>
-            <div class="loginInputFields">
-                <div class="loginInputField">
-                    <input class="loginE-Mail" type="text" required placeholder="E-mail">
-                    <img class="inputImg" src="../img/email.svg" alt="E-Mail">
-                </div>
-                <div class="loginInputField">
-                    <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="Password" onkeydown="changePWSymbol()">
-                    <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
-                </div>
-                <div class="loginFooter">
-                    <input class="loginCheckbox margin-left-rifht-5 margin pointer" type="checkbox"> 
-                    <p class="rememberMe margin-left-rifht-5 margin">Remember me</p>
-                    <p class="forgotPass margin-left-rifht-5 margin pointer">Forgot my Password</p> 
-                </div>
-            </div>
-            <div class="loginFooterBtns">
-                <button class="loginBtn pointer">Log in</button>
-                <button class="guestBtn pointer">Guest Log in</button>
-            </div>
+        <div class="loginForm" id="loginForm">
+            
         </div>
     </div>
 </body>
