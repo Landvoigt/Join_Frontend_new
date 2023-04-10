@@ -1,6 +1,6 @@
 h2 {
     font-size: 3.5em;
-    padding-left: 10%;
+    margin-top: 0;
 }
 
 input {
@@ -55,25 +55,16 @@ textarea::placeholder {
 }
 
 .addTask-content {
-    height: 100vh;
-    width: 80%;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    padding-left: 20%;
-    background-color: rgb(250, 250, 250);
 }
 
 .addTask-form {
     height: 50%;
-    width: 80%;
+    width: 100%;
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    padding-left: 10%;
-    padding-right: 10%;
-    /* gap: 12%; */
 }
 
 .addTask-form-left-container {
@@ -90,9 +81,7 @@ textarea::placeholder {
 }
 
 .addTask-form-headlines {
-    font-size: 1.1em;
     font-weight: 500;
-    margin-bottom: 5px;
 }
 
 .addTask-prio-container {
@@ -159,13 +148,12 @@ textarea::placeholder {
 }
 
 .addTask-commit-buttons {
-    width: 80%;
+    width: 100%;
     height: 50px;
-    padding-left: 10%;
-    padding-right: 10%;
     display: flex;
     justify-content: flex-end;
     gap: 21px;
+    margin-top: 35px;
 }
 
 .addTask-commit-buttons button {
@@ -189,7 +177,7 @@ textarea::placeholder {
     background-color: #29abe2 !important;
 }
 
-.addTask-subtask-container{
+.addTask-subtask-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -199,7 +187,7 @@ textarea::placeholder {
     gap: 8px;
 }
 
-.subtask-checkbox{
+.subtask-checkbox {
     height: 15px !important;
     width: 15px !important;
 }

@@ -1,5 +1,5 @@
 const SUMMARY_ID = 'summary'
-const PRIVACY_ID = 'privacy'
+const PRIVACY_ID = 'privacyPolicy'
 const ADDTASK_ID = 'addTask'
 const LEGALNOTICE_ID = 'legalNotice'
 const LOGIN_ID = 'login'
@@ -9,8 +9,9 @@ let currentPage = SUMMARY_ID;
  * this function is used to include HTML Template
  * 
  */
-async function initialize(){
+async function initialize() {
     await includeHTML();
+    showMainpage();
     loadDate();
 }
 
@@ -28,7 +29,11 @@ async function includeHTML() {
     }
 }
 
-function changeSite(id){
+function showMainpage() {
+    changeSite(SUMMARY_ID);
+}
+
+function changeSite(id) {
     let pageToShow = document.getElementById(id);
     let currentShownPage = document.getElementById(currentPage);
 
