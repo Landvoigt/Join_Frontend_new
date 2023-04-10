@@ -5,16 +5,16 @@ async function changePWSymbol() {
   let Symbol = document.getElementById("passwordImg");
   if (InputField.value == "") {
     Symbol.src = "../img/pasword.svg";
-    Symbol.classList.remove("pointer");
+    Symbol.classList.remove("pointer", "opacity");
     InputField.type = "password";
     inputPass = false;
   } else if ((InputField.type = "password")) {
     Symbol.src = "../img/privacy.png";
-    Symbol.classList.add("pointer");
+    Symbol.classList.add("pointer", "opacity");
     inputPass = true;
   } else {
     Symbol.src = "../img/visibility.svg";
-    Symbol.classList.add("pointer");
+    Symbol.classList.add("pointer", "opacity");
     inputPass = true;
   }
 }
