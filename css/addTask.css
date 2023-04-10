@@ -116,6 +116,7 @@ textarea::placeholder {
     background-color: white;
     font-size: 1em;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .prio:hover {
@@ -161,11 +162,12 @@ textarea::placeholder {
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 8px;
-    border: 1px solid lightgrey;
+    border: 1px solid #2a3647;
     background-color: white;
     font-size: 1em;
     font-weight: 600;
     color: rgba(0, 0, 59, 0.8);
+    cursor: pointer;
 }
 
 .addTask-submit-btn {
@@ -175,6 +177,18 @@ textarea::placeholder {
 
 .addTask-submit-btn:hover {
     background-color: #29abe2 !important;
+    border: 1px solid transparent;
+    box-shadow:
+        1px 4px 3px -1px rgba(0, 0, 0, 0.16),
+        -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
+}
+
+.addTask-clear-btn:hover {
+    border: 1px solid #29abe2;
+    color: #29abe2;
+    box-shadow:
+        1px 4px 3px -1px rgba(0, 0, 0, 0.16),
+        -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
 }
 
 .addTask-subtask-container {

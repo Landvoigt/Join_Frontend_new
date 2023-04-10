@@ -1,12 +1,12 @@
 <div class="sidebar-content">
-    <img class="LogoImageSidebar pointer" src="./img/logo-white.svg" alt="Logo-Join">
+    <img class="LogoImageSidebar pointer" src="./img/logo-white.svg" alt="Logo-Join" onclick="showMainpage()">
 
     <div class="sidebarMenu">
         <div class="summarySidebar pointer bgdHover" onclick="changeSite(SUMMARY_ID)">
             <img src="./img/uit_web-grid.svg" alt="summary logo">
             <span class="spanSidebar">Summary</span>
         </div>
-        <div class="boardSidebar pointer bgdHover">
+        <div class="boardSidebar pointer bgdHover" onclick="changeSite(BOARD_ID)">
             <img src="./img/board.svg" alt="Board logo">
             <span class="spanSidebarBoard">Board</span>
         </div>
@@ -14,7 +14,7 @@
             <img src="./img/add-task.svg" alt="Add Task logo">
             <span class="spanSidebarBoard">Add Task</span>
         </div>
-        <div class="boardSidebar pointer bgdHover">
+        <div class="boardSidebar pointer bgdHover" onclick="changeSite(CONTACTS_ID)">
             <img src="./img/contacts.svg" alt="Contacts logo">
             <span class="spanSidebarBoard">Contacts</span>
         </div>

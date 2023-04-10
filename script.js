@@ -1,8 +1,10 @@
-const SUMMARY_ID = 'summary'
-const PRIVACY_ID = 'privacyPolicy'
-const ADDTASK_ID = 'addTask'
-const LEGALNOTICE_ID = 'legalNotice'
-const LOGIN_ID = 'login'
+const LOGIN_ID = 'loginPage'
+const SUMMARY_ID = 'summaryPage'
+const BOARD_ID = 'boardPage'
+const CONTACTS_ID = 'contactsPage'
+const ADDTASK_ID = 'addTaskPage'
+const PRIVACY_ID = 'privacyPolicyPage'
+const LEGALNOTICE_ID = 'legalNoticePage'
 
 let currentPage = SUMMARY_ID;
 /**

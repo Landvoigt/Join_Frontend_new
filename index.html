@@ -7,22 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Gruppe 526</title>
     <script src="script.js"></script>
-    <script src="summary.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/summary.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/addTask.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="summary.css">
-    <link rel="stylesheet" href="addTask.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/summary.css">
+    <link rel="stylesheet" href="./css/addTask.css">
 </head>
 
 <body onload="initialize()">
-    <div w3-include-html="./sidebar.html" id=""></div>
-    <div w3-include-html="./header.html" id=""></div>
-    <div class="incl-cont-side d-none" w3-include-html="./summary.html" id="summary"></div>
-    <div class="incl-cont-side d-none" w3-include-html="./addTask.html" id="addTask"></div>
-    <div class="incl-cont-side d-none" w3-include-html="./privacyPolicy.html" id="privacyPolicy"></div>
-    <div class="incl-cont-side d-none" w3-include-html="./legalNotice.html" id="legalNotice"></div>
-    <div class="incl-cont-side d-none" w3-include-html="./contact.html" id="contact"></div>
+    <div w3-include-html="./templates/sidebar.html" id=""></div>
+    <div w3-include-html="./templates/header.html" id=""></div>
+    <div class="incl-cont-side d-none" w3-include-html="./templates/summary.html" id="summaryPage"></div>
+    <div class="incl-cont-side d-none" w3-include-html="./templates/board.html" id="boardPage"></div>
+    <div class="incl-cont-side d-none" w3-include-html="./templates/addTask.html" id="addTaskPage"></div>
+    <div class="incl-cont-side d-none" w3-include-html="./templates/contacts.html" id="contactsPage"></div>
+    <div class="incl-cont-side d-none" w3-include-html="./templates/privacyPolicy.html" id="privacyPolicyPage"></div>
+    <div class="incl-cont-side d-none" w3-include-html="./templates/legalNotice.html" id="legalNoticePage"></div>
 </body>
 
 </html>
