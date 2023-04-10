@@ -11,6 +11,10 @@ body {
     display: flex;
 }
 
+.a-i-center{
+    align-items: center;
+}
+
 .sidebar-content {
     position: fixed;
     z-index: 2;
