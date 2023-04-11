@@ -8,12 +8,13 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding-left: 43px;
 }
 
 .headline-summary {
     display: flex;
     align-items: center;
-    margin-bottom: 47px;
+    margin-bottom: 87px;
 }
 
 .summary-headline{
