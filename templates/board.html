@@ -17,17 +17,17 @@
             <h3>To Do</h3>
             <img src="./img/plus.png" class="board-plus-icon">
         </div>
-        <div class="test" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)">
-
+        <div class="drag-drop-area" id="toDo" ondrop="moveTo('toDo'); removeHighlight('toDo')"
+            ondragover="allowDrop(event); showHighlight('toDo')" ondragleave="removeHighlight('toDo')">
         </div>
     </div>
     <div class="board-section">
         <div class="board-section-category">
             <h3>In Progress</h3>
             <img src="./img/plus.png" class="board-plus-icon">
-        </div> 
-        <div class="test" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
-
+        </div>
+        <div class="drag-drop-area" id="inProgress" ondrop="moveTo('inProgress'); removeHighlight('inProgress')"
+            ondragover="allowDrop(event); showHighlight('inProgress')" ondragleave="removeHighlight('inProgress')">
         </div>
     </div>
     <div class="board-section">
@@ -35,8 +35,10 @@
             <h3>Awaiting Feedback</h3>
             <img src="./img/plus.png" class="board-plus-icon">
         </div>
-        <div class="test" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)">
-
+        <div class="drag-drop-area" id="awaitFeedback"
+            ondrop="moveTo('awaitFeedback'); removeHighlight('awaitFeedback')"
+            ondragover="allowDrop(event); showHighlight('awaitFeedback')"
+            ondragleave="removeHighlight('awaitFeedback')">
         </div>
     </div>
     <div class="board-section">
@@ -44,8 +46,8 @@
             <h3>Done</h3>
             <img src="./img/plus.png" class="board-plus-icon">
         </div>
-        <div class="test" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)">
-
+        <div class="drag-drop-area" id="done" ondrop="moveTo('done'); removeHighlight('done')"
+            ondragover="allowDrop(event); showHighlight('done')" ondragleave="removeHighlight('done')">
         </div>
     </div>
 </div>

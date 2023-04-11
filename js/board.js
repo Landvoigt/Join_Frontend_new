@@ -17,7 +17,7 @@ let tasks = [
         'id': 1,
         'category': 'inProgress',
         'topic': 'Backend',
-        'color': 'orange',
+        'color': 'lightblue',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
         'subtasksNumber': 2,
@@ -31,7 +31,7 @@ let tasks = [
         'id': 2,
         'category': 'awaitFeedback',
         'topic': 'Frontend',
-        'color': 'orange',
+        'color': 'green',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
         'subtasksNumber': 2,
@@ -45,7 +45,7 @@ let tasks = [
         'id': 3,
         'category': 'done',
         'topic': 'Hallo',
-        'color': 'orange',
+        'color': 'aqua',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
         'subtasksNumber': 2,
@@ -95,7 +95,7 @@ function updateTasks(){
 
 function generateTask(task){
     return /*html*/ `
-    <div class="task-box" draggable="true" ondragstart="startDragging(${task['id']})">
+        <div class="task-box" draggable="true" ondragstart="startDragging(${task['id']})">
             <span class="task-category" style="background-color: ${task['color']}">${task['topic']}</span>
             <span class="task-headline">${task['headline']}</span>
             <span class="task-description">${task['description']}</span>
@@ -128,4 +128,12 @@ function allowDrop(event){
 function moveTo(category){
     tasks[currentDraggedElement]['category'] = category;
     updateTasks();
+}
+
+function showHighlight(id){
+    document.getElementById(id).classList.add('drag-over-highlight');
+}
+
+function removeHighlight(id){
+    document.getElementById(id).classList.remove('drag-over-highlight');
 }
