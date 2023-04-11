@@ -46,3 +46,21 @@ function changeSite(id) {
 
     currentPage = id;
 }
+
+function showLogoutPopup() {
+    let popup = document.getElementById('logoutPopup');
+    popup.classList.remove('d-none');
+    let overlay = document.getElementById('overlay');
+    overlay.classList.remove('d-none');
+}
+
+function stopPropagation(event) {
+    event.stopPropagation();
+}
+
+function closeLogoutPopup() {
+    let popup = document.getElementById('logoutPopup');
+    popup.classList.add('d-none');
+    let overlay = document.getElementById('overlay');
+    overlay.classList.add('d-none');
+}

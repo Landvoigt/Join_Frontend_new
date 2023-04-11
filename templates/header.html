@@ -4,7 +4,9 @@
         <img class="headerHelp pointer" src="./img/questionLogo.svg" alt="You need a Help?">
         <div class="profilePictureContainer pointer">
             <img class="ChristinaProfileImage" src="./img/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.jpeg"
-                alt="Christina">
+                alt="Christina" onclick="showLogoutPopup()">
+            <a href="../templates/login.html"><button id="logoutPopup" class="logoutBtn pointer d-none" onclick="stopPropagation(event)">Log Out</button></a>
         </div>
     </div>
+    <div class="overlay d-none" id="overlay" onclick="closeLogoutPopup()"></div>
 </div>

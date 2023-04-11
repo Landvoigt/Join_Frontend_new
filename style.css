@@ -349,6 +349,35 @@ body {
     margin-bottom: 20px;
 }
 
+.logoutBtn {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    background: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px 0px 20px 20px;
+    width: 130px;
+    height: 53px;
+    font-size: 16px;
+    line-height: 120%;
+    text-align: center;
+    color: #CDCDCD;
+    border: unset;
+    z-index: 9999;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 0;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
 .d-none {
     display: none;
 }
