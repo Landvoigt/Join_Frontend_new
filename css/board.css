@@ -139,7 +139,6 @@
     border-radius: 8px;
     font-size: 1.1em;
     font-weight: 400;
-    background-color: orange;
     color: white;
 }
 
@@ -182,4 +181,11 @@
     font-size: 0.8em;
     font-weight: 600;
     opacity: 0.8;
+}
+
+.test{
+    min-height: 500px;
+    height: auto;
+    width: 300px;
+    background-color: aquamarine;
 }

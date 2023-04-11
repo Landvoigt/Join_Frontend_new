@@ -16,7 +16,7 @@ let tasks = [
     {   
         'id': 1,
         'category': 'inProgress',
-        'topic': 'Sales',
+        'topic': 'Backend',
         'color': 'orange',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
@@ -30,7 +30,7 @@ let tasks = [
     {   
         'id': 2,
         'category': 'awaitFeedback',
-        'topic': 'Sales',
+        'topic': 'Frontend',
         'color': 'orange',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
@@ -44,7 +44,7 @@ let tasks = [
     {   
         'id': 3,
         'category': 'done',
-        'topic': 'Sales',
+        'topic': 'Hallo',
         'color': 'orange',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
@@ -57,14 +57,48 @@ let tasks = [
     },
 ];
 
+let currentDraggedElement;
 
+function updateTasks(){
+    let todo = tasks.filter(t => t['category'] == 'toDo');
+    document.getElementById('toDo').innerHTML = '';
 
-function generateTask(){
-    return `
-    <div class="task-box">
-            <span class="task-category">Sales</span>
-            <span class="task-headline">Website Redesign</span>
-            <span class="task-description">Modify the contents of the main website specific ...</span>
+    for (let i = 0; i < todo.length; i++) {
+        const element = todo[i];
+        document.getElementById('toDo').innerHTML += generateTask(element);   
+    }
+
+    let inProgress = tasks.filter(t => t['category'] == 'inProgress');
+    document.getElementById('inProgress').innerHTML = '';
+
+    for (let i = 0; i < inProgress.length; i++) {
+        const element = inProgress[i];
+        document.getElementById('inProgress').innerHTML += generateTask(element); 
+    }
+
+    let awaitFeedback = tasks.filter(t => t['category'] == 'awaitFeedback');
+    document.getElementById('awaitFeedback').innerHTML = '';
+
+    for (let i = 0; i < awaitFeedback.length; i++) {
+        const element = awaitFeedback[i];
+        document.getElementById('awaitFeedback').innerHTML += generateTask(element);
+    }
+
+    let done = tasks.filter(t => t['category'] == 'done');
+    document.getElementById('done').innerHTML = '';
+
+    for (let i = 0; i < done.length; i++) {
+        const element = done[i];
+        document.getElementById('done').innerHTML += generateTask(element);
+    }
+}
+
+function generateTask(task){
+    return /*html*/ `
+    <div class="task-box" draggable="true" ondragstart="startDragging(${task['id']})">
+            <span class="task-category" style="background-color: ${task['color']}">${task['topic']}</span>
+            <span class="task-headline">${task['headline']}</span>
+            <span class="task-description">${task['description']}</span>
             <div class="progress-container">
                 <div class="progress-box">
                     <div class="progress-bar" style="width:50%"></div>
@@ -81,4 +115,17 @@ function generateTask(){
             </div>
         </div>
     `;
+}
+
+function startDragging(id){
+    currentDraggedElement = id;
+}
+
+function allowDrop(event){
+    event.preventDefault();
+}
+
+function moveTo(category){
+    tasks[currentDraggedElement]['category'] = category;
+    updateTasks();
 }

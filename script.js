@@ -15,6 +15,7 @@ async function initialize() {
     await includeHTML();
     showMainpage();
     loadDate();
+    updateTasks();
 }
 
 async function includeHTML() {
