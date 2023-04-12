@@ -58,7 +58,7 @@ function loginTemplate() {
                 <div class="loginFooter">
                     <input class="loginCheckbox margin-left-rifht-5 margin pointer" type="checkbox"> 
                     <p class="rememberMe margin-left-rifht-5 margin">Remember me</p>
-                    <p class="forgotPass margin-left-rifht-5 margin pointer">Forgot my Password</p> 
+                    <p class="forgotPass margin-left-rifht-5 margin pointer" onclick="newPassword()">Forgot my Password</p> 
                 </div>
             </div>
             <div class="loginFooterBtns">
@@ -78,7 +78,7 @@ function signUp() {
 function signUpTemplate() {
   return `
             <div class="signupHeaderContainer">
-              <div class="backImgContainer">  
+              <div class="backImgSignUp">  
                 <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
               </div> 
                 <h1 class="loginH1">Sign up</h1>
@@ -101,6 +101,37 @@ function signUpTemplate() {
             </div>
             <div class="signupFooterBtn">
                 <button class="loginBtn pointer">Sign up</button>
+            </div>
+  `;
+}
+
+function newPassword() {
+  let header = document.getElementById('loginHeaderRight');
+  header.classList.add("d-none");
+  let card = document.getElementById('loginForm');
+  card.innerHTML = newPasswordTemplate();
+}
+
+function newPasswordTemplate() {
+  return `
+            <div class="signupHeaderContainer">
+              <div class="backImgContainer">  
+                <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
+              </div> 
+                <h1 class="loginH1">I forgot my password</h1>
+                <span class="underlineForH1"></span>
+            </div>
+            <div class="loginInputFields">
+                <div class="">
+                    <span class="subheaderNewPassword">Don't worry! We will send you an email with the instructions to reset your password.</span>
+                </div>
+                <div class="loginInputField">
+                    <input class="loginE-Mail" type="text" required placeholder="Email">
+                    <img class="inputImg" src="../img/email.svg" alt="E-Mail">
+                </div>
+            </div>
+            <div class="signupFooterBtn">
+                <button class="loginBtn pointer">Send me the email</button>
             </div>
   `;
 }

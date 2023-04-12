@@ -332,8 +332,19 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    right: 120%;
-    top: 20%;
+    right: 42%;
+    top: -10%;
+    width: 37px;
+    height: 37px;
+}
+
+.backImgSignUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 66%;
+    top: 10%;
     width: 37px;
     height: 37px;
 }

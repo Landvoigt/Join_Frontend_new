@@ -18,7 +18,7 @@ body {
     justify-content: center;
     padding: 35px 0px;
     gap: 35px;
-    width: 652px;
+    min-width: 652px;
     height: 513px;
     left: 394px;
     top: 274px;
@@ -97,6 +97,8 @@ body {
     color: #000000;
     margin-top: 0;
     margin-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .underlineForH1 {
@@ -163,6 +165,18 @@ body {
     color: #29ABE2;
     font-size: 16px;
     margin-left: 20px !important;
+}
+
+.subheaderNewPassword {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    text-align: center;
+    display: flex;
+    width: 650px;
+    margin-bottom: 40px;
 }
 
 .loginFooterBtns {
