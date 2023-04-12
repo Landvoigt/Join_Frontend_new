@@ -4,19 +4,19 @@
         <div class="addTask-form-left-container">
             <div>
                 <h4 class="addTask-form-headlines">Title</h4>
-                <input placeholder="Enter a title">
+                <input placeholder="Enter a title" maxlength="40">
             </div>
             <div>
                 <h4 class="addTask-form-headlines">Description</h4>
-                <textarea placeholder="Enter a description"></textarea>
+                <textarea placeholder="Enter a description" maxlength="200"></textarea>
             </div>
-            <div>
+            <div class="category-select">
                 <h4 class="addTask-form-headlines">Category</h4>
                 <select>
-                    <option value="" disabled selected>Select task category</option>
-                    <option>New category</option>
-                    <option>Sales</option>
-                    <option>Backoffice</option>
+                    <option value="0">Select task category</option>
+                    <option value="1">New category</option>
+                    <option value="2">Sales</option>
+                    <option value="3">Backoffice</option>
                 </select>
             </div>
             <div>
@@ -32,28 +32,34 @@
         <div class="addTask-form-right-container">
             <div>
                 <h4 class="addTask-form-headlines">Due date</h4>
-                <input type="date" placeholder="dd/mm/yyyy">
+                <div style="position: relative;">
+                    <img class="calendar-icon" src="./img/calendar.png"></img>
+                    <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" onclick="showCurrentDate()">
+                </div>
             </div>
             <div>
                 <h4 class="addTask-form-headlines">Prio</h4>
                 <div class="addTask-prio-container">
-                    <div class="prio red-highlight" onclick="true">
+                    <div id="red" class="prio" onclick="addPrioColor('red')">
                         <span>Urgent</span>
-                        <img src="./img/prio_urgent.png">
+                        <img id="redIcon" src="./img/prio_urgent.png" class="prio-img">
                     </div>
-                    <div class="prio yellow-highlight" onclick="true">
+                    <div id="yellow" class="prio" onclick="addPrioColor('yellow')">
                         <span>Medium</span>
-                        <img src="./img/prio_medium.png" class="extra">
+                        <img id="yellowIcon" src="./img/prio_medium.png" class="prio-img extra">
                     </div>
-                    <div class="prio green-highlight" onclick="true">
+                    <div id="green" class="prio" onclick="addPrioColor('green')">
                         <span>Low</span>
-                        <img src="./img/prio_low.png">
+                        <img id="greenIcon" src="./img/prio_low.png" class="prio-img">
                     </div>
                 </div>
             </div>
             <div>
                 <h4 class="addTask-form-headlines">Subtasks</h4>
-                <input placeholder="Add new subtask">
+                <div style="position: relative;">
+                    <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+                    <input placeholder="Add new subtask">
+                </div>
             </div>
             <div class="addTask-subtask-container">
                 <input id="subtask1" type="checkbox" class="subtask-checkbox">

@@ -5,7 +5,6 @@ h2 {
 
 input {
     width: -webkit-fill-available;
-    font-family: 'Open Sans', sans-serif;
     padding-bottom: 8px;
     padding-top: 10px;
     padding-left: 15px;
@@ -13,12 +12,14 @@ input {
     border-radius: 8px;
     border: 1px solid lightgrey;
     background-color: white;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 500;
-    color: rgb(200, 200, 200);
+    letter-spacing: -0.5px;
 }
 
 input::placeholder {
+    font-size: 1em;
+    font-weight: 400;
     color: rgb(200, 200, 200);
 }
 
@@ -46,11 +47,14 @@ textarea {
     border-radius: 8px;
     border: 1px solid lightgrey;
     background-color: white;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 500;
+    letter-spacing: -0.5px;
 }
 
 textarea::placeholder {
+    font-size: 1em;
+    font-weight: 400;
     color: rgb(200, 200, 200);
 }
 
@@ -91,7 +95,15 @@ textarea::placeholder {
     gap: 7px;
 }
 
-.addTask-prio-container img {
+.calendar-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 21px;
+    width: 21px;
+}
+
+.prio-img {
     margin-left: 8px;
     height: 12px;
     width: 16px;
@@ -126,26 +138,26 @@ textarea::placeholder {
         -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
 }
 
-.prio:active img {
+.img-brightening {
     filter: brightness(0) invert(1);
 }
 
-.red-highlight:active {
-    background-color: #ff3d00;
-    border: 0;
-    color: white;
+.red-highlight {
+    background-color: #ff3d00 !important;
+    border: 0 !important;
+    color: white !important;
 }
 
-.yellow-highlight:active {
-    background-color: #ffa800;
-    border: 0;
-    color: white;
+.yellow-highlight {
+    background-color: #ffa800 !important;
+    border: 0 !important;
+    color: white !important;
 }
 
-.green-highlight:active {
-    background-color: #7ae229;
-    border: 0;
-    color: white;
+.green-highlight {
+    background-color: #7ae229 !important;
+    border: 0 !important;
+    color: white !important;
 }
 
 .addTask-commit-buttons {
@@ -211,7 +223,30 @@ textarea::placeholder {
     gap: 8px;
 }
 
+.subtask-plus-icon {
+    position: absolute;
+    filter: contrast(2);
+    right: 10px;
+    top: 12px;
+    height: 16px;
+    width: 16px;
+}
+
 .subtask-checkbox {
     height: 15px !important;
     width: 15px !important;
+}
+
+select {
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: right 16px top 1em, right 10px top 1em;
+    background-size: 6px 6px, 6px 6px;
 }
