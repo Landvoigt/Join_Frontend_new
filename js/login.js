@@ -131,7 +131,42 @@ function newPasswordTemplate() {
                 </div>
             </div>
             <div class="signupFooterBtn">
-                <button class="loginBtn pointer">Send me the email</button>
+                <button class="loginBtn pointer" onclick="resetPassword()">Send me the email</button>
+            </div>
+  `;
+}
+
+function resetPassword() {
+  let header = document.getElementById('loginHeaderRight');
+  header.classList.add("d-none");
+  let card = document.getElementById('loginForm');
+  card.innerHTML = resetPasswordTemplate();
+}
+
+function resetPasswordTemplate() {
+  return `
+            <div class="signupHeaderContainer">
+              <div class="backImgResetContainer">  
+                <img onclick="newPassword()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
+              </div> 
+                <h1 class="loginH1">Reset your password</h1>
+                <span class="underlineForH1"></span>
+            </div>
+            <div class="loginInputFields">
+                <div class="">
+                    <span class="subheaderNewPassword">Change your account password</span>
+                </div>
+                <div class="loginInputField">
+                  <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="New password" onkeydown="changePWSymbol()">
+                  <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
+                </div>
+                <div class="loginInputField">
+                  <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="Confirm password" onkeydown="changePWSymbol()">
+                  <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
+                </div>
+            </div>
+            <div class="signupFooterBtn">
+                <button class="loginBtn pointer" onclick="renderLogin()">Send me the email</button>
             </div>
   `;
 }

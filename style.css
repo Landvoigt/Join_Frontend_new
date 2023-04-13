@@ -349,6 +349,17 @@ body {
     height: 37px;
 }
 
+.backImgResetContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 44%;
+    top: 0;
+    width: 37px;
+    height: 37px;
+}
+
 .signupHeaderContainer {
     display: flex;
     flex-direction: column;
