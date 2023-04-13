@@ -6,12 +6,14 @@ let tasks = [
         'color': 'orange',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
+        'date': '13/04/2023',
         'subtasksNumber': 2,
         'progression': 1,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
-        'prio': './img/prio_urgent.png',
+        'prioName': 'urgent',
+        'prioImg': './img/prio_urgent.png',
     },
     {
         'id': 1,
@@ -20,12 +22,14 @@ let tasks = [
         'color': 'lightblue',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
+        'date': '13/04/2023',
         'subtasksNumber': 2,
         'progression': 1,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
-        'prio': './img/prio_urgent.png',
+        'prioName': 'medium',
+        'prioImg': './img/prio_medium.png',
     },
     {
         'id': 2,
@@ -34,12 +38,14 @@ let tasks = [
         'color': 'green',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
+        'date': '13/04/2023',
         'subtasksNumber': 2,
         'progression': 1,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
-        'prio': './img/prio_urgent.png',
+        'prioName': 'urgent',
+        'prioImg': './img/prio_urgent.png',
     },
     {
         'id': 3,
@@ -48,16 +54,19 @@ let tasks = [
         'color': 'aqua',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
+        'date': '13/04/2023',
         'subtasksNumber': 2,
         'progression': 1,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
-        'prio': './img/prio_urgent.png',
+        'prioName': 'low',
+        'prioImg': './img/prio_low.png',
     },
 ];
 
 let currentDraggedElement;
+let currentPrioColor;
 
 function updateTasks() {
     let todo = tasks.filter(t => t['category'] == 'toDo');
@@ -149,23 +158,62 @@ function removeIconColor(id) {
 }
 
 function showDetailedTask(id) {
+    checkPrioColor(id);
     let task = tasks[id];
     let popup = document.getElementById('popupWindow');
     popup.classList.remove('d-none');
     popup.innerHTML = '';
     popup.innerHTML = `
     <div class="popup-task" onclick="stopPropagation(event)">
-        <div class="addTask-form-left-container">
-            <div>
-                <h4 class="addTask-form-headlines">Title</h4>
-                <input id="task${id}" placeholder="Enter a title" maxlength="40">
-            </div>
-            <div>
-                <h4 class="addTask-form-headlines">Description</h4>
-                <textarea placeholder="Enter a description" maxlength="200">${task['description']}</textarea>
-            </div>
+        <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+        <img class="edit-btn" src="./img/pencil_white.png" onclick="editDetailedTask(${id})">
+        <span class="task-category popup-category" style="background-color: ${task['color']}">${task['topic']}</span>
+        <h2 class="popup-headline">${task['headline']}</h2>
+        <span class="popup-span">${task['description']}</span>
+        <span class="popup-span"><b>Due date:</b>${task['date']}</span>
+        <div class="popup-span" style="display:flex; align-items:center">
+            <span><b>Priority:</b></span>
+            <span class="task-category" style="background-color: ${currentPrioColor}">${task['prioName']}
+                <img src="${task['prioImg']}" class="popup-prio-icon img-brightening">
+            </span>
+        </div>
+        <span class="popup-span"><b>Assigned to:</b></span>
+        <div class="popup-clients-container">
+        
         </div>
     </div>
     `;
-    document.getElementById(`task${id}`).value = `${task['headline']}`;
+}
+
+function checkPrioColor(id) {
+    let prio = tasks[id]['prioName'];
+    if (prio == 'urgent') {
+        currentPrioColor = '#ff3d00';
+    }
+    if (prio == 'medium') {
+        currentPrioColor = '#ffa800';
+    }
+    if (prio == 'low') {
+        currentPrioColor = '#7ae229';
+    }
+}
+
+function editDetailedTask(id) {
+    let task = tasks[id];
+    let popup = document.getElementById('popupWindow');
+    popup.classList.remove('d-none');
+    popup.innerHTML = '';
+    popup.innerHTML = `
+    <div class="popup-task" onclick="stopPropagation(event)">
+        <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+        <div class="popup-text-boxes">
+            <h4 class="addTask-form-headlines">Title</h4>
+            <input id="task${id}" placeholder="Enter a title" maxlength="40" onfocus="this.value=''" value="${task['headline']}">
+        </div>
+        <div class="popup-text-boxes">
+            <h4 class="addTask-form-headlines">Description</h4>
+            <textarea id="desc${id}" placeholder="Enter a description" maxlength="200" onfocus="this.value=''">${task['description']}</textarea>
+        </div>
+    </div>
+    `;
 }

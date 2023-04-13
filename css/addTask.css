@@ -24,7 +24,7 @@ input::placeholder {
     letter-spacing: 0;
 }
 
-input:focus-visible{
+input:focus-visible {
     outline: 0 !important;
 }
 
@@ -64,7 +64,7 @@ textarea::placeholder {
     letter-spacing: 0;
 }
 
-textarea:focus-visible{
+textarea:focus-visible {
     outline: 0 !important;
 }
 
@@ -117,11 +117,6 @@ textarea:focus-visible{
     margin-left: 8px;
     height: 12px;
     width: 16px;
-}
-
-.extra {
-    height: 8px !important;
-    width: 14px !important;
 }
 
 .prio {
@@ -261,7 +256,7 @@ select {
     background-size: 6px 6px, 6px 6px;
 }
 
-.popup-container{
+.popup-container {
     height: 85%;
     width: 80%;
     background-color: white;
@@ -270,16 +265,21 @@ select {
     position: relative;
 }
 
-.popup-task{
+.popup-task {
     height: 85%;
     width: 50%;
     background-color: white;
     border-radius: 30px;
+    margin-left: 232px;
     padding: 65px;
+    padding-top: 44px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.back-btn{
+.back-btn {
     position: absolute;
     z-index: 77;
     top: 35px;
