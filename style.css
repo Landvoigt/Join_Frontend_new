@@ -389,6 +389,18 @@ body {
     bottom: 0;
 }
 
+.popup-window {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000069;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .d-none {
     display: none;
 }

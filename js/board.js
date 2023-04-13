@@ -1,5 +1,5 @@
 let tasks = [
-    {   
+    {
         'id': 0,
         'category': 'toDo',
         'topic': 'Sales',
@@ -13,7 +13,7 @@ let tasks = [
         'client3': 'EF',
         'prio': './img/prio_urgent.png',
     },
-    {   
+    {
         'id': 1,
         'category': 'inProgress',
         'topic': 'Backend',
@@ -27,7 +27,7 @@ let tasks = [
         'client3': 'EF',
         'prio': './img/prio_urgent.png',
     },
-    {   
+    {
         'id': 2,
         'category': 'awaitFeedback',
         'topic': 'Frontend',
@@ -41,7 +41,7 @@ let tasks = [
         'client3': 'EF',
         'prio': './img/prio_urgent.png',
     },
-    {   
+    {
         'id': 3,
         'category': 'done',
         'topic': 'Hallo',
@@ -59,13 +59,13 @@ let tasks = [
 
 let currentDraggedElement;
 
-function updateTasks(){
+function updateTasks() {
     let todo = tasks.filter(t => t['category'] == 'toDo');
     document.getElementById('toDo').innerHTML = '';
 
     for (let i = 0; i < todo.length; i++) {
         const element = todo[i];
-        document.getElementById('toDo').innerHTML += generateTask(element);   
+        document.getElementById('toDo').innerHTML += generateTask(element);
     }
 
     let inProgress = tasks.filter(t => t['category'] == 'inProgress');
@@ -73,7 +73,7 @@ function updateTasks(){
 
     for (let i = 0; i < inProgress.length; i++) {
         const element = inProgress[i];
-        document.getElementById('inProgress').innerHTML += generateTask(element); 
+        document.getElementById('inProgress').innerHTML += generateTask(element);
     }
 
     let awaitFeedback = tasks.filter(t => t['category'] == 'awaitFeedback');
@@ -93,9 +93,9 @@ function updateTasks(){
     }
 }
 
-function generateTask(task){
+function generateTask(task) {
     return /*html*/ `
-        <div class="task-box" draggable="true" ondragstart="startDragging(${task['id']})">
+        <div class="task-box" draggable="true" ondragstart="startDragging(${task['id']})" onclick="showDetailedTask(${task['id']})">
             <span class="task-category" style="background-color: ${task['color']}">${task['topic']}</span>
             <span class="task-headline">${task['headline']}</span>
             <span class="task-description">${task['description']}</span>
@@ -117,23 +117,55 @@ function generateTask(task){
     `;
 }
 
-function startDragging(id){
+function startDragging(id) {
     currentDraggedElement = id;
 }
 
-function allowDrop(event){
+function allowDrop(event) {
     event.preventDefault();
 }
 
-function moveTo(category){
+function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
     updateTasks();
 }
 
-function showHighlight(id){
+function showHighlight(id) {
     document.getElementById(id).classList.add('drag-over-highlight');
 }
 
-function removeHighlight(id){
+function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-over-highlight');
+}
+
+function changeIconColor(id) {
+    let img = document.getElementById(id);
+    img.src = "./img/plus_lightblue.png";
+}
+
+function removeIconColor(id) {
+    let img = document.getElementById(id);
+    img.src = "./img/plus.png";
+}
+
+function showDetailedTask(id) {
+    let task = tasks[id];
+    let popup = document.getElementById('popupWindow');
+    popup.classList.remove('d-none');
+    popup.innerHTML = '';
+    popup.innerHTML = `
+    <div class="popup-task" onclick="stopPropagation(event)">
+        <div class="addTask-form-left-container">
+            <div>
+                <h4 class="addTask-form-headlines">Title</h4>
+                <input id="task${id}" placeholder="Enter a title" maxlength="40">
+            </div>
+            <div>
+                <h4 class="addTask-form-headlines">Description</h4>
+                <textarea placeholder="Enter a description" maxlength="200">${task['description']}</textarea>
+            </div>
+        </div>
+    </div>
+    `;
+    document.getElementById(`task${id}`).value = `${task['headline']}`;
 }

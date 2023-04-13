@@ -18,9 +18,14 @@ input {
 }
 
 input::placeholder {
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 400;
     color: rgb(200, 200, 200);
+    letter-spacing: 0;
+}
+
+input:focus-visible{
+    outline: 0 !important;
 }
 
 select {
@@ -53,9 +58,14 @@ textarea {
 }
 
 textarea::placeholder {
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 400;
     color: rgb(200, 200, 200);
+    letter-spacing: 0;
+}
+
+textarea:focus-visible{
+    outline: 0 !important;
 }
 
 .addTask-content {
@@ -66,7 +76,7 @@ textarea::placeholder {
 }
 
 .addTask-form {
-    height: 50%;
+    height: 50vh;
     width: 100%;
     display: flex;
 }
@@ -249,4 +259,34 @@ select {
     background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
     background-position: right 16px top 1em, right 10px top 1em;
     background-size: 6px 6px, 6px 6px;
+}
+
+.popup-container{
+    height: 85%;
+    width: 80%;
+    background-color: white;
+    border-radius: 30px;
+    padding: 65px;
+    position: relative;
+}
+
+.popup-task{
+    height: 85%;
+    width: 50%;
+    background-color: white;
+    border-radius: 30px;
+    padding: 65px;
+    position: relative;
+}
+
+.back-btn{
+    position: absolute;
+    z-index: 77;
+    top: 35px;
+    right: 35px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    transform: rotate(45deg);
+    cursor: pointer;
 }

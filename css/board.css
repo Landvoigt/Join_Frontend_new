@@ -23,15 +23,28 @@
     align-items: center;
     gap: 8px;
     height: 45px;
-    padding-left: 15px;
+    padding-left: 5px;
     padding-right: 15px;
     border-radius: 8px;
-    border: 1px solid #2a3647;
+    border: 1px solid lightgrey;
     background-color: white;
     font-size: 1em;
     font-weight: 600;
     color: rgba(0, 0, 59, 0.8);
     cursor: pointer;
+}
+
+.board-search-box input {
+    border: 0 !important;
+}
+
+.board-search-box img {
+    height: 26px;
+    width: 34px;
+    border-left: 2px solid rgb(230, 230, 230);
+    padding-top: 3px;
+    padding-left: 12px;
+    padding-bottom: 3px;
 }
 
 .board-headline-icon {
@@ -51,8 +64,8 @@
     gap: 8px;
 }
 
-.w-150 {
-    width: 150px;
+.w-160 {
+    width: 160px !important;
 }
 
 .board-section {
