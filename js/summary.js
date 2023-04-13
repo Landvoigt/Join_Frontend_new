@@ -8,7 +8,10 @@ function loadDate() {
         year: 'numeric'
     });
     dateContainer.innerHTML = formattedDate;
-    console.log(currentDate.getHours())
+    greetAccordingToTime(currenthour);
+}
+
+function greetAccordingToTime(currenthour){
     if (currenthour < 12) {
         document.getElementById('greeting').innerHTML='Good Morning';
     }if (currenthour < 18) {

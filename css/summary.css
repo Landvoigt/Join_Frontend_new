@@ -31,6 +31,7 @@
 
 .task-container {
     display: flex;
+    justify-content: space-between;
 }
 
 .tasks {
@@ -115,11 +116,6 @@
     margin-bottom: 14px;
 }
 
-.flex-column {
-    display: flex;
-    flex-direction: column;
-}
-
 .third-row {
     display: flex;
     justify-content: space-between;
@@ -153,7 +149,7 @@
 .name{
     color: #29ABE2;
     font-weight: 700;
-    font-size: 72px;
+    font-size: 68px;
     margin-bottom: 20px;
 }
 .greeting{
@@ -161,6 +157,6 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    margin-left: 300px;
     margin-bottom: 100px;
+    padding-right: 100px;
 }

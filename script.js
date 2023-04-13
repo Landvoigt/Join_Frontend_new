@@ -7,16 +7,14 @@ const PRIVACY_ID = 'privacyPolicyPage'
 const LEGALNOTICE_ID = 'legalNoticePage'
 
 let currentPage = SUMMARY_ID;
-/**
- * this function is used to include HTML Template
- * 
- */
+
 async function initialize() {
     setURL('http://developerakademie.com/smallest_backend_ever');
     await includeHTML();
     showMainpage();
     loadDate();
     updateTasks();
+    pushFirstLetter();
 }
 
 async function includeHTML() {

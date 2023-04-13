@@ -1,0 +1,46 @@
+.contacts-content{
+    display: flex;
+}
+.contacts-list{
+    width: 453px;
+    height: auto;
+}
+.first-letter{
+    min-width: 357px;
+    padding: 10px 37px 24px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    font-size: 21px;
+}
+.initials{
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+}
+.single-contact-box{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 35px;
+    transition: all 225ms ease-in-out;
+    border-radius: 22px;
+}
+.single-contact-box:hover{
+    cursor: pointer;
+    background-image: linear-gradient(to bottom,#ffffff, #dedede);
+}
+.contact-names{
+    font-weight: 400;
+    font-size: 21px;
+}
+.contact-names a{
+    font-weight: 400;
+    font-size: 16px;
+    color: #007CEE;
+}
