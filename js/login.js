@@ -52,7 +52,7 @@ function loginTemplate() {
                     <img class="inputImg" src="../img/email.svg" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="Password" onkeydown="changePWSymbol()">
+                    <input class="loginE-Mail" minlength="1" type="password" required id="passwordInput" placeholder="Password" onkeydown="changePWSymbol()">
                     <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
                 </div>
                 <div class="loginFooter">
