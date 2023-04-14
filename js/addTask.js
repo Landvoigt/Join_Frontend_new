@@ -144,7 +144,7 @@ function generateContacts() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         select.innerHTML += `
-        <option>${contact['firstname']} ${contact['lastname']}</option>
+        <option>${contact['firstname']} ${contact['lastname']}<input type="checkbox" class="subtask-checkbox"></option>
         `;
     }
 }
