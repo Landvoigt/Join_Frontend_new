@@ -1,4 +1,4 @@
-body {    
+body {
     margin: 0;
     font-family: 'Inter';
 }
@@ -23,10 +23,10 @@ body {
     left: 394px;
     top: 274px;
 
-/* white */
+    /* white */
 
     background: #FFFFFF;
-/* shadoe backlog box */
+    /* shadoe backlog box */
 
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
@@ -203,7 +203,8 @@ body {
 
 .loginBtn:hover {
     background-color: #29ABE2;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;}
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 
 .guestBtn {
     font-style: normal;
@@ -228,4 +229,48 @@ body {
 
 .opacity {
     opacity: 0.5;
+}
+
+.backImgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 42%;
+    top: -10%;
+    width: 37px;
+    height: 37px;
+}
+
+.backImgSignUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 66%;
+    top: 10%;
+    width: 37px;
+    height: 37px;
+}
+
+.backImgResetContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 44%;
+    top: 0;
+    width: 37px;
+    height: 37px;
+}
+
+.signupHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.signupFooterBtn {
+    margin-bottom: 20px;
 }

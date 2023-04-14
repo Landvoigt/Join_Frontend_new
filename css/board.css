@@ -164,7 +164,6 @@
 }
 
 .task-description {
-    font-weight: 500;
     opacity: 0.4;
     padding-bottom: 20px;
 }
@@ -226,7 +225,6 @@
 }
 
 .popup-span {
-    font-weight: 500;
     font-size: 1.1em;
     color: #2a3647;
     margin-bottom: 20px;
@@ -296,7 +294,6 @@
 }
 
 .popup-client-span {
-    font-weight: 500;
     letter-spacing: -0.5px;
     color: #2a3647;
 }

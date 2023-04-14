@@ -5,8 +5,10 @@ const CONTACTS_ID = 'contactsPage'
 const ADDTASK_ID = 'addTaskPage'
 const PRIVACY_ID = 'privacyPolicyPage'
 const LEGALNOTICE_ID = 'legalNoticePage'
+const HELP_ID = 'helpPage'
 
 let currentPage = SUMMARY_ID;
+let previousPage;
 
 async function initialize() {
     setURL('http://developerakademie.com/smallest_backend_ever');
@@ -42,6 +44,7 @@ function changeSite(id) {
     currentShownPage.classList.add('d-none');
     pageToShow.classList.remove('d-none');
 
+    previousPage = currentPage;
     currentPage = id;
 }
 
