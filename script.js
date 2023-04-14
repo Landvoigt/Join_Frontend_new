@@ -48,6 +48,14 @@ function changeSite(id) {
     currentPage = id;
 }
 
+function changeToAddTaskSite(id) {
+    changeSite(id);
+    let addTaskSite = document.getElementById('addTaskSite');
+    addTaskSite.innerHTML = getAddTaskHTML();
+    generateTaskCategories();
+    generateContacts();
+}
+
 function showLogoutPopup() {
     let popup = document.getElementById('logoutPopup');
     popup.classList.remove('d-none');

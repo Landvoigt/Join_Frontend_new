@@ -69,7 +69,6 @@ function pushFirstLetter(){
     
 }
 
-
 function renderLetters(){
     let contactsList = document.getElementById('contact-list');
     contactsList.innerHTML='';
@@ -82,6 +81,7 @@ function renderLetters(){
         renderContacts(element)
     }
 }
+
 function renderContacts(id){
     let letterBox = document.getElementById(`${id}`);
     for (let i = 0; i < contacts.length; i++) {
@@ -105,6 +105,7 @@ function renderContacts(id){
         
     }
 }
+
 function addRandomColor(i){
     let contact = document.getElementById(`initials-${i}`);
     contact.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);

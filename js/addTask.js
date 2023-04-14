@@ -1,3 +1,5 @@
+let topics = ['Sales', 'Design', 'Backoffice', 'Media', 'Marketing'];
+
 function addPrioColor(id) {
     let element = document.getElementById(id);
     let target = element.classList.contains(`${id}-highlight`);
@@ -35,12 +37,29 @@ function showCurrentDate() {
 }
 
 function showAddTaskWindow() {
-    let popup = document.getElementById('popupWindow');
-    popup.classList.remove('d-none');
-    popup.innerHTML = '';
-    popup.innerHTML = `
-    <div class="popup-container" onclick="stopPropagation(event)">
-        <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+    resetIDs();
+    popupWindow.innerHTML = `
+        <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
+            <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+        </div>
+        `;
+    let popupBox = document.getElementById('popupContainer');
+    popupBox.innerHTML += getAddTaskHTML();
+    generateTaskCategories();
+    generateContacts();
+}
+
+function resetIDs() {
+    let popupWindow = document.getElementById('popupWindow');
+    popupWindow.classList.remove('d-none');
+    popupWindow.innerHTML = '';
+    let addTaskSite = document.getElementById('addTaskSite');
+    addTaskSite.innerHTML = '';
+    return popupWindow
+}
+
+function getAddTaskHTML() {
+    return `
         <h2>Add Task</h2>
         <form class="addTask-form" onsubmit="addTask()">
             <div class="addTask-form-left-container">
@@ -50,24 +69,18 @@ function showAddTaskWindow() {
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Description</h4>
-                    <textarea placeholder="Enter a description" maxlength="200"></textarea>
+                    <textarea placeholder="Enter a description" maxlength="250"></textarea>
                 </div>
                 <div class="category-select">
                     <h4 class="addTask-form-headlines">Category</h4>
-                    <select>
-                        <option value="0">Select task category</option>
-                        <option value="1">New category</option>
-                        <option value="2">Sales</option>
-                        <option value="3">Backoffice</option>
+                    <select id="categorySelection">
+                        <option value="" disabled selected>Select task category</option>
                     </select>
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <select id="addTaskAssignedContacts">
+                    <select id="contactsSelection">
                         <option value="" disabled selected>Select contacts to assign</option>
-                        <option>Kaser</option>
-                        <option>Niko</option>
-                        <option>Tim</option>
                     </select>
                 </div>
             </div>
@@ -100,7 +113,7 @@ function showAddTaskWindow() {
                     <h4 class="addTask-form-headlines">Subtasks</h4>
                     <div style="position: relative;">
                         <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
-                        <input placeholder="Add new subtask">
+                        <input id="subtaskInput" placeholder="Add new subtask">
                     </div>
                 </div>
                 <div class="addTask-subtask-container">
@@ -113,8 +126,27 @@ function showAddTaskWindow() {
             <button class="addTask-clear-btn">Clear x</button>
             <button class="submit-btn">Create Task ✓</button>
         </div>
-    </div>
     `;
+}
+
+function generateTaskCategories() {
+    let select = document.getElementById('categorySelection');
+    for (let i = 0; i < topics.length; i++) {
+        let cat = topics[i];
+        select.innerHTML += `
+        <option>${cat}</option>
+        `;
+    }
+}
+
+function generateContacts() {
+    let select = document.getElementById('contactsSelection');
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        select.innerHTML += `
+        <option>${contact['firstname']} ${contact['lastname']}</option>
+        `;
+    }
 }
 
 function removeAddTaskWindow() {
