@@ -44,6 +44,7 @@ select {
 
 textarea {
     width: -webkit-fill-available;
+    height: 110px;
     font-family: 'Open Sans', sans-serif;
     padding-bottom: 8px;
     padding-top: 10px;

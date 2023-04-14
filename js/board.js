@@ -2,7 +2,7 @@ let tasks = [
     {
         'id': 0,
         'category': 'toDo',
-        'topic': 'Sales',
+        'topic': 'Design',
         'color': 'orange',
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
@@ -18,10 +18,10 @@ let tasks = [
     {
         'id': 1,
         'category': 'inProgress',
-        'topic': 'Backend',
-        'color': 'lightblue',
-        'headline': 'Website Redesign',
-        'description': 'Modify the contents of the main website specific ...',
+        'topic': 'Sales',
+        'color': 'aqua',
+        'headline': 'Call potential clients',
+        'description': 'Make the product presentation to prospective buyers',
         'date': '13/04/2023',
         'subtasksNumber': 2,
         'progression': 1,
@@ -34,26 +34,10 @@ let tasks = [
     {
         'id': 2,
         'category': 'awaitFeedback',
-        'topic': 'Frontend',
-        'color': 'green',
-        'headline': 'Website Redesign',
-        'description': 'Modify the contents of the main website specific ...',
-        'date': '13/04/2023',
-        'subtasksNumber': 2,
-        'progression': 1,
-        'client1': 'SM',
-        'client2': 'MV',
-        'client3': 'EF',
-        'prioName': 'urgent',
-        'prioImg': './img/prio_urgent.png',
-    },
-    {
-        'id': 3,
-        'category': 'done',
-        'topic': 'Hallo',
-        'color': 'aqua',
-        'headline': 'Website Redesign',
-        'description': 'Modify the contents of the main website specific ...',
+        'topic': 'Backoffice',
+        'color': 'purple',
+        'headline': 'Accounting invoices',
+        'description': 'Write open invoices for customer',
         'date': '13/04/2023',
         'subtasksNumber': 2,
         'progression': 1,
@@ -63,6 +47,38 @@ let tasks = [
         'prioName': 'low',
         'prioImg': './img/prio_low.png',
     },
+    {
+        'id': 3,
+        'category': 'awaitFeedback',
+        'topic': 'Media',
+        'color': 'yellow',
+        'headline': 'Video cut',
+        'description': 'Edit the new company video',
+        'date': '13/04/2023',
+        'subtasksNumber': 2,
+        'progression': 1,
+        'client1': 'SM',
+        'client2': 'MV',
+        'client3': 'EF',
+        'prioName': 'medium',
+        'prioImg': './img/prio_medium.png',
+    },
+    {
+        'id': 4,
+        'category': 'done',
+        'topic': 'Marketing',
+        'color': 'blue',
+        'headline': 'Social media strategy',
+        'description': 'Develop an ad campain for brand positioning',
+        'date': '13/04/2023',
+        'subtasksNumber': 2,
+        'progression': 1,
+        'client1': 'SM',
+        'client2': 'MV',
+        'client3': 'EF',
+        'prioName': 'low',
+        'prioImg': './img/prio_low.png',
+    }
 ];
 
 let currentDraggedElement;
@@ -120,7 +136,7 @@ function generateTask(task) {
                     <div class="task-client m-l-negative">MV</div>
                     <div class="task-client m-l-negative">EF</div>
                 </div>
-                <img src="./img/prio_urgent.png" class="task-prio-icon">
+                <img src="${task['prioImg']}" class="task-prio-icon">
             </div>
         </div>
     `;
@@ -178,8 +194,27 @@ function showDetailedTask(id) {
             </span>
         </div>
         <span class="popup-span"><b>Assigned to:</b></span>
-        <div class="popup-clients-container">
-        
+        <div id="popupClientContainer${id}" class="popup-clients-container">
+            <div class="popup-client-box">
+                <div class="task-client task-client-big">DE</div>
+                <span class="popup-client-span">David Eisenberg</span>
+            </div>
+            <div class="popup-client-box">
+                <div class="task-client task-client-big">DE</div>
+                <span class="popup-client-span">David Eisenberg</span>
+            </div>
+            <div class="popup-client-box">
+                <div class="task-client task-client-big">DE</div>
+                <span class="popup-client-span">David Eisenberg</span>
+            </div>
+            <div class="popup-client-box">
+                <div class="task-client task-client-big">DE</div>
+                <span class="popup-client-span">David Eisenberg</span>
+            </div>
+            <div class="popup-client-box">
+                <div class="task-client task-client-big">DE</div>
+                <span class="popup-client-span">David Eisenberg</span>
+            </div>
         </div>
     </div>
     `;
@@ -206,6 +241,7 @@ function editDetailedTask(id) {
     popup.innerHTML = `
     <div class="popup-task" onclick="stopPropagation(event)">
         <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+        <button class="submit-btn btn-absolute" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
         <div class="popup-text-boxes">
             <h4 class="addTask-form-headlines">Title</h4>
             <input id="task${id}" placeholder="Enter a title" maxlength="40" onfocus="this.value=''" value="${task['headline']}">
@@ -214,6 +250,51 @@ function editDetailedTask(id) {
             <h4 class="addTask-form-headlines">Description</h4>
             <textarea id="desc${id}" placeholder="Enter a description" maxlength="200" onfocus="this.value=''">${task['description']}</textarea>
         </div>
+        <div class="popup-text-boxes">
+            <h4 class="addTask-form-headlines">Due date</h4>
+            <div style="position: relative;">
+                <img class="calendar-icon" src="./img/calendar.png"></img>
+                <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
+            </div>
+        </div>
+        <div class="popup-text-boxes">
+            <h4 class="addTask-form-headlines">Prio</h4>
+            <div class="addTask-prio-container">
+                <div id="red" class="prio" onclick="addPrioColor('red')">
+                    <span>Urgent</span>
+                    <img id="redIcon" src="./img/prio_urgent.png" class="prio-img">
+                </div>
+                <div id="yellow" class="prio" onclick="addPrioColor('yellow')">
+                    <span>Medium</span>
+                    <img id="yellowIcon" src="./img/prio_medium.png" class="prio-img extra">
+                </div>
+                <div id="green" class="prio" onclick="addPrioColor('green')">
+                    <span>Low</span>
+                    <img id="greenIcon" src="./img/prio_low.png" class="prio-img">
+                </div>
+            </div>
+        </div>
+        <div class="popup-text-boxes">
+            <h4 class="addTask-form-headlines">Assigned to</h4>
+            <select id="addTaskAssignedContacts">
+                <option value="" disabled selected>Select contacts to assign</option>
+                <option>Kaser</option>
+                <option>Niko</option>
+                <option>Tim</option>
+            </select>
+        </div>
+        <div class="popup-text-boxes">
+            <div class="task-clients-container m-t-20">
+                <div class="task-client task-client-big m-r-8">SM</div>
+                <div class="task-client task-client-big m-r-8">MV</div>
+                <div class="task-client task-client-big m-r-8">EF</div>
+            </div>
+        </div>
     </div>
     `;
+}
+
+function saveEditedTaskInformation(id) {
+    updateTasks();
+    showDetailedTask(id);
 }
