@@ -2,7 +2,7 @@ input {
     width: -webkit-fill-available;
     padding-bottom: 8px;
     padding-top: 10px;
-    padding-left: 15px;
+    padding-left: 18px;
     padding-right: 15px;
     border-radius: 8px;
     border: 1px solid lightgrey;
@@ -17,6 +17,7 @@ input::placeholder {
     font-weight: 400;
     color: rgb(200, 200, 200);
     letter-spacing: 0;
+    transform: scale(1, 1.01) !important;
 }
 
 input:focus-visible {
@@ -43,7 +44,7 @@ textarea {
     font-family: 'Open Sans', sans-serif;
     padding-bottom: 8px;
     padding-top: 10px;
-    padding-left: 15px;
+    padding-left: 18px;
     padding-right: 15px;
     border-radius: 8px;
     border: 1px solid lightgrey;
@@ -60,6 +61,7 @@ textarea::placeholder {
     font-weight: 400;
     color: rgb(200, 200, 200);
     letter-spacing: 0;
+    transform: scale(1, 1.01) !important;
 }
 
 textarea:focus-visible {
@@ -289,7 +291,7 @@ select {
     font-weight: 400;
     padding-bottom: 8px;
     padding-top: 10px;
-    padding-left: 15px;
+    padding-left: 18px;
     padding-right: 15px;
     cursor: pointer;
     background-color: white;
@@ -325,9 +327,15 @@ select {
 label {
     display: flex;
     justify-content: space-between;
-    padding: 6px;
+    align-items: center;
+    padding: 8px;
     font-size: 1.1rem;
     font-weight: 400;
+    cursor: pointer;
+}
+
+label:hover {
+    background-color: lightgrey;
 }
 
 label span {
@@ -338,4 +346,32 @@ label span {
 label input {
     width: auto;
     margin-right: 8px;
+}
+
+.addTask-category-label {
+    justify-content: flex-start !important;
+}
+
+.addTask-category-label span {
+    width: auto !important;
+}
+
+.addTask-category-dot {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    border: 1px solid white;
+    margin-left: 10px;
+}
+
+.selection-border-align {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.addTask-new-contact-img {
+    height: 22px;
+    width: 22px;
+    margin-right: 4px;
 }

@@ -1,4 +1,25 @@
-let topics = ['Sales', 'Design', 'Backoffice', 'Media', 'Marketing'];
+let topics = [
+    {
+        'name': 'Sales',
+        'color': 'aqua'
+    },
+    {
+        'name': 'Design',
+        'color': 'orange'
+    },
+    {
+        'name': 'Backoffice',
+        'color': 'purple'
+    },
+    {
+        'name': 'Media',
+        'color': 'lightgreen'
+    },
+    {
+        'name': 'Marketing',
+        'color': 'blue'
+    }
+];
 let showCheckBoxes = true;
 
 function addPrioColor(id) {
@@ -74,18 +95,25 @@ function getAddTaskHTML() {
                 </div>
                 <div class="category-select">
                     <h4 class="addTask-form-headlines">Category</h4>
-                    <div class="dropdown" onclick="showSelection1()">
+                    <div id="categoryDropdown" class="dropdown" onclick="showSelection1()">
                         Select task category
                     </div>
                     <div class="category-selection" id="categorySelection">
+                        <label class="addTask-category-label" onclick="createNewCategoryInAddTask()">
+                            <span>Create new category</span>
+                        </label>
                     </div>
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div class="dropdown" onclick="showSelection2()">
+                    <div id="contactDropdown" class="dropdown" onclick="showSelection2()">
                         Select contacts to assign
                     </div>
                     <div class="category-selection" id="contactsSelection">
+                        <label onclick="createNewContactInAddTask()">
+                            <span>Create new contact</span>
+                            <img src="./img/add_user.png" class="addTask-new-contact-img">
+                        </label>
                     </div>
                 </div>
             </div>
@@ -135,33 +163,42 @@ function getAddTaskHTML() {
 }
 
 function showSelection1() {
-    var options = document.getElementById(`categorySelection`);
+    let options = document.getElementById(`categorySelection`);
+    let dropdown = document.getElementById('categoryDropdown');
     if (showCheckBoxes) {
         options.style.display = "flex";
         showCheckBoxes = !showCheckBoxes;
+        dropdown.classList.add('selection-border-align');
     } else {
         options.style.display = "none";
         showCheckBoxes = !showCheckBoxes;
+        dropdown.classList.remove('selection-border-align');
     }
 }
+
 function showSelection2() {
     var options = document.getElementById(`contactsSelection`);
+    let dropdown = document.getElementById('contactDropdown');
     if (showCheckBoxes) {
         options.style.display = "flex";
         showCheckBoxes = !showCheckBoxes;
+        dropdown.classList.add('selection-border-align');
     } else {
         options.style.display = "none";
         showCheckBoxes = !showCheckBoxes;
+        dropdown.classList.remove('selection-border-align');
     }
 }
 
 function generateTaskCategories() {
     let select = document.getElementById('categorySelection');
     for (let i = 0; i < topics.length; i++) {
-        let cat = topics[i];
+        let cat = topics[i]['name'];
+        let color = topics[i]['color'];
         select.innerHTML += `
-        <label>
+        <label class="addTask-category-label">
             <span>${cat}</span>
+            <div class="addTask-category-dot" style="background-color:${color};"></div>
         </label>
         `;
     }
@@ -185,3 +222,7 @@ function removeAddTaskWindow() {
     popup.innerHTML = '';
     popup.classList.add('d-none');
 }
+
+function createNewContactInAddTask() { }
+
+function createNewCategoryInAddTask() { }
