@@ -1,6 +1,6 @@
 #contactsPage{
-    padding-top: 115px;
-    padding-left: 252px;
+    padding-top: 89px;
+    padding-left: 236px;
     padding-bottom: 0;
 }
 .contacts-content{
@@ -8,6 +8,9 @@
 }
 .contacts-list{
     width: 357px;
+    height: 100%;
+    position: absolute;
+    padding-top: 10px;
 }
 .contact-list-scrollable-div{
     height: 100vh;
@@ -16,6 +19,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    position: sticky;
 }
 .first-letter{
     padding: 10px 37px 24px 37px;
@@ -90,6 +95,7 @@
     font-size: 47px;
     font-weight: 500;
     flex-direction: column;
+    gap: 13px;
 }
 .add-task-btn{
     color: #29ABE2;
@@ -104,4 +110,27 @@
 }
 .add-task-btn img{
     height: 16px;
+}
+.contact-infos{
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+    font-weight: 400;
+    gap: 60px;
+    height: 74px;
+    margin-top: 21px;
+}
+.contact-infos img{
+    height: 30px;
+}
+.card-mail{
+    font-size:16px; 
+    gap:15px;
+}
+.card-mail b{
+    font-weight: 700;
+}
+.card-mail a{
+    text-decoration: none;
+    color: #29ABE2;
 }

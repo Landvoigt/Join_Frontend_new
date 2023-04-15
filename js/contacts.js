@@ -46,6 +46,24 @@ let contacts = [{
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
+},{
+    'firstname':'Sanya',
+    'lastname':'Kilic',
+    'mail':'Sven.T@live.de',
+    'phone':'01234567',
+    'color':'brown'
+},{
+    'firstname':'Sanya',
+    'lastname':'Kilic',
+    'mail':'Sven.T@live.de',
+    'phone':'01234567',
+    'color':'brown'
+},{
+    'firstname':'Sanya',
+    'lastname':'Kilic',
+    'mail':'Sven.T@live.de',
+    'phone':'01234567',
+    'color':'brown'
 }
 ];  
 let letters =[];
@@ -129,12 +147,17 @@ function openContact(id){
                <div onclick="showAddTaskWindow()" class="add-task-btn"> <img src="./img/plus_lightblue.png" alt=""> Add Task</div>
             </div>
         </div>
-        <div class="d-flex">
-                    Contact Information    <span><img src="./img/pencil.png" alt=""> Edit Task</span>
+        <div class="contact-infos">
+                    Contact Information    <span style="font-size:16px; "><img src="./img/pencil.png" alt=""> Edit Task</span>
         </div>
-           
-            
-            `;
+        <div class="card-mail flex-column">
+            <b>Email</b>
+            <a href="mailto:${contacts[id]['mail']}">${contacts[id]['mail']}</a>
+        </div>
+        <div style="font-size:16px; gap:15px; margin-top:22px" class="flex-column">
+            <b style="font-weight:700;">Phone</b>
+            <span>${contacts[id]['phone']}</span>
+        </div> `;
    
 }
 
