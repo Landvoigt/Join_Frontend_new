@@ -2,30 +2,30 @@
     <img class="LogoImageSidebar pointer" src="./img/logo-white.svg" alt="Logo-Join" onclick="showMainpage()">
 
     <div class="sidebarMenu">
-        <div class="summarySidebar pointer bgdHover" onclick="changeSite(SUMMARY_ID)">
+        <div class="boardSidebar pointer bgdHover" id="summarySidebar" onclick="changeSite(SUMMARY_ID)">
             <img src="./img/uit_web-grid.svg" alt="summary logo">
-            <span class="spanSidebar">Summary</span>
+            <span class="spanSidebarBoard">Summary</span>
         </div>
-        <div class="boardSidebar pointer bgdHover" onclick="changeSite(BOARD_ID)">
+        <div class="boardSidebar pointer bgdHover" id="boardSidebar" onclick="changeSite(BOARD_ID)">
             <img src="./img/board.svg" alt="Board logo">
             <span class="spanSidebarBoard">Board</span>
         </div>
-        <div class="boardSidebar pointer bgdHover" onclick="changeToAddTaskSite(ADDTASK_ID)">
+        <div class="boardSidebar pointer bgdHover" id="addTaskSidebar" onclick="changeToAddTaskSite(ADDTASK_ID)">
             <img src="./img/add-task.svg" alt="Add Task logo">
             <span class="spanSidebarBoard">Add Task</span>
         </div>
-        <div class="boardSidebar pointer bgdHover" onclick="changeSite(CONTACTS_ID)">
+        <div class="boardSidebar pointer bgdHover" id="contactsSidebar" onclick="changeSite(CONTACTS_ID)">
             <img src="./img/contacts.svg" alt="Contacts logo">
             <span class="spanSidebarBoard">Contacts</span>
         </div>
     </div>
 
     <div class="impressumContainer">
-        <div class="legalNoticeContainer pointer bgdHover">
+        <div class="legalNoticeContainer pointer bgdHover" id="legalNoticeSidebar">
             <img class="privacyPolicyLogo rotate pointer" src="../img/legal-notice.png" alt="Impressum logo">
             <span onclick="changeSite(LEGALNOTICE_ID)" class="spanImpressumSidebar pointer">Legal notice</span>
         </div>
-        <div class="legalNoticeContainer pointer bgdHover">
+        <div class="legalNoticeContainer pointer bgdHover" id="privacyPolicySidebar">
             <img class="privacyPolicyLogo pointer" src="../img/privacy-policy.png" alt="Impressum logo">
             <span onclick="changeSite(PRIVACY_ID)" class="spanImpressumSidebar pointer">Privacy policy</span>
         </div>

@@ -22,11 +22,8 @@
     align-items: flex-start;
     padding: 0px;
     gap: 15px;
-
     width: 232px;
     height: 229px;
-    /* Inside auto layout */
-
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -38,14 +35,9 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-
     width: 232px;
     height: 46px;
-
     background: #091931;
-
-    /* Inside auto layout */
-
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -54,22 +46,12 @@
 .spanSidebar {
     width: 72px;
     height: 19px;
-
-    /* Version 2/body */
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-    /* or 19px */
-
-
     color: #FFFFFF;
-
-
-    /* Inside auto layout */
-
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -78,22 +60,12 @@
 .spanSidebarBoard {
     width: 72px;
     height: 19px;
-
-    /* Version 2/body */
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 120%;
-    /* or 19px */
-
-
     color: #CDCDCD;
-
-
-    /* Inside auto layout */
-
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -104,9 +76,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* Version 2/body */
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -120,13 +89,10 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: #CDCDCD;
     gap: 20px;
-
     width: 232px;
     height: 46px;
-
-    /* Inside auto layout */
-
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -164,4 +130,15 @@
     width: 100%;
     gap: 5px;
     padding-left: 20%;
+}
+
+.bgdHover:hover {
+    background-color: #091931;
+    color: #FFFFFF;
+    filter: brightness(1.25);
+}
+
+.backgroundSidebar {
+    background-color: #091931;
+    filter: brightness(1.25);
 }
