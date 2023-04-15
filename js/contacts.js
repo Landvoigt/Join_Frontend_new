@@ -2,42 +2,50 @@ let contacts = [{
     'firstname':'Anton',
     'lastname':'Mayer',
     'mail':'anton-mayer@gmx.com',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'green'
 },{
     'firstname':'Julia',
     'lastname':'Roberts',
     'mail':'juliar@gmx.com',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'red'
 },{
     'firstname':'Jonathan',
     'lastname':'Wick',
     'mail':'anton-mayer@gmx.com',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'blue'
 },{
     'firstname':'Alfred',
     'lastname':'Niebuhr',
     'mail':'anton-mayer@gmx.com',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'purple'
 },{
     'firstname':'Carlos',
     'lastname':'Sanros',
     'mail':'anton-mayer@gmx.com',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'grey'
 },{
     'firstname':'Carmen',
     'lastname':'Müller',
     'mail':'Müller.C@gmx.com',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'black'
 },{
     'firstname':'Sven',
     'lastname':'Siebert',
     'mail':'Sven.T@live.de',
-    'phone':'01234567'
+    'phone':'01786965354',
+    'color':'cyan'
 },{
     'firstname':'Sanya',
     'lastname':'Kilic',
     'mail':'Sven.T@live.de',
-    'phone':'01234567'
+    'phone':'01234567',
+    'color':'brown'
 }
 ];  
 let letters =[];
@@ -90,8 +98,8 @@ function renderContacts(id){
         const lastName = contact['lastname'];
         if (firstName.includes(id)) {
              letterBox.innerHTML+=/*html*/`
-            <div class="single-contact-box">
-                <div id="initials-${i}" class="initials">
+            <div class="single-contact-box" id="single-contact-box-${i}" onclick="openContact(${i})">
+                <div id="initials-${i}" style="background-color:${contact['color']};" class="initials">
                     ${id}${lastName.charAt(0)}
                 </div>
                 <div class="contact-names">
@@ -100,14 +108,33 @@ function renderContacts(id){
 
                 </div>
             </div>
-        `;addRandomColor(i);
+        `;
         }
         
     }
 }
 
-function addRandomColor(i){
-    let contact = document.getElementById(`initials-${i}`);
-    contact.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-
+function openContact(id){
+    let firstNames = contacts[id]['firstname'];
+    const lastNames = contacts[id]['lastname'];
+    let contactPopup = document.getElementById('card-popup');
+        contactPopup.innerHTML='';
+        contactPopup.innerHTML+=/*html*/`
+        <div class="d-flex">
+             <div style="background-color:${contacts[id]['color']};" id="initialen-${id}" class="initials-big">
+                ${firstNames.charAt(0)}${lastNames.charAt(0)}
+            </div>
+            <div class="card-headline flex-column">
+               ${firstNames} ${lastNames}
+               <div onclick="showAddTaskWindow()" class="add-task-btn"> <img src="./img/plus_lightblue.png" alt=""> Add Task</div>
+            </div>
+        </div>
+        <div class="d-flex">
+                    Contact Information    <span><img src="./img/pencil.png" alt=""> Edit Task</span>
+        </div>
+           
+            
+            `;
+   
 }
+

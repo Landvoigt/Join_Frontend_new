@@ -1,12 +1,23 @@
+#contactsPage{
+    padding-top: 115px;
+    padding-left: 252px;
+    padding-bottom: 0;
+}
 .contacts-content{
     display: flex;
 }
 .contacts-list{
+    width: 357px;
+}
+.contact-list-scrollable-div{
+    height: 100vh;
     width: 453px;
-    height: auto;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .first-letter{
-    min-width: 357px;
     padding: 10px 37px 24px 37px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     font-weight: 400;
@@ -43,4 +54,54 @@
     font-weight: 400;
     font-size: 16px;
     color: #007CEE;
+}
+.contact-card{
+    background-color: #F6F7F8;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-left: 100px;
+}
+.contacts-headline{
+    display: flex;
+    align-items: center;
+    
+}
+.initials-big{
+    width: 120px;
+    height: 120px;
+    color: white;
+    border-radius: 100%;
+    border: 5px double white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 47px;
+    font-weight: 500;
+    margin-right: 50px;
+}
+#card-popup{
+    margin-top: 82px;
+}
+.card-headline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 47px;
+    font-weight: 500;
+    flex-direction: column;
+}
+.add-task-btn{
+    color: #29ABE2;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    gap: 13px;
+    cursor: pointer;
+}
+.add-task-btn img{
+    height: 16px;
 }
