@@ -1,4 +1,5 @@
 let topics = ['Sales', 'Design', 'Backoffice', 'Media', 'Marketing'];
+let showCheckBoxes = true;
 
 function addPrioColor(id) {
     let element = document.getElementById(id);
@@ -73,15 +74,19 @@ function getAddTaskHTML() {
                 </div>
                 <div class="category-select">
                     <h4 class="addTask-form-headlines">Category</h4>
-                    <select id="categorySelection">
-                        <option value="" disabled selected>Select task category</option>
-                    </select>
+                    <div class="dropdown" onclick="showSelection1()">
+                        Select task category
+                    </div>
+                    <div class="category-selection" id="categorySelection">
+                    </div>
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <select id="contactsSelection">
-                        <option value="" disabled selected>Select contacts to assign</option>
-                    </select>
+                    <div class="dropdown" onclick="showSelection2()">
+                        Select contacts to assign
+                    </div>
+                    <div class="category-selection" id="contactsSelection">
+                    </div>
                 </div>
             </div>
             <div class="addTask-form-right-container">
@@ -129,12 +134,35 @@ function getAddTaskHTML() {
     `;
 }
 
+function showSelection1() {
+    var options = document.getElementById(`categorySelection`);
+    if (showCheckBoxes) {
+        options.style.display = "flex";
+        showCheckBoxes = !showCheckBoxes;
+    } else {
+        options.style.display = "none";
+        showCheckBoxes = !showCheckBoxes;
+    }
+}
+function showSelection2() {
+    var options = document.getElementById(`contactsSelection`);
+    if (showCheckBoxes) {
+        options.style.display = "flex";
+        showCheckBoxes = !showCheckBoxes;
+    } else {
+        options.style.display = "none";
+        showCheckBoxes = !showCheckBoxes;
+    }
+}
+
 function generateTaskCategories() {
     let select = document.getElementById('categorySelection');
     for (let i = 0; i < topics.length; i++) {
         let cat = topics[i];
         select.innerHTML += `
-        <option>${cat}</option>
+        <label>
+            <span>${cat}</span>
+        </label>
         `;
     }
 }
@@ -144,7 +172,10 @@ function generateContacts() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         select.innerHTML += `
-        <option>${contact['firstname']} ${contact['lastname']}<input type="checkbox" class="subtask-checkbox"></option>
+        <label>
+            <span>${contact['firstname']} ${contact['lastname']}</span>
+            <input type="checkbox">
+        </label>
         `;
     }
 }

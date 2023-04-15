@@ -282,3 +282,60 @@ select {
     transform: rotate(45deg);
     cursor: pointer;
 }
+
+.dropdown {
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding-bottom: 8px;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid lightgrey;
+    display: inline-block;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: right 16px top 1em, right 10px top 1em;
+    background-size: 6px 6px, 6px 6px;
+}
+
+.category-selection {
+    width: 100%;
+    max-height: 150px;
+    background-color: white;
+    display: none;
+    flex-direction: column;
+    border-radius: 8px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: 1px solid lightgrey;
+    border-top: 0;
+    overflow-x: hidden;
+    overflow: auto;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+label span {
+    width: 90%;
+    margin-left: 11px;
+}
+
+label input {
+    width: auto;
+    margin-right: 8px;
+}
