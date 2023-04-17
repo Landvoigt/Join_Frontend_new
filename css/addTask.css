@@ -377,7 +377,7 @@ label input {
 }
 
 .grey-text {
-    color: rgb(200, 200, 200);
+    cursor: default;
     background: none;
     background-color: white;
     display: flex;
@@ -392,8 +392,9 @@ label input {
 }
 
 .resize-icon {
-    height: 15px !important;
-    width: 15px !important;
+    height: 14px !important;
+    width: 14px !important;
+    rotate: 45deg;
     margin-right: 3px;
 }
 
@@ -401,10 +402,33 @@ label input {
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
 }
 
 .gap-line {
     width: 1px;
     height: 26px;
     background-color: lightgrey;
+}
+
+.new-cat-input {
+    border: 0;
+    padding: 0;
+}
+
+.new-cat-color-select-box {
+    display: flex;
+    padding-top: 12px;
+    padding-left: 8px;
+    gap: 4px;
+}
+
+.dot-hover:hover {
+    border: 1px solid black;
+    box-shadow: 1px 4px 3px -1px rgba(0, 0, 0, 0.2), -1px 4px 3px -1px rgba(0, 0, 0, 0.2);
+}
+
+.color-dot-bg {
+    border: 1px solid black;
+    box-shadow: 1px 4px 3px -1px rgba(0, 0, 0, 0.2), -1px 4px 3px -1px rgba(0, 0, 0, 0.2);
 }
