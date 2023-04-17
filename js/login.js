@@ -1,3 +1,5 @@
+let users = [];
+
 let inputPass = false;
 
 function renderLogin() {

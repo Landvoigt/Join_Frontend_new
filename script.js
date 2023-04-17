@@ -79,42 +79,6 @@ function closeLogoutPopup() {
     overlay.classList.add('d-none');
 }
 
-/* --- Habt ihr evtl. ein Tipp wie man die zwei folgende funktionen sauberer umsetzen kann? --- 
-*/
-
-// function removePreviousPageBackground() {
-//     document.getElementById('summarySidebar').classList.remove('backgroundSidebar');
-//     document.getElementById('boardSidebar').classList.remove('backgroundSidebar');
-//     document.getElementById('addTaskSidebar').classList.remove('backgroundSidebar');
-//     document.getElementById('contactsSidebar').classList.remove('backgroundSidebar');
-//     document.getElementById('legalNoticeSidebar').classList.remove('backgroundSidebar');
-//     document.getElementById('privacyPolicySidebar').classList.remove('backgroundSidebar');
-
-// }
-
-// function changeBackgroundInSidebar(currentPage) {
-//     if (currentPage == SUMMARY_ID) {
-//         document.getElementById('summarySidebar').classList.add('backgroundSidebar');
-//     }
-//     if (currentPage == BOARD_ID) {
-//         document.getElementById('boardSidebar').classList.add('backgroundSidebar');
-//     }
-//     if (currentPage == ADDTASK_ID) {
-//         document.getElementById('addTaskSidebar').classList.add('backgroundSidebar');
-//     }
-//     if (currentPage == CONTACTS_ID) {
-//         document.getElementById('contactsSidebar').classList.add('backgroundSidebar');
-//     }
-//     if (currentPage == PRIVACY_ID) {
-//         document.getElementById('privacyPolicySidebar').classList.add('backgroundSidebar');
-//     }
-//     if (currentPage == LEGALNOTICE_ID) {
-//         document.getElementById('legalNoticeSidebar').classList.add('backgroundSidebar');
-//     }
-// }
-
-
-
 // schau mal hier     https://www.w3schools.com/jsref/met_document_queryselectorall.asp
 // so sollte es gehen !
 
@@ -133,3 +97,7 @@ function deleteBackgroundColors() {         // searches for all elements with cl
         background[i].classList.remove('backgroundSidebar');
     }
 }
+
+// Cool, etwas änliches hat mir chatGPT ausgespuckt, war auch mit querySelectorAll, noch kürzer aber viel unverständlicher. :)
+// Danke dir! 
+// Niko :)
