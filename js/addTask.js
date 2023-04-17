@@ -93,7 +93,7 @@ function getAddTaskHTML() {
                     <h4 class="addTask-form-headlines">Description</h4>
                     <textarea placeholder="Enter a description" maxlength="250"></textarea>
                 </div>
-                <div class="category-select">
+                <div id="categoryDropdownSection" class="category-select">
                     <h4 class="addTask-form-headlines">Category</h4>
                     <div id="categoryDropdown" class="dropdown" onclick="showSelection1()">
                         Select task category
@@ -223,6 +223,21 @@ function removeAddTaskWindow() {
     popup.classList.add('d-none');
 }
 
-function createNewContactInAddTask() { }
+function createNewContactInAddTask() {
+    
+}
 
-function createNewCategoryInAddTask() { }
+function createNewCategoryInAddTask() { 
+    let dropdown = document.getElementById('categoryDropdownSection');
+    dropdown.innerHTML = `
+        <h4 class="addTask-form-headlines">Category</h4>
+        <div class="dropdown grey-text">
+            New Category Name
+            <div class="create-cat-icon-box">
+                <img src="./img/plus.png" class="create-category-icon resize-icon">
+                <div class="gap-line"></div>
+                <img src="./img/check_mark.png" class="create-category-icon">
+            </div>
+        </div>
+    `;
+}
