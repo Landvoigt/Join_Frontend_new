@@ -22,6 +22,8 @@ let topics = [
 ];
 let showCheckBoxes = true;
 let currentPickedColor;
+let currentPrio;
+let currentPrioImageSource;
 
 function addPrioColor(id) {
     let element = document.getElementById(id);
@@ -32,6 +34,8 @@ function addPrioColor(id) {
     document.getElementById('greenIcon').classList.remove('img-brightening');
     if (target) {
         element.classList.remove(`${id}-highlight`);
+        currentPrio = '';
+        currentPrioImageSource = '';
     }
     else {
         if (id == 'red') {
@@ -39,18 +43,24 @@ function addPrioColor(id) {
             document.getElementById('yellow').classList.remove('yellow-highlight');
             document.getElementById('green').classList.remove('green-highlight');
             icon.classList.add('img-brightening');
+            currentPrio = 'urgent';
+            currentPrioImageSource = './img/prio_urgent.png';
         }
         if (id == 'yellow') {
             element.classList.add('yellow-highlight');
             document.getElementById('red').classList.remove('red-highlight');
             document.getElementById('green').classList.remove('green-highlight');
             icon.classList.add('img-brightening');
+            currentPrio = 'medium';
+            currentPrioImageSource = './img/prio_medium.png';
         }
         if (id == 'green') {
             element.classList.add('green-highlight');
             document.getElementById('yellow').classList.remove('yellow-highlight');
             document.getElementById('red').classList.remove('red-highlight');
             icon.classList.add('img-brightening');
+            currentPrio = 'low';
+            currentPrioImageSource = './img/prio_low.png';
         }
     }
 }
@@ -84,15 +94,15 @@ function resetIDs() {
 function getAddTaskHTML() {
     return `
         <h2>Add Task</h2>
-        <form class="addTask-form" onsubmit="addTask()">
+        <form class="addTask-form" onsubmit="getInputsFromForm()">
             <div class="addTask-form-left-container">
                 <div>
                     <h4 class="addTask-form-headlines">Title</h4>
-                    <input placeholder="Enter a title" maxlength="40">
+                    <input type="text" id="addTask-title-input" placeholder="Enter a title" maxlength="40" required>
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Description</h4>
-                    <textarea placeholder="Enter a description" maxlength="250"></textarea>
+                    <textarea id="addTask-desc-input" placeholder="Enter a description" maxlength="250" required></textarea>
                 </div>
                 <div id="categoryDropdownSection" class="category-select">
                     <h4 class="addTask-form-headlines">Category</h4>
@@ -123,7 +133,7 @@ function getAddTaskHTML() {
                     <h4 class="addTask-form-headlines">Due date</h4>
                     <div style="position: relative;">
                         <img class="calendar-icon" src="./img/calendar.png"></img>
-                        <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" onclick="showCurrentDate()">
+                        <input type="text" class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" onclick="showCurrentDate()" required>
                     </div>
                 </div>
                 <div>
@@ -147,7 +157,7 @@ function getAddTaskHTML() {
                     <h4 class="addTask-form-headlines">Subtasks</h4>
                     <div style="position: relative;">
                         <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
-                        <input id="subtaskInput" placeholder="Add new subtask">
+                        <input type="text" id="subtaskInput" placeholder="Add new subtask">
                     </div>
                 </div>
                 <div class="addTask-subtask-container">
@@ -157,8 +167,8 @@ function getAddTaskHTML() {
             </div>
         </form>
         <div class="addTask-commit-buttons">
-            <button class="addTask-clear-btn">Clear x</button>
-            <button class="submit-btn">Create Task ✓</button>
+            <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
+            <button class="submit-btn" type="submit">Create Task ✓</button>
         </div>
     `;
 }
@@ -299,4 +309,34 @@ function addCategory() {
         <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
     </div>
     `;
+}
+
+function getInputsFromForm() {
+    let title = document.getElementById('addTask-title-input').value;
+    let desc = document.getElementById('addTask-desc-input').value;
+    let date = document.getElementById('addTaskDate').value;
+    // let = document.getElementById('');
+    // let = document.getElementById('');
+    addTask(title, desc, date);
+}
+
+function addTask(title, desc, date) {
+    tasks.push(
+        {
+            'id': tasks.length,
+            'category': 'toDo',
+            'topic': 'Design',
+            'color': currentPickedColor,
+            'headline': title,
+            'description': desc,
+            'date': date,
+            'subtasksNumber': 0,
+            'progression': 0,
+            'client1': 'SM',
+            'client2': 'MV',
+            'client3': 'EF',
+            'prioName': currentPrio,
+            'prioImg': currentPrioImageSource,
+        },
+    );
 }
