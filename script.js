@@ -9,6 +9,7 @@ const HELP_ID = 'helpPage'
 
 let currentPage = SUMMARY_ID;
 let previousPage;
+let previousBackground = 'summarySidebar';
 
 async function initialize() {
     setURL('http://developerakademie.com/smallest_backend_ever');
@@ -35,6 +36,7 @@ async function includeHTML() {
 
 function showMainpage() {
     changeSite(SUMMARY_ID);
+    addBackgroundColorForMainPages('summarySidebar');
 }
 
 function changeSite(id) {
@@ -46,8 +48,9 @@ function changeSite(id) {
 
     previousPage = currentPage;
     currentPage = id;
-    removePreviousPageBackground();
-    changeBackgroundInSidebar(currentPage);
+    deleteBackgroundColors();
+    // removePreviousPageBackground();
+    // changeBackgroundInSidebar(currentPage);
 }
 
 function changeToAddTaskSite(id) {
@@ -76,34 +79,57 @@ function closeLogoutPopup() {
     overlay.classList.add('d-none');
 }
 
-/* --- Habt ihr evtl. ein Tipp wie man die zwei folgende funktionen sauberer umsetzen kann? --- */
+/* --- Habt ihr evtl. ein Tipp wie man die zwei folgende funktionen sauberer umsetzen kann? --- 
+*/
 
-function removePreviousPageBackground() {
-    document.getElementById('summarySidebar').classList.remove('backgroundSidebar');
-    document.getElementById('boardSidebar').classList.remove('backgroundSidebar');
-    document.getElementById('addTaskSidebar').classList.remove('backgroundSidebar');
-    document.getElementById('contactsSidebar').classList.remove('backgroundSidebar');
-    document.getElementById('legalNoticeSidebar').classList.remove('backgroundSidebar');
-    document.getElementById('privacyPolicySidebar').classList.remove('backgroundSidebar');
+// function removePreviousPageBackground() {
+//     document.getElementById('summarySidebar').classList.remove('backgroundSidebar');
+//     document.getElementById('boardSidebar').classList.remove('backgroundSidebar');
+//     document.getElementById('addTaskSidebar').classList.remove('backgroundSidebar');
+//     document.getElementById('contactsSidebar').classList.remove('backgroundSidebar');
+//     document.getElementById('legalNoticeSidebar').classList.remove('backgroundSidebar');
+//     document.getElementById('privacyPolicySidebar').classList.remove('backgroundSidebar');
+
+// }
+
+// function changeBackgroundInSidebar(currentPage) {
+//     if (currentPage == SUMMARY_ID) {
+//         document.getElementById('summarySidebar').classList.add('backgroundSidebar');
+//     }
+//     if (currentPage == BOARD_ID) {
+//         document.getElementById('boardSidebar').classList.add('backgroundSidebar');
+//     }
+//     if (currentPage == ADDTASK_ID) {
+//         document.getElementById('addTaskSidebar').classList.add('backgroundSidebar');
+//     }
+//     if (currentPage == CONTACTS_ID) {
+//         document.getElementById('contactsSidebar').classList.add('backgroundSidebar');
+//     }
+//     if (currentPage == PRIVACY_ID) {
+//         document.getElementById('privacyPolicySidebar').classList.add('backgroundSidebar');
+//     }
+//     if (currentPage == LEGALNOTICE_ID) {
+//         document.getElementById('legalNoticeSidebar').classList.add('backgroundSidebar');
+//     }
+// }
+
+
+
+// schau mal hier     https://www.w3schools.com/jsref/met_document_queryselectorall.asp
+// so sollte es gehen !
+
+function addBackgroundColorForMainPages(id) {           // adds bg to sidebar element you go to (only for the sites you cant go back)
+    document.getElementById(`${id}`).classList.add('backgroundSidebar');
+    previousBackground = id;
 }
 
-function changeBackgroundInSidebar(currentPage) {
-    if (currentPage == SUMMARY_ID) {
-        document.getElementById('summarySidebar').classList.add('backgroundSidebar');
-    }
-    if (currentPage == BOARD_ID) {
-        document.getElementById('boardSidebar').classList.add('backgroundSidebar');
-    }
-    if (currentPage == ADDTASK_ID) {
-        document.getElementById('addTaskSidebar').classList.add('backgroundSidebar');
-    }
-    if (currentPage == CONTACTS_ID) {
-        document.getElementById('contactsSidebar').classList.add('backgroundSidebar');
-    }
-    if (currentPage == PRIVACY_ID) {
-        document.getElementById('privacyPolicySidebar').classList.add('backgroundSidebar');
-    }
-    if (currentPage == LEGALNOTICE_ID) {
-        document.getElementById('legalNoticeSidebar').classList.add('backgroundSidebar');
+function addBackgroundColorForSpecialPages(id) {        // adds bg to sidebar element you go to (for the sites you can go back)
+    document.getElementById(`${id}`).classList.add('backgroundSidebar');
+}
+
+function deleteBackgroundColors() {         // searches for all elements with class .bgdHover then remove the bg from each one of this classes
+    const background = document.querySelectorAll('.bgdHover');
+    for (let i = 0; i < background.length; i++) {
+        background[i].classList.remove('backgroundSidebar');
     }
 }
