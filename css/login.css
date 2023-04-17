@@ -140,6 +140,10 @@ body {
     width: 422px;
 }
 
+.loginInputField:first-child {
+    margin-top: 10px;
+}
+
 .loginInputField {
     position: relative;
     height: 44px;
@@ -296,4 +300,6 @@ body {
 
 .signupFooterBtn {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }

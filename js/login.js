@@ -1,5 +1,3 @@
-let users = [];
-
 let inputPass = false;
 
 function renderLogin() {
@@ -50,7 +48,7 @@ function loginTemplate() {
             </div>
             <div class="loginInputFields">
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="text" required placeholder="E-mail">
+                    <input class="loginE-Mail" type="email" required placeholder="E-mail">
                     <img class="inputImg" src="../img/email.svg" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
@@ -79,6 +77,7 @@ function signUp() {
 
 function signUpTemplate() {
   return `
+          <form onsubmit="register(); return false;">
             <div class="signupHeaderContainer">
               <div class="backImgSignUp">  
                 <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
@@ -88,22 +87,23 @@ function signUpTemplate() {
             </div>
             <div class="loginInputFields">
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="text" required placeholder="Name">
+                    <input class="loginE-Mail" type="text" required id="signUpName" placeholder="Name">
                     <img class="inputImg" src="../img/human-profile.png" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="text" required placeholder="Email">
+                    <input class="loginE-Mail" type="email" required id="emailSignUp" placeholder="Email">
                     <img class="inputImg" src="../img/email.svg" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="Password" onkeydown="changePWSymbol()">
-                    <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
+                    <input class="loginE-Mail" type="password" required id="passwordSignUp" id="passwordInput" placeholder="Password">
+                    <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password">
                 </div>
                 
             </div>
             <div class="signupFooterBtn">
                 <button class="loginBtn pointer">Sign up</button>
             </div>
+          </form>
   `;
 }
 
