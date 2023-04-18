@@ -41,26 +41,26 @@ let contacts = [{
     'phone':'01786965354',
     'color':'cyan'
 },{
-    'firstname':'Sanya',
-    'lastname':'Kilic',
+    'firstname':'Robert',
+    'lastname':'Koch',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
 },{
-    'firstname':'Sanya',
-    'lastname':'Kilic',
+    'firstname':'Peter',
+    'lastname':'Heinrich',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
 },{
-    'firstname':'Sanya',
-    'lastname':'Kilic',
+    'firstname':'Rahul',
+    'lastname':'Sharma',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
 },{
-    'firstname':'Sanya',
-    'lastname':'Kilic',
+    'firstname':'Michelle',
+    'lastname':'Seiler',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
@@ -161,3 +161,13 @@ function openContact(id){
    
 }
 
+function openCreateContact() {
+    let popupBG = document.getElementById('create-contact-bg');
+    popupBG.classList.remove('d-none');
+  }
+
+  function closeCreateContact(){
+    document.getElementById('create-contact-bg').classList.add('d-none');
+  }
+  
+  

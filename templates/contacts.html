@@ -1,4 +1,40 @@
 <div class="contacts-content">
+    <div class="create-contact-bg d-none" id="create-contact-bg">
+        <div id="contacts-popup">
+            <div class="contacts-popup-left">
+                <div class="flex-column" style="align-items: flex-start; gap: 12px; font-size: 27px;color: white;">
+                    <img src="./img/join-for-add-contacts.png" alt="">
+                    <span id="add-contact">Add Contact</span>
+                    <span>Tasks are better with a team!</span>
+                </div>
+            </div>
+            <div class="contacts-popup-right">
+                <img class="close-popup" onclick="closeCreateContact()" src="./img/close.png" alt="">
+                <div class="add-contact-img">
+                    <img src="./img/profile.png" alt="">
+                </div>
+                <form class="add-contact-form-container" action="">
+                    <div style="position: relative;">
+                        <input class="add-contact-form" placeholder="Name" type="text">
+                        <img class="input-icon" src="./img/human-profile.png" alt="">
+                    </div>
+                    <div style="position: relative;">
+                        <input class="add-contact-form" placeholder="Email" type="text">
+                        <img class="input-icon" src="./img/mail-icon.png" id="mail-icon" alt="">
+                    </div>
+                    <div style="position: relative;">
+                        <input class="add-contact-form" placeholder="Phone" type="text">
+                        <img class="input-icon" src="./img/phone-icon.png" alt="">
+                    </div>
+                    <div class="add-btn-container">
+                        <button id="cancel-btn">Cancel <img src="" alt=""></button>
+                        <button id="create-btn">Create Contact <img src="" alt=""></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
     <div class="contact-list-scrollable-div">
         <div id="contact-list" class="contacts-list flex-column ">
 
@@ -20,8 +56,8 @@
         <div class="flex-column">
             <div id="card-popup" class="flex-column">
             </div>
-            
-        </div>
 
+        </div>
+        <div onclick="openCreateContact()" class="add-contact">New Contact <img src="./img/Capa 1.png" alt=""></div>
     </div>
 </div>
