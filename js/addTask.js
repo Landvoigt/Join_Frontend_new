@@ -21,9 +21,11 @@ let topics = [
     }
 ];
 let showCheckBoxes = true;
-let currentPickedColor;
+let currentPickedColor = '';
 let currentPrio;
 let currentPrioImageSource;
+let currentCat;
+let randomColor;
 
 function addPrioColor(id) {
     let element = document.getElementById(id);
@@ -94,7 +96,7 @@ function resetIDs() {
 function getAddTaskHTML() {
     return `
         <h2>Add Task</h2>
-        <form class="addTask-form" onsubmit="getInputsFromForm()">
+        <form class="addTask-form" >
             <div class="addTask-form-left-container">
                 <div>
                     <h4 class="addTask-form-headlines">Title</h4>
@@ -106,7 +108,7 @@ function getAddTaskHTML() {
                 </div>
                 <div id="categoryDropdownSection" class="category-select">
                     <h4 class="addTask-form-headlines">Category</h4>
-                    <div id="categoryDropdown" class="dropdown" onclick="showSelection1()">
+                    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
                         Select task category
                     </div>
                     <div class="category-selection" id="categorySelection">
@@ -115,9 +117,9 @@ function getAddTaskHTML() {
                         </label>
                     </div>
                 </div>
-                <div>
+                <div id="contactDropdownSection">
                     <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div id="contactDropdown" class="dropdown" onclick="showSelection2()">
+                    <div id="contactDropdown" class="dropdown" onclick="showSelection('contactsSelection','contactDropdown')">
                         Select contacts to assign
                     </div>
                     <div class="category-selection" id="contactsSelection">
@@ -126,6 +128,7 @@ function getAddTaskHTML() {
                             <img src="./img/add_user.png" class="addTask-new-contact-img">
                         </label>
                     </div>
+                    <div id="addedClientsBox" style="display:flex;"></div>
                 </div>
             </div>
             <div class="addTask-form-right-container">
@@ -168,36 +171,26 @@ function getAddTaskHTML() {
         </form>
         <div class="addTask-commit-buttons">
             <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
-            <button class="submit-btn" type="submit">Create Task ✓</button>
+            <button class="submit-btn" type="submit" onclick="getInputsFromForm()">Create Task ✓</button>
         </div>
     `;
 }
 
-function showSelection1() {
-    let options = document.getElementById(`categorySelection`);
-    let dropdown = document.getElementById('categoryDropdown');
+function showSelection(select, container) {
+    let options = document.getElementById(`${select}`);
+    let dropdown = document.getElementById(`${container}`);
+    let closeOptions = document.querySelectorAll('.category-selection');
+    let removeBorder = document.querySelectorAll('.dropdown');
     if (showCheckBoxes) {
         options.style.display = "flex";
         showCheckBoxes = !showCheckBoxes;
         dropdown.classList.add('selection-border-align');
     } else {
-        options.style.display = "none";
+        for (let i = 0; i < closeOptions.length; i++) {
+            closeOptions[i].style.display = "none";
+            removeBorder[i].classList.remove('selection-border-align');
+        }
         showCheckBoxes = !showCheckBoxes;
-        dropdown.classList.remove('selection-border-align');
-    }
-}
-
-function showSelection2() {
-    var options = document.getElementById(`contactsSelection`);
-    let dropdown = document.getElementById('contactDropdown');
-    if (showCheckBoxes) {
-        options.style.display = "flex";
-        showCheckBoxes = !showCheckBoxes;
-        dropdown.classList.add('selection-border-align');
-    } else {
-        options.style.display = "none";
-        showCheckBoxes = !showCheckBoxes;
-        dropdown.classList.remove('selection-border-align');
     }
 }
 
@@ -207,12 +200,27 @@ function generateTaskCategories() {
         let cat = topics[i]['name'];
         let color = topics[i]['color'];
         select.innerHTML += `
-        <label class="addTask-category-label">
+        <label class="addTask-category-label" onclick="showSelectedCategory(${i})">
             <span>${cat}</span>
             <div class="addTask-category-dot" style="background-color:${color};"></div>
         </label>
         `;
     }
+}
+
+function showSelectedCategory(i) {
+    let container = document.getElementById('categoryDropdown');
+    let cat = topics[i]['name'];
+    let color = topics[i]['color'];
+    container.innerHTML = `
+    <div style="display:flex; align-items:center;">
+        <span>${cat}</span>
+        <div class="addTask-category-dot" style="background-color:${color};"></div>
+    </div>
+    `;
+    showSelection('categorySelection', 'categoryDropdown');
+    currentCat = cat;
+    currentPickedColor = color;
 }
 
 function generateContacts() {
@@ -222,10 +230,38 @@ function generateContacts() {
         select.innerHTML += `
         <label>
             <span>${contact['firstname']} ${contact['lastname']}</span>
-            <input type="checkbox">
+            <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="showAddedClients('contactCheckbox${i}')">
         </label>
         `;
     }
+}
+
+function showAddedClients(checkboxID) {
+    let checkbox = document.getElementById(checkboxID);
+    let i = checkbox.name;
+    if (checkbox.checked === true) {
+        let dropdown = document.getElementById('addedClientsBox');
+        let initials = 'JW';
+        // let initials = contacts[i]['firstname'];
+        let color = contacts[i]['color'];
+        dropdown.innerHTML += `
+            <div style="display:flex;">
+                <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
+                onclick="removeClient('addedClient${i}','${checkboxID}')">${initials}</div>
+            <div>
+            `;
+    }
+    else {
+        removeClient(`addedClient${i}`,`${checkboxID}`);
+    }
+
+}
+
+function removeClient(divID, checkboxID) {
+    let checkbox = document.getElementById(checkboxID);
+    checkbox.checked = false;
+    let client = document.getElementById(divID);
+    client.remove();
 }
 
 function removeAddTaskWindow() {
@@ -235,7 +271,18 @@ function removeAddTaskWindow() {
 }
 
 function createNewContactInAddTask() {
-
+    let dropdown = document.getElementById('contactDropdownSection');
+    dropdown.innerHTML = `
+        <h4 class="addTask-form-headlines">Assigned to</h4>
+        <div class="dropdown grey-text">
+            <input id="new-contact-input" class="new-cat-input" type="email" placeholder="Contact email" required>
+            <div class="create-cat-icon-box">
+                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="">
+                <div class="gap-line"></div>
+                <img src="./img/check_mark.png" class="create-category-icon" onclick="">
+            </div>
+        </div>
+    `;
 }
 
 function createNewCategoryInAddTask() {
@@ -243,7 +290,7 @@ function createNewCategoryInAddTask() {
     dropdown.innerHTML = `
         <h4 class="addTask-form-headlines">Category</h4>
         <div class="dropdown grey-text">
-            <input id="new-cat-input" class="new-cat-input" maxlength="16" placeholder="New Category Name">
+            <input id="new-cat-input" class="new-cat-input" minvalue="3" maxlength="16" placeholder="New Category Name" required>
             <div class="create-cat-icon-box">
                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="resetAddCategorySection()">
                 <div class="gap-line"></div>
@@ -273,7 +320,7 @@ function resetAddCategorySection() {
     let select = document.getElementById('categoryDropdownSection');
     select.innerHTML = `
             <h4 class="addTask-form-headlines">Category</h4>
-            <div id="categoryDropdown" class="dropdown" onclick="showSelection1()">
+            <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
                 Select task category
             </div>
             <div class="category-selection" id="categorySelection">
@@ -283,6 +330,7 @@ function resetAddCategorySection() {
             </div>
     `;
     generateTaskCategories();
+    showCheckBoxes = !showCheckBoxes;
 }
 
 function addBorderToPickedColor(id) {
@@ -295,6 +343,7 @@ function addBorderToPickedColor(id) {
 }
 
 function addCategory() {
+    checkPickedColor();
     let newCat = document.getElementById('new-cat-input');
     topics.push(
         {
@@ -309,15 +358,33 @@ function addCategory() {
         <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
     </div>
     `;
+    currentCat = newCat.value;
+}
+
+function checkPickedColor() {
+    if (currentPickedColor == '') {
+        createRandomColor();
+    }
+    else {
+        for (let i = 0; i < topics.length; i++) {
+            const element = topics[i]['color'];
+            if (currentPickedColor == element) {
+                createRandomColor();
+            }
+        }
+        return
+    }
 }
 
 function getInputsFromForm() {
     let title = document.getElementById('addTask-title-input').value;
     let desc = document.getElementById('addTask-desc-input').value;
     let date = document.getElementById('addTaskDate').value;
-    // let = document.getElementById('');
-    // let = document.getElementById('');
+    let categoryCont = document.getElementById('categorySelection');
+    let categoryName = categoryCont.getElementsByTagName('span')[0];
+    let topic = categoryName.innerHTML;
     addTask(title, desc, date);
+    console.log(topic);
 }
 
 function addTask(title, desc, date) {
@@ -325,7 +392,7 @@ function addTask(title, desc, date) {
         {
             'id': tasks.length,
             'category': 'toDo',
-            'topic': 'Design',
+            'topic': currentCat,
             'color': currentPickedColor,
             'headline': title,
             'description': desc,
@@ -339,4 +406,8 @@ function addTask(title, desc, date) {
             'prioImg': currentPrioImageSource,
         },
     );
+}
+
+function createRandomColor() {
+    currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 }

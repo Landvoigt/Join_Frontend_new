@@ -1,23 +1,22 @@
 input {
     width: -webkit-fill-available;
+    font-family: 'Inter';
     padding-bottom: 8px;
     padding-top: 10px;
     padding-left: 18px;
     padding-right: 15px;
     border-radius: 8px;
     border: 1px solid lightgrey;
+    color: #000000de;
     background-color: white;
-    font-size: 1.1em;
+    font-size: 0.95em;
     font-weight: 500;
-    letter-spacing: -0.5px;
 }
 
 input::placeholder {
-    font-size: 0.9em;
+    font-size: 1.1em;
     font-weight: 400;
     color: rgb(200, 200, 200);
-    letter-spacing: 0;
-    transform: scale(1, 1.01) !important;
 }
 
 input:focus-visible {
@@ -41,7 +40,7 @@ select {
 textarea {
     width: -webkit-fill-available;
     height: 95px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Inter';
     padding-bottom: 8px;
     padding-top: 10px;
     padding-left: 18px;
@@ -49,19 +48,17 @@ textarea {
     border-radius: 8px;
     border: 1px solid lightgrey;
     background-color: white;
-    font-size: 1.1em;
+    color: #000000de;
+    font-size: 0.95em;
     font-weight: 500;
-    letter-spacing: -0.5px;
     resize: none;
     overflow: auto;
 }
 
 textarea::placeholder {
-    font-size: 0.9em;
+    font-size: 1.1em;
     font-weight: 400;
     color: rgb(200, 200, 200);
-    letter-spacing: 0;
-    transform: scale(1, 1.01) !important;
 }
 
 textarea:focus-visible {
@@ -311,7 +308,7 @@ select {
 
 .category-selection {
     width: 100%;
-    max-height: 150px;
+    max-height: 146px;
     background-color: white;
     display: none;
     flex-direction: column;
@@ -431,4 +428,15 @@ label input {
 .color-dot-bg {
     border: 1px solid black;
     box-shadow: 1px 4px 3px -1px rgba(0, 0, 0, 0.2), -1px 4px 3px -1px rgba(0, 0, 0, 0.2);
+}
+
+.added-client-style {
+    margin-top: 8px;
+    margin-right: 7px;
+    margin-left: 1px;
+}
+
+.added-client-style:hover {
+    border: 1px solid black;
+    box-shadow: 1px 5px 3px -1px rgba(0, 0, 0, 0.4), -1px 5px 3px -1px rgba(0, 0, 0, 0.3);
 }
