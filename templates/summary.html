@@ -8,15 +8,15 @@
         <div class="tasks">
             <div class="first-row">
                 <div class="single-task" onclick="changeSite(BOARD_ID)">
-                    <span class="tasks-in-board-nr">5</span>
+                    <span id="allTasksNr" class="tasks-in-board-nr">0</span>
                     <div class="single-task-description">Tasks in <br> Board</div>
                 </div>
                 <div class="single-task" onclick="changeSite(BOARD_ID)">
-                    <span class="tasks-in-board-nr">2</span>
+                    <span id="progressTasksNr" class="tasks-in-board-nr">0</span>
                     <div class="single-task-description">Tasks in <br> Progress</div>
                 </div>
                 <div class="single-task" onclick="changeSite(BOARD_ID)">
-                    <span class="tasks-in-board-nr">2</span>
+                    <span id="waitingTasksNr" class="tasks-in-board-nr">0</span>
                     <div class="single-task-description">Awaiting<br>feedback</div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="d-flex">
                     <img src="img/Group 7.png" alt="">
                     <div class="flex-column">
-                        <span style="font-size: 47px; text-align: center;"><b>1</b></span>Urgent
+                        <span id="urgentTasksNr" style="font-size: 47px; text-align: center;"><b>0</b></span>Urgent
                     </div>
                 </div>
                 <div class="vertical-line-2"></div>
@@ -38,13 +38,13 @@
                 <div class="to-do-status">
                     <img src="img/to-do.png" alt="">
                     <div class="flex-column" style="font-weight: 500; font-size: 21px;">
-                        <span style="font-size: 64px; text-align: center;"><b>1</b></span>To-Do
+                        <span id="toDoTasksNr" style="font-size: 64px; text-align: center;"><b>0</b></span>To-Do
                     </div>
                 </div>
                 <div class="to-do-status" onclick="changeSite(BOARD_ID)">
                     <img src="img/done.png" alt="">
                     <div class="flex-column" style="font-weight: 500; font-size: 21px;">
-                        <span style="font-size: 64px; text-align: center;"><b>1</b></span>Done
+                        <span id="doneTasksNr" style="font-size: 64px; text-align: center;"><b>0</b></span>Done
                     </div>
                 </div>
             </div>

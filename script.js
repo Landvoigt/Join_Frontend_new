@@ -18,6 +18,7 @@ async function initialize() {
     loadDate();
     updateTasks();
     pushFirstLetter();
+    checkForTaskNumbers();
 }
 
 async function includeHTML() {
@@ -49,6 +50,7 @@ function changeSite(id) {
     previousPage = currentPage;
     currentPage = id;
     deleteBackgroundColors();
+    checkForTaskNumbers();
     // removePreviousPageBackground();
     // changeBackgroundInSidebar(currentPage);
 }
