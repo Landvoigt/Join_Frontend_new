@@ -20,6 +20,7 @@ let topics = [
         'color': 'blue'
     }
 ];
+let currentAssignedClients = [];
 let showCheckBoxes = true;
 let currentPickedColor = '';
 let currentPrio;
@@ -247,17 +248,19 @@ function showAddedClients(checkboxID) {
         dropdown.innerHTML += `
             <div style="display:flex;">
                 <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
-                onclick="removeClient('addedClient${i}','${checkboxID}')">${initials}</div>
+                onclick="removeClient('addedClient${i}','${checkboxID}','${i}')">${initials}</div>
             <div>
             `;
+        currentAssignedClients.push(i);
     }
     else {
-        removeClient(`addedClient${i}`,`${checkboxID}`);
+        removeClient(`addedClient${i}`,`${checkboxID}`,`${i}`);
     }
-
 }
 
-function removeClient(divID, checkboxID) {
+function removeClient(divID, checkboxID, i) {
+    let index = currentAssignedClients.indexOf(i);
+    currentAssignedClients.splice(index, 1);
     let checkbox = document.getElementById(checkboxID);
     checkbox.checked = false;
     let client = document.getElementById(divID);
@@ -380,11 +383,7 @@ function getInputsFromForm() {
     let title = document.getElementById('addTask-title-input').value;
     let desc = document.getElementById('addTask-desc-input').value;
     let date = document.getElementById('addTaskDate').value;
-    let categoryCont = document.getElementById('categorySelection');
-    let categoryName = categoryCont.getElementsByTagName('span')[0];
-    let topic = categoryName.innerHTML;
     addTask(title, desc, date);
-    console.log(topic);
 }
 
 function addTask(title, desc, date) {
