@@ -67,6 +67,7 @@ let contacts = [{
 }
 ];  
 let letters =[];
+let contactsRandomColor;
 
 function pushFirstLetter(){
     for (let i = 0; i < contacts.length; i++) {
@@ -92,6 +93,8 @@ function pushFirstLetter(){
     });
     
     renderLetters();
+    createRandomColor();
+    console.log(contactsRandomColor)
     
 }
 
@@ -185,7 +188,35 @@ function openCreateContact() {
     
   }
   
-  function sayHi(){
-    console.log('Hi')
+  function createRandomColor() {
+    currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    contactsRandomColor = currentPickedColor;
+}
+  function createNewContact(){
+    let Firstname = document.getElementById('contacts-firstname').value;
+    let Lastname = document.getElementById('contacts-lastname').value;
+    let Mail = document.getElementById('contacts-mail').value;
+    let Phone = document.getElementById('contacts-phone').value;
+    contacts.push(
+        {
+            'firstname':Firstname,
+            'lastname':Lastname,
+            'mail':Mail,
+            'phone':Phone,
+            'color':contactsRandomColor
+        }
+    )
+    console.log(contacts);
+    closeCreateContact();
+    pushFirstLetter();
+    resetInputValue();
   }
-  
+
+  function resetInputValue(){
+    let addContactForms = document.querySelectorAll('.add-contact-form');
+
+    for (let i = 0; i < addContactForms.length; i++) {
+     addContactForms[i].value = '';
+    }
+
+  }

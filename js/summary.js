@@ -31,7 +31,6 @@ function checkForTaskNumbers() {
     const awaitFeedback = tasks.filter(a => a.category === 'awaitFeedback');
     const done = tasks.filter(d => d.category === 'done');
     const urgentTasks = tasks.filter(u => u.prioName === 'urgent');
-    
     allTasks.innerHTML = tasks.length;
     document.getElementById('toDoTasksNr').innerHTML = toDos.length;
     document.getElementById('progressTasksNr').innerHTML = progressTasks.length;

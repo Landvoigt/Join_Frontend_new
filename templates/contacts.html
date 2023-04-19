@@ -13,17 +13,21 @@
                 <div class="add-contact-img">
                     <img src="./img/profile.png" alt="">
                 </div>
-                <form class="add-contact-form-container" onsubmit="sayHi()">
+                <form class="add-contact-form-container" onsubmit="createNewContact(); return false"  >
                     <div style="position: relative;">
-                        <input required class="add-contact-form" placeholder="Name" type="text">
+                        <input required class="add-contact-form" id="contacts-firstname" placeholder="Firstname" type="text">
                         <img class="input-icon" src="./img/human-profile.png" alt="">
                     </div>
                     <div style="position: relative;">
-                        <input required class="add-contact-form" placeholder="Email" type="text">
+                        <input required class="add-contact-form" id="contacts-lastname" placeholder="Lastname" type="text">
+                        <img class="input-icon" src="./img/human-profile.png" alt="">
+                    </div>
+                    <div style="position: relative;">
+                        <input required class="add-contact-form" id="contacts-mail" placeholder="Email" type="email">
                         <img class="input-icon" src="./img/mail-icon.png" id="mail-icon" alt="">
                     </div>
                     <div style="position: relative;">
-                        <input required class="add-contact-form" placeholder="Phone" type="text">
+                        <input required class="add-contact-form" id="contacts-phone" placeholder="Phone" type="number">
                         <img class="input-icon" src="./img/phone-icon.png" alt="">
                     </div>
                     <div class="add-btn-container">
