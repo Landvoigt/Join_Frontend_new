@@ -63,11 +63,13 @@ body {
   from {
     top: 45%;
     left: 40%;
+    scale: 1.5;
     transform: translate(-50%, -50%);
   }
   to {
     top: 0;
     left: 0;
+    scale: 1;
     transform: none;
   }
 }
