@@ -181,9 +181,11 @@ function openCreateContact() {
     contactPopup.classList.add('move-out');
     setTimeout(function() {
       document.getElementById('create-contact-bg').classList.add('d-none');
-    }, 1500);
+    }, 1200);
     
   }
   
-  
+  function sayHi(){
+    console.log('Hi')
+  }
   

@@ -22,10 +22,26 @@ function greetAccordingToTime(currenthour) {
 }
 
 /// gerne kürzer und einfacher machen wenn jemand weiß wie :) gruß Tim 
+// hab's versucht :) gruß Kaser
 
 function checkForTaskNumbers() {
     let allTasks = document.getElementById('allTasksNr');
+    const toDos = tasks.filter(t => t.category === 'toDo');
+    const progressTasks = tasks.filter(p => p.category === 'inProgress');
+    const awaitFeedback = tasks.filter(a => a.category === 'awaitFeedback');
+    const done = tasks.filter(d => d.category === 'done');
+    const urgentTasks = tasks.filter(u => u.prioName === 'urgent');
+    
     allTasks.innerHTML = tasks.length;
+    document.getElementById('toDoTasksNr').innerHTML = toDos.length;
+    document.getElementById('progressTasksNr').innerHTML = progressTasks.length;
+    document.getElementById('waitingTasksNr').innerHTML = awaitFeedback.length;
+    document.getElementById('doneTasksNr').innerHTML = done.length;;
+    document.getElementById('urgentTasksNr').innerHTML = urgentTasks.length;
+
+}
+
+/** 
     let toDos = 0;
     let progressTasks = 0;
     let awaitTasks = 0;
@@ -55,4 +71,4 @@ function checkForTaskNumbers() {
     document.getElementById('toDoTasksNr').innerHTML = toDos;
     document.getElementById('doneTasksNr').innerHTML = doneTasks;
     document.getElementById('urgentTasksNr').innerHTML = urgentTasks;
-}
+    */
