@@ -4,8 +4,8 @@ let tasks = [
         'category': 'toDo',
         'topic': 'Design',
         'color': 'orange',
-        'headline': 'Website Redesign',
-        'description': 'Modify the contents of the main website specific ...',
+        'headline': 'Hallo',
+        'description': 'Hallo',
         'date': '13/04/2023',
         'subtasksNumber': 0,
         'progression': 0,
@@ -21,7 +21,7 @@ let tasks = [
         'topic': 'Sales',
         'color': 'aqua',
         'headline': 'Call potential clients',
-        'description': 'Make the product presentation to prospective buyers',
+        'description': 'Hallo',
         'date': '13/04/2023',
         'subtasksNumber': 3,
         'progression': 2,
@@ -322,8 +322,15 @@ function saveEditedTaskInformation(id) {
 //     }
 // }
 
-// function filterTasks() {
-//     let searchField = document.getElementById('searchTasks').value;
-//     let result = tasks.filter(t => t['headline'] && t['description'] == searchField);
-//     console.log(result);
-// }
+function filterTasks() {
+    document.getElementById('toDo').innerHTML = '';
+    document.getElementById('inProgress').innerHTML = '';
+    document.getElementById('awaitFeedback').innerHTML = '';
+    document.getElementById('done').innerHTML = '';
+    let searchField = document.getElementById('searchTasks');
+    let resultHL = tasks.filter(t => t['headline'].includes(searchField.value));
+    let resultD = tasks.filter(t => t['description'].includes(searchField.value));
+    console.log(resultHL,resultD);
+
+
+}
