@@ -99,7 +99,3 @@ function deleteBackgroundColors() {         // searches for all elements with cl
         background[i].classList.remove('backgroundSidebar');
     }
 }
-
-// Cool, etwas änliches hat mir chatGPT ausgespuckt, war auch mit querySelectorAll, noch kürzer aber viel unverständlicher. :)
-// Danke dir! 
-// Niko :)

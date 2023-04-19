@@ -10,5 +10,6 @@ let users = [
     let password = document.getElementById('passwordSignUp');
     users.push({name: name.value, email: email.value, password: password.value})
     renderLogin();
-    //window.location.href = '../templates/login.html?msg=successfully registered';
+    /* should be replaced with if else question (if user exist - alert, else new user function) */
+    /*need to make animation that show if user successfully registrated is*/
   }
