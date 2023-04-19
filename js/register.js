@@ -9,5 +9,6 @@ let users = [
     let email = document.getElementById('emailSignUp');
     let password = document.getElementById('passwordSignUp');
     users.push({name: name.value, email: email.value, password: password.value})
+    renderLogin();
     //window.location.href = '../templates/login.html?msg=successfully registered';
   }
