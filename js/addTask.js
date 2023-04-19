@@ -84,6 +84,7 @@ function showAddTaskWindow() {
     popupBox.innerHTML += getAddTaskHTML();
     generateTaskCategories();
     generateContacts();
+    renderSubtasks();
 }
 
 function resetIDs() {
@@ -114,7 +115,7 @@ function getAddTaskHTML() {
                         Select task category
                     </div>
                     <div class="category-selection" id="categorySelection">
-                        <label class="addTask-category-label" onclick="createNewCategoryInAddTask()">
+                        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
                             <span>Create new category</span>
                         </label>
                     </div>
@@ -125,7 +126,7 @@ function getAddTaskHTML() {
                         Select contacts to assign
                     </div>
                     <div class="category-selection" id="contactsSelection">
-                        <label onclick="createNewContactInAddTask()">
+                        <label onclick="createNewContactInAddTask()" class="label-hover">
                             <span>Create new contact</span>
                             <img src="./img/add_user.png" class="addTask-new-contact-img">
                         </label>
@@ -159,16 +160,13 @@ function getAddTaskHTML() {
                     </div>
                 </div>
                 <div id="addSubtasksSection">
-                    <h4 class="addTask-form-headlines">Subtasks</h4>
+                    <h4 class="addTask-form-headlines">Assigned to</h4>
                     <div style="position: relative;" onclick="createNewSubtask()">
                         <input type="text" id="subtaskInput" placeholder="Add new subtask">
                         <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
                     </div>
                 </div>
-                <div class="addTask-subtask-container">
-                    <input id="subtask1" type="checkbox" class="subtask-checkbox">
-                    <label class="subtask-text" for="subtask1">Subtask 1</label>
-                </div>
+                <div id="newSubtasksBox" class="new-subtask-box"></div>
             </div>
         </form>
         <div class="addTask-commit-buttons">
@@ -202,7 +200,7 @@ function generateTaskCategories() {
         let cat = topics[i]['name'];
         let color = topics[i]['color'];
         select.innerHTML += `
-        <label class="addTask-category-label" onclick="showSelectedCategory(${i})">
+        <label class="addTask-category-label label-hover" onclick="showSelectedCategory(${i})">
             <span>${cat}</span>
             <div class="addTask-category-dot" style="background-color:${color};"></div>
         </label>
@@ -230,7 +228,7 @@ function generateContacts() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         select.innerHTML += `
-        <label>
+        <label class="label-hover">
             <span>${contact['firstname']} ${contact['lastname']}</span>
             <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="showAddedClients('contactCheckbox${i}')">
         </label>
@@ -255,7 +253,7 @@ function showAddedClients(checkboxID) {
         currentAssignedClients.push(i);
     }
     else {
-        removeClient(`addedClient${i}`,`${checkboxID}`,`${i}`);
+        removeClient(`addedClient${i}`, `${checkboxID}`, `${i}`);
     }
 }
 
@@ -328,7 +326,7 @@ function resetAddCategorySection() {
                 Select task category
             </div>
             <div class="category-selection" id="categorySelection">
-                <label class="addTask-category-label" onclick="createNewCategoryInAddTask()">
+                <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
                     <span>Create new category</span>
                 </label>
             </div>
@@ -380,12 +378,12 @@ function checkPickedColor() {
     }
 }
 
-function createNewSubtask(){
+function createNewSubtask() {
     let container = document.getElementById('addSubtasksSection');
     container.innerHTML = `
         <h4 class="addTask-form-headlines">Assigned to</h4>
         <div class="dropdown grey-text">
-            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input" placeholder="Add new subtask">
+            <input id="subtaskInput" maxlength="32" class="new-cat-input" placeholder="Add new subtask">
             <div class="create-cat-icon-box">
                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
                 <div class="gap-line"></div>
@@ -393,13 +391,15 @@ function createNewSubtask(){
             </div>
         </div>
     `;
+    getFocusOnInputField('subtaskInput');
 }
 
-function renderSubtasks(){
-    let subtaskSection = document.getElementById('addSubtasksSection');
+function renderSubtasks() {
+    let subtaskBox = document.getElementById('newSubtasksBox');
+    subtaskBox.innerHTML = '';
     for (let i = 0; i < currentSubtasks.length; i++) {
         const element = currentSubtasks[i];
-        subtaskSection.innerHTML += `
+        subtaskBox.innerHTML += `
             <div class="addTask-subtask-container">
                 <input id="subtask${i}" type="checkbox" class="subtask-checkbox">
                 <label class="subtask-text" for="subtask${i}">${element}</label>
@@ -408,18 +408,19 @@ function renderSubtasks(){
     }
 }
 
-function addSubtask(){
+function addSubtask() {
     let input = document.getElementById('subtaskInput');
     currentSubtasks.push(input.value);
+    input.value = '';
     renderSubtasks();
 }
 
-function clearSubtaskSection(){
+function clearSubtaskSection() {
     let container = document.getElementById('addSubtasksSection');
     container.innerHTML = `
-        <h4 class="addTask-form-headlines">Subtasks</h4>
+        <h4 class="addTask-form-headlines">Assigned to</h4>
         <div style="position: relative;" onclick="createNewSubtask()">
-            <input type="text" id="subtaskInput" placeholder="Add new subtask">
+            <input id="subtaskInput" placeholder="Add new subtask">
             <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
         </div>
         `;
@@ -456,4 +457,10 @@ function addTask(title, desc, date) {
 
 function createRandomColor() {
     currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function getFocusOnInputField(id) {
+    let input = document.getElementById(`${id}`);
+    input.focus();
+    input.select();
 }

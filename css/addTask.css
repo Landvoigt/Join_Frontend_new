@@ -1,8 +1,8 @@
 input {
     width: -webkit-fill-available;
     font-family: 'Inter';
-    padding-bottom: 8px;
-    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 12px;
     padding-left: 18px;
     padding-right: 15px;
     border-radius: 8px;
@@ -214,7 +214,8 @@ textarea:focus-visible {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     font-size: 0.8em;
     gap: 8px;
 }
@@ -223,7 +224,7 @@ textarea:focus-visible {
     position: absolute;
     filter: contrast(2);
     right: 10px;
-    top: 12px;
+    top: 14px;
     height: 16px;
     width: 16px;
 }
@@ -236,7 +237,7 @@ textarea:focus-visible {
 .subtask-text {
     font-size: 1em;
     font-weight: 500;
-    margin-left: 0 !important;
+    padding: 0px;
 }
 
 select {
@@ -292,8 +293,8 @@ select {
     width: 100%;
     font-size: 1.1rem;
     font-weight: 400;
-    padding-bottom: 8px;
-    padding-top: 10px;
+    padding-bottom: 7px;
+    padding-top: 8px;
     padding-left: 18px;
     padding-right: 15px;
     cursor: pointer;
@@ -308,7 +309,7 @@ select {
     appearance: none;
     background-repeat: no-repeat;
     background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-    background-position: right 16px top 1em, right 10px top 1em;
+    background-position: right 16px top 0.9em, right 10px top 0.9em;
     background-size: 6px 6px, 6px 6px;
 }
 
@@ -337,7 +338,7 @@ label {
     cursor: pointer;
 }
 
-label:hover {
+.label-hover:hover {
     background-color: lightgrey;
 }
 
@@ -417,6 +418,12 @@ label input {
 .new-cat-input {
     border: 0;
     padding: 0;
+    margin-right: 8px;
+    letter-spacing: -0.5px;
+    font-size: initial;
+    /* font-weight: 0 !important; */
+    /* font-stretch: 0 !important; */
+    /* writing-mode: 0 !important; */
 }
 
 .new-cat-color-select-box {
@@ -445,4 +452,15 @@ label input {
 .added-client-style:hover {
     border: 1px solid black;
     box-shadow: 1px 5px 3px -1px rgba(0, 0, 0, 0.4), -1px 5px 3px -1px rgba(0, 0, 0, 0.3);
+}
+
+.new-subtask-box{
+    margin-top: 8px;
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
