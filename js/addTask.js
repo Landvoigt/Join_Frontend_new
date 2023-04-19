@@ -144,7 +144,7 @@ function getAddTaskHTML() {
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Prio</h4>
-                    <div class="addTask-prio-container">
+                    <div class="addTask-prio-container" required>
                         <div id="red" class="prio" onclick="addPrioColor('red')">
                             <span>Urgent</span>
                             <img id="redIcon" src="./img/prio_urgent.png" class="prio-img">
@@ -383,7 +383,7 @@ function createNewSubtask() {
     container.innerHTML = `
         <h4 class="addTask-form-headlines">Assigned to</h4>
         <div class="dropdown grey-text">
-            <input id="subtaskInput" maxlength="32" class="new-cat-input" placeholder="Add new subtask">
+            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input">
             <div class="create-cat-icon-box">
                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
                 <div class="gap-line"></div>
@@ -398,10 +398,10 @@ function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
     subtaskBox.innerHTML = '';
     for (let i = 0; i < currentSubtasks.length; i++) {
-        const element = currentSubtasks[i];
+        const element = currentSubtasks[i]['text'];
         subtaskBox.innerHTML += `
             <div class="addTask-subtask-container">
-                <input id="subtask${i}" type="checkbox" class="subtask-checkbox">
+                <input id="subtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')">
                 <label class="subtask-text" for="subtask${i}">${element}</label>
             </div>
         `;
@@ -410,9 +410,14 @@ function renderSubtasks() {
 
 function addSubtask() {
     let input = document.getElementById('subtaskInput');
-    currentSubtasks.push(input.value);
+    currentSubtasks.push(
+        {
+            'text': input.value,
+            'status': false
+        }
+    );
     input.value = '';
-    renderSubtasks();
+    clearSubtaskSection();
 }
 
 function clearSubtaskSection() {
@@ -420,21 +425,33 @@ function clearSubtaskSection() {
     container.innerHTML = `
         <h4 class="addTask-form-headlines">Assigned to</h4>
         <div style="position: relative;" onclick="createNewSubtask()">
-            <input id="subtaskInput" placeholder="Add new subtask">
+            <input type="text" id="subtaskInput" placeholder="Add new subtask">
             <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
         </div>
         `;
     renderSubtasks();
 }
 
+function changeSubtaskStatus(i) {
+    let checkbox = document.getElementById(`subtask${i}`);
+    if (checkbox.checked === true) {
+        currentSubtasks[i]['status'] = true;
+    }
+    else {
+        currentSubtasks[i]['status'] = false;
+    }
+}
+
 function getInputsFromForm() {
     let title = document.getElementById('addTask-title-input').value;
     let desc = document.getElementById('addTask-desc-input').value;
     let date = document.getElementById('addTaskDate').value;
-    addTask(title, desc, date);
+    let doneSubtasks = currentSubtasks.filter(s => s.status === true);
+    let progress = doneSubtasks.length;
+    addTask(title, desc, date, progress);
 }
 
-function addTask(title, desc, date) {
+function addTask(title, desc, date, progress) {
     tasks.push(
         {
             'id': tasks.length,
@@ -444,8 +461,8 @@ function addTask(title, desc, date) {
             'headline': title,
             'description': desc,
             'date': date,
-            'subtasksNumber': 0,
-            'progression': 0,
+            'subtasksNumber': currentSubtasks.length,
+            'progression': progress,
             'client1': 'SM',
             'client2': 'MV',
             'client3': 'EF',

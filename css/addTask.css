@@ -420,10 +420,7 @@ label input {
     padding: 0;
     margin-right: 8px;
     letter-spacing: -0.5px;
-    font-size: initial;
-    /* font-weight: 0 !important; */
-    /* font-stretch: 0 !important; */
-    /* writing-mode: 0 !important; */
+    font-size: 0.95em;
 }
 
 .new-cat-color-select-box {
@@ -454,13 +451,13 @@ label input {
     box-shadow: 1px 5px 3px -1px rgba(0, 0, 0, 0.4), -1px 5px 3px -1px rgba(0, 0, 0, 0.3);
 }
 
-.new-subtask-box{
+.new-subtask-box {
     margin-top: 8px;
     width: 100%;
     height: auto;
     max-height: 150px;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: visible;
     overflow-x: hidden;
 }
