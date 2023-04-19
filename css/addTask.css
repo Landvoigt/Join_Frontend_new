@@ -233,6 +233,12 @@ textarea:focus-visible {
     width: 15px !important;
 }
 
+.subtask-text {
+    font-size: 1em;
+    font-weight: 500;
+    margin-left: 0 !important;
+}
+
 select {
     cursor: pointer;
     display: inline-block;

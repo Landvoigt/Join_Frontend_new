@@ -7,8 +7,8 @@ let tasks = [
         'headline': 'Website Redesign',
         'description': 'Modify the contents of the main website specific ...',
         'date': '13/04/2023',
-        'subtasksNumber': 2,
-        'progression': 1,
+        'subtasksNumber': 0,
+        'progression': 0,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
@@ -23,8 +23,8 @@ let tasks = [
         'headline': 'Call potential clients',
         'description': 'Make the product presentation to prospective buyers',
         'date': '13/04/2023',
-        'subtasksNumber': 2,
-        'progression': 1,
+        'subtasksNumber': 3,
+        'progression': 2,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
@@ -39,8 +39,8 @@ let tasks = [
         'headline': 'Accounting invoices',
         'description': 'Write open invoices for customer',
         'date': '13/04/2023',
-        'subtasksNumber': 2,
-        'progression': 1,
+        'subtasksNumber': 0,
+        'progression': 0,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
@@ -55,7 +55,7 @@ let tasks = [
         'headline': 'Video cut',
         'description': 'Edit the new company video',
         'date': '13/04/2023',
-        'subtasksNumber': 2,
+        'subtasksNumber': 4,
         'progression': 1,
         'client1': 'SM',
         'client2': 'MV',
@@ -71,8 +71,8 @@ let tasks = [
         'headline': 'Social media strategy',
         'description': 'Develop an ad campain for brand positioning',
         'date': '13/04/2023',
-        'subtasksNumber': 2,
-        'progression': 1,
+        'subtasksNumber': 5,
+        'progression': 3,
         'client1': 'SM',
         'client2': 'MV',
         'client3': 'EF',
@@ -85,36 +85,19 @@ let currentDraggedElement;
 let currentPrioColor;
 
 function updateTasks() {
-    let todo = tasks.filter(t => t['category'] == 'toDo');
-    document.getElementById('toDo').innerHTML = '';
+    updateTaskSection('toDo');
+    updateTaskSection('inProgress');
+    updateTaskSection('awaitFeedback');
+    updateTaskSection('done');
+}
 
-    for (let i = 0; i < todo.length; i++) {
-        const element = todo[i];
-        document.getElementById('toDo').innerHTML += generateTask(element);
-    }
-
-    let inProgress = tasks.filter(t => t['category'] == 'inProgress');
-    document.getElementById('inProgress').innerHTML = '';
-
-    for (let i = 0; i < inProgress.length; i++) {
-        const element = inProgress[i];
-        document.getElementById('inProgress').innerHTML += generateTask(element);
-    }
-
-    let awaitFeedback = tasks.filter(t => t['category'] == 'awaitFeedback');
-    document.getElementById('awaitFeedback').innerHTML = '';
-
-    for (let i = 0; i < awaitFeedback.length; i++) {
-        const element = awaitFeedback[i];
-        document.getElementById('awaitFeedback').innerHTML += generateTask(element);
-    }
-
-    let done = tasks.filter(t => t['category'] == 'done');
-    document.getElementById('done').innerHTML = '';
-
-    for (let i = 0; i < done.length; i++) {
-        const element = done[i];
-        document.getElementById('done').innerHTML += generateTask(element);
+function updateTaskSection(id) {
+    let cat = tasks.filter(t => t['category'] == `${id}`);
+    document.getElementById(`${id}`).innerHTML = '';
+    for (let i = 0; i < cat.length; i++) {
+        const element = cat[i];
+        document.getElementById(`${id}`).innerHTML += generateTask(element);
+        checkForSubtasks(element['subtasksNumber'], element['id']);
     }
 }
 
@@ -124,11 +107,11 @@ function generateTask(task) {
             <span class="task-category" style="background-color: ${task['color']}">${task['topic']}</span>
             <span class="task-headline">${task['headline']}</span>
             <span class="task-description">${task['description']}</span>
-            <div class="progress-container">
+            <div id="progressContainer${task['id']}" class="progress-container">
                 <div class="progress-box">
-                    <div class="progress-bar" style="width:50%"></div>
+                    <div class="progress-bar" style="width:${task['progression'] / task['subtasksNumber'] * 100}%"></div>
                   </div>
-                <span>1/2 Done</span>
+                <span>${task['progression']}/${task['subtasksNumber']} Done</span>
             </div>
             <div class="task-assignment-section">
                 <div class="task-clients-container">
@@ -171,6 +154,16 @@ function changeIconColor(id) {
 function removeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus.png";
+}
+
+function checkForSubtasks(number, id) {
+    let progress = document.getElementById(`progressContainer${id}`);
+    if (number == 0) {
+        progress.innerHTML = '';
+    }
+    else {
+        progress.style = 'padding-bottom: 20px;'
+    }
 }
 
 function showDetailedTask(id) {
@@ -298,3 +291,9 @@ function saveEditedTaskInformation(id) {
     updateTasks();
     showDetailedTask(id);
 }
+
+// function filterTasks() {
+//     let searchField = document.getElementById('searchTasks').value;
+//     let result = tasks.filter(t => t['headline'] && t['description'] == searchField);
+//     console.log(result);
+// }

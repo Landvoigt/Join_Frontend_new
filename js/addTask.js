@@ -20,7 +20,8 @@ let topics = [
         'color': 'blue'
     }
 ];
-let currentAssignedClients = [];
+let currentAssignedClients = ['Subtask 1'];
+let currentSubtasks = [];
 let showCheckBoxes = true;
 let currentPickedColor = '';
 let currentPrio;
@@ -157,16 +158,16 @@ function getAddTaskHTML() {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div id="addSubtasksSection">
                     <h4 class="addTask-form-headlines">Subtasks</h4>
-                    <div style="position: relative;">
-                        <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+                    <div style="position: relative;" onclick="createNewSubtask()">
                         <input type="text" id="subtaskInput" placeholder="Add new subtask">
+                        <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
                     </div>
                 </div>
                 <div class="addTask-subtask-container">
                     <input id="subtask1" type="checkbox" class="subtask-checkbox">
-                    <label for="subtask1">Subtask 1</label>
+                    <label class="subtask-text" for="subtask1">Subtask 1</label>
                 </div>
             </div>
         </form>
@@ -276,7 +277,7 @@ function removeAddTaskWindow() {
 function createNewContactInAddTask() {
     let dropdown = document.getElementById('contactDropdownSection');
     dropdown.innerHTML = `
-        <h4 class="addTask-form-headlines">Assigned to</h4>
+        <h4 class="addTask-form-headlines">Subtasks</h4>
         <div class="dropdown grey-text">
             <input id="new-contact-input" class="new-cat-input" type="email" placeholder="Contact email" required>
             <div class="create-cat-icon-box">
@@ -377,6 +378,52 @@ function checkPickedColor() {
         }
         return
     }
+}
+
+function createNewSubtask(){
+    let container = document.getElementById('addSubtasksSection');
+    container.innerHTML = `
+        <h4 class="addTask-form-headlines">Assigned to</h4>
+        <div class="dropdown grey-text">
+            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input" placeholder="Add new subtask">
+            <div class="create-cat-icon-box">
+                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
+                <div class="gap-line"></div>
+                <img src="./img/check_mark.png" class="create-category-icon" onclick="addSubtask()">
+            </div>
+        </div>
+    `;
+}
+
+function renderSubtasks(){
+    let subtaskSection = document.getElementById('addSubtasksSection');
+    for (let i = 0; i < currentSubtasks.length; i++) {
+        const element = currentSubtasks[i];
+        subtaskSection.innerHTML += `
+            <div class="addTask-subtask-container">
+                <input id="subtask${i}" type="checkbox" class="subtask-checkbox">
+                <label class="subtask-text" for="subtask${i}">${element}</label>
+            </div>
+        `;
+    }
+}
+
+function addSubtask(){
+    let input = document.getElementById('subtaskInput');
+    currentSubtasks.push(input.value);
+    renderSubtasks();
+}
+
+function clearSubtaskSection(){
+    let container = document.getElementById('addSubtasksSection');
+    container.innerHTML = `
+        <h4 class="addTask-form-headlines">Subtasks</h4>
+        <div style="position: relative;" onclick="createNewSubtask()">
+            <input type="text" id="subtaskInput" placeholder="Add new subtask">
+            <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+        </div>
+        `;
+    renderSubtasks();
 }
 
 function getInputsFromForm() {
