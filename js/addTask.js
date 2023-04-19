@@ -33,37 +33,37 @@ function addPrioColor(id) {
     let element = document.getElementById(id);
     let target = element.classList.contains(`${id}-highlight`);
     let icon = document.getElementById(`${id}Icon`);
-    document.getElementById('redIcon').classList.remove('img-brightening');
-    document.getElementById('yellowIcon').classList.remove('img-brightening');
-    document.getElementById('greenIcon').classList.remove('img-brightening');
+    document.getElementById('urgentIcon').classList.remove('img-brightening');
+    document.getElementById('mediumIcon').classList.remove('img-brightening');
+    document.getElementById('lowIcon').classList.remove('img-brightening');
     if (target) {
         element.classList.remove(`${id}-highlight`);
         currentPrio = '';
         currentPrioImageSource = '';
     }
     else {
-        if (id == 'red') {
-            element.classList.add('red-highlight');
-            document.getElementById('yellow').classList.remove('yellow-highlight');
-            document.getElementById('green').classList.remove('green-highlight');
+        if (id == 'urgent') {
+            element.classList.add('urgent-highlight');
+            document.getElementById('medium').classList.remove('medium-highlight');
+            document.getElementById('low').classList.remove('low-highlight');
             icon.classList.add('img-brightening');
-            currentPrio = 'urgent';
+            currentPrio = id;
             currentPrioImageSource = './img/prio_urgent.png';
         }
-        if (id == 'yellow') {
-            element.classList.add('yellow-highlight');
-            document.getElementById('red').classList.remove('red-highlight');
-            document.getElementById('green').classList.remove('green-highlight');
+        if (id == 'medium') {
+            element.classList.add('medium-highlight');
+            document.getElementById('urgent').classList.remove('urgent-highlight');
+            document.getElementById('low').classList.remove('low-highlight');
             icon.classList.add('img-brightening');
-            currentPrio = 'medium';
+            currentPrio = id;
             currentPrioImageSource = './img/prio_medium.png';
         }
-        if (id == 'green') {
-            element.classList.add('green-highlight');
-            document.getElementById('yellow').classList.remove('yellow-highlight');
-            document.getElementById('red').classList.remove('red-highlight');
+        if (id == 'low') {
+            element.classList.add('low-highlight');
+            document.getElementById('medium').classList.remove('medium-highlight');
+            document.getElementById('urgent').classList.remove('urgent-highlight');
             icon.classList.add('img-brightening');
-            currentPrio = 'low';
+            currentPrio = id;
             currentPrioImageSource = './img/prio_low.png';
         }
     }
@@ -145,17 +145,17 @@ function getAddTaskHTML() {
                 <div>
                     <h4 class="addTask-form-headlines">Prio</h4>
                     <div class="addTask-prio-container" required>
-                        <div id="red" class="prio" onclick="addPrioColor('red')">
+                        <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
                             <span>Urgent</span>
-                            <img id="redIcon" src="./img/prio_urgent.png" class="prio-img">
+                            <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
                         </div>
-                        <div id="yellow" class="prio" onclick="addPrioColor('yellow')">
+                        <div id="medium" class="prio" onclick="addPrioColor('medium')">
                             <span>Medium</span>
-                            <img id="yellowIcon" src="./img/prio_medium.png" class="prio-img extra">
+                            <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
                         </div>
-                        <div id="green" class="prio" onclick="addPrioColor('green')">
+                        <div id="low" class="prio" onclick="addPrioColor('low')">
                             <span>Low</span>
-                            <img id="greenIcon" src="./img/prio_low.png" class="prio-img">
+                            <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,11 @@ function getAddTaskHTML() {
         </form>
         <div class="addTask-commit-buttons">
             <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
-            <button class="submit-btn" type="submit" onclick="getInputsFromForm()">Create Task ✓</button>
+            <button class="submit-btn" type="submit" onclick="getInputsFromForm(); showTaskAddedPopup()">Create Task ✓</button>
+        </div>
+        <div id="taskAddedPopup" class="task-added-popup-container">
+            <span>Task added to board</span>
+            <img src="./img/grid.png" class="popup-icon">
         </div>
     `;
 }
@@ -480,4 +484,11 @@ function getFocusOnInputField(id) {
     let input = document.getElementById(`${id}`);
     input.focus();
     input.select();
+}
+
+function showTaskAddedPopup() {
+    let popup = document.getElementById('taskAddedPopup');
+    popup.classList.add('popup-animation');
+    setTimeout((changeSite), 900, BOARD_ID);
+    setTimeout((removeAddTaskWindow), 900);
 }

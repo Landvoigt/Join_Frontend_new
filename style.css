@@ -77,6 +77,8 @@ b {
     padding-top: 164px;
     padding-bottom: 52px;
     background-color: rgba(211, 211, 211, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
 .popup-window {
@@ -89,6 +91,7 @@ b {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .back-arrow-abs {

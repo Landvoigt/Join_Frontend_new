@@ -167,7 +167,7 @@ function checkForSubtasks(number, id) {
 }
 
 function showDetailedTask(id) {
-    checkPrioColor(id);
+    checkPriority(id);
     let task = tasks[id];
     let popup = document.getElementById('popupWindow');
     popup.classList.remove('d-none');
@@ -182,7 +182,7 @@ function showDetailedTask(id) {
         <span class="popup-span"><b>Due date:</b>${task['date']}</span>
         <div class="popup-span" style="display:flex; align-items:center">
             <span><b>Priority:</b></span>
-            <span class="task-category" style="background-color: ${currentPrioColor}">${task['prioName']}
+            <span class="task-category" style="background-color: ${currentPrioColor}">${currentPrio}
                 <img src="${task['prioImg']}" class="popup-prio-icon img-brightening">
             </span>
         </div>
@@ -213,20 +213,24 @@ function showDetailedTask(id) {
     `;
 }
 
-function checkPrioColor(id) {
+function checkPriority(id) {
     let prio = tasks[id]['prioName'];
     if (prio == 'urgent') {
         currentPrioColor = '#ff3d00';
+        currentPrio = prio;
     }
     if (prio == 'medium') {
         currentPrioColor = '#ffa800';
+        currentPrio = prio;
     }
     if (prio == 'low') {
         currentPrioColor = '#7ae229';
+        currentPrio = prio;
     }
 }
 
 function editDetailedTask(id) {
+    resetIDs();
     let task = tasks[id];
     let popup = document.getElementById('popupWindow');
     popup.classList.remove('d-none');
@@ -237,60 +241,86 @@ function editDetailedTask(id) {
         <button class="submit-btn btn-absolute" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
         <div class="popup-text-boxes">
             <h4 class="addTask-form-headlines">Title</h4>
-            <input id="task${id}" placeholder="Enter a title" maxlength="40" onfocus="this.value=''" value="${task['headline']}">
+            <input id="task${id}" placeholder="Enter a title" maxlength="40" value="${task['headline']}">
         </div>
         <div class="popup-text-boxes">
-            <h4 class="addTask-form-headlines">Description</h4>
-            <textarea id="desc${id}" placeholder="Enter a description" maxlength="200" onfocus="this.value=''">${task['description']}</textarea>
+        <h4 class="addTask-form-headlines">Description</h4>
+        <textarea id="desc${id}" placeholder="Enter a description" maxlength="200">${task['description']}</textarea>
         </div>
         <div class="popup-text-boxes">
-            <h4 class="addTask-form-headlines">Due date</h4>
-            <div style="position: relative;">
-                <img class="calendar-icon" src="./img/calendar.png"></img>
-                <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
-            </div>
+        <h4 class="addTask-form-headlines">Due date</h4>
+        <div style="position: relative;">
+        <img class="calendar-icon" src="./img/calendar.png"></img>
+        <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
+        </div>
         </div>
         <div class="popup-text-boxes">
-            <h4 class="addTask-form-headlines">Prio</h4>
-            <div class="addTask-prio-container">
-                <div id="red" class="prio" onclick="addPrioColor('red')">
-                    <span>Urgent</span>
-                    <img id="redIcon" src="./img/prio_urgent.png" class="prio-img">
-                </div>
-                <div id="yellow" class="prio" onclick="addPrioColor('yellow')">
-                    <span>Medium</span>
-                    <img id="yellowIcon" src="./img/prio_medium.png" class="prio-img extra">
-                </div>
-                <div id="green" class="prio" onclick="addPrioColor('green')">
-                    <span>Low</span>
-                    <img id="greenIcon" src="./img/prio_low.png" class="prio-img">
-                </div>
-            </div>
+        <h4 class="addTask-form-headlines">Prio</h4>
+        <div class="addTask-prio-container">
+        <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
+        <span>Urgent</span>
+        <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
+        </div>
+        <div id="medium" class="prio" onclick="addPrioColor('medium')">
+        <span>Medium</span>
+        <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
+        </div>
+        <div id="low" class="prio" onclick="addPrioColor('low')">
+        <span>Low</span>
+        <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
+        </div>
+        </div>
         </div>
         <div class="popup-text-boxes">
-            <h4 class="addTask-form-headlines">Assigned to</h4>
-            <select id="addTaskAssignedContacts">
-                <option value="" disabled selected>Select contacts to assign</option>
-                <option>Kaser</option>
-                <option>Niko</option>
-                <option>Tim</option>
-            </select>
+        <h4 class="addTask-form-headlines">Assigned to</h4>
+        <select id="addTaskAssignedContacts">
+        <option value="" disabled selected>Select contacts to assign</option>
+        <option>Kaser</option>
+        <option>Niko</option>
+        <option>Tim</option>
+        </select>
         </div>
         <div class="popup-text-boxes">
-            <div class="task-clients-container m-t-20">
-                <div class="task-client task-client-big m-r-8">SM</div>
-                <div class="task-client task-client-big m-r-8">MV</div>
-                <div class="task-client task-client-big m-r-8">EF</div>
-            </div>
+        <div class="task-clients-container m-t-20">
+        <div class="task-client task-client-big m-r-8">SM</div>
+        <div class="task-client task-client-big m-r-8">MV</div>
+        <div class="task-client task-client-big m-r-8">EF</div>
         </div>
-    </div>
-    `;
+        </div>
+        </div>
+        `;
+    addPrioColor(currentPrio);
 }
 
 function saveEditedTaskInformation(id) {
-    updateTasks();
+    // updateTaskInformations(id);
+    updateTasks(id);
     showDetailedTask(id);
 }
+
+// function updateTaskInformations(id) {
+//     let title = document.getElementById('addTask-title-input').value;
+//     let desc = document.getElementById('addTask-desc-input').value;
+//     let date = document.getElementById('addTaskDate').value;
+//     let doneSubtasks = currentSubtasks.filter(s => s.status === true);
+//     let progress = doneSubtasks.length;
+//     tasks[id] = {
+//         'id': id,
+//         'category': 'toDo',
+//         'topic': currentCat,
+//         'color': currentPickedColor,
+//         'headline': title,
+//         'description': desc,
+//         'date': date,
+//         'subtasksNumber': currentSubtasks.length,
+//         'progression': progress,
+//         'client1': 'SM',
+//         'client2': 'MV',
+//         'client3': 'EF',
+//         'prioName': currentPrio,
+//         'prioImg': currentPrioImageSource,
+//     }
+// }
 
 // function filterTasks() {
 //     let searchField = document.getElementById('searchTasks').value;

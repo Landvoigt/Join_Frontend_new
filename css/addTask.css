@@ -9,7 +9,7 @@ input {
     border: 1px solid lightgrey;
     color: #000000de;
     background-color: white;
-    font-size: 0.95em;
+    font-size: 1em;
     font-weight: 500;
 }
 
@@ -49,7 +49,7 @@ textarea {
     border: 1px solid lightgrey;
     background-color: white;
     color: #000000de;
-    font-size: 0.95em;
+    font-size: 1em;
     font-weight: 500;
     resize: none;
     overflow: auto;
@@ -139,19 +139,19 @@ textarea:focus-visible {
     filter: brightness(0) invert(1);
 }
 
-.red-highlight {
+.urgent-highlight {
     background-color: #ff3d00 !important;
     border: 0 !important;
     color: white !important;
 }
 
-.yellow-highlight {
+.medium-highlight {
     background-color: #ffa800 !important;
     border: 0 !important;
     color: white !important;
 }
 
-.green-highlight {
+.low-highlight {
     background-color: #7ae229 !important;
     border: 0 !important;
     color: white !important;
@@ -261,6 +261,7 @@ select {
     border-radius: 30px;
     padding: 65px;
     position: relative;
+    display: grid;
 }
 
 .popup-task {
@@ -460,4 +461,46 @@ label input {
     flex-direction: column;
     overflow-y: visible;
     overflow-x: hidden;
+}
+
+.task-added-popup-container {
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 1.25em;
+    font-weight: 500;
+    background-color: #2a3647;
+    color: white;
+    box-shadow: 1px 4px 3px -1px rgba(0, 0, 0, 0.16), -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
+    transform: translateY(60vh) !important;
+}
+
+.popup-icon {
+    height: 26px;
+    width: 26px;
+}
+
+.popup-animation {
+    animation: goUp 1.1s ease-in-out;
+}
+
+@keyframes goUp {
+    from {
+        bottom: 50%;
+    }
+
+    to {
+        bottom: 75%;
+    }
+
+    to {
+        bottom: 80%;
+    }
 }
