@@ -163,11 +163,27 @@ function openContact(id){
 
 function openCreateContact() {
     let popupBG = document.getElementById('create-contact-bg');
+    let contactsForm = document.getElementById('contacts-popup');
     popupBG.classList.remove('d-none');
+    contactsForm.classList.remove('move-out');
+    contactsForm.classList.add('move-in');
+    popupBG.classList.add('dark');
+    popupBG.classList.remove('light');
   }
+  
+  
 
   function closeCreateContact(){
-    document.getElementById('create-contact-bg').classList.add('d-none');
+    let contactPopup = document.getElementById('contacts-popup');
+    document.getElementById('create-contact-bg').classList.remove('dark');
+    contactPopup.classList.remove('move-in')
+    document.getElementById('create-contact-bg').classList.add('light');
+    contactPopup.classList.add('move-out');
+    setTimeout(function() {
+      document.getElementById('create-contact-bg').classList.add('d-none');
+    }, 1500);
+    
   }
+  
   
   

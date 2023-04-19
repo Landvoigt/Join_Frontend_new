@@ -179,7 +179,7 @@
 }
 
 .create-contact-bg {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.0);
     position: fixed;
     z-index: 4;
     top: 0;
@@ -189,7 +189,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 1s ease-in-out;
 }
+.dark{
+    animation: darkenBackground 1s forwards;
+  }
+  .light{
+    animation: lightenBackground 1s forwards;
+  }
+  @keyframes darkenBackground {
+    from {
+      background-color: rgba(0, 0, 0, 0.0);
+    }
+    to {
+      background-color:rgba(0, 0, 0, 0.2);
+    }
+  }
+  @keyframes lightenBackground {
+    from {
+        background-color:rgba(0, 0, 0, 0.2);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.0);
+    }
+  }
 
 #contacts-popup {
     position: fixed;
@@ -197,7 +220,39 @@
     background-color: #fff;
     display: flex;
     border-radius: 29px;
+    right: -90%;
 }
+.move-in{
+    animation: moveIn 1.5s ease-in-out forwards;
+}
+.move-out{
+    animation: moveOut 1.5s ease-in-out forwards;
+}
+@keyframes moveIn {
+    from{ 
+        right: -90%;
+        transform: translateX(200%);
+    }
+    to{
+        right:unset;
+        transform: none;
+    }
+}
+@keyframes moveOut{
+    from{
+        right:unset;
+        transform: none;
+       
+        
+    }
+    to{ 
+        right: -100%;
+        transform: translateX(200%);
+        
+    }
+    
+}
+
 
 .contacts-popup-left {
     width: 463px;
