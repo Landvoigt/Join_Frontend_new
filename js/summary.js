@@ -23,6 +23,7 @@ function greetAccordingToTime(currenthour) {
 
 /// gerne kürzer und einfacher machen wenn jemand weiß wie :) gruß Tim 
 // hab's versucht :) gruß Kaser
+// aja geht ja auch mit filter funktion danke nice :)
 
 function checkForTaskNumbers() {
     let allTasks = document.getElementById('allTasksNr');
