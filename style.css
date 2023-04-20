@@ -68,9 +68,12 @@ b {
     font-weight: 600;
 }
 
+.h-100 {
+    height: 100% !important;
+}
+
 .incl-cont-side {
-    min-height: 100vh;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     padding-left: 334px;
     padding-right: 102px;
