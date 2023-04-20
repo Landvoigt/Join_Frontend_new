@@ -106,3 +106,24 @@ b {
     width: 26px;
     cursor: pointer;
 }
+
+@media (max-width: 1300px) {
+    .padding-r-15 {
+        padding-right: 15px !important;
+    }
+
+    .of-visible-responsive {
+        overflow: visible;
+        height: 100%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .incl-cont-side {
+        min-height: 100vh;
+        height: 100%;
+        overflow: visible;
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+}

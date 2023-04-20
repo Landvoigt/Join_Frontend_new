@@ -386,7 +386,7 @@ function createNewSubtask() {
     let container = document.getElementById('addSubtasksSection');
     container.innerHTML = `
         <h4 class="addTask-form-headlines">Assigned to</h4>
-        <div class="dropdown grey-text">
+        <div class="dropdown grey-text padding-r-15">
             <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input">
             <div class="create-cat-icon-box">
                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">

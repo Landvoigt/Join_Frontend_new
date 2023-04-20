@@ -23,3 +23,16 @@
     width: 74%;
 }
 
+@media (max-width: 1300px) {
+    .help-steps-box {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .help-steps-box b {
+        width: 30%;
+    }
+}
