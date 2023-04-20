@@ -1,11 +1,12 @@
 let inputPass = false;
 
-function renderLogin() {
+async function renderLogin() {
   setTimeout(1000);
   let card = document.getElementById('loginForm');
   card.innerHTML = loginTemplate();
   let header = document.getElementById('loginHeaderRight');
   header.classList.remove("d-none");
+  loadUsers();
 }
 
 async function changePWSymbol() {
@@ -102,7 +103,7 @@ function signUpTemplate() {
                 
             </div>
             <div class="signupFooterBtn">
-                <button class="loginBtn pointer">Sign up</button>
+                <button id="registerBtn" class="loginBtn pointer">Sign up</button>
             </div>
           </form>
   `;

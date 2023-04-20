@@ -12,7 +12,6 @@ let previousPage;
 let previousBackground = 'summarySidebar';
 
 async function initialize() {
-    setURL('http://developerakademie.com/smallest_backend_ever');
     await includeHTML();
     showMainpage();
     loadDate();

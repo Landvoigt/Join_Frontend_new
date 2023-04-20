@@ -1,15 +1,27 @@
-let users = [
-    {   'name': 'Niko',
-        'email': 'niko@test.de',
-        'password': 'test123'}
-  ];
+let users = [];
   
-  function register() {
-    let name = document.getElementById('signUpName');
-    let email = document.getElementById('emailSignUp');
-    let password = document.getElementById('passwordSignUp');
-    users.push({name: name.value, email: email.value, password: password.value})
-    renderLogin();
-    /* should be replaced with if else question (if user exist - alert, else new user function) */
-    /*need to make animation that show if user successfully registrated is*/
-  }
+  async function loadUsers(){
+    try {
+        users = JSON.parse(await getItem('users'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+}
+
+
+async function register() {
+    registerBtn.disabled = true;
+    users.push({
+        name: signUpName.value,
+        email: emailSignUp.value,
+        password: passwordSignUp.value,
+    });
+    await setItem('users', JSON.stringify(users));
+    resetForm();
+}
+
+function resetForm() {
+    email.value = '';
+    password.value = '';
+    registerBtn.disabled = false;
+}
