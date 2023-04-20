@@ -1,3 +1,7 @@
+.help-desc {
+    font-size: 1.1em;
+}
+
 .help-steps-box {
     display: flex;
     align-items: center;
@@ -7,4 +11,15 @@
 
 .help-steps-box h3 {
     margin: 0;
+    width: 3%;
 }
+
+.help-steps-box b {
+    width: 23%;
+    font-weight: 700;
+}
+
+.help-steps-box span {
+    width: 74%;
+}
+
