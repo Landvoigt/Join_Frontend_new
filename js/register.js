@@ -11,17 +11,15 @@ let users = [];
 
 async function register() {
     registerBtn.disabled = true;
+    let name = document.getElementById('signUpName');
+    let email = document.getElementById('emailSignUp');
+    let password = document.getElementById('passwordSignUp');
+
     users.push({
-        name: signUpName.value,
-        email: emailSignUp.value,
-        password: passwordSignUp.value,
+        name: name.value,
+        email: email.value,
+        password: password.value,
     });
     await setItem('users', JSON.stringify(users));
-    resetForm();
-}
-
-function resetForm() {
-    email.value = '';
-    password.value = '';
-    registerBtn.disabled = false;
+    renderLogin();
 }
