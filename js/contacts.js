@@ -1,66 +1,77 @@
 let contacts = [{
     'firstname':'Anton',
     'lastname':'Mayer',
+    'initials':'AM',
     'mail':'anton-mayer@gmx.com',
     'phone':'01234567',
     'color':'green'
 },{
     'firstname':'Julia',
     'lastname':'Roberts',
+    'initials':'JR',
     'mail':'juliar@gmx.com',
     'phone':'01234567',
     'color':'red'
 },{
     'firstname':'Jonathan',
     'lastname':'Wick',
+    'initials':'JW',
     'mail':'anton-mayer@gmx.com',
     'phone':'01234567',
     'color':'blue'
 },{
     'firstname':'Alfred',
     'lastname':'Niebuhr',
+    'initials':'AN',
     'mail':'anton-mayer@gmx.com',
     'phone':'01234567',
     'color':'purple'
 },{
     'firstname':'Carlos',
     'lastname':'Sanros',
+    'initials':'CS',
     'mail':'anton-mayer@gmx.com',
     'phone':'01234567',
     'color':'grey'
 },{
     'firstname':'Carmen',
     'lastname':'Müller',
+    'initials':'CM',
     'mail':'Müller.C@gmx.com',
     'phone':'01234567',
-    'color':'black'
+    'color':'orange'
 },{
     'firstname':'Sven',
     'lastname':'Siebert',
+    'initials':'SS',
     'mail':'Sven.T@live.de',
     'phone':'01786965354',
     'color':'cyan'
 },{
     'firstname':'Robert',
     'lastname':'Koch',
+    'initials':'RK',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
 },{
     'firstname':'Peter',
     'lastname':'Heinrich',
+    'initials':'PH',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
 },{
     'firstname':'Rahul',
     'lastname':'Sharma',
+    'initials':'RS',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'
 },{
     'firstname':'Michelle',
     'lastname':'Seiler',
+    'initials':'MS',
     'mail':'Sven.T@live.de',
     'phone':'01234567',
     'color':'brown'

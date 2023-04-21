@@ -20,7 +20,7 @@ let topics = [
         'color': 'blue'
     }
 ];
-let currentAssignedClients = ['Subtask 1'];
+let currentAssignedClients = [];
 let currentSubtasks = [];
 let showCheckBoxes = true;
 let currentPickedColor = '';
@@ -99,7 +99,7 @@ function resetIDs() {
 function getAddTaskHTML() {
     return `
         <h2>Add Task</h2>
-        <form class="addTask-form" >
+        <form class="addTask-form" onsubmit="getInputsFromForm(); return false">
             <div class="addTask-form-left-container">
                 <div>
                     <h4 class="addTask-form-headlines">Title</h4>
@@ -171,7 +171,7 @@ function getAddTaskHTML() {
         </form>
         <div class="addTask-commit-buttons">
             <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
-            <button class="submit-btn" type="submit" onclick="getInputsFromForm(); showTaskAddedPopup()">Create Task ✓</button>
+            <button class="submit-btn" type="submit" onclick="getInputsFromForm()">Create Task ✓</button>
         </div>
         <div id="taskAddedPopup" class="task-added-popup-container">
             <span>Task added to board</span>
@@ -223,7 +223,7 @@ function showSelectedCategory(i) {
     </div>
     `;
     showSelection('categorySelection', 'categoryDropdown');
-    currentCat = cat;
+    currentCat = i;
     currentPickedColor = color;
 }
 
@@ -245,8 +245,7 @@ function showAddedClients(checkboxID) {
     let i = checkbox.name;
     if (checkbox.checked === true) {
         let dropdown = document.getElementById('addedClientsBox');
-        let initials = 'JW';
-        // let initials = contacts[i]['firstname'];
+        let initials = contacts[i]['initials'];
         let color = contacts[i]['color'];
         dropdown.innerHTML += `
             <div style="display:flex;">
@@ -364,7 +363,7 @@ function addCategory() {
         <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
     </div>
     `;
-    currentCat = newCat.value;
+    currentCat = topics.length - 1;
 }
 
 function checkPickedColor() {
@@ -450,26 +449,22 @@ function getInputsFromForm() {
     let title = document.getElementById('addTask-title-input').value;
     let desc = document.getElementById('addTask-desc-input').value;
     let date = document.getElementById('addTaskDate').value;
-    let doneSubtasks = currentSubtasks.filter(s => s.status === true);
-    let progress = doneSubtasks.length;
-    addTask(title, desc, date, progress);
+    addTask(title, desc, date);
 }
 
-function addTask(title, desc, date, progress) {
+function addTask(title, desc, date) {
     tasks.push(
         {
             'id': tasks.length,
             'category': 'toDo',
             'topic': currentCat,
-            'color': currentPickedColor,
             'headline': title,
             'description': desc,
             'date': date,
+            'subtasks': currentSubtasks,
             'subtasksNumber': currentSubtasks.length,
             'progression': progress,
-            'client1': 'SM',
-            'client2': 'MV',
-            'client3': 'EF',
+            'clients': currentAssignedClients,
             'prioName': currentPrio,
             'prioImg': currentPrioImageSource,
         },
