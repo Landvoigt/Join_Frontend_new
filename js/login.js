@@ -50,7 +50,7 @@ function loginTemplate() {
             </div>
             <div class="loginInputFields">
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="email" required placeholder="E-mail">
+                    <input class="loginE-Mail" type="email" required placeholder="E-mail" id="emailInput">
                     <img class="inputImg" src="../img/email.svg" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
@@ -64,7 +64,7 @@ function loginTemplate() {
                 </div>
             </div>
             <div class="loginFooterBtns">
-                <button class="loginBtn pointer">Log in</button>
+                <button id="loginBtn" class="loginBtn pointer" onclick="login()">Log in</button>
                 <button class="guestBtn pointer">Guest Log in</button>
             </div>
   `;
@@ -174,3 +174,26 @@ function resetPasswordTemplate() {
             </div>
   `;
 }
+
+function login() {
+  let loginBtn = document.getElementById('loginBtn');
+    loginBtn.disabled = true;
+    
+    let email = document.getElementById('emailInput').value;
+    let password = document.getElementById('passwordInput').value;
+
+    let user = users.find((user) => user.email === email);
+    if (!user) {
+        alert('User not found');
+        loginBtn.disabled = false;
+        return;
+    }
+
+    if (password !== user.password) {
+        alert('Invalid password');
+        loginBtn.disabled = false;
+        return;
+    }
+
+    alert('Login successful!');     /* weiterleiten zum Board */
+  }
