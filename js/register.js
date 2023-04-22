@@ -8,18 +8,27 @@ let users = [];
     }
 }
 
-
 async function register() {
+    let registerBtn = document.getElementById('registerBtn');
     registerBtn.disabled = true;
-    let name = document.getElementById('signUpName');
-    let email = document.getElementById('emailSignUp');
-    let password = document.getElementById('passwordSignUp');
+    
+    let name = document.getElementById('signUpName').value;
+    let email = document.getElementById('emailSignUp').value;
+    let password = document.getElementById('passwordSignUp').value;
 
-    users.push({
-        name: name.value,
-        email: email.value,
-        password: password.value,
-    });
+    let userExists = users.some((user) => user.email === email);
+    if (userExists) {
+        alert('User with this email already exists');
+        registerBtn.disabled = false;
+        return;
+    } else { users.push({
+        name: name,
+        email: email,
+        password: password,
+        })
+    };
+
     await setItem('users', JSON.stringify(users));
+    alert('Registration successful!');
     renderLogin();
 }
