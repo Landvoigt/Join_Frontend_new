@@ -462,8 +462,6 @@ function addTask(title, desc, date) {
             'description': desc,
             'date': date,
             'subtasks': currentSubtasks,
-            'subtasksNumber': currentSubtasks.length,
-            'progression': progress,
             'clients': currentAssignedClients,
             'prioName': currentPrio,
             'prioImg': currentPrioImageSource,

@@ -289,7 +289,6 @@
 }
 
 .popup-clients-container {
-    min-height: 100px;
     height: auto;
     width: 100%;
     display: flex;
@@ -347,6 +346,19 @@
 .addTask-btn-responsive img {
     width: 25px;
     height: 25px;
+}
+
+.popup-subtask-container {
+    min-height: 100px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.line-through {
+    text-decoration: line-through !important;
 }
 
 @media (max-width: 1570px) {

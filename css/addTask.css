@@ -158,7 +158,7 @@ textarea:focus-visible {
 }
 
 .addTask-commit-buttons {
-    width: 100%;
+    align-self: flex-end;
     height: 50px;
     display: flex;
     justify-content: flex-end;

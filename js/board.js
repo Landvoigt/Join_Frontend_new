@@ -129,7 +129,6 @@ function getTaskInformationFromArray(task, taskSection) {
     let topicColor = topics[task['topic']]['color'];
     let doneSubtasks = task['subtasks'].filter(s => s.status === true);
     let progress = doneSubtasks.length;
-    console.log(progress);
     let subtasksAmount = task['subtasks'].length;
     generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount);
     showAssignedClients(task);
@@ -266,12 +265,15 @@ function showDetailedTask(id) {
         <span class="popup-span"><b>Assigned to:</b></span>
         <div id="popupClientSection${id}" class="popup-clients-container">
         </div>
+        <span class="popup-span m-t-5"><b>Subtasks</b></span>
+        <div id="popupSubtaskSection${id}" class="popup-subtask-container"></div>
     </div>
     `;
     showDetailedAssignedClients(task, id);
+    showDetailedSubtasks(task, id);
 }
 
-function showDetailedAssignedClients(task, id){
+function showDetailedAssignedClients(task, id) {
     let clientsSection = document.getElementById(`popupClientSection${id}`);
     for (let i = 0; i < task['clients'].length; i++) {
         let clientNumber = task['clients'][i];
@@ -285,6 +287,30 @@ function showDetailedAssignedClients(task, id){
             <span class="popup-client-span">${firstName} ${lastName}</span>
         </div>
         `;
+    }
+}
+
+function showDetailedSubtasks(task, id) {
+    let subtaskSection = document.getElementById(`popupSubtaskSection${id}`);
+    for (let i = 0; i < task['subtasks'].length; i++) {
+        let subtask = task['subtasks'][i]['text'];
+        let status = task['subtasks'][i]['status'];
+        if (status == true) {
+            subtaskSection.innerHTML += `
+            <div class="d-flex gap-8">
+                <span class="opa-03">-</span>
+                <span class="popup-client-span line-through opa-03">${subtask}</span>
+            </div>
+            `;
+        }
+        if (status == false) {
+            subtaskSection.innerHTML += `
+            <div class="d-flex gap-8">
+                <span>-</span>
+                <span class="popup-client-span">${subtask}</span>
+            </div>
+            `;
+        }
     }
 }
 
@@ -326,7 +352,7 @@ function editDetailedTask(id) {
         <h4 class="addTask-form-headlines">Due date</h4>
         <div style="position: relative;">
         <img class="calendar-icon" src="./img/calendar.png"></img>
-        <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
+        <inputclass="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
         </div>
         </div>
         <div class="popup-text-boxes">
@@ -346,30 +372,75 @@ function editDetailedTask(id) {
         </div>
         </div>
         </div>
-        <div class="popup-text-boxes">
-        <h4 class="addTask-form-headlines">Assigned to</h4>
-        <select id="addTaskAssignedContacts">
-        <option value="" disabled selected>Select contacts to assign</option>
-        <option>Kaser</option>
-        <option>Niko</option>
-        <option>Tim</option>
-        </select>
-        </div>
-        <div class="popup-text-boxes">
-        <div class="task-clients-container m-t-20">
-        <div class="task-client task-client-big m-r-8">SM</div>
-        <div class="task-client task-client-big m-r-8">MV</div>
-        <div class="task-client task-client-big m-r-8">EF</div>
+        <div id="contactDropdownSection" class="w-100">
+                    <h4 class="addTask-form-headlines">Assigned to</h4>
+                    <div id="contactDropdown" class="dropdown" onclick="showSelection('contactsSelection','contactDropdown')">
+                        Select contacts to assign
+                    </div>
+                    <div class="category-selection" id="contactsSelection">
+                        <label onclick="createNewContactInAddTask()" class="label-hover">
+                            <span>Create new contact</span>
+                            <img src="./img/add_user.png" class="addTask-new-contact-img">
+                        </label>
+                    </div>
+                    <div id="addedClientsBox" style="display:flex;"></div>
         </div>
         </div>
         </div>
         `;
     addPrioColor(currentPrio);
+    generateContacts2(id);
+}
+
+function generateContacts2(id) {            ///// not finished
+    let select = document.getElementById('contactsSelection');
+    let clients = tasks[id]['clients'];
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        select.innerHTML += `
+        <label class="label-hover">
+        <span>${contact['firstname']} ${contact['lastname']}</span>
+        <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="showAddedClients('contactCheckbox${i}')">
+        </label>
+        `;
+    }
+    for (let i = 0; i < clients.length; i++) {
+        let contact = clients[i];
+        currentAssignedClients.push(contact);
+    }
+    for (let i = 0; i < currentAssignedClients.length; i++) {
+        let assigned = currentAssignedClients[i];
+        let checkbox = document.getElementById(`contactCheckbox${assigned}`);
+        checkbox.checked = true;
+
+        let dropdown = document.getElementById('addedClientsBox');
+        let initials = contacts[assigned]['initials'];
+        let color = contacts[assigned]['color'];
+        dropdown.innerHTML += `
+            <div style="display:flex;">
+                <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
+                onclick="removeClient('addedClient${assigned}','contactCheckbox${assigned}','${assigned}')">${initials}</div>
+            <div>
+            `;
+    }
+}
+
+function deleteShownTask(id) {
+    tasks.splice(id, 1);
+    removeAddTaskWindow();
+    updateTasksID();
+    updateTasks();
+}
+
+function updateTasksID() {
+    for (let i = 0; i < tasks.length; i++) {
+        tasks[i]['id'] = i;
+    }
 }
 
 function saveEditedTaskInformation(id) {
     // updateTaskInformations(id);
-    updateTasks(id);
+    // updateTasks(id);
     showDetailedTask(id);
 }
 
@@ -405,7 +476,5 @@ function filterTasks() {
     let searchField = document.getElementById('searchTasks');
     let resultHL = tasks.filter(t => t['headline'].includes(searchField.value));
     let resultD = tasks.filter(t => t['description'].includes(searchField.value));
-    console.log(resultHL, resultD);
-
-
+    //     console.log(resultHL, resultD);
 }
