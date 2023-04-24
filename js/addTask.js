@@ -247,18 +247,18 @@ function addOrRemoveClients(i) {
         removeClient(i);
     }
     else {
-        currentAssignedClients.push(i);
+        currentAssignedClients.push(`${i}`);
         showAssignedClients();
     }
 }
 
 function removeClient(i) {
+    let clientID = currentAssignedClients.indexOf(`${i}`);
+    currentAssignedClients.splice(clientID, 1);
     let checkbox = document.getElementById(`contactCheckbox${i}`);
     checkbox.checked = false;
     let client = document.getElementById(`addedClient${i}`);
     client.remove();
-    const index = currentAssignedClients.indexOf(i);
-    currentAssignedClients.splice(index, 1);
 }
 
 function showAssignedClients() {
