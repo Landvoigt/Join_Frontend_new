@@ -1,5 +1,7 @@
 let inputPass = false;
 
+let currentUser = [];
+
 async function renderLogin() {
   setTimeout(1000);
   let card = document.getElementById('loginForm');
@@ -118,25 +120,25 @@ function newPassword() {
 
 function newPasswordTemplate() {
   return `
-            <div class="signupHeaderContainer">
-              <div class="backImgContainer">  
-                <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
-              </div> 
-                <h1 class="loginH1">I forgot my password</h1>
-                <span class="underlineForH1"></span>
-            </div>
-            <div class="loginInputFields">
-                <div class="">
-                    <span class="subheaderNewPassword">Don't worry! We will send you an email with the instructions to reset your password.</span>
-                </div>
-                <div class="loginInputField">
-                    <input class="loginE-Mail" type="text" required placeholder="Email">
-                    <img class="inputImg" src="../img/email.svg" alt="E-Mail">
-                </div>
-            </div>
-            <div class="signupFooterBtn">
-                <button class="loginBtn pointer" onclick="resetPassword()">Send me the email</button>
-            </div>
+    <div class="signupHeaderContainer">
+      <div class="backImgContainer">  
+        <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
+      </div> 
+      <h1 class="loginH1">I forgot my password</h1>
+      <span class="underlineForH1"></span>
+    </div>
+    <div class="loginInputFields">
+      <div class="">
+        <span class="subheaderNewPassword">Don't worry! We will send you an email with the instructions to reset your password.</span>
+      </div>
+      <div class="loginInputField">
+        <input class="loginE-Mail" type="email" id="resetEmail" required placeholder="Email">
+        <img class="inputImg" src="../img/email.svg" alt="E-Mail">
+      </div>
+    </div>
+    <div class="signupFooterBtn">
+      <button class="loginBtn pointer" onclick="resetPassword()">Send me the email</button>
+    </div>
   `;
 }
 
@@ -144,36 +146,67 @@ function resetPassword() {
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
+
+  let email = document.getElementById('resetEmail').value;
+  let user = users.find(user => user.email === email);
+  if (!user) {
+    alert('User not found');
+    return;
+  }
+
+  currentUser.push(user);
   card.innerHTML = resetPasswordTemplate();
 }
 
 function resetPasswordTemplate() {
   return `
-            <div class="signupHeaderContainer">
-              <div class="backImgResetContainer">  
-                <img onclick="newPassword()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
-              </div> 
-                <h1 class="loginH1">Reset your password</h1>
-                <span class="underlineForH1"></span>
-            </div>
-            <div class="loginInputFields">
-                <div class="">
-                    <span class="subheaderNewPassword">Change your account password</span>
-                </div>
-                <div class="loginInputField">
-                  <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="New password" onkeydown="changePWSymbol()">
-                  <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
-                </div>
-                <div class="loginInputField">
-                  <input class="loginE-Mail" type="password" required id="passwordInput" placeholder="Confirm password" onkeydown="changePWSymbol()">
-                  <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
-                </div>
-            </div>
-            <div class="signupFooterBtn">
-                <button class="loginBtn pointer" onclick="renderLogin()">Send me the email</button>
-            </div>
+    <div class="signupHeaderContainer">
+      <div class="backImgResetContainer">  
+        <img onclick="newPassword()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
+      </div> 
+      <h1 class="loginH1">Reset your password</h1>
+      <span class="underlineForH1"></span>
+    </div>
+    <div class="loginInputFields">
+      <div class="">
+        <span class="subheaderNewPassword">Change your account password</span>
+      </div>
+      <div class="loginInputField">
+        <input class="loginE-Mail" type="password" required id="passwordReset" placeholder="New password" onkeydown="changePWSymbol()">
+        <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
+      </div>
+      <div class="loginInputField">
+        <input class="loginE-Mail" type="password" required id="passwordResetConfirm" placeholder="Confirm password" onkeydown="changePWSymbol()">
+        <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
+      </div>
+    </div>
+    <div class="signupFooterBtn">
+      <button class="loginBtn pointer" onclick="updatePassword()">Send me the email</button>
+    </div>
   `;
 }
+
+async function updatePassword() {
+  let newPassword = '';
+  let newPasswordConfirmation = '';
+
+  while (newPassword !== newPasswordConfirmation) {
+    newPassword = document.getElementById('passwordReset');
+    newPasswordConfirmation = document.getElementById('passwordResetConfirm');
+    if (newPassword !== newPasswordConfirmation) {
+      alert('Passwords do not match. Please try again.');
+    }
+  }
+
+  // Update the user's password
+  currentUser.password = newPassword;
+
+  // Save the updated user information
+  //await setItem('users', JSON.stringify(users));
+
+  alert('Your password has been reset.');
+}
+
 
 function login() {
   let loginBtn = document.getElementById('loginBtn');
