@@ -12,12 +12,15 @@ function loadDate() {
 }
 
 function greetAccordingToTime(currenthour) {
-    if (currenthour < 12) {
+    console.log(currenthour);
+    if (currenthour > 5 && currenthour < 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
-    } if (currenthour < 18) {
+    } if (currenthour > 12 && currenthour < 18) {
         document.getElementById('greeting').innerHTML = 'Good Afternoon';
-    } else {
+    } if (currenthour > 18 && currenthour < 24) {
         document.getElementById('greeting').innerHTML = 'Good Evening';
+    } if (currenthour >= 0 && currenthour < 5) {
+        document.getElementById('greeting').innerHTML = 'Good Night';
     }
 }
 

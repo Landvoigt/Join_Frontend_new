@@ -65,7 +65,7 @@ function loginTemplate() {
             </div>
             <div class="loginFooterBtns">
                 <button id="loginBtn" class="loginBtn pointer" onclick="login()">Log in</button>
-                <button class="guestBtn pointer">Guest Log in</button>
+                <button class="guestBtn pointer" onclick="forwardToMainPage()">Guest Log in</button>
             </div>
   `;
 }
@@ -177,23 +177,27 @@ function resetPasswordTemplate() {
 
 function login() {
   let loginBtn = document.getElementById('loginBtn');
-    loginBtn.disabled = true;
-    
-    let email = document.getElementById('emailInput').value;
-    let password = document.getElementById('passwordInput').value;
+  loginBtn.disabled = true;
 
-    let user = users.find((user) => user.email === email);
-    if (!user) {
-        alert('User not found');
-        loginBtn.disabled = false;
-        return;
-    }
+  let email = document.getElementById('emailInput').value;
+  let password = document.getElementById('passwordInput').value;
 
-    if (password !== user.password) {
-        alert('Invalid password');
-        loginBtn.disabled = false;
-        return;
-    }
-
-    alert('Login successful!');     /* weiterleiten zum Board */
+  let user = users.find((user) => user.email === email);
+  if (!user) {
+    alert('User not found');
+    loginBtn.disabled = false;
+    return;
   }
+
+  if (password !== user.password) {
+    alert('Invalid password');
+    loginBtn.disabled = false;
+    return;
+  }
+
+  alert('Login successful!');     /* weiterleiten zum Board */
+}
+
+function forwardToMainPage() {
+  window.location.href = "./index.html";
+}
