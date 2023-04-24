@@ -234,39 +234,54 @@ function generateContacts() {
         select.innerHTML += `
         <label class="label-hover">
             <span>${contact['firstname']} ${contact['lastname']}</span>
-            <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="showAddedClients('contactCheckbox${i}')">
+            <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="addOrRemoveClients(${i})">
         </label>
         `;
     }
+    showAssignedClients();
 }
 
-function showAddedClients(checkboxID) {
-    let checkbox = document.getElementById(checkboxID);
-    let i = checkbox.name;
-    if (checkbox.checked === true) {
-        let dropdown = document.getElementById('addedClientsBox');
-        let initials = contacts[i]['initials'];
-        let color = contacts[i]['color'];
-        dropdown.innerHTML += `
-            <div style="display:flex;">
-                <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
-                onclick="removeClient('addedClient${i}','${checkboxID}','${i}')">${initials}</div>
-            <div>
-            `;
-        currentAssignedClients.push(i);
+function addOrRemoveClients(i) {
+    let checkbox = document.getElementById(`contactCheckbox${i}`);
+    if (checkbox.checked != true) {
+        removeClient(i);
     }
     else {
-        removeClient(`addedClient${i}`, `${checkboxID}`, `${i}`);
+        currentAssignedClients.push(i);
+        showAssignedClients();
     }
 }
 
-function removeClient(divID, checkboxID, i) {
-    let index = currentAssignedClients.indexOf(i);
-    currentAssignedClients.splice(index, 1);
-    let checkbox = document.getElementById(checkboxID);
+function removeClient(i) {
+    let checkbox = document.getElementById(`contactCheckbox${i}`);
     checkbox.checked = false;
-    let client = document.getElementById(divID);
+    let client = document.getElementById(`addedClient${i}`);
     client.remove();
+    const index = currentAssignedClients.indexOf(i);
+    currentAssignedClients.splice(index, 1);
+}
+
+function showAssignedClients() {
+    let dropdown = document.getElementById('addedClientsBox');
+    dropdown.innerHTML = '';
+    for (let i = 0; i < currentAssignedClients.length; i++) {
+        let assignedClientID = currentAssignedClients[i];
+        createAssignedClientContainer(assignedClientID);
+        let checkbox = document.getElementById(`contactCheckbox${assignedClientID}`);
+        checkbox.checked = true;
+    }
+}
+
+function createAssignedClientContainer(id) {
+    let dropdown = document.getElementById('addedClientsBox');
+    let initials = contacts[id]['initials'];
+    let color = contacts[id]['color'];
+    dropdown.innerHTML += `
+        <div style="display:flex;">
+            <div id="addedClient${id}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
+            onclick="removeClient(${id})">${initials}</div>
+        <div>
+        `;
 }
 
 function removeAddTaskWindow() {

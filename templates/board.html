@@ -2,8 +2,8 @@
     <h2>Board</h2>
     <div class="board-search-and-add m-b-45">
         <div class="board-search-box">
-            <input id="searchTasks" type="search" placeholder="Find Task" onkeydown="filterTasks()"></input>
-            <img class="board-headline-icon" src="./img/loupe.png">
+            <input id="searchTasks" type="text" placeholder="Find Task" onkeydown="filterTasks()">
+            <img class="board-headline-icon" src="./img/loupe.png" onclick="clearSearchField()">
         </div>
         <div class="board-btn submit-btn d-flex g-8 a-i-center w-160" onclick="showAddTaskWindow()">
             <span>Add Task</span>

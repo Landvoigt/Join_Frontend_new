@@ -48,10 +48,11 @@ function changeSite(id) {
 
     previousPage = currentPage;
     currentPage = id;
+    currentAssignedClients = [];
+    updateTasks();
+    clearSearchField();
     deleteBackgroundColors();
     checkForTaskNumbers();
-    // removePreviousPageBackground();
-    // changeBackgroundInSidebar(currentPage);
 }
 
 function changeToAddTaskSite(id) {

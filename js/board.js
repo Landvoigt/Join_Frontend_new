@@ -117,8 +117,8 @@ function updateTaskSection(id) {
     let cat = tasks.filter(t => t['category'] == `${id}`);
     document.getElementById(`${id}`).innerHTML = '';
     for (let i = 0; i < cat.length; i++) {
-        let task = cat[i];
         let taskSection = document.getElementById(`${id}`);
+        let task = cat[i];
         getTaskInformationFromArray(task, taskSection);
         checkForSubtasks(task, task['id']);
     }
@@ -131,7 +131,7 @@ function getTaskInformationFromArray(task, taskSection) {
     let progress = doneSubtasks.length;
     let subtasksAmount = task['subtasks'].length;
     generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount);
-    showAssignedClients(task);
+    showClients(task);
 }
 
 function generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount) {
@@ -156,7 +156,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
     `;
 }
 
-function showAssignedClients(task) {
+function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
     let clientsAmount = task['clients'].length;
     for (let i = 0; i < clientsAmount; i++) {
@@ -383,45 +383,21 @@ function editDetailedTask(id) {
                             <img src="./img/add_user.png" class="addTask-new-contact-img">
                         </label>
                     </div>
-                    <div id="addedClientsBox" style="display:flex;"></div>
         </div>
+        <div id="addedClientsBox" style="display:flex;"></div>
         </div>
         </div>
         `;
     addPrioColor(currentPrio);
-    generateContacts2(id);
+    pushAssignedClientsToArray(id);
+    generateContacts();
 }
 
-function generateContacts2(id) {            ///// not finished
-    let select = document.getElementById('contactsSelection');
+function pushAssignedClientsToArray(id) {
     let clients = tasks[id]['clients'];
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        select.innerHTML += `
-        <label class="label-hover">
-        <span>${contact['firstname']} ${contact['lastname']}</span>
-        <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="showAddedClients('contactCheckbox${i}')">
-        </label>
-        `;
-    }
     for (let i = 0; i < clients.length; i++) {
         let contact = clients[i];
         currentAssignedClients.push(contact);
-    }
-    for (let i = 0; i < currentAssignedClients.length; i++) {
-        let assigned = currentAssignedClients[i];
-        let checkbox = document.getElementById(`contactCheckbox${assigned}`);
-        checkbox.checked = true;
-
-        let dropdown = document.getElementById('addedClientsBox');
-        let initials = contacts[assigned]['initials'];
-        let color = contacts[assigned]['color'];
-        dropdown.innerHTML += `
-            <div style="display:flex;">
-                <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
-                onclick="removeClient('addedClient${assigned}','contactCheckbox${assigned}','${assigned}')">${initials}</div>
-            <div>
-            `;
     }
 }
 
@@ -469,12 +445,32 @@ function saveEditedTaskInformation(id) {
 // }
 
 function filterTasks() {
-    document.getElementById('toDo').innerHTML = '';
-    document.getElementById('inProgress').innerHTML = '';
-    document.getElementById('awaitFeedback').innerHTML = '';
-    document.getElementById('done').innerHTML = '';
-    let searchField = document.getElementById('searchTasks');
-    let resultHL = tasks.filter(t => t['headline'].includes(searchField.value));
-    let resultD = tasks.filter(t => t['description'].includes(searchField.value));
-    //     console.log(resultHL, resultD);
+    showFilteredTasks('toDo');
+    showFilteredTasks('inProgress');
+    showFilteredTasks('awaitFeedback');
+    showFilteredTasks('done');
+}
+
+function showFilteredTasks(id) {
+    let searchField = document.getElementById('searchTasks').value.toLowerCase();
+    let cat = tasks.filter(t => t['category'] == `${id}`);
+    document.getElementById(`${id}`).innerHTML = '';
+    for (let i = 0; i < cat.length; i++) {
+        let taskSection = document.getElementById(`${id}`);
+        let task = cat[i];
+        let filterHeadline = task.headline.toLowerCase().includes(searchField);
+        let filterDescription = task.description.toLowerCase().includes(searchField);
+        if (filterHeadline) {
+            getTaskInformationFromArray(task, taskSection);
+            checkForSubtasks(task, task['id']);
+        }
+        else if (filterDescription) {
+            getTaskInformationFromArray(task, taskSection);
+            checkForSubtasks(task, task['id']);
+        }
+    }
+}
+
+function clearSearchField() {
+    document.getElementById('searchTasks').value = '';
 }
