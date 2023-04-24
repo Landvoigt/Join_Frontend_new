@@ -168,11 +168,23 @@ function getAddTaskHTML() {
                 </div>
                 <div id="newSubtasksBox" class="new-subtask-box"></div>
             </div>
+            <div class="addTask-commit-buttons">
+                <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
+                <button class="submit-btn" type="submit">Create Task ✓</button>
+            </div>
+            <div id="emptyInputPopupPrio" style="position: absolute;" class="pos-1 d-none">
+                <div class="test">
+                    <img src="./img/exclamation.png" class="exclamation">
+                </div>
+                <div class="empty-input-popup">Wähle die Priorität.</div>
+            </div>
+            <div id="emptyInputPopupCat" style="position: absolute;" class="pos-2 d-none">
+                <div class="test">
+                    <img src="./img/exclamation.png" class="exclamation">
+                </div>
+                <div class="empty-input-popup">Wähle eine Kategorie.</div>
+            </div>
         </form>
-        <div class="addTask-commit-buttons">
-            <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
-            <button class="submit-btn" type="submit" onclick="getInputsFromForm()">Create Task ✓</button>
-        </div>
         <div id="taskAddedPopup" class="task-added-popup-container">
             <span>Task added to board</span>
             <img src="./img/grid.png" class="popup-icon">
@@ -460,7 +472,19 @@ function changeSubtaskStatus(i) {
     }
 }
 
+function checkForEmptyFields() {
+    if (currentPrio == "") {
+        document.getElementById('emptyInputPopupPrio').remove('d-none');
+        // return false
+    }
+    if (currentCat == "") {
+        document.getElementById('emptyInputPopupCat').remove('d-none');
+        // return false
+    }
+}
+
 function getInputsFromForm() {
+    // checkForEmptyFields();
     let title = document.getElementById('addTask-title-input').value;
     let desc = document.getElementById('addTask-desc-input').value;
     let date = document.getElementById('addTaskDate').value;
