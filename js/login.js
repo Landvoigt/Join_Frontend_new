@@ -232,5 +232,5 @@ function login() {
 }
 
 function forwardToMainPage() {
-  window.location.href = "./index.html";
+  window.location.href = "../mainpage.html";
 }
