@@ -41,13 +41,6 @@ let contacts = [{
     'phone': '01234567',
     'color': 'orange'
 }, {
-    'firstname': 'Robert',
-    'lastname': 'Koch',
-    'initials': 'RK',
-    'mail': 'Sven.T@live.de',
-    'phone': '01234567',
-    'color': 'brown'
-}, {
     'firstname': 'Peter',
     'lastname': 'Heinrich',
     'initials': 'PH',
@@ -67,7 +60,22 @@ let letters = [];
 let contactsRandomColor;
 let lastSelectedContact;
 
-function pushFirstLetter() {
+async function loadContacts() {
+    try {
+        contacts = JSON.parse(await getItem('contacts'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+
+}
+
+async function setItemContacts(contacts) {
+    await setItem('contacts', JSON.stringify(contacts));
+}
+
+async function pushFirstLetter() {
+    await loadContacts();
+    letters = [];
     for (let i = 0; i < contacts.length; i++) {
         const name = contacts[i]['firstname'];
         const firstLetter = name.charAt(0);
@@ -92,30 +100,30 @@ function pushFirstLetter() {
 
     renderLetters();
     createRandomColor();
-    console.log(contactsRandomColor)
-
 }
 
 function renderLetters() {
     let contactsList = document.getElementById('contact-list');
     contactsList.innerHTML = '';
     for (let j = 0; j < letters.length; j++) {
-        const element = letters[j];
+        const letter = letters[j];
         contactsList.innerHTML +=/*html*/`
-        <div id="${element}" class="flex-column">
-            <div class="first-letter">${element}</div>
+        <div id="${letter}" class="flex-column">
+            <div class="first-letter">${letter}</div>
         </div>`;
-        renderContacts(element)
+        renderContacts(letter)
     }
 }
 
-function renderContacts(id) {
+async function renderContacts(id) {
+    console.log(contacts)
     let letterBox = document.getElementById(`${id}`);
+
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         const firstName = contact['firstname'];
         const lastName = contact['lastname'];
-        if (firstName.includes(id)) {
+        if (firstName.startsWith(id)) {
             letterBox.innerHTML +=/*html*/`
             <div class="single-contact-box" id="single-contact-box-${i}" onclick="openContact(${i})">
                 <div id="initials-${i}" style="background-color:${contact['color']};" class="initials">
@@ -129,10 +137,8 @@ function renderContacts(id) {
             </div>
         `;
         }
-
     }
 }
-
 function openContact(id) {
     highlightSelectedContact(id)
     let firstNames = contacts[id]['firstname'];
@@ -150,7 +156,7 @@ function openContact(id) {
             </div>
         </div>
         <div class="contact-infos">
-                    Contact Information    <span style="font-size:16px; "><img src="./img/pencil.png" alt=""> Edit Task</span>
+             Contact Information    <span style="font-size:16px; "><img src="./img/pencil.png" alt=""> Edit Contact</span>
         </div>
         <div class="card-mail flex-column">
             <b>Email</b>
@@ -200,26 +206,38 @@ function createRandomColor() {
     currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
     contactsRandomColor = currentPickedColor;
 }
-function createNewContact() {
+async function createNewContact() {
     let Firstname = document.getElementById('contacts-firstname').value;
+    Firstname = Firstname.charAt(0).toUpperCase() + Firstname.slice(1);
     let Lastname = document.getElementById('contacts-lastname').value;
+    Lastname = Lastname.charAt(0).toUpperCase() + Lastname.slice(1);
     let Mail = document.getElementById('contacts-mail').value;
     let Phone = document.getElementById('contacts-phone').value;
     contacts.push(
         {
             'firstname': Firstname,
             'lastname': Lastname,
+            'initials': Firstname.charAt(0) + Lastname.charAt(0),
             'mail': Mail,
             'phone': Phone,
             'color': contactsRandomColor
         }
     )
-    console.log(contacts);
+    await setItemContacts(contacts);
     closeCreateContact();
     pushFirstLetter();
     resetInputValue();
+    createdSuccessfully();
 }
-
+function createdSuccessfully() {
+    let banner = document.getElementById('created-successfully-logo');
+    banner.classList.remove('move-down');
+    banner.classList.add('move-up');
+    setTimeout(function () {
+        banner.classList.remove('move-up');
+        banner.classList.add('move-down');
+    }, 1500);
+}
 function resetInputValue() {
     let addContactForms = document.querySelectorAll('.add-contact-form');
 
@@ -227,4 +245,25 @@ function resetInputValue() {
         addContactForms[i].value = '';
     }
 
+}
+async function deleteContactByFirstname(firstname) {
+    try {
+        let contacts = JSON.parse(await getItem('contacts'));
+
+        // den Kontakt mit dem übergebenen Vornamen finden
+        let index = contacts.findIndex(contact => contact.firstname === firstname);
+
+        if (index !== -1) {
+            // den Kontakt aus dem Array entfernen
+            contacts.splice(index, 1);
+
+            // das aktualisierte Array zurück in den Speicher schreiben
+            await setItem('contacts', JSON.stringify(contacts));
+            console.log(`Contact with firstname ${firstname} has been deleted.`);
+        } else {
+            console.log(`Contact with firstname ${firstname} not found.`);
+        }
+    } catch (e) {
+        console.error('Deleting error:', e);
+    }
 }

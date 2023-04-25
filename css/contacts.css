@@ -16,7 +16,7 @@
 }
 
 .contact-list-scrollable-div {
-    height: 100vh;
+    height: 91vh;
     width: 453px;
     overflow: auto;
     display: flex;
@@ -176,7 +176,44 @@
 .add-contact:hover {
     background-color: #29ABE2;
 }
-
+.created-successfully-logo{
+    display: flex;
+    position: absolute;
+    padding: 15px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    right: 40%;
+    bottom: -100px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 400;
+}
+.move-up{
+    animation: moveUp 1s forwards;
+  }
+.move-down{
+    animation: moveDown 1s forwards;
+}
+@keyframes moveUp {
+    from {
+        bottom: -100px;
+        transform: translateY(200%);
+      }
+      to {
+        bottom: 150px;
+      }
+}
+@keyframes moveDown {
+    from {
+        bottom: 150px;
+      }
+      to {
+        bottom: -100px;
+        transform: translateY(200%);
+      }
+}
 .create-contact-bg {
     background-color: rgba(0, 0, 0, 0.0);
     position: fixed;
@@ -241,15 +278,11 @@
     from{
         right:unset;
         transform: none;
-       
-        
     }
     to{ 
         right: -100%;
         transform: translateX(200%);
-        
     }
-    
 }
 
 
