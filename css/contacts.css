@@ -59,7 +59,6 @@
     cursor: pointer;
     background-image: linear-gradient(to bottom, #ffffff, #dedede);
 }
-
 .contact-names {
     font-weight: 400;
     font-size: 21px;
@@ -352,4 +351,12 @@
     right: 30px;
     top: 20px;
     cursor: pointer;
+}
+.bg-highlight{
+    background-color: #2A3647;
+    color: white;
+}
+.bg-highlight:hover{
+    background-image: none;
+    background-color: none;
 }

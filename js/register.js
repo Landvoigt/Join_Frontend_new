@@ -32,3 +32,27 @@ async function register() {
     alert('Registration successful!');
     renderLogin();
 }
+
+async function deleteUser(email) {
+    try {
+      // das Array aus dem Backend abrufen
+      let users = JSON.parse(await getItem('users'));
+  
+      // das Element mit der übergebenen E-Mail-Adresse finden
+      let index = users.findIndex(user => user.email === email);
+  
+      if (index !== -1) {
+        // das Element aus dem Array entfernen
+        users.splice(index, 1);
+  
+        // das aktualisierte Array zurück in den Speicher schreiben
+        await setItem('users', JSON.stringify(users));
+        console.log(`User with email ${email} has been deleted.`);
+      } else {
+        console.log(`User with email ${email} not found.`);
+      }
+    } catch (e) {
+      console.error('Deleting error:', e);
+    }
+  }
+  

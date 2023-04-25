@@ -11,15 +11,16 @@ function loadDate() {
     greetAccordingToTime(currenthour);
 }
 
-function greetAccordingToTime(currenthour) {
+function greetAccordingToTime(currenthour) { 
     console.log(currenthour);
-    if (currenthour > 5 && currenthour < 12) {
+   
+    if (currenthour > 5 && currenthour <= 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
-    } if (currenthour > 12 && currenthour < 18) {
+    } if (currenthour > 12 && currenthour <= 18) {
         document.getElementById('greeting').innerHTML = 'Good Afternoon';
-    } if (currenthour > 18 && currenthour < 24) {
+    } if (currenthour > 18 && currenthour <= 24) {
         document.getElementById('greeting').innerHTML = 'Good Evening';
-    } if (currenthour >= 0 && currenthour < 5) {
+    } if (currenthour >= 0 && currenthour <= 5) {
         document.getElementById('greeting').innerHTML = 'Good Night';
     }
 }

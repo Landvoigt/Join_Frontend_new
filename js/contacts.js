@@ -1,97 +1,84 @@
 let contacts = [{
-    'firstname':'Anton',
-    'lastname':'Mayer',
-    'initials':'AM',
-    'mail':'anton-mayer@gmx.com',
-    'phone':'01234567',
-    'color':'green'
-},{
-    'firstname':'Julia',
-    'lastname':'Roberts',
-    'initials':'JR',
-    'mail':'juliar@gmx.com',
-    'phone':'01234567',
-    'color':'red'
-},{
-    'firstname':'Jonathan',
-    'lastname':'Wick',
-    'initials':'JW',
-    'mail':'anton-mayer@gmx.com',
-    'phone':'01234567',
-    'color':'blue'
-},{
-    'firstname':'Alfred',
-    'lastname':'Niebuhr',
-    'initials':'AN',
-    'mail':'anton-mayer@gmx.com',
-    'phone':'01234567',
-    'color':'purple'
-},{
-    'firstname':'Carlos',
-    'lastname':'Sanros',
-    'initials':'CS',
-    'mail':'anton-mayer@gmx.com',
-    'phone':'01234567',
-    'color':'grey'
-},{
-    'firstname':'Carmen',
-    'lastname':'Müller',
-    'initials':'CM',
-    'mail':'Müller.C@gmx.com',
-    'phone':'01234567',
-    'color':'orange'
-},{
-    'firstname':'Sven',
-    'lastname':'Siebert',
-    'initials':'SS',
-    'mail':'Sven.T@live.de',
-    'phone':'01786965354',
-    'color':'cyan'
-},{
-    'firstname':'Robert',
-    'lastname':'Koch',
-    'initials':'RK',
-    'mail':'Sven.T@live.de',
-    'phone':'01234567',
-    'color':'brown'
-},{
-    'firstname':'Peter',
-    'lastname':'Heinrich',
-    'initials':'PH',
-    'mail':'Sven.T@live.de',
-    'phone':'01234567',
-    'color':'brown'
-},{
-    'firstname':'Rahul',
-    'lastname':'Sharma',
-    'initials':'RS',
-    'mail':'Sven.T@live.de',
-    'phone':'01234567',
-    'color':'brown'
-},{
-    'firstname':'Michelle',
-    'lastname':'Seiler',
-    'initials':'MS',
-    'mail':'Sven.T@live.de',
-    'phone':'01234567',
-    'color':'brown'
+    'firstname': 'Anton',
+    'lastname': 'Mayer',
+    'initials': 'AM',
+    'mail': 'anton-mayer@gmx.com',
+    'phone': '01234567',
+    'color': 'green'
+}, {
+    'firstname': 'Julia',
+    'lastname': 'Roberts',
+    'initials': 'JR',
+    'mail': 'juliar@gmx.com',
+    'phone': '01234567',
+    'color': 'red'
+}, {
+    'firstname': 'Jonathan',
+    'lastname': 'Wick',
+    'initials': 'JW',
+    'mail': 'anton-mayer@gmx.com',
+    'phone': '01234567',
+    'color': 'blue'
+}, {
+    'firstname': 'Alfred',
+    'lastname': 'Niebuhr',
+    'initials': 'AN',
+    'mail': 'anton-mayer@gmx.com',
+    'phone': '01234567',
+    'color': 'purple'
+}, {
+    'firstname': 'Carlos',
+    'lastname': 'Sanros',
+    'initials': 'CS',
+    'mail': 'anton-mayer@gmx.com',
+    'phone': '01234567',
+    'color': 'grey'
+}, {
+    'firstname': 'Carmen',
+    'lastname': 'Müller',
+    'initials': 'CM',
+    'mail': 'Müller.C@gmx.com',
+    'phone': '01234567',
+    'color': 'orange'
+}, {
+    'firstname': 'Robert',
+    'lastname': 'Koch',
+    'initials': 'RK',
+    'mail': 'Sven.T@live.de',
+    'phone': '01234567',
+    'color': 'brown'
+}, {
+    'firstname': 'Peter',
+    'lastname': 'Heinrich',
+    'initials': 'PH',
+    'mail': 'Sven.T@live.de',
+    'phone': '01234567',
+    'color': 'brown'
+}, {
+    'firstname': 'Rahul',
+    'lastname': 'Sharma',
+    'initials': 'RS',
+    'mail': 'Sven.T@live.de',
+    'phone': '01234567',
+    'color': 'brown'
 }
-];  
-let letters =[];
+];
+let letters = [];
 let contactsRandomColor;
+let lastSelectedContact;
 
-function pushFirstLetter(){
+function pushFirstLetter() {
     for (let i = 0; i < contacts.length; i++) {
         const name = contacts[i]['firstname'];
         const firstLetter = name.charAt(0);
-        
+
         if (!letters.includes(firstLetter)) {
             letters.push(firstLetter);
         }
     }
-    
+
     // Sortiere das letters-Array alphabetisch
-    letters.sort(function(a, b){
+    letters.sort(function (a, b) {
         var letterA = a.toLowerCase();
         var letterB = b.toLowerCase();
         if (letterA < letterB) {
@@ -102,19 +89,19 @@ function pushFirstLetter(){
         }
         return 0;
     });
-    
+
     renderLetters();
     createRandomColor();
     console.log(contactsRandomColor)
-    
+
 }
 
-function renderLetters(){
+function renderLetters() {
     let contactsList = document.getElementById('contact-list');
-    contactsList.innerHTML='';
+    contactsList.innerHTML = '';
     for (let j = 0; j < letters.length; j++) {
         const element = letters[j];
-        contactsList.innerHTML+=/*html*/`
+        contactsList.innerHTML +=/*html*/`
         <div id="${element}" class="flex-column">
             <div class="first-letter">${element}</div>
         </div>`;
@@ -122,14 +109,14 @@ function renderLetters(){
     }
 }
 
-function renderContacts(id){
+function renderContacts(id) {
     let letterBox = document.getElementById(`${id}`);
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         const firstName = contact['firstname'];
         const lastName = contact['lastname'];
         if (firstName.includes(id)) {
-             letterBox.innerHTML+=/*html*/`
+            letterBox.innerHTML +=/*html*/`
             <div class="single-contact-box" id="single-contact-box-${i}" onclick="openContact(${i})">
                 <div id="initials-${i}" style="background-color:${contact['color']};" class="initials">
                     ${id}${lastName.charAt(0)}
@@ -142,16 +129,17 @@ function renderContacts(id){
             </div>
         `;
         }
-        
+
     }
 }
 
-function openContact(id){
+function openContact(id) {
+    highlightSelectedContact(id)
     let firstNames = contacts[id]['firstname'];
     const lastNames = contacts[id]['lastname'];
     let contactPopup = document.getElementById('card-popup');
-        contactPopup.innerHTML='';
-        contactPopup.innerHTML+=/*html*/`
+    contactPopup.innerHTML = '';
+    contactPopup.innerHTML +=/*html*/`
         <div class="d-flex">
              <div style="background-color:${contacts[id]['color']};" id="initialen-${id}" class="initials-big">
                 ${firstNames.charAt(0)}${lastNames.charAt(0)}
@@ -172,9 +160,18 @@ function openContact(id){
             <b style="font-weight:700;">Phone</b>
             <span>${contacts[id]['phone']}</span>
         </div> `;
-   
-}
 
+}
+function highlightSelectedContact(id) {
+    const currentContact = document.getElementById(`single-contact-box-${id}`);
+    if (lastSelectedContact !== undefined) {//wenn lastselectedcontact nicht undefiniert wird von dem ausgewählten contact die hintergrundfarbe entfernt
+        lastSelectedContact.classList.remove('bg-highlight');
+
+    }
+    currentContact.classList.add('bg-highlight');
+    lastSelectedContact = currentContact;
+
+}
 function openCreateContact() {
     let popupBG = document.getElementById('create-contact-bg');
     let contactsForm = document.getElementById('contacts-popup');
@@ -183,51 +180,51 @@ function openCreateContact() {
     contactsForm.classList.add('move-in');
     popupBG.classList.add('dark');
     popupBG.classList.remove('light');
-  }
-  
-  
+}
 
-  function closeCreateContact(){
+
+
+function closeCreateContact() {
     let contactPopup = document.getElementById('contacts-popup');
     document.getElementById('create-contact-bg').classList.remove('dark');
     contactPopup.classList.remove('move-in')
     document.getElementById('create-contact-bg').classList.add('light');
     contactPopup.classList.add('move-out');
-    setTimeout(function() {
-      document.getElementById('create-contact-bg').classList.add('d-none');
+    setTimeout(function () {
+        document.getElementById('create-contact-bg').classList.add('d-none');
     }, 1200);
-    
-  }
-  
-  function createRandomColor() {
+
+}
+
+function createRandomColor() {
     currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
     contactsRandomColor = currentPickedColor;
 }
-  function createNewContact(){
+function createNewContact() {
     let Firstname = document.getElementById('contacts-firstname').value;
     let Lastname = document.getElementById('contacts-lastname').value;
     let Mail = document.getElementById('contacts-mail').value;
     let Phone = document.getElementById('contacts-phone').value;
     contacts.push(
         {
-            'firstname':Firstname,
-            'lastname':Lastname,
-            'mail':Mail,
-            'phone':Phone,
-            'color':contactsRandomColor
+            'firstname': Firstname,
+            'lastname': Lastname,
+            'mail': Mail,
+            'phone': Phone,
+            'color': contactsRandomColor
         }
     )
     console.log(contacts);
     closeCreateContact();
     pushFirstLetter();
     resetInputValue();
-  }
+}
 
-  function resetInputValue(){
+function resetInputValue() {
     let addContactForms = document.querySelectorAll('.add-contact-form');
 
     for (let i = 0; i < addContactForms.length; i++) {
-     addContactForms[i].value = '';
+        addContactForms[i].value = '';
     }
 
-  }
+}
