@@ -152,11 +152,11 @@ function openContact(id) {
             </div>
             <div class="card-headline flex-column">
                ${firstNames} ${lastNames}
-               <div onclick="showAddTaskWindow()" class="add-task-btn"> <img src="./img/plus_lightblue.png" alt=""> Add Task</div>
+               <div onclick="showAddTaskWindow()" class="add-task-btn"> <img src="./img/plus_lightblue.png" alt=""><span>Add Task</span> </div>
             </div>
         </div>
         <div class="contact-infos">
-             Contact Information    <span style="font-size:16px; "><img src="./img/pencil.png" alt=""> Edit Contact</span>
+             Contact Information<span class="edit-contact" onclick="openEditContact(${id})"><img src="./img/pencil.png" alt=""> Edit Contact</span>
         </div>
         <div class="card-mail flex-column">
             <b>Email</b>
@@ -244,6 +244,12 @@ function resetInputValue() {
     for (let i = 0; i < addContactForms.length; i++) {
         addContactForms[i].value = '';
     }
+
+}
+function openEditContact(){
+    let editBG = document.getElementById('edit-contact-bg');
+    editBG.classList.remove('d-none');
+    editBG.classList.add('dark');
 
 }
 async function deleteContactByFirstname(firstname) {
