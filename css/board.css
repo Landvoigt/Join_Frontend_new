@@ -323,6 +323,15 @@
     color: #2a3647;
 }
 
+.popup-subtask-span {
+    font-size: 1.1em;
+    letter-spacing: -0.5px;
+    color: #2a3647;
+    overflow: hidden;
+    width: 75%;
+    white-space: nowrap;
+}
+
 .m-t-20 {
     margin-top: 20px;
 }
@@ -349,9 +358,8 @@
 }
 
 .popup-subtask-container {
-    min-height: 100px;
-    height: auto;
     width: 100%;
+    height: 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -359,6 +367,10 @@
 
 .line-through {
     text-decoration: line-through !important;
+}
+
+.w-80 {
+    width: 80%;
 }
 
 @media (max-width: 1570px) {

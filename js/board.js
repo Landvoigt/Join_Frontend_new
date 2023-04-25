@@ -19,7 +19,11 @@ let tasks = [
                 {
                     'text': 'Moin Leudeeee!',
                     'status': true
-                }
+                },
+                {
+                    'text': 'Moin Leudeeee!',
+                    'status': false
+                },
             ],
         'clients': ['0', '2', '5'],
         'prioName': 'urgent',
@@ -299,7 +303,7 @@ function showDetailedSubtasks(task, id) {
             subtaskSection.innerHTML += `
             <div class="d-flex gap-8">
                 <span class="opa-03">-</span>
-                <span class="popup-client-span line-through opa-03">${subtask}</span>
+                <span class="popup-subtask-span line-through opa-03">${subtask}</span>
             </div>
             `;
         }
@@ -307,7 +311,7 @@ function showDetailedSubtasks(task, id) {
             subtaskSection.innerHTML += `
             <div class="d-flex gap-8">
                 <span>-</span>
-                <span class="popup-client-span">${subtask}</span>
+                <span class="popup-subtask-span">${subtask}</span>
             </div>
             `;
         }
@@ -332,6 +336,7 @@ function checkPriority(id) {
 
 function editDetailedTask(id) {
     resetIDs();
+    currentAssignedClients = [];
     let task = tasks[id];
     let popup = document.getElementById('popupWindow');
     popup.classList.remove('d-none');
@@ -352,7 +357,7 @@ function editDetailedTask(id) {
         <h4 class="addTask-form-headlines">Due date</h4>
         <div style="position: relative;">
         <img class="calendar-icon" src="./img/calendar.png"></img>
-        <inputclass="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
+        <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
         </div>
         </div>
         <div class="popup-text-boxes">
@@ -385,12 +390,22 @@ function editDetailedTask(id) {
                     </div>
         </div>
         <div id="addedClientsBox" style="display:flex;"></div>
+        <div id="addSubtasksSection" class="w-80">
+                    <h4 class="addTask-form-headlines">Assigned to</h4>
+                    <div style="position: relative;" onclick="createNewSubtask()">
+                        <input type="text" id="subtaskInput" placeholder="Add new subtask">
+                        <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+                    </div>
+                </div>
+                <div id="newSubtasksBox" class="new-subtask-box"></div>
         </div>
         </div>
         `;
     addPrioColor(currentPrio);
     pushAssignedClientsToArray(id);
     generateContacts();
+    pushAttachedSubtasksToArray(id);
+    renderSubtasks();
 }
 
 function pushAssignedClientsToArray(id) {
@@ -398,6 +413,14 @@ function pushAssignedClientsToArray(id) {
     for (let i = 0; i < clients.length; i++) {
         let contact = clients[i];
         currentAssignedClients.push(contact);
+    }
+}
+
+function pushAttachedSubtasksToArray(id) {
+    let subtasks = tasks[id]['subtasks'];
+    for (let i = 0; i < subtasks.length; i++) {
+        let subtask = subtasks[i];
+        currentSubtasks.push(subtask);
     }
 }
 
