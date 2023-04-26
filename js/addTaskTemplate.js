@@ -77,7 +77,7 @@ function getAddTaskHTML() {
                 <div id="newSubtasksBox" class="new-subtask-box"></div>
             </div>
             <div class="addTask-commit-buttons">
-                <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
+                <button class="addTask-clear-btn" type="reset">Clear x</button>
                 <button class="submit-btn" type="submit">Create Task ✓</button>
             </div>
             <div id="emptyInputPopupCat" style="position: absolute;" class="pos-2 d-none">
@@ -87,7 +87,7 @@ function getAddTaskHTML() {
                 <div class="empty-input-popup">Wähle eine Kategorie.</div>
             </div>
         </form>
-        <div id="taskAddedPopup" class="task-added-popup-container">
+        <div id="taskAddedPopup" class="task-added-popup-container d-none">
             <span>Task added to board</span>
             <img src="./img/grid.png" class="popup-icon">
         </div>

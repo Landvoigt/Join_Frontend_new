@@ -1,16 +1,3 @@
-const LOGIN_ID = 'loginPage'
-const SUMMARY_ID = 'summaryPage'
-const BOARD_ID = 'boardPage'
-const CONTACTS_ID = 'contactsPage'
-const ADDTASK_ID = 'addTaskPage'
-const PRIVACY_ID = 'privacyPolicyPage'
-const LEGALNOTICE_ID = 'legalNoticePage'
-const HELP_ID = 'helpPage'
-
-let currentPage = SUMMARY_ID;
-let previousPage;
-let previousBackground = 'summarySidebar';
-
 async function initialize() {
     await includeHTML();
     showMainpage();
@@ -42,10 +29,8 @@ function showMainpage() {
 function changeSite(id) {
     let pageToShow = document.getElementById(id);
     let currentShownPage = document.getElementById(currentPage);
-
     currentShownPage.classList.add('d-none');
     pageToShow.classList.remove('d-none');
-
     previousPage = currentPage;
     currentPage = id;
     currentAssignedClients = [];
@@ -80,9 +65,6 @@ function closeLogoutPopup() {
     let overlay = document.getElementById('overlay');
     overlay.classList.add('d-none');
 }
-
-// schau mal hier     https://www.w3schools.com/jsref/met_document_queryselectorall.asp
-// so sollte es gehen !
 
 function addBackgroundColorForMainPages(id) {           // adds bg to sidebar element you go to (only for the sites you cant go back)
     document.getElementById(`${id}`).classList.add('backgroundSidebar');

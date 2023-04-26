@@ -1,35 +1,3 @@
-let topics = [
-    {
-        'name': 'Sales',
-        'color': 'aqua'
-    },
-    {
-        'name': 'Design',
-        'color': 'orange'
-    },
-    {
-        'name': 'Backoffice',
-        'color': 'purple'
-    },
-    {
-        'name': 'Media',
-        'color': 'lightgreen'
-    },
-    {
-        'name': 'Marketing',
-        'color': 'blue'
-    }
-];
-let currentAssignedClients = [];
-let currentSubtasks = [];
-let showCheckBoxes = true;
-let currentPickedColor = '';
-let currentPrio = "";
-let currentPrioImageSource;
-let currentCat = "";
-let randomColor;
-let fieldsFilledCorrectly = false;
-
 function addPrioColor(id) {
     let element = document.getElementById(id);
     let target = element.classList.contains(`${id}-highlight`);

@@ -33,6 +33,11 @@
     }
 
     .help-steps-box b {
-        width: 30%;
+        width: 90%;
+        padding-left: 8px;
+    }
+
+    .help-steps-box span {
+        width: 95%;
     }
 }
