@@ -155,3 +155,23 @@
     top: 0;
     bottom: 0;
 }
+
+@media (max-width: 1050px) {
+    .LogoImageHeader {
+        display: unset !important;
+        height: 40px;
+        width: 32px;
+    }
+    .header-content {
+        padding: 25px;
+    }
+    .spanHeader {
+        display: none;
+    }
+    .headerHelp {
+        display: none;
+    }
+    .profileImageHeader {
+        width: auto;
+    }
+}
