@@ -73,7 +73,7 @@ let tasks = [
                     'status': false
                 },
             ],
-        'clients': ['0', '2', '5'],
+        'clients': [],
         'prioName': 'urgent',
         'prioImg': './img/prio_urgent.png',
     },
@@ -87,7 +87,7 @@ let tasks = [
         'subtasks':
             [
             ],
-        'clients': ['0', '2', '3', '5', '6', '4'],
+        'clients': [],
         'prioName': 'medium',
         'prioImg': './img/prio_medium.png',
     },
@@ -101,7 +101,7 @@ let tasks = [
         'subtasks':
             [
             ],
-        'clients': ['7'],
+        'clients': [],
         'prioName': 'low',
         'prioImg': './img/prio_low.png',
     },
@@ -127,7 +127,7 @@ let tasks = [
                     'status': false
                 }
             ],
-        'clients': ['0', '2'],
+        'clients': [],
         'prioName': 'medium',
         'prioImg': './img/prio_medium.png',
     },
@@ -149,7 +149,7 @@ let tasks = [
                     'status': false
                 }
             ],
-        'clients': ['0', '2', '3', '5'],
+        'clients': [],
         'prioName': 'low',
         'prioImg': './img/prio_low.png',
     }

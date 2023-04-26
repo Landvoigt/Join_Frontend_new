@@ -1,9 +1,9 @@
 async function initialize() {
     await includeHTML();
+    await pushFirstLetter();
     showMainpage();
     loadDate();
     updateTasks();
-    pushFirstLetter();
     checkForTaskNumbers();
 }
 
