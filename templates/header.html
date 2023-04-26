@@ -6,8 +6,14 @@
         <div class="profilePictureContainer pointer">
             <img class="ChristinaProfileImage" src="./img/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.jpeg"
                 alt="Christina" onclick="showLogoutPopup()">
-            <a href="../templates/login.html"><button id="logoutPopup" class="logoutBtn pointer d-none" onclick="stopPropagation(event)">Log Out</button></a>
+            <div onclick="stopPropagation(event)" class="logoutBtn pointer d-none" id="logoutPopup">
+                <span onclick="changeSite(LEGALNOTICE_ID); addBackgroundColorForSpecialPages('legalNoticeSidebar')" class="pointer">Legal notice</span>
+                <span onclick="changeSite(PRIVACY_ID); addBackgroundColorForSpecialPages('privacyPolicySidebar')" class="pointer">Privacy policy</span>
+                <span class="pointer" onclick="location.href = './index.html';">Log Out</span>
+                <span class="pointer" onclick="changeSite(HELP_ID)">Help</span>
+            </div>
         </div>
     </div>
-    <div class="overlay d-none" id="overlay" onclick="closeLogoutPopup()"></div>
+    <div class="overlay d-none" id="overlay" onclick="closeLogoutPopup()">
+    </div>
 </div>
