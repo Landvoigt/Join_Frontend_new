@@ -162,5 +162,7 @@ b {
         overflow: visible;
         padding-left: 8%;
         padding-right: 8%;
+        margin-bottom: 100px;
+        padding-bottom: 65px;
     }
 }
