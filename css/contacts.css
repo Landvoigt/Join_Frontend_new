@@ -252,7 +252,7 @@
     }
   }
 
-#contacts-popup {
+.contacts-popup {
     position: fixed;
     height: 566px;
     background-color: #fff;
@@ -291,8 +291,8 @@
 .contacts-popup-left {
     width: 463px;
     background-color: #2A3647;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-top-left-radius: 26px;
+    border-bottom-left-radius: 26px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -415,4 +415,43 @@
     justify-content: center;
     align-items: center;
     transition: all 1s ease-in-out;
+}
+.edit-contacts-popup-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.contacts-popup-right-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#initials-circle{
+    margin-right: 0;
+    margin-left: 25px;
+}
+.horizontal-line{
+    width: 73px;
+    border-bottom: 4px solid #29ABE2;
+}
+#save-btn{
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    transition: 225ms all ease-in-out;
+    padding-left: 34px;
+    padding-right: 34px;
+}
+#save-btn:hover{
+    background-color: #29ABE2;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
