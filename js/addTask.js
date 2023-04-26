@@ -300,25 +300,25 @@ function renderSubtasks() {
     debugger
     for (let i = 0; i < currentSubtasks.length; i++) {
         let text = currentSubtasks[i]['text'];
-        subtaskBox.innerHTML += `
-            <div class="addTask-subtask-container">
-                <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')">
-                <label class="subtask-text" for="editTaskSubtask${i}">${text}</label>
-            </div>
-            `;
-        markAlreadyDoneSubtasks(i);
+        let status = currentSubtasks[i]['status'];
+        if (status == true) {
+            checkmark = 'checked';
+            subtaskBox.innerHTML += getSubtaskBoxHTML(i, text, checkmark);
+        }
+        if (status == false) {
+            checkmark = '';
+            subtaskBox.innerHTML += getSubtaskBoxHTML(i, text, checkmark);
+        }
     }
 }
 
-function markAlreadyDoneSubtasks(i) {
-    let status = currentSubtasks[i]['status'];
-    if (status != true) {
-        let checkbox = document.getElementById(`editTaskSubtask${i}`);
-        checkbox.checked = true;
-    }
-    else {
-        return
-    }
+function getSubtaskBoxHTML(i, text, checkmark) {
+    return `
+    <div class="addTask-subtask-container">
+        <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')" ${checkmark}>
+        <label class="subtask-text" for="editTaskSubtask${i}">${text}</label>
+    </div>
+    `;
 }
 
 function addSubtask() {
@@ -356,11 +356,11 @@ function changeSubtaskStatus(i) {
 }
 
 function checkForEmptyFields() {
-    if (currentPrio == "") {
+    if (currentPrio == '') {
         document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
     }
-    if (currentCat == "") {
+    if (currentCat == '') {
         document.getElementById('emptyInputPopupCat').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
     }
@@ -382,7 +382,7 @@ function getInputsFromForm() {
     }
 }
 
-function addTask(title, desc, date) {
+async function addTask(title, desc, date) {
     tasks.push(
         {
             'id': tasks.length,
@@ -395,8 +395,9 @@ function addTask(title, desc, date) {
             'clients': currentAssignedClients,
             'prioName': currentPrio,
             'prioImg': currentPrioImageSource,
-        },
+        }
     );
+    await setItemTasks(tasks);
     clearVariables();
     showTaskAddedPopup();
 }

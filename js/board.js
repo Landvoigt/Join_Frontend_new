@@ -1,3 +1,16 @@
+async function loadTasks() {
+    try {
+        tasks = JSON.parse(await getItem('tasks'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+    updateTasks();
+}
+
+async function setItemTasks(tasks) {
+    await setItem('tasks', JSON.stringify(tasks));
+}
+
 function updateTasks() {
     updateTaskSection('toDo');
     updateTaskSection('inProgress');
@@ -244,11 +257,25 @@ function checkForExistingSubtasks(id) {
     }
 }
 
-function deleteShownTask(id) {
-    tasks.splice(id, 1);
+async function deleteShownTask(id) {
+    // tasks.splice(id, 1);
+
+    try {
+        let tasks = JSON.parse(await getItem('tasks'));
+        let index = tasks.findIndex(t => t.id === id);
+        if (index !== -1) {
+            tasks.splice(index, 1);
+            await setItem('tasks', JSON.stringify(tasks));
+            console.log(`task${id} has been deleted.`);
+        } else {
+            console.log(`task${id} not found.`);
+        }
+    } catch (e) {
+        console.error('Deleting error:', e);
+    }
     removeAddTaskWindow();
     updateTasksID();
-    updateTasks();
+    loadTasks();
 }
 
 function updateTasksID() {
