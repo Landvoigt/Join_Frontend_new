@@ -12,8 +12,6 @@ function loadDate() {
 }
 
 function greetAccordingToTime(currenthour) { 
-    console.log(currenthour);
-   
     if (currenthour > 5 && currenthour <= 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
     } if (currenthour > 12 && currenthour <= 18) {

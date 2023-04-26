@@ -24,15 +24,15 @@ let currentAssignedClients = [];
 let currentSubtasks = [];
 let showCheckBoxes = true;
 let currentPickedColor = '';
-let currentPrio;
+let currentPrio = "";
 let currentPrioImageSource;
-let currentCat;
+let currentCat = "";
 let randomColor;
+let fieldsFilledCorrectly = false;
 
 function addPrioColor(id) {
     let element = document.getElementById(id);
     let target = element.classList.contains(`${id}-highlight`);
-    let icon = document.getElementById(`${id}Icon`);
     document.getElementById('urgentIcon').classList.remove('img-brightening');
     document.getElementById('mediumIcon').classList.remove('img-brightening');
     document.getElementById('lowIcon').classList.remove('img-brightening');
@@ -43,38 +43,35 @@ function addPrioColor(id) {
     }
     else {
         if (id == 'urgent') {
-            element.classList.add('urgent-highlight');
-            document.getElementById('medium').classList.remove('medium-highlight');
-            document.getElementById('low').classList.remove('low-highlight');
-            icon.classList.add('img-brightening');
-            currentPrio = id;
-            currentPrioImageSource = './img/prio_urgent.png';
+            changePrioProperties(id, 'medium', 'low');
         }
         if (id == 'medium') {
-            element.classList.add('medium-highlight');
-            document.getElementById('urgent').classList.remove('urgent-highlight');
-            document.getElementById('low').classList.remove('low-highlight');
-            icon.classList.add('img-brightening');
-            currentPrio = id;
-            currentPrioImageSource = './img/prio_medium.png';
+            changePrioProperties(id, 'urgent', 'low');
         }
         if (id == 'low') {
-            element.classList.add('low-highlight');
-            document.getElementById('medium').classList.remove('medium-highlight');
-            document.getElementById('urgent').classList.remove('urgent-highlight');
-            icon.classList.add('img-brightening');
-            currentPrio = id;
-            currentPrioImageSource = './img/prio_low.png';
+            changePrioProperties(id, 'medium', 'urgent');
         }
     }
 }
 
-function showCurrentDate() {
-    document.getElementById('addTaskDate').value = new Date().toLocaleDateString('en-GB');
+function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
+    let element = document.getElementById(shownPrio);
+    element.classList.add(`${shownPrio}-highlight`);
+    document.getElementById(hidingPrio1).classList.remove(`${hidingPrio1}-highlight`);
+    document.getElementById(hidingPrio2).classList.remove(`${hidingPrio2}-highlight`);
+    let icon = document.getElementById(`${shownPrio}Icon`);
+    icon.classList.add('img-brightening');
+    currentPrio = shownPrio;
+    currentPrioImageSource = `./img/prio_${shownPrio}.png`;
+}
+
+function showCurrentDate(id) {
+    document.getElementById(id).value = new Date().toLocaleDateString('en-GB');
 }
 
 function showAddTaskWindow() {
     resetIDs();
+    document.getElementById('boardPage').classList.add('of-hidden');
     popupWindow.innerHTML = `
         <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
             <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
@@ -94,102 +91,6 @@ function resetIDs() {
     let addTaskSite = document.getElementById('addTaskSite');
     addTaskSite.innerHTML = '';
     return popupWindow
-}
-
-function getAddTaskHTML() {
-    return `
-        <h2>Add Task</h2>
-        <form class="addTask-form" onsubmit="getInputsFromForm(); return false">
-            <div class="addTask-form-left-container">
-                <div>
-                    <h4 class="addTask-form-headlines">Title</h4>
-                    <input type="text" id="addTask-title-input" placeholder="Enter a title" maxlength="40" required>
-                </div>
-                <div>
-                    <h4 class="addTask-form-headlines">Description</h4>
-                    <textarea id="addTask-desc-input" placeholder="Enter a description" maxlength="250" required></textarea>
-                </div>
-                <div id="categoryDropdownSection" class="category-select">
-                    <h4 class="addTask-form-headlines">Category</h4>
-                    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
-                        Select task category
-                    </div>
-                    <div class="category-selection" id="categorySelection">
-                        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
-                            <span>Create new category</span>
-                        </label>
-                    </div>
-                </div>
-                <div id="contactDropdownSection">
-                    <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div id="contactDropdown" class="dropdown" onclick="showSelection('contactsSelection','contactDropdown')">
-                        Select contacts to assign
-                    </div>
-                    <div class="category-selection" id="contactsSelection">
-                        <label onclick="createNewContactInAddTask()" class="label-hover">
-                            <span>Create new contact</span>
-                            <img src="./img/add_user.png" class="addTask-new-contact-img">
-                        </label>
-                    </div>
-                    <div id="addedClientsBox" style="display:flex;"></div>
-                </div>
-            </div>
-            <div class="addTask-form-right-container">
-                <div>
-                    <h4 class="addTask-form-headlines">Due date</h4>
-                    <div style="position: relative;">
-                        <img class="calendar-icon" src="./img/calendar.png"></img>
-                        <input type="text" class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" onclick="showCurrentDate()" required>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="addTask-form-headlines">Prio</h4>
-                    <div class="addTask-prio-container" required>
-                        <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
-                            <span>Urgent</span>
-                            <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
-                        </div>
-                        <div id="medium" class="prio" onclick="addPrioColor('medium')">
-                            <span>Medium</span>
-                            <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
-                        </div>
-                        <div id="low" class="prio" onclick="addPrioColor('low')">
-                            <span>Low</span>
-                            <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
-                        </div>
-                    </div>
-                </div>
-                <div id="addSubtasksSection">
-                    <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div style="position: relative;" onclick="createNewSubtask()">
-                        <input type="text" id="subtaskInput" placeholder="Add new subtask">
-                        <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
-                    </div>
-                </div>
-                <div id="newSubtasksBox" class="new-subtask-box"></div>
-            </div>
-            <div class="addTask-commit-buttons">
-                <button class="addTask-clear-btn" onclick="changeToAddTaskSite(ADDTASK_ID)">Clear x</button>
-                <button class="submit-btn" type="submit">Create Task ✓</button>
-            </div>
-            <div id="emptyInputPopupPrio" style="position: absolute;" class="pos-1 d-none">
-                <div class="test">
-                    <img src="./img/exclamation.png" class="exclamation">
-                </div>
-                <div class="empty-input-popup">Wähle die Priorität.</div>
-            </div>
-            <div id="emptyInputPopupCat" style="position: absolute;" class="pos-2 d-none">
-                <div class="test">
-                    <img src="./img/exclamation.png" class="exclamation">
-                </div>
-                <div class="empty-input-popup">Wähle eine Kategorie.</div>
-            </div>
-        </form>
-        <div id="taskAddedPopup" class="task-added-popup-container">
-            <span>Task added to board</span>
-            <img src="./img/grid.png" class="popup-icon">
-        </div>
-    `;
 }
 
 function showSelection(select, container) {
@@ -300,6 +201,7 @@ function removeAddTaskWindow() {
     let popup = document.getElementById('popupWindow');
     popup.innerHTML = '';
     popup.classList.add('d-none');
+    document.getElementById('boardPage').classList.remove('of-hidden');
 }
 
 function createNewContactInAddTask() {
@@ -428,13 +330,18 @@ function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
     subtaskBox.innerHTML = '';
     for (let i = 0; i < currentSubtasks.length; i++) {
-        const element = currentSubtasks[i]['text'];
+        let text = currentSubtasks[i]['text'];
         subtaskBox.innerHTML += `
             <div class="addTask-subtask-container">
                 <input id="subtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')">
-                <label class="subtask-text" for="subtask${i}">${element}</label>
+                <label class="subtask-text" for="subtask${i}">${text}</label>
             </div>
-        `;
+            `;
+        let status = currentSubtasks[i]['status'];
+        if (status == true) {
+            let checkbox = document.getElementById(`subtask${i}`);
+            checkbox.checked = true;
+        }
     }
 }
 
@@ -474,21 +381,29 @@ function changeSubtaskStatus(i) {
 
 function checkForEmptyFields() {
     if (currentPrio == "") {
-        document.getElementById('emptyInputPopupPrio').remove('d-none');
-        // return false
+        document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
+        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
     }
     if (currentCat == "") {
-        document.getElementById('emptyInputPopupCat').remove('d-none');
-        // return false
+        document.getElementById('emptyInputPopupCat').classList.remove('d-none');
+        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
+    }
+    else {
+        fieldsFilledCorrectly = true;
     }
 }
 
 function getInputsFromForm() {
-    // checkForEmptyFields();
-    let title = document.getElementById('addTask-title-input').value;
-    let desc = document.getElementById('addTask-desc-input').value;
-    let date = document.getElementById('addTaskDate').value;
-    addTask(title, desc, date);
+    checkForEmptyFields();
+    if (fieldsFilledCorrectly == false) {
+        checkForEmptyFields();
+    }
+    else {
+        let title = document.getElementById('addTask-title-input').value;
+        let desc = document.getElementById('addTask-desc-input').value;
+        let date = document.getElementById('addTaskDate').value;
+        addTask(title, desc, date);
+    }
 }
 
 function addTask(title, desc, date) {
@@ -506,16 +421,8 @@ function addTask(title, desc, date) {
             'prioImg': currentPrioImageSource,
         },
     );
-}
-
-function createRandomColor() {
-    currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
-
-function getFocusOnInputField(id) {
-    let input = document.getElementById(`${id}`);
-    input.focus();
-    input.select();
+    clearVariables();
+    showTaskAddedPopup();
 }
 
 function showTaskAddedPopup() {
@@ -523,4 +430,17 @@ function showTaskAddedPopup() {
     popup.classList.add('popup-animation');
     setTimeout((changeSite), 900, BOARD_ID);
     setTimeout((removeAddTaskWindow), 900);
+}
+
+function removeFillFieldPopup(id) {
+    document.getElementById(id).classList.add('d-none');
+}
+
+function clearVariables() {
+    currentCat = "";
+    currentPrio = "";
+    currentPrioImageSource = "";
+    currentAssignedClients = "";
+    currentSubtasks = "";
+    fieldsFilledCorrectly = false;
 }

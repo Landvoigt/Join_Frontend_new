@@ -295,13 +295,6 @@
     flex-wrap: wrap;
 }
 
-.btn-absolute {
-    position: absolute;
-    z-index: 77;
-    bottom: 35px;
-    right: 35px;
-}
-
 .popup-client-box {
     display: flex;
     align-items: center;
@@ -358,8 +351,7 @@
 }
 
 .popup-subtask-container {
-    width: 100%;
-    height: 10px;
+    width: 80%;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -371,6 +363,10 @@
 
 .w-80 {
     width: 80%;
+}
+
+.editTask-subtask-box {
+    overflow-x: visible !important;
 }
 
 @media (max-width: 1570px) {
@@ -432,5 +428,62 @@
 
     .addTask-btn-responsive {
         display: flex;
+    }
+
+    .edit-and-delete-box {
+        bottom: 48px;
+        right: 65px;
+    }
+
+    .ok-btn-responsive {
+        top: 15px;
+        right: 65px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .popup-clients-container {
+        flex-direction: column;
+    }
+
+    .popup-client-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .popup-headline {
+        font-size: 2.7em;
+    }
+
+    .edit-and-delete-box {
+        flex-direction: column;
+        bottom: 40px;
+        right: 35px;
+    }
+
+    .delete-btn {
+        border-radius: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .edit-btn {
+        border-radius: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .prio-small {
+        font-size: 0.9em !important;
+    }
+
+    .prio-img-small {
+        height: 10px !important;
+        width: 14px !important;
+    }
+
+    .ok-btn-responsive {
+        right: 35px;
     }
 }

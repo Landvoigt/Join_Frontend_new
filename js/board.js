@@ -3,25 +3,25 @@ let tasks = [
         'id': 0,
         'category': 'toDo',
         'topic': 4,
-        'headline': 'Hallo',
-        'description': 'Hallo',
+        'headline': 'Website redesign',
+        'description': 'Modify the contents of the main website...',
         'date': '13/04/2023',
         'subtasks':
             [
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 1',
                     'status': false
                 },
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 2',
                     'status': true
                 },
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 3',
                     'status': true
                 },
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 4',
                     'status': false
                 },
             ],
@@ -34,7 +34,7 @@ let tasks = [
         'category': 'inProgress',
         'topic': 0,
         'headline': 'Call potential clients',
-        'description': 'Hallo',
+        'description': 'Make the product presentation to prospective buyers',
         'date': '13/04/2023',
         'subtasks':
             [
@@ -67,15 +67,15 @@ let tasks = [
         'subtasks':
             [
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 1',
                     'status': false
                 },
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 2',
                     'status': true
                 },
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 3',
                     'status': false
                 }
             ],
@@ -93,11 +93,11 @@ let tasks = [
         'subtasks':
             [
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 1',
                     'status': false
                 },
                 {
-                    'text': 'Moin Leudeeee!',
+                    'text': 'Subtask 2',
                     'status': false
                 }
             ],
@@ -109,6 +109,7 @@ let tasks = [
 
 let currentDraggedElement;
 let currentPrioColor;
+let currentAssasignation;
 
 function updateTasks() {
     updateTaskSection('toDo');
@@ -243,41 +244,13 @@ function checkForSubtasks(task, id) {
 
 function showDetailedTask(id) {
     checkPriority(id);
-    let task = tasks[id];
-    let topicName = topics[task['topic']]['name'];
-    let topicColor = topics[task['topic']]['color'];
-    let popup = document.getElementById('popupWindow');
-    popup.classList.remove('d-none');
-    popup.innerHTML = '';
-    popup.innerHTML = `
-    <div class="popup-task" onclick="stopPropagation(event)">
-        <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
-        <div class="edit-and-delete-box">
-            <img class="delete-btn" src="./img/delete.png" onclick="deleteShownTask(${id})">
-            <img class="edit-btn" src="./img/pencil_white.png" onclick="editDetailedTask(${id})">
-        </div>
-        <span class="task-category popup-category" style="background-color: ${topicColor}">${topicName}</span>
-        <h2 class="popup-headline">${task['headline']}</h2>
-        <span class="popup-span">${task['description']}</span>
-        <span class="popup-span"><b>Due date:</b>${task['date']}</span>
-        <div class="popup-span" style="display:flex; align-items:center">
-            <span><b>Priority:</b></span>
-            <span class="task-category popup-prio" style="background-color: ${currentPrioColor}">${currentPrio}
-                <img src="${task['prioImg']}" class="popup-prio-icon img-brightening">
-            </span>
-        </div>
-        <span class="popup-span"><b>Assigned to:</b></span>
-        <div id="popupClientSection${id}" class="popup-clients-container">
-        </div>
-        <span class="popup-span m-t-5"><b>Subtasks</b></span>
-        <div id="popupSubtaskSection${id}" class="popup-subtask-container"></div>
-    </div>
-    `;
-    showDetailedAssignedClients(task, id);
-    showDetailedSubtasks(task, id);
+    getDetailedTaskHTML(id);
+    showDetailedAssignedClients(id);
+    checkForExistingSubtasks(id);
 }
 
-function showDetailedAssignedClients(task, id) {
+function showDetailedAssignedClients(id) {
+    let task = tasks[id];
     let clientsSection = document.getElementById(`popupClientSection${id}`);
     for (let i = 0; i < task['clients'].length; i++) {
         let clientNumber = task['clients'][i];
@@ -286,11 +259,11 @@ function showDetailedAssignedClients(task, id) {
         let firstName = contacts[clientNumber]['firstname'];
         let lastName = contacts[clientNumber]['lastname'];
         clientsSection.innerHTML += `
-        <div class="popup-client-box">
-            <div class="task-client task-client-big" style="background-color:${color};">${initials}</div>
-            <span class="popup-client-span">${firstName} ${lastName}</span>
-        </div>
-        `;
+            <div class="popup-client-box">
+                <div class="task-client task-client-big" style="background-color:${color};">${initials}</div>
+                <span class="popup-client-span">${firstName} ${lastName}</span>
+            </div>
+            `;
     }
 }
 
@@ -300,22 +273,30 @@ function showDetailedSubtasks(task, id) {
         let subtask = task['subtasks'][i]['text'];
         let status = task['subtasks'][i]['status'];
         if (status == true) {
-            subtaskSection.innerHTML += `
-            <div class="d-flex gap-8">
-                <span class="opa-03">-</span>
-                <span class="popup-subtask-span line-through opa-03">${subtask}</span>
-            </div>
-            `;
+            getCrossedOutSubtaskHTML(subtaskSection, subtask);
         }
         if (status == false) {
-            subtaskSection.innerHTML += `
-            <div class="d-flex gap-8">
-                <span>-</span>
-                <span class="popup-subtask-span">${subtask}</span>
-            </div>
-            `;
+            getSubtaskHTML(subtaskSection, subtask);
         }
     }
+}
+
+function getSubtaskHTML(subtaskSection, subtask) {
+    subtaskSection.innerHTML += `
+    <div class="d-flex gap-8">
+        <span>-</span>
+        <span class="popup-subtask-span">${subtask}</span>
+    </div>
+    `;
+}
+
+function getCrossedOutSubtaskHTML(subtaskSection, subtask) {
+    subtaskSection.innerHTML += `
+    <div class="d-flex gap-8">
+        <span class="opa-03">-</span>
+        <span class="popup-subtask-span line-through opa-03">${subtask}</span>
+    </div>
+    `;
 }
 
 function checkPriority(id) {
@@ -337,70 +318,10 @@ function checkPriority(id) {
 function editDetailedTask(id) {
     resetIDs();
     currentAssignedClients = [];
-    let task = tasks[id];
-    let popup = document.getElementById('popupWindow');
-    popup.classList.remove('d-none');
-    popup.innerHTML = '';
-    popup.innerHTML = `
-    <div class="popup-task" onclick="stopPropagation(event)">
-        <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
-        <button class="submit-btn btn-absolute" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
-        <div class="popup-text-boxes">
-            <h4 class="addTask-form-headlines">Title</h4>
-            <input id="task${id}" placeholder="Enter a title" maxlength="40" value="${task['headline']}">
-        </div>
-        <div class="popup-text-boxes">
-        <h4 class="addTask-form-headlines">Description</h4>
-        <textarea id="desc${id}" placeholder="Enter a description" maxlength="200">${task['description']}</textarea>
-        </div>
-        <div class="popup-text-boxes">
-        <h4 class="addTask-form-headlines">Due date</h4>
-        <div style="position: relative;">
-        <img class="calendar-icon" src="./img/calendar.png"></img>
-        <input class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}">
-        </div>
-        </div>
-        <div class="popup-text-boxes">
-        <h4 class="addTask-form-headlines">Prio</h4>
-        <div class="addTask-prio-container">
-        <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
-        <span>Urgent</span>
-        <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
-        </div>
-        <div id="medium" class="prio" onclick="addPrioColor('medium')">
-        <span>Medium</span>
-        <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
-        </div>
-        <div id="low" class="prio" onclick="addPrioColor('low')">
-        <span>Low</span>
-        <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
-        </div>
-        </div>
-        </div>
-        <div id="contactDropdownSection" class="w-100">
-                    <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div id="contactDropdown" class="dropdown" onclick="showSelection('contactsSelection','contactDropdown')">
-                        Select contacts to assign
-                    </div>
-                    <div class="category-selection" id="contactsSelection">
-                        <label onclick="createNewContactInAddTask()" class="label-hover">
-                            <span>Create new contact</span>
-                            <img src="./img/add_user.png" class="addTask-new-contact-img">
-                        </label>
-                    </div>
-        </div>
-        <div id="addedClientsBox" style="display:flex;"></div>
-        <div id="addSubtasksSection" class="w-80">
-                    <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div style="position: relative;" onclick="createNewSubtask()">
-                        <input type="text" id="subtaskInput" placeholder="Add new subtask">
-                        <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
-                    </div>
-                </div>
-                <div id="newSubtasksBox" class="new-subtask-box"></div>
-        </div>
-        </div>
-        `;
+    currentSubtasks = [];
+    currentCat = tasks[id]['topic'];
+    currentAssasignation = tasks[id]['category'];
+    getEditTaskHTML(id);
     addPrioColor(currentPrio);
     pushAssignedClientsToArray(id);
     generateContacts();
@@ -424,6 +345,17 @@ function pushAttachedSubtasksToArray(id) {
     }
 }
 
+function checkForExistingSubtasks(id) {
+    let task = tasks[id];
+    if (task['subtasks'].length == 0) {
+        let subtaskHL = document.getElementById(`popupSubtaskHeadline${id}`);
+        subtaskHL.classList.add('d-none');
+    }
+    else {
+        showDetailedSubtasks(task, id);
+    }
+}
+
 function deleteShownTask(id) {
     tasks.splice(id, 1);
     removeAddTaskWindow();
@@ -438,34 +370,28 @@ function updateTasksID() {
 }
 
 function saveEditedTaskInformation(id) {
-    // updateTaskInformations(id);
-    // updateTasks(id);
-    showDetailedTask(id);
+    updateTaskInformations(id);
+    updateTasks(id);
+    removeAddTaskWindow();
 }
 
-// function updateTaskInformations(id) {
-//     let title = document.getElementById('addTask-title-input').value;
-//     let desc = document.getElementById('addTask-desc-input').value;
-//     let date = document.getElementById('addTaskDate').value;
-//     let doneSubtasks = currentSubtasks.filter(s => s.status === true);
-//     let progress = doneSubtasks.length;
-//     tasks[id] = {
-//         'id': id,
-//         'category': 'toDo',
-//         'topic': currentCat,
-//         'color': currentPickedColor,
-//         'headline': title,
-//         'description': desc,
-//         'date': date,
-//         'subtasksNumber': currentSubtasks.length,
-//         'progression': progress,
-//         'client1': 'SM',
-//         'client2': 'MV',
-//         'client3': 'EF',
-//         'prioName': currentPrio,
-//         'prioImg': currentPrioImageSource,
-//     }
-// }
+function updateTaskInformations(id) {
+    let title = document.getElementById('editTaskTitle').value;
+    let desc = document.getElementById('editTaskDesc').value;
+    let date = document.getElementById('editTaskDate').value;
+    tasks[id] = {
+        'id': id,
+        'category': currentAssasignation,
+        'topic': currentCat,
+        'headline': title,
+        'description': desc,
+        'date': date,
+        'subtasks': currentSubtasks,
+        'clients': currentAssignedClients,
+        'prioName': currentPrio,
+        'prioImg': currentPrioImageSource,
+    };
+}
 
 function filterTasks() {
     showFilteredTasks('toDo');

@@ -116,7 +116,6 @@ function renderLetters() {
 }
 
 async function renderContacts(id) {
-    console.log(contacts)
     let letterBox = document.getElementById(`${id}`);
 
     for (let i = 0; i < contacts.length; i++) {
@@ -202,10 +201,6 @@ function closeCreateContact() {
 
 }
 
-function createRandomColor() {
-    currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    contactsRandomColor = currentPickedColor;
-}
 async function createNewContact() {
     let Firstname = document.getElementById('contacts-firstname').value;
     Firstname = Firstname.charAt(0).toUpperCase() + Firstname.slice(1);

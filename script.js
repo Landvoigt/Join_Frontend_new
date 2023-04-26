@@ -99,3 +99,14 @@ function deleteBackgroundColors() {         // searches for all elements with cl
         background[i].classList.remove('backgroundSidebar');
     }
 }
+
+function createRandomColor() {
+    currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    contactsRandomColor = currentPickedColor;
+}
+
+function getFocusOnInputField(id) {
+    let input = document.getElementById(`${id}`);
+    input.focus();
+    input.select();
+}
