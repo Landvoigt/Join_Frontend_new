@@ -55,33 +55,34 @@
                 <div class="contacts-popup-right-content">
                     <div id="initials-circle" class="initials-big">
 
+                    </div>
+                    <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
+                        <div style="position: relative;">
+                            <input required class="add-contact-form" id="edit-firstname" placeholder="Firstname"
+                                type="text">
+                            <img class="input-icon" src="./img/human-profile.png" alt="">
+                        </div>
+                        <div style="position: relative;">
+                            <input required class="add-contact-form" id="edit-lastname" placeholder="Lastname"
+                                type="text">
+                            <img class="input-icon" src="./img/human-profile.png" alt="">
+                        </div>
+                        <div style="position: relative;">
+                            <input required class="add-contact-form" id="edit-mail" placeholder="Email" type="email">
+                            <img class="input-icon" src="./img/mail-icon.png" id="mail-icon" alt="">
+                        </div>
+                        <div style="position: relative;">
+                            <input required class="add-contact-form" id="edit-phone" placeholder="Phone" type="number">
+                            <img class="input-icon" src="./img/phone-icon.png" alt="">
+                        </div>
+
+                    </form>
                 </div>
-                <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
-                    <div style="position: relative;">
-                        <input required class="add-contact-form" id="edit-firstname" placeholder="Firstname"
-                            type="text">
-                        <img class="input-icon" src="./img/human-profile.png" alt="">
-                    </div>
-                    <div style="position: relative;">
-                        <input required class="add-contact-form" id="edit-lastname" placeholder="Lastname"
-                            type="text">
-                        <img class="input-icon" src="./img/human-profile.png" alt="">
-                    </div>
-                    <div style="position: relative;">
-                        <input required class="add-contact-form" id="edit-mail" placeholder="Email" type="email">
-                        <img class="input-icon" src="./img/mail-icon.png" id="mail-icon" alt="">
-                    </div>
-                    <div style="position: relative;">
-                        <input required class="add-contact-form" id="edit-phone" placeholder="Phone" type="number">
-                        <img class="input-icon" src="./img/phone-icon.png" alt="">
-                    </div>
-                    <div class="add-btn-container">
-                        <div onclick="deleteContactByFirstname(firstname)" class="cancel-btn" style="display: flex; align-items: center; height: 50px;">Delete <img src="" alt=""></div>
-                        <button id="save-btn">Save</button>
-                    </div>
-                </form>
+                <div class="add-btn-container">
+                    <div onclick="deleteContactByFirstname(firstname)" class="cancel-btn"
+                        style="display: flex; align-items: center; height: 50px;">Delete <img src="" alt=""></div>
+                    <button onclick="" id="save-btn">Save</button>
                 </div>
-                
             </div>
         </div>
 
@@ -104,7 +105,7 @@
                 Better with a team
             </span>
         </div>
-        <div class="flex-column" >
+        <div class="flex-column">
             <div id="card-popup" id="contacts-box-info" class="flex-column">
             </div>
         </div>

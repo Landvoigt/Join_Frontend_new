@@ -247,8 +247,15 @@ function openEditContact(id){
     let initalsCircle = document.getElementById('initials-circle');
     editBG.classList.remove('d-none','light');
     editBG.classList.add('dark');
+    document.getElementById('edit-contact-popup').classList.add('move-in');
     initalsCircle.style=`background-color:${contacts[id]['color']};`
     initalsCircle.innerHTML= contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0); 
+    initalsCircle.innerHTML= contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0); 
+    
+    document.getElementById('edit-contact-popup').classList.remove('move-out');
+    document.getElementById('edit-contact-popup').classList.add('move-in');
+
+    initalsCircle.innerHTML= contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
     
     document.getElementById('edit-contact-popup').classList.remove('move-out');
     document.getElementById('edit-contact-popup').classList.add('move-in');
@@ -289,4 +296,37 @@ async function deleteContactByFirstname(firstname) {
     } catch (e) {
         console.error('Deleting error:', e);
     }
+    document.getElementById('contact-popup').innerHTML='';
+    loadContacts();
+    closeCreateContact();
 }
+
+async function changeFirstname(firstName) {
+    const newFirstname = document.getElementById('edit-firstname').value;
+  
+    // Laden der Kontakte
+    await loadContacts();
+  
+    // Suchen des Index des Kontakts, dessen Vornamen (Firstname) geändert werden soll
+    const index = contacts.findIndex(contact => contact.firstname === firstName);
+  
+    if (index !== -1) {
+      // Ändern des Vornamens (Firstname) des Kontakts
+      contacts[index].firstname = newFirstname;
+  
+      // Aktualisieren weiterer Kontaktdaten
+      contacts[index].lastname = document.getElementById('edit-lastname').value;
+      contacts[index].mail = document.getElementById('edit-mail').value;
+      contacts[index].phone = document.getElementById('edit-phone').value;
+  
+      // Speichern der aktualisierten Kontakte im Speicher
+      await setItemContacts(contacts);
+  
+      // Informieren des Benutzers über die erfolgreiche Änderung
+      alert(`Die Änderungen für den Kontakt ${firstName} wurden erfolgreich gespeichert.`);
+    } else {
+      // Informieren des Benutzers, wenn der Kontakt nicht gefunden wurde
+      alert(`Der Kontakt mit dem Vornamen ${firstName} wurde nicht gefunden.`);
+    }
+  }
+  
