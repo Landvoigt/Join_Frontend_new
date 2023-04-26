@@ -142,3 +142,42 @@
     background-color: #091931;
     filter: brightness(1.25);
 }
+
+@media (max-width: 1050px) {
+    .sidebar-content {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        padding: 0;
+        position: fixed;
+        flex-direction: row;
+        display: flex;
+        justify-content: space-evenly;
+        top: auto;
+        width: auto;
+    }
+    .LogoImageSidebar {
+        display: none;
+    }
+    .impressumContainer {
+        display: none;
+    }
+    .sidebarMenu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: auto;
+        align-items: center;
+        text-align: center;
+        gap: 0;
+        width: 100%;
+    }
+    .boardSidebar {
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+        padding: 10px;
+        width: auto;
+    }
+}
