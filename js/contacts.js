@@ -221,15 +221,10 @@ function closeEditContact() {
 async function deleteContactByFirstname(firstname) {
     try {
         let contacts = JSON.parse(await getItem('contacts'));
-
-        // den Kontakt mit dem übergebenen Vornamen finden
         let index = contacts.findIndex(contact => contact.firstname === firstname);
 
         if (index !== -1) {
-            // den Kontakt aus dem Array entfernen
             contacts.splice(index, 1);
-
-            // das aktualisierte Array zurück in den Speicher schreiben
             await setItem('contacts', JSON.stringify(contacts));
             console.log(`Contact with firstname ${firstname} has been deleted.`);
         } else {
@@ -255,10 +250,8 @@ async function changeFirstname() {
     const index = contacts.findIndex(contact => contact.firstname === firstname);
 
     if (index !== -1) {
-        // Ändern des Vornamens (Firstname) des Kontakts
+        // Ändern des Daten des Kontakts
         contacts[index].firstname = newFirstname;
-
-        // Aktualisieren weiterer Kontaktdaten
         contacts[index].lastname = document.getElementById('edit-lastname').value;
         contacts[index].mail = document.getElementById('edit-mail').value;
         contacts[index].phone = document.getElementById('edit-phone').value;
@@ -267,9 +260,13 @@ async function changeFirstname() {
         await setItemContacts(contacts);
 
         // Informieren des Benutzers über die erfolgreiche Änderung
-        alert(`Die Änderungen für den Kontakt ${firstName} wurden erfolgreich gespeichert.`);
+        alert(`Die Änderungen für den Kontakt ${firstname} wurden erfolgreich gespeichert.`);
     } else {
         // Informieren des Benutzers, wenn der Kontakt nicht gefunden wurde
-        alert(`Der Kontakt mit dem Vornamen ${firstName} wurde nicht gefunden.`);
+        alert(`Der Kontakt mit dem Vornamen ${firstname} wurde nicht gefunden.`);
     }
+    document.getElementById('card-popup').innerHTML = '';
+    loadContacts();
+    closeEditContact();
+    pushFirstLetter();
 }
