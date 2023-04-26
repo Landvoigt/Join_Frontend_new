@@ -54,7 +54,7 @@ function showClients(task) {
     for (let i = 0; i < clientsAmount; i++) {
         let clientNumber = task['clients'][i];
         let initials = contacts[clientNumber]['initials'];
-        console.log(initials)
+        console.log(initials);
         let color = contacts[clientNumber]['color'];
         changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
     }

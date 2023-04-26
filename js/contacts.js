@@ -54,6 +54,20 @@ let contacts = [{
     'mail': 'Sven.T@live.de',
     'phone': '01234567',
     'color': 'brown'
+},{
+    'firstname': 'Rahul',
+    'lastname': 'Sharma',
+    'initials': 'RS',
+    'mail': 'Sven.T@live.de',
+    'phone': '01234567',
+    'color': 'brown'
+},{
+    'firstname': 'Rahul',
+    'lastname': 'Sharma',
+    'initials': 'RS',
+    'mail': 'Sven.T@live.de',
+    'phone': '01234567',
+    'color': 'brown'
 }
 ];
 let letters = [];
