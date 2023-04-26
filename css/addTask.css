@@ -680,6 +680,14 @@ label input {
         left: 20% !important;
         bottom: 38% !important;
     }
+
+    .spanMainpage {
+        display: unset !important;
+        margin-bottom: 30px;
+        margin-top: -20px;
+        font-weight: 400;
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 600px) {

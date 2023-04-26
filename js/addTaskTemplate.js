@@ -1,5 +1,6 @@
 function getAddTaskHTML() {
     return `
+        <div class="spanMainpage d-none">Kanban Project Management Tool</div>
         <h2>Add Task</h2>
         <form class="addTask-form" onsubmit="getInputsFromForm(); return false">
             <div class="addTask-form-left-container">
