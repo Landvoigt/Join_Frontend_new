@@ -297,19 +297,27 @@ function createNewSubtask() {
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
     subtaskBox.innerHTML = '';
+    debugger
     for (let i = 0; i < currentSubtasks.length; i++) {
         let text = currentSubtasks[i]['text'];
         subtaskBox.innerHTML += `
             <div class="addTask-subtask-container">
-                <input id="subtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')">
-                <label class="subtask-text" for="subtask${i}">${text}</label>
+                <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')">
+                <label class="subtask-text" for="editTaskSubtask${i}">${text}</label>
             </div>
             `;
-        let status = currentSubtasks[i]['status'];
-        if (status == true) {
-            let checkbox = document.getElementById(`subtask${i}`);
-            checkbox.checked = true;
-        }
+        markAlreadyDoneSubtasks(i);
+    }
+}
+
+function markAlreadyDoneSubtasks(i) {
+    let status = currentSubtasks[i]['status'];
+    if (status != true) {
+        let checkbox = document.getElementById(`editTaskSubtask${i}`);
+        checkbox.checked = true;
+    }
+    else {
+        return
     }
 }
 

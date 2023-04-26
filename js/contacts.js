@@ -10,8 +10,8 @@ async function loadContacts() {
     } catch (e) {
         console.error('Loading error:', e);
     }
-
 }
+
 async function setItemContacts(contacts) {
     await setItem('contacts', JSON.stringify(contacts));
 }

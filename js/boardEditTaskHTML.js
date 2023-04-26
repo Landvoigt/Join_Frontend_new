@@ -5,7 +5,7 @@ function getEditTaskHTML(id) {
     popup.innerHTML = '';
     popup.innerHTML = `
         <div class="popup-task" onclick="stopPropagation(event)">
-        <form>
+        <form class="w-100">
             <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
             <button class="submit-btn btn-absolute ok-btn-responsive" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
             <div class="popup-text-boxes">
