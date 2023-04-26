@@ -59,6 +59,7 @@ let contacts = [{
 let letters = [];
 let contactsRandomColor;
 let lastSelectedContact;
+let firstname;
 
 async function loadContacts() {
     try {
@@ -241,11 +242,32 @@ function resetInputValue() {
     }
 
 }
-function openEditContact(){
+function openEditContact(id){
     let editBG = document.getElementById('edit-contact-bg');
-    editBG.classList.remove('d-none');
+    let initalsCircle = document.getElementById('initials-circle');
+    editBG.classList.remove('d-none','light');
     editBG.classList.add('dark');
+    initalsCircle.style=`background-color:${contacts[id]['color']};`
+    initalsCircle.innerHTML= contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0); 
+    
+    document.getElementById('edit-contact-popup').classList.remove('move-out');
+    document.getElementById('edit-contact-popup').classList.add('move-in');
 
+    document.getElementById('edit-firstname').value = contacts[id]['firstname'];
+    firstname = contacts[id]['firstname'];
+    console.log(firstname);
+    document.getElementById('edit-lastname').value = contacts[id]['lastname'];
+    document.getElementById('edit-mail').value = contacts[id]['mail'];
+    document.getElementById('edit-phone').value = contacts[id]['phone'];
+}
+function closeEditContact(){
+    document.getElementById('edit-contact-bg').classList.add('light');
+    document.getElementById('edit-contact-bg').classList.remove('dark');
+    document.getElementById('edit-contact-popup').classList.remove('move-in');
+    document.getElementById('edit-contact-popup').classList.add('move-out');
+    setTimeout(function () {
+        document.getElementById('edit-contact-bg').classList.add('d-none');
+    }, 1200);
 }
 async function deleteContactByFirstname(firstname) {
     try {

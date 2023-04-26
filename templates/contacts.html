@@ -1,6 +1,6 @@
 <div class="contacts-content">
     <div class="create-contact-bg d-none" id="create-contact-bg">
-        <div id="contacts-popup">
+        <div id="contacts-popup" class="contacts-popup">
             <div class="contacts-popup-left">
                 <div class="flex-column" style="align-items: flex-start; gap: 12px; font-size: 27px;color: white;">
                     <img src="./img/join-for-add-contacts.png" alt="">
@@ -13,13 +13,15 @@
                 <div class="add-contact-img">
                     <img src="./img/profile.png" alt="">
                 </div>
-                <form class="add-contact-form-container" onsubmit="createNewContact(); return false"  >
+                <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
                     <div style="position: relative;">
-                        <input required class="add-contact-form" id="contacts-firstname" placeholder="Firstname" type="text">
+                        <input required class="add-contact-form" id="contacts-firstname" placeholder="Firstname"
+                            type="text">
                         <img class="input-icon" src="./img/human-profile.png" alt="">
                     </div>
                     <div style="position: relative;">
-                        <input required class="add-contact-form" id="contacts-lastname" placeholder="Lastname" type="text">
+                        <input required class="add-contact-form" id="contacts-lastname" placeholder="Lastname"
+                            type="text">
                         <img class="input-icon" src="./img/human-profile.png" alt="">
                     </div>
                     <div style="position: relative;">
@@ -40,6 +42,48 @@
         </div>
     </div>
     <div class="edit-contact-bg d-none" id="edit-contact-bg">
+        <div class="contacts-popup" id="edit-contact-popup">
+            <div class="contacts-popup-left">
+                <div class="flex-column" style="align-items: flex-start; gap: 12px; font-size: 27px;color: white;">
+                    <img src="./img/join-for-add-contacts.png" alt="">
+                    <span id="add-contact">Edit Contact</span>
+                    <div class="horizontal-line"></div>
+                </div>
+            </div>
+            <div class="edit-contacts-popup-right">
+                <img class="close-popup" onclick="closeEditContact()" src="./img/close.png" alt="">
+                <div class="contacts-popup-right-content">
+                    <div id="initials-circle" class="initials-big">
+
+                </div>
+                <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
+                    <div style="position: relative;">
+                        <input required class="add-contact-form" id="edit-firstname" placeholder="Firstname"
+                            type="text">
+                        <img class="input-icon" src="./img/human-profile.png" alt="">
+                    </div>
+                    <div style="position: relative;">
+                        <input required class="add-contact-form" id="edit-lastname" placeholder="Lastname"
+                            type="text">
+                        <img class="input-icon" src="./img/human-profile.png" alt="">
+                    </div>
+                    <div style="position: relative;">
+                        <input required class="add-contact-form" id="edit-mail" placeholder="Email" type="email">
+                        <img class="input-icon" src="./img/mail-icon.png" id="mail-icon" alt="">
+                    </div>
+                    <div style="position: relative;">
+                        <input required class="add-contact-form" id="edit-phone" placeholder="Phone" type="number">
+                        <img class="input-icon" src="./img/phone-icon.png" alt="">
+                    </div>
+                    <div class="add-btn-container">
+                        <div onclick="deleteContactByFirstname(firstname)" class="cancel-btn" style="display: flex; align-items: center; height: 50px;">Delete <img src="" alt=""></div>
+                        <button id="save-btn">Save</button>
+                    </div>
+                </form>
+                </div>
+                
+            </div>
+        </div>
 
     </div>
     <div class="contact-list-scrollable-div">
@@ -60,10 +104,9 @@
                 Better with a team
             </span>
         </div>
-        <div class="flex-column">
-            <div id="card-popup" class="flex-column">
+        <div class="flex-column" >
+            <div id="card-popup" id="contacts-box-info" class="flex-column">
             </div>
-
         </div>
         <div onclick="openCreateContact()" class="add-contact">New Contact <img src="./img/Capa 1.png" alt=""></div>
         <div id="created-successfully-logo" class="created-successfully-logo">Contact Successfully Created</div>
