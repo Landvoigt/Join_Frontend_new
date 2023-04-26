@@ -69,7 +69,6 @@ async function loadContacts() {
     }
 
 }
-
 async function setItemContacts(contacts) {
     await setItem('contacts', JSON.stringify(contacts));
 }
@@ -296,9 +295,10 @@ async function deleteContactByFirstname(firstname) {
     } catch (e) {
         console.error('Deleting error:', e);
     }
-    document.getElementById('contact-popup').innerHTML='';
+    document.getElementById('card-popup').innerHTML='';
     loadContacts();
-    closeCreateContact();
+    closeEditContact();
+    pushFirstLetter();
 }
 
 async function changeFirstname(firstName) {
