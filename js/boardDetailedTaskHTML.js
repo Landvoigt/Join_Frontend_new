@@ -8,7 +8,7 @@ function getDetailedTaskHTML(id) {
     popup.innerHTML = '';
     popup.innerHTML = `
         <div class="popup-task" onclick="stopPropagation(event)">
-            <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+            <img class="back-btn back-btn-none" src="./img/plus.png" onclick="removeAddTaskWindow()">
             <img src="./img/back_arrow.png" class="back-arrow-responsive-popup" onclick="removeAddTaskWindow()">
             <div class="edit-and-delete-box">
                 <img class="delete-btn" src="./img/delete.png" onclick="deleteShownTask(${id})">

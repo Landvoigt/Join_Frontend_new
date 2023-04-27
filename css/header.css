@@ -162,18 +162,23 @@
         height: 40px;
         width: 32px;
     }
+
     .header-content {
         padding: 25px;
     }
+
     .spanHeader {
         display: none;
     }
+
     .headerHelp {
         display: none;
     }
+
     .profileImageHeader {
         width: auto;
     }
+
     .logoutBtn {
         height: 120px;
         display: flex;
@@ -181,5 +186,9 @@
         justify-content: space-evenly;
         font-weight: 400;
         font-size: 16px;
+    }
+
+    .header-content {
+        z-index: 15;
     }
 }

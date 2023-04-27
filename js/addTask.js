@@ -50,6 +50,7 @@ function showAddTaskWindow() {
     generateTaskCategories();
     generateContacts();
     renderSubtasks();
+    document.getElementById('commitButtonsBox').style.right = '65px';
 }
 
 function resetIDs() {
@@ -188,6 +189,7 @@ function createNewContactInAddTask() {
 }
 
 function createNewCategoryInAddTask() {
+    currentCat = '';
     let dropdown = document.getElementById('categoryDropdownSection');
     dropdown.innerHTML = `
         <h4 class="addTask-form-headlines">Category</h4>
@@ -297,7 +299,6 @@ function createNewSubtask() {
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
     subtaskBox.innerHTML = '';
-    debugger
     for (let i = 0; i < currentSubtasks.length; i++) {
         let text = currentSubtasks[i]['text'];
         let status = currentSubtasks[i]['status'];
@@ -356,13 +357,19 @@ function changeSubtaskStatus(i) {
 }
 
 function checkForEmptyFields() {
-    if (currentPrio == '') {
+    if (currentCat.length == 0 && currentPrio.length == 0) {
+        document.getElementById('emptyInputPopupCat').classList.remove('d-none');
+        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
         document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
     }
-    if (currentCat == '') {
+    else if (currentCat.length == 0) {
         document.getElementById('emptyInputPopupCat').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
+    }
+    else if (currentPrio.length == 0) {
+        document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
+        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
     }
     else {
         fieldsFilledCorrectly = true;

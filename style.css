@@ -16,6 +16,10 @@ body {
     display: flex;
 }
 
+.flex-end {
+    justify-content: flex-end;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -128,7 +132,7 @@ b {
 .popup-window {
     position: fixed;
     top: 0;
-    z-index: 99;
+    z-index: 11;
     height: 100vh;
     width: 100vw;
     background-color: #00000069;
@@ -162,7 +166,16 @@ b {
         overflow: visible;
         padding-left: 8%;
         padding-right: 8%;
-        margin-bottom: 100px;
         padding-bottom: 65px;
+    }
+
+    .popup-window {
+        /* padding-top: 89px; */
+    }
+}
+
+@media (max-width: 600px) {
+    h2 {
+        font-size: 2.7em;
     }
 }

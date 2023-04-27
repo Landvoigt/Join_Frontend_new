@@ -160,7 +160,8 @@ textarea:focus-visible {
 
 .addTask-commit-buttons {
     position: absolute;
-    right: 65px;
+    z-index: 30;
+    right: 0;
     bottom: 65px;
     height: 50px;
     display: flex;
@@ -170,26 +171,44 @@ textarea:focus-visible {
 }
 
 .addTask-commit-buttons button {
-    height: 45px;
+    height: 55px;
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 8px;
     border: 1px solid #2a3647;
     background-color: white;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 600;
     color: rgba(0, 0, 59, 0.8);
     cursor: pointer;
 }
 
-.submit-btn {
+.add-task-button {
     height: 45px;
+    width: 200px;
+    border-radius: 8px;
+    gap: 8px;
+    border: 1px solid #2a3647;
+    background-color: white;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: rgba(0, 0, 59, 0.8);
+    cursor: pointer;
+    background-color: #2a3647 !important;
+    color: white !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-btn {
+    height: 55px;
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 8px;
     border: 1px solid #2a3647;
     background-color: white;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 600;
     color: rgba(0, 0, 59, 0.8);
     cursor: pointer;
@@ -198,6 +217,14 @@ textarea:focus-visible {
 }
 
 .submit-btn:hover {
+    background-color: #29abe2 !important;
+    border: 1px solid transparent;
+    box-shadow:
+        1px 4px 3px -1px rgba(0, 0, 0, 0.16),
+        -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
+}
+
+.add-task-button:hover {
     background-color: #29abe2 !important;
     border: 1px solid transparent;
     box-shadow:
@@ -638,7 +665,8 @@ label input {
         width: 100%;
         border-radius: 0;
         overflow: auto;
-        padding-top: 100px;
+        padding-top: 163px;
+        background-color: rgb(249, 249, 249);
     }
 
     .popup-task {
@@ -646,10 +674,12 @@ label input {
         width: 100%;
         border-radius: 0;
         margin-left: 0;
+        padding-top: 135px;
     }
 
     .back-btn {
-        display: none;
+        top: 140px;
+        right: 65px;
     }
 
     .back-arrow-responsive-popup {
@@ -666,7 +696,7 @@ label input {
     .addTask-commit-buttons {
         z-index: 22;
         position: fixed;
-        top: 15px;
+        top: 17px;
         right: 65px;
         margin-top: 0;
     }
@@ -688,15 +718,21 @@ label input {
         font-weight: 400;
         font-size: 16px;
     }
+
+    .add-task-button {
+        display: none;
+    }
 }
 
 @media (max-width: 600px) {
     .popup-container {
-        padding: 35px;
+        padding-left: 35px;
+        padding-right: 35px;
     }
 
-    .popup-task {
-        padding: 35px;
+    .back-btn {
+        top: 140px;
+        right: 35px;
     }
 
     .back-arrow-responsive-popup {

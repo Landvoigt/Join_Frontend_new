@@ -258,8 +258,6 @@ function checkForExistingSubtasks(id) {
 }
 
 async function deleteShownTask(id) {
-    // tasks.splice(id, 1);
-
     try {
         let tasks = JSON.parse(await getItem('tasks'));
         let index = tasks.findIndex(t => t.id === id);

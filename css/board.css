@@ -108,7 +108,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 7%;
+    padding: 25px;
     margin-bottom: 10%;
     cursor: pointer;
 }
@@ -357,6 +357,10 @@
     gap: 8px;
 }
 
+.ok-btn {
+    width: 80px;
+}
+
 .line-through {
     text-decoration: line-through !important;
 }
@@ -367,6 +371,10 @@
 
 .editTask-subtask-box {
     overflow-x: visible !important;
+}
+
+.edit-task-form {
+    display: grid !important;
 }
 
 @media (max-width: 1570px) {
@@ -385,7 +393,7 @@
     }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1450px) {
     .board-content {
         height: auto;
         gap: 0;
@@ -399,7 +407,7 @@
 
     .drag-drop-area {
         max-width: 100%;
-        min-height: 20vh;
+        min-height: 80px;
         height: 20%;
         display: flex;
         flex-direction: row;
@@ -412,7 +420,6 @@
         min-width: 35%;
         width: 35%;
         margin-bottom: 0;
-        padding: 4%;
     }
 
     .board-headline-container {
@@ -435,13 +442,11 @@
         right: 65px;
     }
 
-    .ok-btn-responsive {
-        top: 15px;
+    .ok-btn {
+        top: 118px;
         right: 65px;
     }
-}
 
-@media (max-width: 1050px) {
     .popup-clients-container {
         flex-direction: column;
     }
@@ -449,13 +454,19 @@
     .popup-client-box {
         width: 100%;
     }
+
+    .resp-btn-extra {
+        height: 45px !important;
+    }
+
+    .edit-task-form {
+        padding: 65px;
+        padding-top: 144px;
+        padding-bottom: 44px;
+    }
 }
 
 @media (max-width: 600px) {
-    .popup-headline {
-        font-size: 2.7em;
-    }
-
     .edit-and-delete-box {
         flex-direction: column;
         bottom: 40px;
@@ -483,7 +494,22 @@
         width: 14px !important;
     }
 
-    .ok-btn-responsive {
+    .ok-btn {
         right: 35px;
+    }
+
+    .board-search-box input {
+        width: 180px;
+    }
+
+    .task-box {
+        width: 220px;
+    }
+
+    .popup-prio {
+        font-size: 0.8em;
+        padding: 5px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
 }

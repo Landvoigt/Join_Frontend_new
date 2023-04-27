@@ -5,9 +5,8 @@ function getEditTaskHTML(id) {
     popup.innerHTML = '';
     popup.innerHTML = `
         <div class="popup-task" onclick="stopPropagation(event)">
-        <form class="w-100">
-            <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
-            <button class="submit-btn btn-absolute ok-btn-responsive" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
+        <form class="edit-task-form w-100">
+            <img class="back-btn back-btn-none" src="./img/plus.png" onclick="removeAddTaskWindow()">
             <div class="popup-text-boxes">
                 <h4 class="addTask-form-headlines">Title</h4>
                 <input id="editTaskTitle" placeholder="Enter a title" maxlength="40" value="${task['headline']}" required>
@@ -53,7 +52,7 @@ function getEditTaskHTML(id) {
                 </div>
             </div>
             <div id="addedClientsBox" class="d-flex f-wrap"></div>
-            <div id="addSubtasksSection" class="w-80">
+            <div id="addSubtasksSection">
                 <h4 class="addTask-form-headlines">Assigned to</h4>
                 <div style="position: relative;" onclick="createNewSubtask()">
                     <input type="text" id="subtaskInput" placeholder="Add new subtask">
@@ -61,6 +60,9 @@ function getEditTaskHTML(id) {
                 </div>
             </div>
             <div id="newSubtasksBox" class="new-subtask-box editTask-subtask-box"></div>
+            <div class="w-100 d-flex flex-end">
+                <button class="submit-btn ok-btn" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
+            </div>        
         </form>
         </div>
         `;

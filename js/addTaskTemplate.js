@@ -77,7 +77,7 @@ function getAddTaskHTML() {
                 </div>
                 <div id="newSubtasksBox" class="new-subtask-box"></div>
             </div>
-            <div class="addTask-commit-buttons">
+            <div class="addTask-commit-buttons" id="commitButtonsBox">
                 <button class="addTask-clear-btn" type="reset">Clear x</button>
                 <button class="submit-btn" type="submit">Create Task ✓</button>
             </div>
