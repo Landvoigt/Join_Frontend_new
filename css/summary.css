@@ -15,9 +15,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 87px;
+    margin-top: -10px;
 }
 
-.summary-headline{
+.summary-headline {
     font-size: 61px;
     font-weight: 700;
 }
@@ -42,10 +43,10 @@
 .first-row {
     display: flex;
     gap: 35px;
-    
+
 }
 
-.single-task{
+.single-task {
     height: 170px;
     width: 170px;
     border-radius: 30px;
@@ -58,12 +59,14 @@
     box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.1);
     transition: all 150ms ease-in-out;
 }
-.single-task:hover{
+
+.single-task:hover {
     background-color: #2A3647;
-    transform: scale(1.2);
+    transform: scale(1.1);
     color: white;
     cursor: pointer;
 }
+
 .tasks-in-board-nr {
     font-size: 64px;
     font-weight: 700;
@@ -88,12 +91,14 @@
     cursor: pointer;
     transition: all 150ms ease-in-out;
 }
-.second-row:hover{
+
+.second-row:hover {
     background-color: #2A3647;
-    transform: scale(1.2);
+    transform: scale(1.1);
     color: white;
     cursor: pointer;
 }
+
 .second-row img {
     height: 58px;
     margin-right: 12px;
@@ -124,7 +129,8 @@
     height: 150px;
     margin-top: 40px;
 }
-.to-do-status{
+
+.to-do-status {
     height: 150px;
     width: 272px;
     background-color: white;
@@ -137,26 +143,188 @@
     gap: 20px;
     transition: all 150ms ease-in-out;
 }
-.to-do-status:hover{
+
+.to-do-status:hover {
     background-color: #2A3647;
-    transform: scale(1.2);
+    transform: scale(1.1);
     color: white;
     cursor: pointer;
 }
-.to-do-status img{
+
+.to-do-status img {
     height: 60px;
 }
-.name{
+
+.name {
     color: #29ABE2;
     font-weight: 700;
     font-size: 68px;
     margin-bottom: 20px;
 }
-.greeting{
+
+.greeting {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
     margin-bottom: 100px;
     padding-right: 100px;
+}
+
+#greeting {
+    font-weight: 600;
+    font-size: 53px;
+}
+
+.line {
+    width: 100px;
+    border-bottom: 4px solid #29ABE2;
+    margin-top: 35px;
+}
+.urgent-nr{
+    display: flex;
+    align-items: center;
+}
+.doneTasksNr{
+    font-size: 64px;
+    text-align: center;
+}
+@media (max-width: 1556px) {
+    .name {
+        font-size: 60px !important;
+    }
+
+    #greeting {
+        font-size: 45px !important;
+    }
+
+    /* .incl-cont-side {
+        padding-right: 0;
+    } */
+}
+
+@media (max-width: 1414px) {
+    .name {
+        font-size: 50px !important;
+    }
+
+    #greeting {
+        font-size: 35px !important;
+    }
+
+    .greeting {
+        padding-right: 70px;
+    }
+
+}
+
+@media (max-width: 1374px) {
+    .name {
+        font-size: 40px !important;
+    }
+
+    #greeting {
+        font-size: 25px !important;
+    }
+}
+
+@media (max-width: 1300px) {
+    .greeting {
+        padding-right: 30px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .greeting {
+        display: none;
+    }
+}
+
+@media(max-width:1050px) {
+    .headline-summary {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 41px;
+        flex-direction: column;
+        margin-right: 130px;
+    }
+
+    .vertical-line {
+        display: none;
+    }
+
+    .line {
+        display: block !important;
+    }
+
+    #nutshell-text {
+        margin-top: 15px;
+    }
+
+    .tasks-in-board-nr {
+        font-size: 47px;
+        font-weight: 600;
+    }
+
+    .single-task-description {
+        font-size: 15px;
+    }
+
+    .single-task {
+        height: 130px;
+        width: 130px;
+    }
+    .second-row{
+        margin-top: 30px;
+        width: 460px;
+        height: 130px;
+    }
+    .second-row img {
+        height: 50px;
+}
+    .second-row-right{
+        font-size: 14px;
+    } 
+    #date{
+        font-size: 16px;
+    }
+    /* .incl-cont-side {
+        display: flex;
+        justify-content: center;
+        padding-top: 110px;
+        padding-bottom: 75px;
+        padding-right: 8%;
+    } */
+    .summary-content{
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+    .third-row {
+        width: 460px;
+        height: 130px;
+        margin-top: 21px
+}
+#To-Do{
+    font-size: 15px !important;
+}
+#toDoTasksNr{
+    font-size: 47px !important;
+}
+.to-do-status {
+    height: 110px;
+    width: 190px;
+}
+.to-do-status img {
+    height: 40px;
+}
+#done-span{
+    font-size: 15px !important;
+}
+#doneTasksNr{
+    font-size: 47px !important;
+}
+}
+@media(max-width:590px) {
+
 }
