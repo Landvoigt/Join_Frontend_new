@@ -108,8 +108,9 @@ function allowDrop(event) {
     event.preventDefault();
 }
 
-function moveTo(category) {
+async function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
+    await setItemTasks(tasks);
     updateTasks();
 }
 
