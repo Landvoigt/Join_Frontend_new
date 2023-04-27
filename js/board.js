@@ -67,7 +67,6 @@ function showClients(task) {
     for (let i = 0; i < clientsAmount; i++) {
         let clientNumber = task['clients'][i];
         let initials = contacts[clientNumber]['initials'];
-        console.log(initials);
         let color = contacts[clientNumber]['color'];
         changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
     }
@@ -272,13 +271,19 @@ async function deleteShownTask(id) {
         console.error('Deleting error:', e);
     }
     removeAddTaskWindow();
-    updateTasksID();
+    await updateTasksID();
     loadTasks();
 }
 
-function updateTasksID() {
-    for (let i = 0; i < tasks.length; i++) {
-        tasks[i]['id'] = i;
+async function updateTasksID() {
+    try {
+        let tasks = JSON.parse(await getItem('tasks'));
+        for (let i = 0; i < tasks.length; i++) {
+            tasks[i]['id'] = i;
+            await setItem('tasks', JSON.stringify(tasks));
+        }
+    } catch (e) {
+        console.error('Refreshing IDs error:', e);
     }
 }
 
