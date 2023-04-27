@@ -1,8 +1,3 @@
-let contacts = [];
-let letters = [];
-let contactsRandomColor;
-let lastSelectedContact;
-let firstname;
 
 async function loadContacts() {
     try {
@@ -66,18 +61,7 @@ async function renderContacts(id) {
         const firstName = contact['firstname'];
         const lastName = contact['lastname'];
         if (firstName.startsWith(id)) {
-            letterBox.innerHTML +=/*html*/`
-            <div class="single-contact-box" id="single-contact-box-${i}" onclick="openContact(${i})">
-                <div id="initials-${i}" style="background-color:${contact['color']};" class="initials">
-                    ${id}${lastName.charAt(0)}
-                </div>
-                <div class="contact-names">
-                    ${contact.firstname} ${contact.lastname} <br>
-                    <a  href="mailto:${contact['mail']}">${contact['mail']}</a>
-
-                </div>
-            </div>
-        `;
+            letterBox.innerHTML += singleContactBoxTemplate(i,id,contact,firstName,lastName)
         }
     }
 }
@@ -129,8 +113,6 @@ function openCreateContact() {
     popupBG.classList.add('dark');
     popupBG.classList.remove('light');
 }
-
-
 
 function closeCreateContact() {
     let contactPopup = document.getElementById('contacts-popup');
@@ -189,22 +171,12 @@ function openEditContact(id) {
     let initalsCircle = document.getElementById('initials-circle');
     editBG.classList.remove('d-none', 'light');
     editBG.classList.add('dark');
-    document.getElementById('edit-contact-popup').classList.add('move-in');
     initalsCircle.style = `background-color:${contacts[id]['color']};`
     initalsCircle.innerHTML = contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
-    initalsCircle.innerHTML = contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
-
     document.getElementById('edit-contact-popup').classList.remove('move-out');
     document.getElementById('edit-contact-popup').classList.add('move-in');
-
-    initalsCircle.innerHTML = contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
-
-    document.getElementById('edit-contact-popup').classList.remove('move-out');
-    document.getElementById('edit-contact-popup').classList.add('move-in');
-
     document.getElementById('edit-firstname').value = contacts[id]['firstname'];
     firstname = contacts[id]['firstname'];
-    console.log(firstname);
     document.getElementById('edit-lastname').value = contacts[id]['lastname'];
     document.getElementById('edit-mail').value = contacts[id]['mail'];
     document.getElementById('edit-phone').value = contacts[id]['phone'];
@@ -226,9 +198,7 @@ async function deleteContactByFirstname(firstname) {
         if (index !== -1) {
             contacts.splice(index, 1);
             await setItem('contacts', JSON.stringify(contacts));
-            console.log(`Contact with firstname ${firstname} has been deleted.`);
-        } else {
-            console.log(`Contact with firstname ${firstname} not found.`);
+            alert(`Contact with firstname ${firstname} has been deleted.`);
         }
     } catch (e) {
         console.error('Deleting error:', e);
@@ -242,29 +212,18 @@ async function deleteContactByFirstname(firstname) {
 async function changeFirstname() {
     debugger
     const newFirstname = document.getElementById('edit-firstname').value;
-
-    // Laden der Kontakte
     await loadContacts();
-
-    // Suchen des Index des Kontakts, dessen Vornamen (Firstname) geändert werden soll
     const index = contacts.findIndex(contact => contact.firstname === firstname);
 
     if (index !== -1) {
-        // Ändern des Daten des Kontakts
         contacts[index].firstname = newFirstname;
         contacts[index].lastname = document.getElementById('edit-lastname').value;
         contacts[index].mail = document.getElementById('edit-mail').value;
         contacts[index].phone = document.getElementById('edit-phone').value;
-
-        // Speichern der aktualisierten Kontakte im Speicher
+        
         await setItemContacts(contacts);
-
-        // Informieren des Benutzers über die erfolgreiche Änderung
-        alert(`Die Änderungen für den Kontakt ${firstname} wurden erfolgreich gespeichert.`);
-    } else {
-        // Informieren des Benutzers, wenn der Kontakt nicht gefunden wurde
-        alert(`Der Kontakt mit dem Vornamen ${firstname} wurde nicht gefunden.`);
-    }
+        alert(`Die Änderungen für den aufgerufenen Kontakt wurden erfolgreich gespeichert.`);
+    } 
     document.getElementById('card-popup').innerHTML = '';
     loadContacts();
     closeEditContact();

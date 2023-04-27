@@ -22,6 +22,12 @@ let currentPrioImageSource;
 let currentCat = "";
 let randomColor;
 let fieldsFilledCorrectly = false;
+let contacts = [];
+let letters = [];
+let contactsRandomColor;
+let lastSelectedContact;
+let firstname;
+
 
 let topics = [
     {
