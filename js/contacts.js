@@ -17,7 +17,7 @@ async function pushFirstLetter() {
     for (let i = 0; i < contacts.length; i++) {
         const name = contacts[i]['firstname'];
         const firstLetter = name.charAt(0);
-
+        
         if (!letters.includes(firstLetter)) {
             letters.push(firstLetter);
         }
@@ -35,7 +35,6 @@ async function pushFirstLetter() {
         }
         return 0;
     });
-
     renderLetters();
     createRandomColor();
 }
@@ -61,7 +60,7 @@ async function renderContacts(id) {
         const firstName = contact['firstname'];
         const lastName = contact['lastname'];
         if (firstName.startsWith(id)) {
-            letterBox.innerHTML += singleContactBoxTemplate(i,id,contact,firstName,lastName)
+            letterBox.innerHTML += singleContactBoxTemplate(i, id, contact, firstName, lastName)
         }
     }
 }
@@ -71,34 +70,13 @@ function openContact(id) {
     const lastNames = contacts[id]['lastname'];
     let contactPopup = document.getElementById('card-popup');
     contactPopup.innerHTML = '';
-    contactPopup.innerHTML +=/*html*/`
-        <div class="d-flex">
-             <div style="background-color:${contacts[id]['color']};" id="initialen-${id}" class="initials-big">
-                ${firstNames.charAt(0)}${lastNames.charAt(0)}
-            </div>
-            <div class="card-headline flex-column">
-               ${firstNames} ${lastNames}
-               <div onclick="showAddTaskWindow()" class="add-task-btn"> <img src="./img/plus_lightblue.png" alt=""><span>Add Task</span> </div>
-            </div>
-        </div>
-        <div class="contact-infos">
-             Contact Information<span class="edit-contact" onclick="openEditContact(${id})"><img src="./img/pencil.png" alt=""> Edit Contact</span>
-        </div>
-        <div class="card-mail flex-column">
-            <b>Email</b>
-            <a href="mailto:${contacts[id]['mail']}">${contacts[id]['mail']}</a>
-        </div>
-        <div style="font-size:16px; gap:15px; margin-top:22px" class="flex-column">
-            <b style="font-weight:700;">Phone</b>
-            <span>${contacts[id]['phone']}</span>
-        </div> `;
+    contactPopup.innerHTML += openContactTemplate(firstNames, lastNames, id);
 
 }
 function highlightSelectedContact(id) {
     const currentContact = document.getElementById(`single-contact-box-${id}`);
-    if (lastSelectedContact !== undefined) {//wenn lastselectedcontact nicht undefiniert wird von dem ausgewählten contact die hintergrundfarbe entfernt
+    if (lastSelectedContact !== undefined) { //wenn lastselectedcontact nicht undefiniert wird von dem ausgewählten contact die hintergrundfarbe entfernt
         lastSelectedContact.classList.remove('bg-highlight');
-
     }
     currentContact.classList.add('bg-highlight');
     lastSelectedContact = currentContact;
@@ -220,10 +198,10 @@ async function changeFirstname() {
         contacts[index].lastname = document.getElementById('edit-lastname').value;
         contacts[index].mail = document.getElementById('edit-mail').value;
         contacts[index].phone = document.getElementById('edit-phone').value;
-        
+
         await setItemContacts(contacts);
         alert(`Die Änderungen für den aufgerufenen Kontakt wurden erfolgreich gespeichert.`);
-    } 
+    }
     document.getElementById('card-popup').innerHTML = '';
     loadContacts();
     closeEditContact();
