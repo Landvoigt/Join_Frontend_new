@@ -287,16 +287,19 @@ async function updateTasksID() {
     }
 }
 
-function saveEditedTaskInformation(id) {
-    updateTaskInformations(id);
-    updateTasks(id);
-    removeAddTaskWindow();
+async function saveEditedTaskInformation(id) {
+    if (fieldsFilledCorrectly == false) {
+        checkForEmptyFields();
+    }
+    if (fieldsFilledCorrectly == true) {
+        let title = document.getElementById('editTaskTitle').value;
+        let desc = document.getElementById('editTaskDesc').value;
+        let date = document.getElementById('editTaskDate').value;
+        await updateTaskInformation(id, title, desc, date);
+    }
 }
 
-function updateTaskInformations(id) {
-    let title = document.getElementById('editTaskTitle').value;
-    let desc = document.getElementById('editTaskDesc').value;
-    let date = document.getElementById('editTaskDate').value;
+async function updateTaskInformation(id, title, desc, date) {
     tasks[id] = {
         'id': id,
         'category': currentAssasignation,
@@ -309,6 +312,9 @@ function updateTaskInformations(id) {
         'prioName': currentPrio,
         'prioImg': currentPrioImageSource,
     };
+    await setItemTasks(tasks);
+    updateTasks(id);
+    removeAddTaskWindow();
 }
 
 function filterTasks() {

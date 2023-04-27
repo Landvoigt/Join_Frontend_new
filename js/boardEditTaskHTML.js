@@ -5,7 +5,7 @@ function getEditTaskHTML(id) {
     popup.innerHTML = '';
     popup.innerHTML = `
         <div class="popup-task" onclick="stopPropagation(event)">
-        <form class="edit-task-form w-100">
+        <form class="edit-task-form w-100" onsubmit="saveEditedTaskInformation(${id}); return false">
             <img class="back-btn back-btn-none" src="./img/plus.png" onclick="removeAddTaskWindow()">
             <div class="popup-text-boxes">
                 <h4 class="addTask-form-headlines">Title</h4>
@@ -22,7 +22,7 @@ function getEditTaskHTML(id) {
                     <input type="text" class="pointer" id="editTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}" onclick="showCurrentDate('editTaskDate')" required>
                 </div>
             </div>
-            <div class="popup-text-boxes">
+            <div class="popup-text-boxes p-relative">
                 <h4 class="addTask-form-headlines">Prio</h4>
                 <div class="addTask-prio-container">
                     <div id="urgent" class="prio prio-small" onclick="addPrioColor('urgent')">
@@ -37,6 +37,12 @@ function getEditTaskHTML(id) {
                         <span>Low</span>
                         <img id="lowIcon" src="./img/prio_low.png" class="prio-img prio-img-small">
                     </div>
+                </div>
+                <div id="emptyInputPopupPrio" style="position: absolute;" class="pos-3 d-none">
+                    <div class="exclamation-box">
+                        <img src="./img/exclamation.png" class="exclamation">
+                    </div>
+                    <div class="empty-input-popup">Wähle die Priorität.</div>
                 </div>
             </div>
             <div id="contactDropdownSection" class="w-100">
@@ -61,7 +67,7 @@ function getEditTaskHTML(id) {
             </div>
             <div id="newSubtasksBox" class="new-subtask-box editTask-subtask-box"></div>
             <div class="w-100 d-flex flex-end">
-                <button class="submit-btn ok-btn" onclick="saveEditedTaskInformation(${id})">Ok ✓</button>
+                <button class="submit-btn ok-btn" type="submit">Ok ✓</button>
             </div>        
         </form>
         </div>

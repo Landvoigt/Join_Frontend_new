@@ -361,6 +361,13 @@
     width: 80px;
 }
 
+.pos-3 {
+    z-index: 10;
+    right: 30%;
+    bottom: -65px;
+    width: 190px;
+}
+
 .line-through {
     text-decoration: line-through !important;
 }

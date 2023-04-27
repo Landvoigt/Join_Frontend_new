@@ -377,11 +377,10 @@ function checkForEmptyFields() {
 }
 
 function getInputsFromForm() {
-    checkForEmptyFields();
     if (fieldsFilledCorrectly == false) {
         checkForEmptyFields();
     }
-    else {
+    if (fieldsFilledCorrectly == true) {
         let title = document.getElementById('addTask-title-input').value;
         let desc = document.getElementById('addTask-desc-input').value;
         let date = document.getElementById('addTaskDate').value;
