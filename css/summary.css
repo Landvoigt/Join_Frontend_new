@@ -191,50 +191,38 @@
 }
 @media (max-width: 1556px) {
     .name {
-        font-size: 60px !important;
-    }
-
-    #greeting {
-        font-size: 45px !important;
-    }
-
-    /* .incl-cont-side {
-        padding-right: 0;
-    } */
-}
-
-@media (max-width: 1414px) {
-    .name {
         font-size: 50px !important;
     }
 
     #greeting {
         font-size: 35px !important;
     }
+}
+
+@media (max-width: 1450px) {
+    
 
     .greeting {
-        padding-right: 70px;
+        padding-right: 0px;
     }
 
 }
 
 @media (max-width: 1374px) {
     .name {
-        font-size: 40px !important;
+        font-size: 34px !important;
     }
 
     #greeting {
-        font-size: 25px !important;
+        font-size: 21px !important;
     }
 }
 
 @media (max-width: 1300px) {
-    .greeting {
-        padding-right: 30px;
-    }
+    
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
     .greeting {
         display: none;
     }
@@ -325,6 +313,47 @@
     font-size: 47px !important;
 }
 }
-@media(max-width:590px) {
+@media(max-width:524px) {
+    .summary-headline{
+        font-size: 47px;
+    }
+    #nutshell-text{
+        font-size: 21px !important;
+        margin-top: 7px;
+    }
+    .line{
+        margin-top: 15px;
+    }
+    .headline-summary{
+        margin-bottom: 30px;
+    }
+}
+@media(max-width:483px) {
+    .single-task {
+        height: 110px;
+        width: 110px;
+    }
+    .first-row{
+        gap: 15px;
+    }
+    #nutshell-text {
+        font-size: 19px !important;
+    }
+    .headline-summary{
+        margin-right: 126px;
+        gap: 20px;
+    }
+    .second-row {
+        margin-top: 24px;
+        width: 360px;
+        height: 110px;
+    }
+    .third-row {
+        width: 360px;
+        height: 110px;
+    }
+    .to-do-status{
+        width: 170px;
+    }
 
 }
