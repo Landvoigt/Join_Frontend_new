@@ -1,4 +1,10 @@
-
+let contacts = [];
+let letters = [];
+let contactsRandomColor;
+let lastSelectedContact;
+let firstname;
+let ID;
+let mediaQuery = window.matchMedia("(max-width: 1050px)");
 async function loadContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
@@ -17,7 +23,7 @@ async function pushFirstLetter() {
     for (let i = 0; i < contacts.length; i++) {
         const name = contacts[i]['firstname'];
         const firstLetter = name.charAt(0);
-        
+
         if (!letters.includes(firstLetter)) {
             letters.push(firstLetter);
         }
@@ -66,12 +72,30 @@ async function renderContacts(id) {
 }
 function openContact(id) {
     highlightSelectedContact(id)
+    ID = id;
     let firstNames = contacts[id]['firstname'];
     const lastNames = contacts[id]['lastname'];
     let contactPopup = document.getElementById('card-popup');
     contactPopup.innerHTML = '';
     contactPopup.innerHTML += openContactTemplate(firstNames, lastNames, id);
-
+    if (mediaQuery.matches) {///Responsive Design removed Buttons
+        removeAndAddButtons();
+    }
+}
+function removeAndAddButtons() {
+    document.getElementById(`Create-Contact`).classList.add("d-none");
+    document.getElementById('contact-card').classList.add('d-flex');
+    document.getElementById('close-X').classList.add('d-flex');
+    document.getElementById('edit-delete-box').classList.add('d-flex');
+    document.getElementById('edit-contact').classList.add('d-none');
+}
+function closeContactCard() {//Responisve Design function
+    if (mediaQuery.matches) {
+        document.getElementById(`Create-Contact`).classList.remove("d-none");
+        document.getElementById('contact-card').classList.remove('d-flex');
+        document.getElementById('close-X').classList.remove('d-flex');
+        document.getElementById('edit-delete-box').classList.remove('d-flex');
+    }
 }
 function highlightSelectedContact(id) {
     const currentContact = document.getElementById(`single-contact-box-${id}`);
@@ -121,6 +145,7 @@ async function createNewContact() {
             'color': contactsRandomColor
         }
     )
+
     await setItemContacts(contacts);
     closeCreateContact();
     pushFirstLetter();
@@ -129,7 +154,7 @@ async function createNewContact() {
 }
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
-    banner.classList.remove('move-down','d-none');
+    banner.classList.remove('move-down', 'd-none');
     banner.classList.add('move-up');
     setTimeout(function () {
         banner.classList.remove('move-up');
@@ -155,6 +180,7 @@ function openEditContact(id) {
     editBG.classList.add('dark');
     initalsCircle.style = `background-color:${contacts[id]['color']};`
     initalsCircle.innerHTML = contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
+    
     document.getElementById('edit-contact-popup').classList.remove('move-out');
     document.getElementById('edit-contact-popup').classList.add('move-in');
     document.getElementById('edit-firstname').value = contacts[id]['firstname'];
@@ -173,6 +199,9 @@ function closeEditContact() {
     }, 1200);
 }
 async function deleteContactByFirstname(firstname) {
+    if (!firstname) {
+        firstname = contacts[ID]['firstname'];
+    }
     try {
         let contacts = JSON.parse(await getItem('contacts'));
         let index = contacts.findIndex(contact => contact.firstname === firstname);
@@ -185,6 +214,9 @@ async function deleteContactByFirstname(firstname) {
     } catch (e) {
         console.error('Deleting error:', e);
     }
+    if (mediaQuery.matches) {
+        closeContactCard();
+    }
     document.getElementById('card-popup').innerHTML = '';
     loadContacts();
     closeEditContact();
@@ -192,7 +224,7 @@ async function deleteContactByFirstname(firstname) {
 }
 
 async function changeFirstname() {
-    debugger
+
     const newFirstname = document.getElementById('edit-firstname').value;
     await loadContacts();
     const index = contacts.findIndex(contact => contact.firstname === firstname);

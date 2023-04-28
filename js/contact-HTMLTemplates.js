@@ -24,7 +24,7 @@ function openContactTemplate(firstNames,lastNames,id){
         </div>
     </div>
     <div class="contact-infos">
-         Contact Information<span class="edit-contact" onclick="openEditContact(${id})"><img src="./img/pencil.png" alt=""> Edit Contact</span>
+         Contact Information <span class="edit-contact" id="edit-contact" onclick="openEditContact(${id})"><img src="./img/pencil.png" alt=""> Edit Contact</span>
     </div>
     <div class="card-mail flex-column">
         <b>Email</b>

@@ -461,6 +461,30 @@
     font-size: 27px;
     color: white;
 }
+.close-X{
+    position: fixed;
+    top: 120px;
+    right: 30px;
+    height: 30px;
+    display: none;
+    cursor: pointer;
+}
+.edit-and-delete-box-2{
+    position: absolute;
+    bottom: 150px;
+    right: 50px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+#delete-btn-2{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#edit-btn-2{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
 @media(max-width:1483px){
     .contact-card{
         padding-left: 50px;
@@ -502,6 +526,7 @@
     .contact-list-scrollable-div{
         height: 80vh;
         width: 100%;
+        min-width: unset;
     }
     #contactsPage{
         padding-left: 0;
@@ -566,6 +591,11 @@
     border-radius: 100% !important;
     background-color: #D1D1D1 !important;
 }
+.contact-card{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
 }
 @media(max-width:625px){
     .contacts-list{
@@ -576,4 +606,8 @@
         right: 20px;
     }
 }
-  
+@media(max-width:505px){
+    .contacts-popup{
+        width: 43vb;
+    }
+}

@@ -13,7 +13,7 @@ body {
 }
 
 .d-flex {
-    display: flex;
+    display: flex !important;
 }
 
 .flex-end {
@@ -169,9 +169,7 @@ b {
         padding-bottom: 65px;
     }
 
-    .popup-window {
-        /* padding-top: 89px; */
-    }
+    
 }
 
 @media (max-width: 600px) {

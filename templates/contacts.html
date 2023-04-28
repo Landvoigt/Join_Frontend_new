@@ -94,6 +94,11 @@
     </div>
 
     <div id="contact-card" class="contact-card flex-column ">
+        <img id="close-X" onclick="closeContactCard()" class="close-X" src="./img/close.png" alt="">
+        <div class="edit-and-delete-box-2" id="edit-delete-box">
+            <img class="delete-btn" id="delete-btn-2" src="./img/delete.png" onclick="deleteContactByFirstname(firstname)">
+            <img class="edit-btn" id="edit-btn-2" src="./img/pencil_white.png" onclick="openEditContact(ID)">
+        </div>
         <div class="contacts-headline">
             <span class="summary-headline">
                 Contacts
@@ -112,5 +117,5 @@
         
         <div id="created-successfully-logo" class="created-successfully-logo d-none">Contact Successfully Created</div>
     </div>
-    <div onclick="openCreateContact()" class="add-contact">New Contact <img src="./img/Capa 1.png" alt=""></div>
+    <div onclick="openCreateContact()" id="Create-Contact" class="add-contact">New Contact <img src="./img/Capa 1.png" alt=""></div>
 </div>
