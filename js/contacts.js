@@ -45,7 +45,7 @@ function renderLetters() {
     for (let j = 0; j < letters.length; j++) {
         const letter = letters[j];
         contactsList.innerHTML +=/*html*/`
-        <div id="${letter}" class="flex-column">
+        <div id="${letter}" class="flex-column width-500">
             <div class="first-letter">${letter}</div>
         </div>`;
         renderContacts(letter)
@@ -129,12 +129,16 @@ async function createNewContact() {
 }
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
-    banner.classList.remove('move-down');
+    banner.classList.remove('move-down','d-none');
     banner.classList.add('move-up');
     setTimeout(function () {
         banner.classList.remove('move-up');
         banner.classList.add('move-down');
     }, 1500);
+    setTimeout(function () {
+        banner.classList.add('d-none');
+    }, 2000);
+
 }
 function resetInputValue() {
     let addContactForms = document.querySelectorAll('.add-contact-form');
