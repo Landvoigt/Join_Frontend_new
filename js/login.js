@@ -60,8 +60,10 @@ function loginTemplate() {
                     <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
                 </div>
                 <div class="loginFooter">
+                  <div class="loginFooterLeft">
                     <input class="loginCheckbox margin-left-rifht-5 margin pointer" type="checkbox"> 
                     <p class="rememberMe margin-left-rifht-5 margin">Remember me</p>
+                  </div>  
                     <p class="forgotPass margin-left-rifht-5 margin pointer" onclick="newPassword()">Forgot my Password</p> 
                 </div>
             </div>

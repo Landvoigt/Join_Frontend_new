@@ -306,13 +306,39 @@ body {
     justify-content: center;
 }
 
+.loginFooterLeft {
+    display: flex;
+}
+
 @media (max-width: 1050px) {
+    .logoImage {
+        height: 100px;
+        width: 70px;
+    }
+}
+
+@media (max-width: 680px) {
+    .logoImage {
+        height: 100px;
+        width: 70px;
+    }
+    .loginHeaderRight {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        margin-bottom: 30px;
+        width: 105%;
+    }
     .loginForm {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 80%;
+        height: 60%;
         width: 90%;
         min-width: 0;
     }
@@ -323,9 +349,12 @@ body {
     }
     .loginInputFields {
         width: 90%;
+        display: flex;
+        justify-content: center;
     }
     .loginE-Mail {
         width: 90%;
+        margin-right: 0 !important;
     }
     .loginFooter {
         display: flex;
@@ -358,8 +387,17 @@ body {
     }
     .forgotPass {
         font-size: 14px;
+        margin-right: 15px !important;
     }
-    .loginHeader {
-        display: none;
+    .backImgSignUp {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+    }
+    form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
