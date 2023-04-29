@@ -165,6 +165,8 @@
 
     .header-content {
         padding: 25px;
+        padding-right: 75px;
+        padding-left: 75px;
     }
 
     .spanHeader {
@@ -190,5 +192,13 @@
 
     .header-content {
         z-index: 15;
+    }
+}
+
+@media (max-width: 550px) {
+.header-content {
+    padding: 25px;
+    padding-right: 50px;
+    padding-left: 50px;
     }
 }

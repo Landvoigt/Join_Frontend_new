@@ -305,3 +305,61 @@ body {
     display: flex;
     justify-content: center;
 }
+
+@media (max-width: 1050px) {
+    .loginForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+        width: 90%;
+        min-width: 0;
+    }
+    .loginBody {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .loginInputFields {
+        width: 90%;
+    }
+    .loginE-Mail {
+        width: 90%;
+    }
+    .loginFooter {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .cardHeaderContainer {
+        margin-top: 0;
+    }
+    .loginBtn {
+        font-size: 18px;
+        padding: 10px 40px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .guestBtn {
+        font-size: 18px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .loginFooterBtns {
+        justify-content: space-evenly;
+        width: 90%;
+    }
+    .loginH1 {
+        font-size: 44px;
+    }
+    .rememberMe {
+        font-size: 14px;
+    }
+    .forgotPass {
+        font-size: 14px;
+    }
+    .loginHeader {
+        display: none;
+    }
+}
