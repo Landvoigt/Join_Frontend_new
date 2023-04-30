@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="edit-contact-bg d-none" id="edit-contact-bg">
-        <div class="contacts-popup" id="edit-contact-popup">
+        <div class="contacts-popup-2" id="edit-contact-popup">
             <div class="contacts-popup-left">
                 <div class="flex-column" style="align-items: flex-start; gap: 12px; font-size: 27px;color: white;">
                     <img src="./img/join-for-add-contacts.png" alt="">
@@ -56,7 +56,7 @@
                     <div id="initials-circle" class="initials-big">
 
                     </div>
-                    <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
+                    <form class="add-contact-form-container-2" onsubmit="createNewContact(); return false">
                         <div style="position: relative;">
                             <input required class="add-contact-form" id="edit-firstname" placeholder="Firstname"
                                 type="text">
@@ -95,7 +95,7 @@
 
     <div id="contact-card" class="contact-card flex-column ">
         <img id="close-X" onclick="closeContactCard()" class="close-X" src="./img/close.png" alt="">
-        <div class="edit-and-delete-box-2" id="edit-delete-box">
+        <div class="edit-and-delete-box-2 d-none" id="edit-delete-box">
             <img class="delete-btn" id="delete-btn-2" src="./img/delete.png" onclick="deleteContactByFirstname(firstname)">
             <img class="edit-btn" id="edit-btn-2" src="./img/pencil_white.png" onclick="openEditContact(ID)">
         </div>

@@ -45,7 +45,7 @@ async function visibilityPass() {
 }
 
 function loginTemplate() {
-  return `
+  return /*html*/`
             <div class="cardHeaderContainer">
                 <h1 class="loginH1">Log In</h1>
                 <span class="underlineForH1"></span>

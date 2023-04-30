@@ -86,6 +86,7 @@ function removeAndAddButtons() {
     document.getElementById(`Create-Contact`).classList.add("d-none");
     document.getElementById('contact-card').classList.add('d-flex');
     document.getElementById('close-X').classList.add('d-flex');
+    document.getElementById('edit-delete-box').classList.remove('d-none');
     document.getElementById('edit-delete-box').classList.add('d-flex');
     document.getElementById('edit-contact').classList.add('d-none');
 }

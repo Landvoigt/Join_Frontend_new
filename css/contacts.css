@@ -260,6 +260,14 @@
     border-radius: 29px;
     right: -90%;
 }
+.contacts-popup-2{
+    position: fixed;
+    height: 566px;
+    background-color: #fff;
+    display: flex;
+    border-radius: 29px;
+    right: -90%;
+}
 .move-in{
     animation: moveIn 1.5s ease-in-out forwards;
 }
@@ -327,7 +335,16 @@
     padding-left: 70px;
     padding-right: 70px;
 }
-
+.add-contact-form-container-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    gap: 49px;
+    padding-left: 70px;
+    padding-right: 70px;
+}
 .add-contact-img {
     display: flex;
     justify-content: center;
@@ -342,8 +359,9 @@
     right: 17px;
 }
 .add-btn-container{
-    gap: 25px;
+    gap: 55px;
     display: flex;
+    margin-top: 50px;
 }
 
 #mail-icon {
@@ -421,6 +439,7 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
+    flex-direction: column;
 }
 .contacts-popup-right-content{
     display: flex;
@@ -466,14 +485,12 @@
     top: 120px;
     right: 30px;
     height: 30px;
-    display: none;
     cursor: pointer;
 }
 .edit-and-delete-box-2{
     position: absolute;
     bottom: 150px;
     right: 50px;
-    display: none;
     flex-direction: column;
     gap: 10px;
 }
@@ -513,12 +530,26 @@
         gap: 41px;
         font-size: 19px;
     }
+    .contacts-popup-2{
+        width: 99%;
+    }
+}
+@media (min-width:1050px){
+    .edit-and-delete-box-2{
+        display: none !important;
+    }
+    .close-X {
+        display: none !important;
+    }
 }
 @media(max-width:1050px){
     .contact-card{
         display: none;
     }
-  
+    .add-btn-container{
+        margin-top: 30px;
+    }
+    
     .contacts-list{
         align-items: center;
         width: 100%;
@@ -546,16 +577,28 @@
    }
    .contacts-popup{
     margin-top: 67px;
-    display: flex;
-    width: 55vb;
+    width: 80%;
     flex-direction: column;
     height: 88vh;
    }
+   .contacts-popup-2{
+    margin-top: 67px;
+    width: 90%;
+    flex-direction: column;
+    height: 88vh;
+    }
+    #initials-circle{
+        margin-left: 0;
+        margin-top: -100px;
+    }
    .contacts-popup-right{
     flex-direction: column;
     justify-content: center;
     align-items: center;
    }
+   .contacts-popup-right-content{
+    flex-direction: column;
+    }
    .add-contact-img{
     padding-left: unset;
     margin-top: -56px;
@@ -584,6 +627,10 @@
     gap: 30px;
     margin-top: 40px;
 }
+.add-contact-form-container-2{
+    gap: 30px;
+    padding-top: 80px;
+}
 .cancel-btn{
     display: none;
 } 
@@ -609,5 +656,8 @@
 @media(max-width:505px){
     .contacts-popup{
         width: 43vb;
+    }
+    .add-contact-form {
+        width: 290px;
     }
 }
