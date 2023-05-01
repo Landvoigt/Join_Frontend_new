@@ -1,6 +1,8 @@
 let inputPass = false;
 
-let currentUser = [];
+const CURRENT_USER_KEY = 'currentUser';
+
+let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
 
 async function renderLogin() {
   setTimeout(1000);
@@ -230,9 +232,22 @@ function login() {
     return;
   }
 
-  alert('Login successful!');     /* weiterleiten zum Board */
+  alert('Login successful!');
+  createCurrentUser(user);
+  forwardToMainPage();
+}
+
+function createCurrentUser(user) {
+  currentUser.push(user);
+  localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
+  console.log(currentUser);
 }
 
 function forwardToMainPage() {
   window.location.href = "../mainpage.html";
+}
+
+function logOut() {
+  localStorage.removeItem(CURRENT_USER_KEY);
+  window.location.href = "../index.html";
 }
