@@ -142,6 +142,9 @@
     color: #CDCDCD;
     border: unset;
     z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .overlay {
@@ -202,3 +205,15 @@
     padding-left: 50px;
     }
 }
+
+@media (min-width: 1051px) {
+    .legalNoticeResponsive {
+        display: none;
+    }
+    .privacyPolicyResponsive {
+        display: none;
+    }
+    .helpResponsive {
+        display: none;
+    }
+    }
