@@ -6,12 +6,13 @@ let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
 let currentUserForNewPassword = [];
 
 async function renderLogin() {
-  setTimeout(1000);
-  let card = document.getElementById('loginForm');
-  card.innerHTML = loginTemplate();
-  let header = document.getElementById('loginHeaderRight');
-  header.classList.remove("d-none");
-  loadUsers();
+  setTimeout(function() {
+    let card = document.getElementById('loginForm');
+    card.innerHTML = loginTemplate();
+    let header = document.getElementById('loginHeaderRight');
+    header.classList.remove("d-none");
+    loadUsers();
+  }, 500);
 }
 
 async function changePWSymbol() {
