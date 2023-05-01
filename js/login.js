@@ -3,6 +3,7 @@ let inputPass = false;
 const CURRENT_USER_KEY = 'currentUser';
 
 let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
+let currentUserForNewPassword = [];
 
 async function renderLogin() {
   setTimeout(1000);
@@ -158,7 +159,7 @@ function resetPassword() {
     return;
   }
 
-  currentUser.push(user);
+  currentUserForNewPassword.push(user);
   card.innerHTML = resetPasswordTemplate();
 }
 
@@ -176,11 +177,11 @@ function resetPasswordTemplate() {
         <span class="subheaderNewPassword">Change your account password</span>
       </div>
       <div class="loginInputField">
-        <input class="loginE-Mail" type="password" required id="passwordReset" placeholder="New password" onkeydown="changePWSymbol()">
+        <input class="loginE-Mail" type="password" required id="passwordReset" placeholder="New password">
         <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
       </div>
       <div class="loginInputField">
-        <input class="loginE-Mail" type="password" required id="passwordResetConfirm" placeholder="Confirm password" onkeydown="changePWSymbol()">
+        <input class="loginE-Mail" type="password" required id="passwordResetConfirm" placeholder="Confirm password">
         <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
       </div>
     </div>
@@ -191,47 +192,40 @@ function resetPasswordTemplate() {
 }
 
 async function updatePassword() {
-  let newPassword = '';
-  let newPasswordConfirmation = '';
+  let newPassword = document.getElementById('passwordReset').value;
+  let newPasswordConfirmation = document.getElementById('passwordResetConfirm').value;
 
-  while (newPassword !== newPasswordConfirmation) {
-    newPassword = document.getElementById('passwordReset');
-    newPasswordConfirmation = document.getElementById('passwordResetConfirm');
-    if (newPassword !== newPasswordConfirmation) {
+  if (newPassword !== newPasswordConfirmation) {
       alert('Passwords do not match. Please try again.');
-    }
   }
 
-  // Update the user's password
-  currentUser.password = newPassword;
-
-  // Save the updated user information
-  //await setItem('users', JSON.stringify(users));
-
-  alert('Your password has been reset.');
+  const userIndex = users.findIndex(user => user.email === currentUserForNewPassword[0].email);
+  if (userIndex > -1) {
+    users[userIndex].password = newPassword;
+    await setItem('users', JSON.stringify(users));
+    alert('Your password has been reset.');
+    currentUserForNewPassword = [];
+    renderLogin();
+  } 
 }
 
 
 function login() {
   let loginBtn = document.getElementById('loginBtn');
   loginBtn.disabled = true;
-
   let email = document.getElementById('emailInput').value;
   let password = document.getElementById('passwordInput').value;
-
   let user = users.find((user) => user.email === email);
   if (!user) {
     alert('User not found');
     loginBtn.disabled = false;
     return;
   }
-
   if (password !== user.password) {
     alert('Invalid password');
     loginBtn.disabled = false;
     return;
   }
-
   alert('Login successful!');
   createCurrentUser(user);
   forwardToMainPage();
