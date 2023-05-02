@@ -181,6 +181,7 @@ textarea:focus-visible {
     font-weight: 600;
     color: rgba(0, 0, 59, 0.8);
     cursor: pointer;
+    transition: 150ms all ease-in-out;
 }
 
 .add-task-button {
@@ -199,6 +200,7 @@ textarea:focus-visible {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 150ms all ease-in-out;
 }
 
 .submit-btn {
@@ -214,6 +216,7 @@ textarea:focus-visible {
     cursor: pointer;
     background-color: #2a3647 !important;
     color: white !important;
+    transition: 150ms all ease-in-out;
 }
 
 .submit-btn:hover {
@@ -748,7 +751,7 @@ label input {
     }
 
     .addTask-commit-buttons {
-        right: 35px;
+        right: 35px !important;
     }
 }
 
