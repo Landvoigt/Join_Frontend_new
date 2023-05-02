@@ -5,14 +5,18 @@ const CURRENT_USER_KEY = 'currentUser';
 let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
 let currentUserForNewPassword = [];
 
-async function renderLogin() {
+async function init() {
   setTimeout(function() {
+    renderLogin()
+  }, 500);
+}
+
+async function renderLogin() {
     let card = document.getElementById('loginForm');
     card.innerHTML = loginTemplate();
     let header = document.getElementById('loginHeaderRight');
     header.classList.remove("d-none");
-    loadUsers();
-  }, 500);
+    await loadUsers();
 }
 
 async function changePWSymbol() {
@@ -152,9 +156,9 @@ function resetPassword() {
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
-
   let email = document.getElementById('resetEmail').value;
   let user = users.find(user => user.email === email);
+  
   if (!user) {
     alert('User not found');
     return;
@@ -204,8 +208,8 @@ async function updatePassword() {
   if (userIndex > -1) {
     users[userIndex].password = newPassword;
     await setItem('users', JSON.stringify(users));
-    alert('Your password has been reset.');
     currentUserForNewPassword = [];
+    alert('Your password has been reset.');
     renderLogin();
   } 
 }
