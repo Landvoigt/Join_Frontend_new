@@ -296,6 +296,10 @@ function createNewSubtask() {
     `;
     getFocusOnInputField('subtaskInput');
 }
+function showSuccessfullyCreatedLogo(){
+    createdSuccessfully();
+    document.getElementById('created-successfully-logo').innerHTML='Task successfully Created !';
+}
 
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
@@ -406,6 +410,7 @@ async function addTask(title, desc, date) {
     await setItemTasks(tasks);
     clearVariables();
     showTaskAddedPopup();
+    showSuccessfullyCreatedLogo();
 }
 
 function showTaskAddedPopup() {

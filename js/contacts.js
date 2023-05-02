@@ -155,6 +155,7 @@ async function createNewContact() {
 }
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
+    banner.innerHTML='Contact Successfully Created';
     banner.classList.remove('move-down', 'd-none');
     banner.classList.add('move-up');
     setTimeout(function () {

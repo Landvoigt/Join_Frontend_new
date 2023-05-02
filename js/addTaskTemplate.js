@@ -72,7 +72,7 @@ function getAddTaskHTML() {
                     </div>
                     <div style="position: relative;" onclick="createNewSubtask()">
                         <input type="text" id="subtaskInput" placeholder="Add new subtask">
-                        <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+                        <img class="subtask-plus-icon pointer" src="./img/plus.png"> </img>
                     </div>
                 </div>
                 <div id="newSubtasksBox" class="new-subtask-box"></div>
