@@ -630,7 +630,7 @@
     }
 
     .contact-list-scrollable-div {
-        height: 80vh;
+        height: calc(100vh - 192px);
         width: 100%;
         min-width: unset;
     }
