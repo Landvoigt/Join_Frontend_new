@@ -29,7 +29,7 @@ function getAddTaskHTML() {
                         Select contacts to assign
                     </div>
                     <div class="category-selection" id="contactsSelection">
-                        <label onclick="createNewContactInAddTask()" class="label-hover">
+                        <label onclick="openCreateContact()" class="label-hover">
                             <span>Create new contact</span>
                             <img src="./img/add_user.png" class="addTask-new-contact-img">
                         </label>

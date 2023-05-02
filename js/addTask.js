@@ -21,15 +21,7 @@ function addPrioColor(id) {
         }
     }
 }
-function openCreateContact() {
-    let popupBG = document.getElementById('create-contact-bg');
-    let contactsForm = document.getElementById('contacts-popup');
-    popupBG.classList.remove('d-none');
-    contactsForm.classList.remove('move-out');
-    contactsForm.classList.add('move-in');
-    popupBG.classList.add('dark');
-    popupBG.classList.remove('light');
-}
+
 
 function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
     let element = document.getElementById(shownPrio);
