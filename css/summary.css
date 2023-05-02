@@ -355,5 +355,7 @@
     .to-do-status{
         width: 170px;
     }
-
+    .to-do-status:hover,.single-task:hover, .second-row:hover{
+        transform: none;
+    }
 }

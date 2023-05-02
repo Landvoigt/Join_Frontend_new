@@ -9,6 +9,7 @@ function loadDate() {
     });
     dateContainer.innerHTML = formattedDate;
     greetAccordingToTime(currenthour);
+    setUsernameToGreet()
 }
 
 function greetAccordingToTime(currenthour) { 
@@ -22,11 +23,12 @@ function greetAccordingToTime(currenthour) {
         document.getElementById('greeting').innerHTML = 'Good Night';
     }
 }
-
-/// gerne kürzer und einfacher machen wenn jemand weiß wie :) gruß Tim 
-// hab's versucht :) gruß Kaser
-// aja geht ja auch mit filter funktion danke nice :)
-
+function setUsernameToGreet(){
+    if(currentUser){
+       document.getElementById('userFirstName').innerHTML=`${currentUser[0]['name']}`;
+    }
+    
+}
 function checkForTaskNumbers() {
     let allTasks = document.getElementById('allTasksNr');
     const toDos = tasks.filter(t => t.category === 'toDo');
