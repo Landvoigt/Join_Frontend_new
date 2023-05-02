@@ -42,7 +42,7 @@ function showAddTaskWindow() {
     document.getElementById('boardPage').classList.add('of-hidden');
     popupWindow.innerHTML = `
         <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
-            <img class="back-btn" src="./img/plus.png" onclick="removeAddTaskWindow()">
+            <img class="back-btn-popup" src="./img/plus.png" onclick="removeAddTaskWindow()">
         </div>
         `;
     let popupBox = document.getElementById('popupContainer');
@@ -316,7 +316,7 @@ function renderSubtasks() {
 function getSubtaskBoxHTML(i, text, checkmark) {
     return `
     <div class="addTask-subtask-container">
-        <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus('${i}')" ${checkmark}>
+        <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus(${i})" ${checkmark}>
         <label class="subtask-text" for="editTaskSubtask${i}">${text}</label>
     </div>
     `;
@@ -347,12 +347,11 @@ function clearSubtaskSection() {
 }
 
 function changeSubtaskStatus(i) {
-    let checkbox = document.getElementById(`subtask${i}`);
-    if (checkbox.checked === true) {
-        currentSubtasks[i]['status'] = true;
+    if (currentSubtasks[i]['status'] === true) {
+        currentSubtasks[i]['status'] = false;
     }
     else {
-        currentSubtasks[i]['status'] = false;
+        currentSubtasks[i]['status'] = true;
     }
 }
 
@@ -423,7 +422,7 @@ function clearVariables() {
     currentCat = "";
     currentPrio = "";
     currentPrioImageSource = "";
-    currentAssignedClients = "";
-    currentSubtasks = "";
+    currentAssignedClients = [];
+    currentSubtasks = [];
     fieldsFilledCorrectly = false;
 }

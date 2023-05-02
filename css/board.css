@@ -424,7 +424,6 @@
     }
 
     .task-box {
-        min-width: 35%;
         width: 35%;
         margin-bottom: 0;
     }
@@ -467,9 +466,7 @@
     }
 
     .edit-task-form {
-        padding: 65px;
-        padding-top: 144px;
-        padding-bottom: 44px;
+        width: 100%;
     }
 }
 

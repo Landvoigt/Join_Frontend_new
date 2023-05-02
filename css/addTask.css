@@ -675,11 +675,18 @@ label input {
         border-radius: 0;
         margin-left: 0;
         padding-top: 135px;
+        padding-left: 8%;
+        padding-right: 8%;
     }
 
     .back-btn {
         top: 140px;
         right: 65px;
+    }
+
+    .back-btn-popup {
+        top: 5px !important;
+        right: -8px !important;
     }
 
     .back-arrow-responsive-popup {

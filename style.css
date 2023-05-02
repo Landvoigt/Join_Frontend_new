@@ -166,10 +166,8 @@ b {
         overflow: visible;
         padding-left: 8%;
         padding-right: 8%;
-        padding-bottom: 65px;
+        padding-bottom: 165px;
     }
-
-    
 }
 
 @media (max-width: 600px) {
