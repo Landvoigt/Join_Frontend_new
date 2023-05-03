@@ -43,7 +43,7 @@ function showAddTaskWindow() {
     document.getElementById('boardPage').classList.add('of-hidden');
     popupWindow.innerHTML = `
         <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
-            <img class="back-btn-popup" src="./img/plus.png" onclick="removeAddTaskWindow()">
+            <img class="back-btn-addTask-popup" src="./img/plus.png" onclick="removeAddTaskWindow()">
         </div>
         `;
     let popupBox = document.getElementById('popupContainer');
@@ -174,20 +174,20 @@ function removeAddTaskWindow() {
     document.getElementById('boardPage').classList.remove('of-hidden');
 }
 
-function createNewContactInAddTask() {
-    let dropdown = document.getElementById('contactDropdownSection');
-    dropdown.innerHTML = `
-        <h4 class="addTask-form-headlines">Subtasks</h4>
-        <div class="dropdown grey-text">
-            <input id="new-contact-input" class="new-cat-input" type="email" placeholder="Contact email" required>
-            <div class="create-cat-icon-box">
-                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="">
-                <div class="gap-line"></div>
-                <img src="./img/check_mark.png" class="create-category-icon" onclick="">
-            </div>
-        </div>
-    `;
-}
+// function createNewContactInAddTask() {
+//     let dropdown = document.getElementById('contactDropdownSection');
+//     dropdown.innerHTML = `
+//         <h4 class="addTask-form-headlines">Subtasks</h4>
+//         <div class="dropdown grey-text">
+//             <input id="new-contact-input" class="new-cat-input" type="email" placeholder="Contact email" required>
+//             <div class="create-cat-icon-box">
+//                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="">
+//                 <div class="gap-line"></div>
+//                 <img src="./img/check_mark.png" class="create-category-icon" onclick="">
+//             </div>
+//         </div>
+//     `;
+// }
 
 function createNewCategoryInAddTask() {
     currentCat = '';

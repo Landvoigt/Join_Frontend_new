@@ -234,7 +234,7 @@
 .create-contact-bg {
     background-color: rgba(0, 0, 0, 0.0);
     position: fixed;
-    z-index: 4;
+    z-index: 104;
     top: 0;
     right: 0;
     bottom: 0;

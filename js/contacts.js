@@ -152,6 +152,8 @@ async function createNewContact() {
     pushFirstLetter();
     resetInputValue();
     createdSuccessfully();
+    document.getElementById('contactsSelection').innerHTML = '';
+    generateContacts();
 }
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
