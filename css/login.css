@@ -315,12 +315,8 @@ body {
         height: 100px;
         width: 70px;
     }
-}
-
-@media (max-width: 1150px) {
-    .logoImage {
-        height: 100px;
-        width: 70px;
+    .signupHeaderContainer {
+        position: relative;
     }
     .loginHeaderRight {
         position: fixed;
@@ -391,18 +387,16 @@ body {
     }
     .backImgSignUp {
         position: absolute;
-        top: 5%;
-        left: 5%;
+        top: 10%;
+        left: 0%;
     }
 
-     /* bitte eigene Klasse  */
-
-    /* form {
+    .signUpForm {
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-    } */
+    } 
 
 
     .backImgContainer {
@@ -414,5 +408,12 @@ body {
         position: absolute;
         top: 22%;
         left: 9%;
+    }
+}
+
+@media (max-width: 405px) {
+    .backImgSignUp {
+        top: 25%;
+        left: 5%;
     }
 }

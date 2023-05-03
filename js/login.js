@@ -91,7 +91,7 @@ function signUp() {
 
 function signUpTemplate() {
   return `
-          <form onsubmit="register(); return false;">
+          <form class="signUpForm" onsubmit="register(); return false;">
             <div class="signupHeaderContainer">
               <div class="backImgSignUp">  
                 <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
