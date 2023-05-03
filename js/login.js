@@ -91,7 +91,7 @@ function signUp() {
 
 function signUpTemplate() {
   return `
-          <form class="signUpForm" onsubmit="register(); return false;">
+          <form onsubmit="register(); return false;">
             <div class="signupHeaderContainer">
               <div class="backImgSignUp">  
                 <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
@@ -209,9 +209,13 @@ async function updatePassword() {
     users[userIndex].password = newPassword;
     await setItem('users', JSON.stringify(users));
     currentUserForNewPassword = [];
-    alert('Your password has been reset.');
+    showSuccessfullyResettedPassword()
     renderLogin();
   } 
+}
+function showSuccessfullyResettedPassword(){
+  createdSuccessfully();
+  document.getElementById('created-successfully-logo').innerHTML='Your password has been reset !';
 }
 
 

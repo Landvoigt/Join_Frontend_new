@@ -327,6 +327,9 @@
     .headline-summary{
         margin-bottom: 30px;
     }
+    .to-do-status:hover,.single-task:hover, .second-row:hover{
+        transform: none;
+    }
 }
 @media(max-width:483px) {
     .single-task {
@@ -355,7 +358,5 @@
     .to-do-status{
         width: 170px;
     }
-    .to-do-status:hover,.single-task:hover, .second-row:hover{
-        transform: none;
-    }
+    
 }

@@ -394,12 +394,17 @@ body {
         top: 5%;
         left: 5%;
     }
-    form {
+
+     /* bitte eigene Klasse  */
+
+    /* form {
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+    } */
+
+
     .backImgContainer {
         position: absolute;
         top: 22%;
