@@ -209,9 +209,13 @@ async function updatePassword() {
     users[userIndex].password = newPassword;
     await setItem('users', JSON.stringify(users));
     currentUserForNewPassword = [];
-    alert('Your password has been reset.');
+    showSuccessfullyResettedPassword()
     renderLogin();
   } 
+}
+function showSuccessfullyResettedPassword(){
+  createdSuccessfully();
+  document.getElementById('created-successfully-logo').innerHTML='Your password has been reset !';
 }
 
 

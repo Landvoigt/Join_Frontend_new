@@ -603,6 +603,9 @@
     .contacts-popup-2 {
         width: 99%;
     }
+    .contacts-popup{
+        width: 98%;
+    }
 }
 
 @media (min-width:1050px) {
