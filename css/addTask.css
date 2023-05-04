@@ -604,7 +604,7 @@ label input {
     width: 190px;
 }
 
-.back-btn-addTask-popup{
+.back-btn-addTask-popup {
     position: absolute;
     z-index: 77;
     top: 35px;
@@ -699,9 +699,9 @@ label input {
         right: 65px;
     }
 
-    .back-btn-popup {
-        top: 5px !important;
-        right: -8px !important;
+    .back-btn-addTask-popup {
+        top: 142px;
+        right: 65px;
     }
 
     .back-arrow-responsive-popup {
@@ -716,11 +716,10 @@ label input {
     }
 
     .addTask-commit-buttons {
-        z-index: 22;
-        position: fixed;
-        top: 17px;
-        right: 65px;
-        margin-top: 0;
+        position: inherit;
+        z-index: 1;
+        right: 8%;
+        bottom: 0;
     }
 
     .pos-1 {
@@ -754,6 +753,10 @@ label input {
 
     .back-btn {
         top: 140px;
+        right: 35px;
+    }
+
+    .back-btn-addTask-popup {
         right: 35px;
     }
 
