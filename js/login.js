@@ -1,24 +1,53 @@
+/**
+ * Whether or not the password input field is visible.
+ * @type {boolean}
+ */
 let inputPass = false;
 
+/**
+ * The key used to store the current user in localStorage.
+ * @type {string}
+ */
 const CURRENT_USER_KEY = 'currentUser';
 
+/**
+ * The current user, obtained from localStorage, or an empty array if no user is found.
+ * @type {Array.<Object>}
+ */
 let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
+
+/**
+ * An array containing the current user when they request to change their password.
+ * @type {Array.<Object>}
+ */
 let currentUserForNewPassword = [];
 
+/**
+ * Initializes the app by rendering the login form after a 500ms delay.
+ * @async
+ */
 async function init() {
   setTimeout(function() {
     renderLogin()
   }, 500);
 }
 
+/**
+ * Renders the login form, loading user data beforehand.
+ * @async
+ */
 async function renderLogin() {
-    let card = document.getElementById('loginForm');
-    card.innerHTML = loginTemplate();
-    let header = document.getElementById('loginHeaderRight');
-    header.classList.remove("d-none");
-    await loadUsers();
+  let card = document.getElementById('loginForm');
+  card.innerHTML = loginTemplate();
+  let header = document.getElementById('loginHeaderRight');
+  header.classList.remove("d-none");
+  await loadUsers();
 }
 
+/**
+ * Changes the password input field icon when the user types or clears their password.
+ * @async
+ */
 async function changePWSymbol() {
   let InputField = document.getElementById("passwordInput");
   let Symbol = document.getElementById("passwordImg");
@@ -38,6 +67,10 @@ async function changePWSymbol() {
   }
 }
 
+/**
+ * Toggles the visibility of the password input field.
+ * @async
+ */
 async function visibilityPass() {
   let password = document.getElementById("passwordInput");
   let passSymbol = document.getElementById("passwordImg");
@@ -51,6 +84,11 @@ async function visibilityPass() {
     }
   }
 }
+
+/**
+ * Returns the HTML template for the login form.
+ * @returns {string} The HTML template for the login form.
+ */
 
 function loginTemplate() {
   return /*html*/`
@@ -82,12 +120,22 @@ function loginTemplate() {
   `;
 }
 
+/**
+ * Changes the view to the sign up form
+ * @function
+ */
 function signUp() {
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
   card.innerHTML = signUpTemplate();
 }
+
+/**
+ * Generates the HTML template for the sign up form
+ * @function
+ * @returns {string} - The sign up form HTML template
+ */
 
 function signUpTemplate() {
   return `
@@ -120,13 +168,22 @@ function signUpTemplate() {
           </form>
   `;
 }
-
+/**
+ * Changes the view to the new password form
+ * @function
+ */
 function newPassword() {
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
   card.innerHTML = newPasswordTemplate();
 }
+
+/**
+ * Generates the HTML template for the new password form
+ * @function
+ * @returns {string} - The new password form HTML template
+ */
 
 function newPasswordTemplate() {
   return `
@@ -152,13 +209,17 @@ function newPasswordTemplate() {
   `;
 }
 
+/**
+ * Changes the view to the reset password form
+ * @function
+ */
 function resetPassword() {
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
   let email = document.getElementById('resetEmail').value;
   let user = users.find(user => user.email === email);
-  
+
   if (!user) {
     alert('User not found');
     return;
@@ -168,6 +229,11 @@ function resetPassword() {
   card.innerHTML = resetPasswordTemplate();
 }
 
+/**
+ * Generates the HTML template for the reset password form
+ * @function
+ * @returns {string} - The reset password form HTML template
+ */
 function resetPasswordTemplate() {
   return `
     <div class="signupHeaderContainer">
@@ -196,6 +262,11 @@ function resetPasswordTemplate() {
   `;
 }
 
+/**
+ * Updates the user's password and saves it to the database
+ * @function
+ * @async
+ */
 async function updatePassword() {
   let newPassword = document.getElementById('passwordReset').value;
   let newPasswordConfirmation = document.getElementById('passwordResetConfirm').value;
@@ -213,12 +284,20 @@ async function updatePassword() {
     renderLogin();
   } 
 }
+
+/**
+ * Displays a success message when the user's password has been reset.
+ * @returns {void}
+ */
 function showSuccessfullyResettedPassword(){
   createdSuccessfully();
-  document.getElementById('created-successfully-logo').innerHTML='Your password has been reset !';
+  document.getElementById('created-successfully-logo').innerHTML='Your password has been reset!';
 }
 
-
+/**
+ * Logs the user into the application.
+ * @returns {void}
+ */
 function login() {
   let loginBtn = document.getElementById('loginBtn');
   loginBtn.disabled = true;
@@ -239,16 +318,29 @@ function login() {
   forwardToMainPage();
 }
 
+/**
+ * Creates a new user session.
+ * @param {Object} user - The user object.
+ * @returns {void}
+ */
 function createCurrentUser(user) {
   currentUser.push(user);
   localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
   console.log(currentUser);
 }
 
+/**
+ * Redirects the user to the main page of the application.
+ * @returns {void}
+ */
 function forwardToMainPage() {
   window.location.href = "../mainpage.html";
 }
 
+/**
+ * Logs the user out of the application.
+ * @returns {void}
+ */
 function logOut() {
   localStorage.removeItem(CURRENT_USER_KEY);
   window.location.href = "../index.html";
