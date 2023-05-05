@@ -24,7 +24,7 @@ body {
     background: #FFFFFF;
     border-radius: 30px;
     animation-name: changeBackgroundOfCard;
-    animation-duration: 2s;
+    animation-duration: 5s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
@@ -54,7 +54,7 @@ body {
 .endAnimationLogo{
     transform: translate(-50%, -50%);
     animation-name: moveEndLogo;
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
@@ -62,7 +62,7 @@ body {
 .startAnimationLogo {
     transform: translate(-50%, -50%);
     animation-name: moveStartLogo;
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
@@ -73,14 +73,14 @@ body {
 
 .startAnimation {
     animation-name: changeBackground;
-    animation-duration: 2s;
+    animation-duration: 5s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
 
 .signUpContainerAnimation {
     animation-name: hideShowSignUpContainer;
-    animation-duration: 5s;
+    animation-duration: 10s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
@@ -97,12 +97,10 @@ body {
 @keyframes changeBackgroundOfCard {
     from {
       background-color: #2A3547;
-      z-index: 999;
       box-shadow: 0;
     }
     to {
       background-color: #FFFFFF;
-      z-index: 0;
       box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
       transform: none;
     }
