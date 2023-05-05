@@ -21,14 +21,12 @@ body {
     min-width: 652px;
     left: 394px;
     top: 274px;
-
-    /* white */
-
     background: #FFFFFF;
-    /* shadoe backlog box */
-
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
+    animation-name: changeBackgroundOfCard;
+    animation-duration: 2s;
+    animation-delay: 0ms;
+    animation-fill-mode: forwards;
 }
 
 
@@ -50,28 +48,117 @@ body {
     z-index: 10;
     position: fixed;
     top: 45%;
-    left: 40%;
+    left: 40%;   
+}
+
+.endAnimationLogo{
     transform: translate(-50%, -50%);
-    animation-name: moveLogo;
-    animation-duration: 1s;
+    animation-name: moveEndLogo;
+    animation-duration: 2s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
 
-@keyframes moveLogo {
+.startAnimationLogo {
+    transform: translate(-50%, -50%);
+    animation-name: moveStartLogo;
+    animation-duration: 2s;
+    animation-delay: 0ms;
+    animation-fill-mode: forwards;
+}
+
+.logosContainer {
+    position: relative;
+}
+
+.startAnimation {
+    animation-name: changeBackground;
+    animation-duration: 2s;
+    animation-delay: 0ms;
+    animation-fill-mode: forwards;
+}
+
+.signUpContainerAnimation {
+    animation-name: hideShowSignUpContainer;
+    animation-duration: 5s;
+    animation-delay: 0ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hideShowSignUpContainer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
+
+@keyframes changeBackgroundOfCard {
+    from {
+      background-color: #2A3547;
+      z-index: 999;
+      box-shadow: 0;
+    }
+    to {
+      background-color: #FFFFFF;
+      z-index: 0;
+      box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+      transform: none;
+    }
+  }
+
+@keyframes changeBackground {
+    from {
+      background-color: #2A3547;
+      z-index: 999;
+    }
+    to {
+      background-color: rgba(211, 211, 211, 0.2);
+      z-index: 0;
+      transform: none;
+    }
+  }
+
+@keyframes moveEndLogo {
   from {
-    top: 45%;
-    left: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     scale: 1.5;
     transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 9999;
   }
   to {
     top: 0;
     left: 0;
     scale: 1;
     transform: none;
+    opacity: 1;
+    z-index: 0;
   }
 }
+
+@keyframes moveStartLogo {
+    from {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        scale: 1.5;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        z-index: 9999;
+    }
+    to {
+      top: 0;
+      left: 0;
+      scale: 1;
+      transform: none;
+      opacity: 0;
+      z-index: 0;
+    }
+  }
 
 .loginHeaderRight {
     display: flex;
@@ -399,11 +486,10 @@ body {
         align-items: center;
     } 
 
-
     .backImgContainer {
         position: absolute;
-        top: 22%;
-        left: 9%;
+        top: 10%;
+        left: 2%;
     }
     .backImgResetContainer {
         position: absolute;
@@ -412,6 +498,13 @@ body {
     }
     .loginCheckbox {
         margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 725px) {
+    .backImgContainer {
+        top: 10%;
+        left: 10%;
     }
 }
 

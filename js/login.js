@@ -23,13 +23,13 @@ let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
 let currentUserForNewPassword = [];
 
 /**
- * Initializes the app by rendering the login form after a 500ms delay.
+ * Initializes the app by rendering the login form after a 300ms delay.
  * @async
  */
 async function init() {
   setTimeout(function() {
     renderLogin()
-  }, 500);
+  }, 300);
 }
 
 /**

@@ -18,15 +18,19 @@
 </head>
 
 <body onload="init()">
-    <div class="loginBody">
+    <div class="loginBody startAnimation">
         <div class="loginHeader">
-            <img src="../img/logo.svg" alt="Join Logo" class="logoImage">
-            <div class="loginHeaderRight" id="loginHeaderRight">
+            <div class="logosContainer">
+                <img src="../img/logo.svg" alt="Join Logo" class="logoImage endAnimationLogo">
+                <img src="../img/logo-white.svg" alt="Join Logo" class="logoImage startAnimationLogo">
+            </div>
+
+            <div class="loginHeaderRight signUpContainerAnimation" id="loginHeaderRight">
                 <p class="loginHeaderQuestion">Not a Join user?</p>
                 <button class="openSignUpPopupBtn pointer" onclick="signUp()">Sign up</button>
             </div>
         </div>
-        <div class="loginForm" id="loginForm">        
+        <div class="loginForm" id="loginForm">
         </div>
         <div id="created-successfully-logo" class="created-successfully-logo-loginCard d-none"></div>
 
