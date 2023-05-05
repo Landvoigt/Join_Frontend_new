@@ -169,7 +169,7 @@
     background-color: #2A3647;
     border-radius: 10px;
     bottom: 50px;
-    right: 100px;
+    right: 65px;
     gap: 8px;
     color: white;
     justify-content: center;
@@ -325,7 +325,8 @@
 
 
 .contacts-popup-left {
-    width: 463px;
+    padding-left: 30px;
+    padding-right: 30px;
     background-color: #2A3647;
     border-top-left-radius: 26px;
     border-bottom-left-radius: 26px;
@@ -569,18 +570,9 @@
     .contact-card {
         padding-left: 50px;
     }
-
-    .summary-headline {
-        font-size: 50px !important;
-    }
-
 }
 
 @media(max-width:1300px) {
-    .summary-headline {
-        font-size: 43px !important;
-    }
-
     #headline-span {
         font-size: 17px !important;
     }
@@ -603,8 +595,10 @@
     .contacts-popup-2 {
         width: 99%;
     }
-    .contacts-popup{
-        width: 98%;
+
+    .contacts-popup {
+        margin-left: 65px;
+        margin-right: 65px;
     }
 }
 
@@ -743,14 +737,13 @@
     }
 }
 
-@media(max-width:625px) {
+@media(max-width:600px) {
     .contacts-list {
         padding-top: 60px;
     }
 
     .add-contact {
-        font-size: 17px;
-        right: 20px;
+        right: 35px;
     }
 }
 
