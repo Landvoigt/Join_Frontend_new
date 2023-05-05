@@ -421,6 +421,9 @@ body {
         min-height: 60%;
         width: 90%;
         min-width: 0;
+        padding: 15px 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     .loginBody {
         display: flex;
@@ -444,7 +447,7 @@ body {
         width: 100%;
     }
     .cardHeaderContainer {
-        margin-top: 0;
+        margin: 0;
     }
     .loginBtn {
         font-size: 18px;
@@ -460,9 +463,12 @@ body {
     .loginFooterBtns {
         justify-content: space-evenly;
         width: 90%;
+        margin-top: 0;
+        margin-bottom: 0;
     }
     .loginH1 {
         font-size: 44px;
+        margin-bottom: 15px;
     }
     .rememberMe {
         font-size: 14px;
@@ -504,11 +510,18 @@ body {
         top: 10%;
         left: 10%;
     }
+    .loginH1 {
+        font-size: 42px;
+    }
 }
 
 @media (max-width: 405px) {
     .backImgSignUp {
         top: 25%;
         left: 5%;
+    }
+    .loginH1 {
+        font-size: 39px;
+        margin-bottom: 15px;
     }
 }
