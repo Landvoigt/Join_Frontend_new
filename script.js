@@ -53,6 +53,8 @@ function showLogoutPopup() {
     popup.classList.remove('d-none');
     let overlay = document.getElementById('overlay');
     overlay.classList.remove('d-none');
+    let newContactBtn = document.getElementById('Create-Contact');
+    newContactBtn.classList.add('d-none');
 }
 
 function stopPropagation(event) {
@@ -64,6 +66,8 @@ function closeLogoutPopup() {
     popup.classList.add('d-none');
     let overlay = document.getElementById('overlay');
     overlay.classList.add('d-none');
+    let newContactBtn = document.getElementById('Create-Contact');
+    newContactBtn.classList.remove('d-none');
 }
 
 function addBackgroundColorForMainPages(id) {           // adds bg to sidebar element you go to (only for the sites you cant go back)

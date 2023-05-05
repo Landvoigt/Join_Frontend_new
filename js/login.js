@@ -257,7 +257,7 @@ function resetPasswordTemplate() {
       </div>
     </div>
     <div class="signupFooterBtn">
-      <button class="loginBtn pointer" onclick="updatePassword()">Send me the email</button>
+      <button class="loginBtn pointer" onclick="updatePassword()">Continue</button>
     </div>
   `;
 }

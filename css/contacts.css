@@ -201,6 +201,21 @@
     font-weight: 400;
 }
 
+.created-successfully-logo-loginCard {
+    display: flex;
+    position: absolute;
+    padding: 15px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    width: 30%;
+    bottom: -100px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 400;
+}
+
 .move-up {
     animation: moveUp 1s forwards;
 }
@@ -404,6 +419,8 @@
 }
 
 .cancel-btn {
+    display: flex;
+    align-items: center;
     font-size: 21px;
     padding: 15px;
     background-color: white;
@@ -417,6 +434,8 @@
 }
 
 #create-btn {
+    display: flex;
+    align-items: center;
     font-size: 21px;
     padding: 15px;
     border-radius: 8px;
@@ -618,7 +637,11 @@
     }
 
     .add-btn-container {
-        margin-top: 30px;
+        margin-top: 0;
+        margin-bottom: 30px;
+        justify-content: center;
+        align-self: normal;
+        gap: 15px;
     }
 
     .contacts-list {
@@ -648,15 +671,17 @@
     .contacts-popup-left {
         border-bottom-left-radius: 0;
         width: 100%;
-        border-top-right-radius: 26px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
         padding: 20px;
     }
 
     .contacts-popup {
-        margin-top: 67px;
-        width: 80%;
+        height: 100%;
+        width: 100%;
         flex-direction: column;
-        height: 88vh;
+        margin-top: 180px;
+        border-radius: 0;
     }
 
     .contacts-popup-2 {
@@ -698,7 +723,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 139px;
+        padding-bottom: 70px;
         padding-top: 70px;
     }
 
@@ -708,21 +733,18 @@
     }
 
     .add-contact-form {
-        width: 330px;
+        width: 400px;
     }
 
     .add-contact-form-container {
-        gap: 30px;
-        margin-top: 40px;
+        gap: 25px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     .add-contact-form-container-2 {
         gap: 30px;
         padding-top: 80px;
-    }
-
-    .cancel-btn {
-        display: none;
     }
 
     .close-popup {
@@ -734,6 +756,10 @@
         position: absolute;
         top: 0;
         bottom: 0;
+    }
+
+    .create-contact-bg {
+        z-index: 2;
     }
 }
 
@@ -748,11 +774,13 @@
 }
 
 @media(max-width:505px) {
-    .contacts-popup {
-        width: 43vb;
-    }
-
     .add-contact-form {
-        width: 290px;
+        width: 300px;
+    }
+    .cancel-btn {
+        font-size: 14px;
+    }
+    #create-btn {
+        font-size: 14px;
     }
 }

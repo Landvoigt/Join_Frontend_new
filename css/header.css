@@ -130,8 +130,8 @@
 .logoutBtn {
     position: absolute;
     top: 66px;
-    right: 0;
-    background: #2A3647;
+    right: -40px;
+    background: #1f2e43;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 20px 0px 20px 20px;
     width: 130px;

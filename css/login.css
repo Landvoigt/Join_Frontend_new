@@ -19,7 +19,6 @@ body {
     padding: 35px 0px;
     gap: 35px;
     min-width: 652px;
-    height: 513px;
     left: 394px;
     top: 274px;
 
@@ -354,7 +353,9 @@ body {
     }
     .loginFooter {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 15px;
         width: 100%;
     }
     .cardHeaderContainer {
@@ -383,7 +384,7 @@ body {
     }
     .forgotPass {
         font-size: 14px;
-        margin-right: 15px !important;
+        margin-left: 0 !important; 
     }
     .backImgSignUp {
         position: absolute;
@@ -408,6 +409,9 @@ body {
         position: absolute;
         top: 22%;
         left: 9%;
+    }
+    .loginCheckbox {
+        margin-left: 0 !important;
     }
 }
 
