@@ -507,7 +507,11 @@
     }
 
     .task-box {
-        width: 220px;
+        width: 100%;
+    }
+
+    .drag-drop-area {
+        flex-direction: column;
     }
 
     .popup-prio {
