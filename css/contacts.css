@@ -290,7 +290,7 @@
 
 .contacts-popup {
     position: fixed;
-    height: 566px;
+    height: 500px;
     background-color: #fff;
     display: flex;
     border-radius: 29px;
@@ -299,7 +299,7 @@
 
 .contacts-popup-2 {
     position: fixed;
-    height: 566px;
+    height: 500px;
     background-color: #fff;
     display: flex;
     border-radius: 29px;
@@ -340,8 +340,7 @@
 
 
 .contacts-popup-left {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 50px;
     background-color: #2A3647;
     border-top-left-radius: 26px;
     border-bottom-left-radius: 26px;
@@ -357,6 +356,8 @@
 
 .contacts-popup-right {
     display: flex;
+    justify-content: space-between;
+    padding: 50px;
 }
 
 #add-contact {
@@ -366,7 +367,7 @@
 }
 
 .add-contact-form {
-    width: 422px;
+    width: 350px;
 }
 
 .add-contact-form-container {
@@ -375,9 +376,8 @@
     align-items: center;
     flex-direction: column;
     height: 100%;
-    gap: 49px;
-    padding-left: 70px;
-    padding-right: 70px;
+    gap: 30px;
+    padding-left: 50px;
 }
 
 .add-contact-form-container-2 {
@@ -396,7 +396,6 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding-left: 70px;
 }
 
 .input-icon {
@@ -412,6 +411,7 @@
     gap: 21px;
     display: flex;
     align-self: flex-end;
+    margin-top: 20px;
 }
 
 #mail-icon {
@@ -467,7 +467,7 @@
 .close-popup {
     position: absolute;
     height: 32px;
-    right: 30px;
+    right: 20px;
     top: 20px;
     cursor: pointer;
 }
@@ -554,9 +554,10 @@
 
 .add-contact-span {
     align-items: flex-start;
-    gap: 12px;
-    font-size: 27px;
+    gap: 15px;
+    font-size: 20px;
     color: white;
+    font-weight: 300;
 }
 
 .close-X {
@@ -700,6 +701,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 0;
     }
 
     .contacts-popup-right-content {
@@ -740,6 +742,7 @@
         gap: 25px;
         margin-top: 30px;
         margin-bottom: 30px;
+        padding-left: 0;
     }
 
     .add-contact-form-container-2 {
