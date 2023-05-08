@@ -157,7 +157,7 @@ function signUpTemplate() {
                     <img class="inputImg" src="../img/email.svg" alt="E-Mail">
                 </div>
                 <div class="loginInputField">
-                    <input class="loginE-Mail" type="password" required id="passwordSignUp" id="passwordInput" placeholder="Password">
+                    <input class="loginE-Mail" type="password" minlength="8" required id="passwordSignUp" id="passwordInput" placeholder="Password">
                     <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password">
                 </div>
                 
@@ -248,11 +248,11 @@ function resetPasswordTemplate() {
         <span class="subheaderNewPassword">Change your account password</span>
       </div>
       <div class="loginInputField">
-        <input class="loginE-Mail" type="password" required id="passwordReset" placeholder="New password">
+        <input class="loginE-Mail" type="password" minlength="8" required id="passwordReset" placeholder="New password">
         <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
       </div>
       <div class="loginInputField">
-        <input class="loginE-Mail" type="password" required id="passwordResetConfirm" placeholder="Confirm password">
+        <input class="loginE-Mail" type="password" minlength="8" required id="passwordResetConfirm" placeholder="Confirm password">
         <img class="inputImg passwordImg" id="passwordImg" src="../img/pasword.svg" alt="Password" onclick="visibilityPass()">
       </div>
     </div>

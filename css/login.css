@@ -80,7 +80,7 @@ body {
 
 .signUpContainerAnimation {
     animation-name: hideShowSignUpContainer;
-    animation-duration: 10s;
+    animation-duration: 5s;
     animation-delay: 0ms;
     animation-fill-mode: forwards;
 }
