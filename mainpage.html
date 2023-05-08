@@ -39,7 +39,8 @@
     <div class="incl-cont-side of-visible d-none" w3-include-html="./templates/board.html" id="boardPage"></div>
     <div class="incl-cont-side d-none" w3-include-html="./templates/addTask.html" id="addTaskPage"></div>
     <div class=" d-none" w3-include-html="./templates/contacts.html" id="contactsPage"></div>
-    <div class="incl-cont-side d-none h-100" w3-include-html="./templates/privacyPolicy.html" id="privacyPolicyPage"></div>
+    <div class="incl-cont-side d-none h-100" w3-include-html="./templates/privacyPolicy.html" id="privacyPolicyPage">
+    </div>
     <div class="incl-cont-side d-none" w3-include-html="./templates/legalNotice.html" id="legalNoticePage"></div>
     <div class="incl-cont-side d-none" w3-include-html="./templates/help.html" id="helpPage"></div>
     <div id="popupWindow" class="d-none popup-window" onclick="removeAddTaskWindow()"></div>
@@ -48,14 +49,16 @@
             <div class="contacts-popup-left">
                 <div class="flex-column add-contact-span">
                     <img src="./img/join-for-add-contacts.png" alt="">
-                    <span id="add-contact">Add Contact</span>
-                    <span>Tasks are better with a team!</span>
+                    <div class="add-contact-headlines-box">
+                        <span id="add-contact">Add Contact</span>
+                        <span>Tasks are better with a team!</span>
+                    </div>
                 </div>
             </div>
             <div class="contacts-popup-right">
                 <img class="close-popup" onclick="closeCreateContact()" src="./img/close.png" alt="">
                 <div class="add-contact-img">
-                    <img src="./img/profile.png" alt="">
+                    <img src="./img/profile.png" alt="" class="mt-100negative">
                 </div>
                 <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
                     <div style="position: relative;">
@@ -86,7 +89,6 @@
         </div>
     </div>
     <div id="created-successfully-logo" class="created-successfully-logo d-none"></div>
-</body>
 </body>
 
 </html>

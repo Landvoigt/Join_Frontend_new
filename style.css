@@ -65,6 +65,10 @@ body {
     margin-top: 12px !important;
 }
 
+.mt-100negative {
+    margin-top: -100px;
+}
+
 span {
     transform: scale(1, 1.01);
 }

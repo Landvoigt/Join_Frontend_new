@@ -2,17 +2,17 @@
     <div class="edit-contact-bg d-none" id="edit-contact-bg">
         <div class="contacts-popup-2" id="edit-contact-popup">
             <div class="contacts-popup-left">
-                <div class="flex-column" style="align-items: flex-start; gap: 12px; font-size: 27px;color: white;">
+                <div class="flex-column add-contact-span">
                     <img src="./img/join-for-add-contacts.png" alt="">
-                    <span id="add-contact">Edit Contact</span>
-                    <div class="horizontal-line"></div>
+                    <div class="add-contact-headlines-box">
+                        <span id="add-contact">Edit Contact</span>
+                    </div>
                 </div>
             </div>
             <div class="edit-contacts-popup-right">
                 <img class="close-popup" onclick="closeEditContact()" src="./img/close.png" alt="">
                 <div class="contacts-popup-right-content">
-                    <div id="initials-circle" class="initials-big">
-
+                    <div id="initials-circle" class="initials-big mt-100negative">
                     </div>
                     <form class="add-contact-form-container-2" onsubmit="createNewContact(); return false">
                         <div style="position: relative;">
@@ -33,13 +33,11 @@
                             <input required class="add-contact-form" id="edit-phone" placeholder="Phone" type="number">
                             <img class="input-icon" src="./img/phone-icon.png" alt="">
                         </div>
-
+                        <div class="add-btn-container">
+                            <div onclick="deleteContactByFirstname(firstname)" class="cancel-btn">Delete <img src="" alt=""></div>
+                            <button onclick="changeFirstname()" id="save-btn">Save</button>
+                        </div>
                     </form>
-                </div>
-                <div class="add-btn-container">
-                    <div onclick="deleteContactByFirstname(firstname)" class="cancel-btn"
-                        style="display: flex; align-items: center; height: 50px;">Delete <img src="" alt=""></div>
-                    <button onclick="changeFirstname()" id="save-btn">Save</button>
                 </div>
             </div>
         </div>
@@ -72,8 +70,6 @@
             <div id="card-popup" id="contacts-box-info" class="flex-column">
             </div>
         </div>
-        
-        
     </div>
     <div onclick="openCreateContact()" id="Create-Contact" class="add-contact">New Contact <img src="./img/Capa 1.png" alt=""></div>
 </div>
