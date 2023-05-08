@@ -7,8 +7,21 @@ async function loadTasks() {
     updateTasks();
 }
 
+async function loadTopics() {
+    try {
+        topics = JSON.parse(await getItem('topics'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+    // updateTopics();
+}
+
 async function setItemTasks(tasks) {
     await setItem('tasks', JSON.stringify(tasks));
+}
+
+async function setItemTopics(topics) {
+    await setItem('topics', JSON.stringify(topics));
 }
 
 function updateTasks() {

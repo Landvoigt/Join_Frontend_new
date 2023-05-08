@@ -71,10 +71,15 @@ textarea:focus-visible {
     flex-direction: column;
     justify-content: center;
     position: relative;
+    overflow: visible;
+}
+
+.addTask-content::-webkit-scrollbar {
+    display: none;
 }
 
 .addTask-form {
-    height: 60vh;
+    height: 64vh;
     width: 100%;
     display: flex;
 }
@@ -288,13 +293,18 @@ select {
 }
 
 .popup-container {
-    height: 85%;
+    min-height: 85%;
     width: 80%;
     background-color: white;
     border-radius: 30px;
     padding: 65px;
     position: relative;
     display: grid;
+    overflow-x: auto;
+}
+
+.popup-container::-webkit-scrollbar {
+    display: none;
 }
 
 .popup-task {
@@ -523,6 +533,12 @@ label input {
     transform: translateY(60vh) !important;
 }
 
+.added-clients-box {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 25px;
+}
+
 .popup-icon {
     height: 26px;
     width: 26px;
@@ -593,14 +609,14 @@ label input {
 .pos-1 {
     z-index: 10;
     right: 5%;
-    bottom: 40%;
+    bottom: 43%;
     width: 190px;
 }
 
 .pos-2 {
     z-index: 10;
     left: 10%;
-    bottom: 15%;
+    bottom: 20%;
     width: 190px;
 }
 
@@ -614,6 +630,14 @@ label input {
     border-radius: 10px;
     transform: rotate(45deg);
     cursor: pointer;
+}
+
+.empty-field-popup-repositioning-1 {
+    bottom: 23% !important;
+}
+
+.empty-field-popup-repositioning-2 {
+    right: 15% !important;
 }
 
 @keyframes goUp {
@@ -680,6 +704,7 @@ label input {
         width: 100%;
         border-radius: 0;
         overflow: auto;
+        overflow-x: hidden;
         padding-top: 163px;
         background-color: rgb(249, 249, 249);
     }
@@ -723,13 +748,13 @@ label input {
     }
 
     .pos-1 {
-        bottom: 5% !important;
+        bottom: 12% !important;
         right: 25% !important;
     }
 
     .pos-2 {
         left: 20% !important;
-        bottom: 38% !important;
+        bottom: 42% !important;
     }
 
     .spanMainpage {
@@ -742,6 +767,15 @@ label input {
 
     .add-task-button {
         display: none;
+    }
+
+    .empty-field-popup-repositioning-1 {
+        bottom: 21% !important;
+    }
+
+    .empty-field-popup-repositioning-2 {
+        bottom: -11% !important;
+        right: 35% !important;
     }
 }
 
@@ -767,6 +801,15 @@ label input {
 
     .addTask-commit-buttons {
         right: 35px !important;
+    }
+
+    .empty-field-popup-repositioning-1 {
+        bottom: 24% !important;
+    }
+
+    .empty-field-popup-repositioning-2 {
+        bottom: -8% !important;
+        right: 25% !important;
     }
 }
 

@@ -419,12 +419,12 @@
         display: flex;
         flex-direction: row;
         gap: 40px;
-        overflow-y: hidden;
+        overflow: hidden;
         padding-bottom: 10px;
     }
 
     .task-box {
-        width: 35%;
+        width: 280px;
         margin-bottom: 0;
     }
 
@@ -504,10 +504,6 @@
 
     .board-search-box input {
         width: 180px;
-    }
-
-    .task-box {
-        width: 100%;
     }
 
     .drag-drop-area {

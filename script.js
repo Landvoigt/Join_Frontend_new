@@ -2,6 +2,7 @@ async function initialize() {
     await includeHTML();
     await pushFirstLetter();
     await loadTasks();
+    await loadTopics();
     showMainpage();
     loadDate();
     checkForTaskNumbers();

@@ -2,7 +2,7 @@ function getAddTaskHTML() {
     return `
         <div class="spanMainpage d-none">Kanban Project Management Tool</div>
         <h2>Add Task</h2>
-        <form class="addTask-form" onsubmit="getInputsFromForm(); return false">
+        <form class="addTask-form" onsubmit="getInputsFromForm(); return false" onclick="closeDropdown()">
             <div class="addTask-form-left-container">
                 <div>
                     <h4 class="addTask-form-headlines">Title</h4>
@@ -12,7 +12,7 @@ function getAddTaskHTML() {
                     <h4 class="addTask-form-headlines">Description</h4>
                     <textarea id="addTask-desc-input" placeholder="Enter a description" maxlength="250" required></textarea>
                 </div>
-                <div id="categoryDropdownSection" class="category-select">
+                <div id="categoryDropdownSection" class="category-select" onclick="stopPropagation(event)">
                     <h4 class="addTask-form-headlines">Category</h4>
                     <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
                         Select task category
@@ -23,7 +23,7 @@ function getAddTaskHTML() {
                         </label>
                     </div>
                 </div>
-                <div id="contactDropdownSection">
+                <div id="contactDropdownSection" onclick="stopPropagation(event)">
                     <h4 class="addTask-form-headlines">Assigned to</h4>
                     <div id="contactDropdown" class="dropdown" onclick="showSelection('contactsSelection','contactDropdown')">
                         Select contacts to assign
@@ -34,7 +34,7 @@ function getAddTaskHTML() {
                             <img src="./img/add_user.png" class="addTask-new-contact-img">
                         </label>
                     </div>
-                    <div id="addedClientsBox" style="display:flex;"></div>
+                    <div id="addedClientsBox" class="added-clients-box"></div>
                 </div>
             </div>
             <div class="addTask-form-right-container">
@@ -78,7 +78,7 @@ function getAddTaskHTML() {
                 <div id="newSubtasksBox" class="new-subtask-box"></div>
             </div>
             <div class="addTask-commit-buttons" id="commitButtonsBox">
-                <button class="addTask-clear-btn" type="reset">Clear x</button>
+                <button class="addTask-clear-btn" type="reset" onclick="clearAddTaskSide()">Clear x</button>
                 <button class="submit-btn" type="submit">Create Task ✓</button>
             </div>
             <div id="emptyInputPopupCat" style="position: absolute;" class="pos-2 d-none">

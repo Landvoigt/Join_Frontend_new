@@ -40,6 +40,7 @@ function showCurrentDate(id) {
 
 function showAddTaskWindow() {
     resetIDs();
+    clearVariables();
     document.getElementById('boardPage').classList.add('of-hidden');
     popupWindow.innerHTML = `
         <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
@@ -52,6 +53,7 @@ function showAddTaskWindow() {
     generateContacts();
     renderSubtasks();
     document.getElementById('commitButtonsBox').style.right = '65px';
+    emptyFieldPopupPositioning();
 }
 
 function resetIDs() {
@@ -79,6 +81,16 @@ function showSelection(select, container) {
         }
         showCheckBoxes = !showCheckBoxes;
     }
+}
+
+function closeDropdown() {
+    let closeOptions = document.querySelectorAll('.category-selection');
+    let removeBorder = document.querySelectorAll('.dropdown');
+    for (let i = 0; i < closeOptions.length; i++) {
+        closeOptions[i].style.display = "none";
+        removeBorder[i].classList.remove('selection-border-align');
+    }
+    showCheckBoxes = !showCheckBoxes;
 }
 
 function generateTaskCategories() {
@@ -174,21 +186,6 @@ function removeAddTaskWindow() {
     document.getElementById('boardPage').classList.remove('of-hidden');
 }
 
-// function createNewContactInAddTask() {
-//     let dropdown = document.getElementById('contactDropdownSection');
-//     dropdown.innerHTML = `
-//         <h4 class="addTask-form-headlines">Subtasks</h4>
-//         <div class="dropdown grey-text">
-//             <input id="new-contact-input" class="new-cat-input" type="email" placeholder="Contact email" required>
-//             <div class="create-cat-icon-box">
-//                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="">
-//                 <div class="gap-line"></div>
-//                 <img src="./img/check_mark.png" class="create-category-icon" onclick="">
-//             </div>
-//         </div>
-//     `;
-// }
-
 function createNewCategoryInAddTask() {
     currentCat = '';
     let dropdown = document.getElementById('categoryDropdownSection');
@@ -247,7 +244,7 @@ function addBorderToPickedColor(id) {
     pickedColor.classList.add('color-dot-bg');
 }
 
-function addCategory() {
+async function addCategory() {
     checkPickedColor();
     let newCat = document.getElementById('new-cat-input');
     topics.push(
@@ -255,7 +252,8 @@ function addCategory() {
             'name': `${newCat.value}`,
             'color': `${currentPickedColor}`
         }
-    )
+    );
+    await setItemTopics(topics);
     resetAddCategorySection();
     document.getElementById('categoryDropdown').innerHTML = `
     <div style="display:flex; align-items:center;">
@@ -264,6 +262,10 @@ function addCategory() {
     </div>
     `;
     currentCat = topics.length - 1;
+}
+
+async function newbubi() {
+
 }
 
 function checkPickedColor() {
@@ -296,9 +298,9 @@ function createNewSubtask() {
     `;
     getFocusOnInputField('subtaskInput');
 }
-function showSuccessfullyCreatedLogo(){
+function showSuccessfullyCreatedLogo() {
     createdSuccessfully();
-    document.getElementById('created-successfully-logo').innerHTML='Task successfully Created !';
+    document.getElementById('created-successfully-logo').innerHTML = 'Task successfully Created !';
 }
 
 function renderSubtasks() {
@@ -431,4 +433,32 @@ function clearVariables() {
     currentAssignedClients = [];
     currentSubtasks = [];
     fieldsFilledCorrectly = false;
+}
+
+function emptyFieldPopupPositioning() {
+    let emptyCat = document.getElementById('emptyInputPopupCat');
+    let emptyPrio = document.getElementById('emptyInputPopupPrio');
+    emptyCat.classList.add('empty-field-popup-repositioning-1');
+    emptyPrio.classList.add('empty-field-popup-repositioning-2');
+}
+
+function clearAddTaskSide() {
+    clearVariables();
+    let dropdown = document.getElementById('categoryDropdownSection');
+    dropdown.innerHTML = '';
+    dropdown.innerHTML = `
+                    <h4 class="addTask-form-headlines">Category</h4>
+                    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
+                        Select task category
+                    </div>
+                    <div class="category-selection" id="categorySelection">
+                        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
+                            <span>Create new category</span>
+                        </label>
+                    </div>
+    `;
+    generateTaskCategories();
+    generateContacts();
+    document.getElementById('addedClientsBox').innerHTML = '';
+
 }
