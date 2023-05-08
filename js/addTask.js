@@ -445,20 +445,43 @@ function emptyFieldPopupPositioning() {
 function clearAddTaskSide() {
     clearVariables();
     let dropdown = document.getElementById('categoryDropdownSection');
+    let prioSelect = document.getElementById('prioContainer');
     dropdown.innerHTML = '';
-    dropdown.innerHTML = `
-                    <h4 class="addTask-form-headlines">Category</h4>
-                    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
-                        Select task category
-                    </div>
-                    <div class="category-selection" id="categorySelection">
-                        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
-                            <span>Create new category</span>
-                        </label>
-                    </div>
-    `;
+    dropdown.innerHTML = getTopicDropdownHTML();
+    prioSelect.innerHTML = getPrioContainerHTML();
     generateTaskCategories();
     generateContacts();
     document.getElementById('addedClientsBox').innerHTML = '';
+    clearSubtaskSection();
+}
 
+function getTopicDropdownHTML() {
+    return `
+    <h4 class="addTask-form-headlines">Category</h4>
+    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
+        Select task category
+    </div>
+    <div class="category-selection" id="categorySelection">
+        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
+            <span>Create new category</span>
+        </label>
+    </div>
+    `;
+}
+
+function getPrioContainerHTML() {
+    return `
+    <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
+        <span>Urgent</span>
+        <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
+    </div>
+    <div id="medium" class="prio" onclick="addPrioColor('medium')">
+        <span>Medium</span>
+        <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
+    </div>
+    <div id="low" class="prio" onclick="addPrioColor('low')">
+        <span>Low</span>
+        <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
+    </div>
+    `;
 }

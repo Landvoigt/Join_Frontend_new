@@ -47,7 +47,7 @@ function getAddTaskHTML() {
                 </div>
                 <div>
                     <h4 class="addTask-form-headlines">Prio</h4>
-                    <div class="addTask-prio-container" required>
+                    <div id="prioContainer" class="addTask-prio-container" required>
                         <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
                             <span>Urgent</span>
                             <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
