@@ -41,24 +41,30 @@ function showCurrentDate(id) {
 function showAddTaskWindow() {
     resetIDs();
     clearVariables();
-    document.getElementById('boardPage').classList.add('of-hidden');
-    popupWindow.innerHTML = `
-        <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
-            <img class="back-btn-addTask-popup" src="./img/plus.png" onclick="removeAddTaskWindow()">
-        </div>
-        `;
+    popupWindow.innerHTML = getPopupContainerHTML();
     let popupBox = document.getElementById('popupContainer');
     popupBox.innerHTML += getAddTaskHTML();
     generateTaskCategories();
     generateContacts();
     renderSubtasks();
+    popupBox.classList.add('move-in');
     document.getElementById('commitButtonsBox').style.right = '65px';
     emptyFieldPopupPositioning();
+}
+
+function getPopupContainerHTML() {
+    return `
+    <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
+        <img class="back-btn-addTask-popup" src="./img/plus.png" onclick="removeAddTaskWindow()">
+    </div>
+    `;
 }
 
 function resetIDs() {
     let popupWindow = document.getElementById('popupWindow');
     popupWindow.classList.remove('d-none');
+    popupWindow.classList.remove('light');
+    popupWindow.classList.add('dark');
     popupWindow.innerHTML = '';
     let addTaskSite = document.getElementById('addTaskSite');
     addTaskSite.innerHTML = '';
@@ -180,10 +186,19 @@ function createAssignedClientContainer(id) {
 }
 
 function removeAddTaskWindow() {
-    let popup = document.getElementById('popupWindow');
-    popup.innerHTML = '';
-    popup.classList.add('d-none');
-    document.getElementById('boardPage').classList.remove('of-hidden');
+    let popupWindow = document.getElementById('popupWindow');
+    let popupBox = document.getElementById('popupContainer');
+    popupWindow.classList.remove('dark');
+    popupBox.classList.remove('move-in');
+    popupBox.classList.add('move-out');
+    popupWindow.classList.add('light');
+    setTimeout(deleteDarkBackground, 1200);
+}
+
+function deleteDarkBackground() {
+    let popupWindow = document.getElementById('popupWindow');
+    popupWindow.classList.add('d-none');
+    popupWindow.innerHTML = '';
 }
 
 function createNewCategoryInAddTask() {
@@ -298,10 +313,6 @@ function createNewSubtask() {
     `;
     getFocusOnInputField('subtaskInput');
 }
-function showSuccessfullyCreatedLogo() {
-    createdSuccessfully();
-    document.getElementById('created-successfully-logo').innerHTML = 'Task successfully Created !';
-}
 
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
@@ -411,15 +422,14 @@ async function addTask(title, desc, date) {
     );
     await setItemTasks(tasks);
     clearVariables();
-    showTaskAddedPopup();
     showSuccessfullyCreatedLogo();
+    removeAddTaskWindow();
 }
 
-function showTaskAddedPopup() {
-    let popup = document.getElementById('taskAddedPopup');
-    popup.classList.add('popup-animation');
-    setTimeout((changeSite), 900, BOARD_ID);
-    setTimeout((removeAddTaskWindow), 900);
+function showSuccessfullyCreatedLogo() {
+    createdSuccessfully();
+    document.getElementById('created-successfully-logo').innerHTML = 'Task added successfully';
+    changeSite(BOARD_ID);
 }
 
 function removeFillFieldPopup(id) {

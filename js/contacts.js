@@ -120,13 +120,12 @@ function openCreateContact() {
 function closeCreateContact() {
     let contactPopup = document.getElementById('contacts-popup');
     document.getElementById('create-contact-bg').classList.remove('dark');
-    contactPopup.classList.remove('move-in')
+    contactPopup.classList.remove('move-in');
     document.getElementById('create-contact-bg').classList.add('light');
     contactPopup.classList.add('move-out');
     setTimeout(function () {
         document.getElementById('create-contact-bg').classList.add('d-none');
     }, 1200);
-
 }
 
 async function createNewContact() {
@@ -155,9 +154,10 @@ async function createNewContact() {
     document.getElementById('contactsSelection').innerHTML = '';
     generateContacts();
 }
+
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
-    banner.innerHTML='Contact Successfully Created';
+    banner.innerHTML = 'Contact Successfully Created';
     banner.classList.remove('move-down', 'd-none');
     banner.classList.add('move-up');
     setTimeout(function () {
@@ -169,6 +169,7 @@ function createdSuccessfully() {
     }, 2000);
 
 }
+
 function resetInputValue() {
     let addContactForms = document.querySelectorAll('.add-contact-form');
 
@@ -177,6 +178,7 @@ function resetInputValue() {
     }
 
 }
+
 function openEditContact(id) {
     let editBG = document.getElementById('edit-contact-bg');
     let initalsCircle = document.getElementById('initials-circle');
@@ -184,7 +186,7 @@ function openEditContact(id) {
     editBG.classList.add('dark');
     initalsCircle.style = `background-color:${contacts[id]['color']};`
     initalsCircle.innerHTML = contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
-    
+
     document.getElementById('edit-contact-popup').classList.remove('move-out');
     document.getElementById('edit-contact-popup').classList.add('move-in');
     document.getElementById('edit-firstname').value = contacts[id]['firstname'];
@@ -193,6 +195,7 @@ function openEditContact(id) {
     document.getElementById('edit-mail').value = contacts[id]['mail'];
     document.getElementById('edit-phone').value = contacts[id]['phone'];
 }
+
 function closeEditContact() {
     document.getElementById('edit-contact-bg').classList.add('light');
     document.getElementById('edit-contact-bg').classList.remove('dark');
@@ -202,6 +205,7 @@ function closeEditContact() {
         document.getElementById('edit-contact-bg').classList.add('d-none');
     }, 1200);
 }
+
 async function deleteContactByFirstname(firstname) {
     if (!firstname) {
         firstname = contacts[ID]['firstname'];

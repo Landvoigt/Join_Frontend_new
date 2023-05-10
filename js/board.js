@@ -13,7 +13,6 @@ async function loadTopics() {
     } catch (e) {
         console.error('Loading error:', e);
     }
-    // updateTopics();
 }
 
 async function setItemTasks(tasks) {
@@ -163,6 +162,14 @@ function showDetailedTask(id) {
     checkForExistingSubtasks(id);
 }
 
+function removeDetailedTaskWindow() {
+    let popupWindow = document.getElementById('popupWindow');
+    popupWindow.classList.add('light');
+    popupWindow.classList.remove('dark');
+    popupWindow.innerHTML = '';
+    setTimeout(deleteDarkBackground, 325);
+}
+
 function showDetailedAssignedClients(id) {
     let task = tasks[id];
     let clientsSection = document.getElementById(`popupClientSection${id}`);
@@ -284,9 +291,10 @@ async function deleteShownTask(id) {
     } catch (e) {
         console.error('Deleting error:', e);
     }
-    removeAddTaskWindow();
+    removeDetailedTaskWindow();
     await updateTasksID();
     loadTasks();
+    clearVariables();
 }
 
 async function updateTasksID() {
@@ -310,6 +318,7 @@ async function saveEditedTaskInformation(id) {
         let desc = document.getElementById('editTaskDesc').value;
         let date = document.getElementById('editTaskDate').value;
         await updateTaskInformation(id, title, desc, date);
+        clearVariables();
     }
 }
 
@@ -328,7 +337,7 @@ async function updateTaskInformation(id, title, desc, date) {
     };
     await setItemTasks(tasks);
     updateTasks(id);
-    removeAddTaskWindow();
+    removeDetailedTaskWindow();
 }
 
 function filterTasks() {

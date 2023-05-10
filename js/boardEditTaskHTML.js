@@ -6,7 +6,7 @@ function getEditTaskHTML(id) {
     popup.innerHTML = `
         <div class="popup-task" onclick="stopPropagation(event)">
         <form class="edit-task-form w-100" onsubmit="saveEditedTaskInformation(${id}); return false">
-            <img class="back-btn back-btn-popup back-btn-none" src="./img/plus.png" onclick="removeAddTaskWindow(); clearVariables()">
+            <img class="back-btn back-btn-popup back-btn-none" src="./img/plus.png" onclick="removeDetailedTaskWindow(); clearVariables()">
             <div class="popup-text-boxes">
                 <h4 class="addTask-form-headlines">Title</h4>
                 <input id="editTaskTitle" placeholder="Enter a title" maxlength="40" value="${task['headline']}" required>

@@ -1,15 +1,16 @@
 function getDetailedTaskHTML(id) {
-    document.getElementById('boardPage').classList.add('of-hidden');
     let task = tasks[id];
     let topicName = topics[task['topic']]['name'];
     let topicColor = topics[task['topic']]['color'];
     let popup = document.getElementById('popupWindow');
     popup.classList.remove('d-none');
+    popup.classList.remove('light');
+    popup.classList.add('dark');
     popup.innerHTML = '';
     popup.innerHTML = `
         <div class="popup-task" onclick="stopPropagation(event)">
-            <img class="back-btn back-btn-none" src="./img/plus.png" onclick="removeAddTaskWindow()">
-            <img src="./img/back_arrow.png" class="back-arrow-responsive-popup" onclick="removeAddTaskWindow()">
+            <img class="back-btn back-btn-none" src="./img/plus.png" onclick="removeDetailedTaskWindow()">
+            <img src="./img/back_arrow.png" class="back-arrow-responsive-popup" onclick="removeDetailedTaskWindow()">
             <div class="edit-and-delete-box">
                 <img class="delete-btn" src="./img/delete.png" onclick="deleteShownTask(${id})">
                 <img class="edit-btn" src="./img/pencil_white.png" onclick="editDetailedTask(${id})">
