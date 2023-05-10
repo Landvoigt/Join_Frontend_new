@@ -30,7 +30,6 @@ function setUsernameToGreet(){
     if(currentUser){
        document.getElementById('userFirstName').innerHTML=`${currentUser[0]['name']}`;
     }
-    
 }
 
 
@@ -48,35 +47,3 @@ function checkForTaskNumbers() {
     document.getElementById('doneTasksNr').innerHTML = done.length;;
     document.getElementById('urgentTasksNr').innerHTML = urgentTasks.length;
 }
-
-/** 
-    let toDos = 0;
-    let progressTasks = 0;
-    let awaitTasks = 0;
-    let doneTasks = 0;
-    let urgentTasks = 0;
-    for (let i = 0; i < tasks.length; i++) {
-        let cat = tasks[i]['category'];
-        let prio = tasks[i]['prioName'];
-        if(cat == 'toDo'){
-            toDos++;
-        } 
-        if(cat == 'inProgress'){
-            progressTasks++;
-        } 
-        if(cat == 'awaitFeedback'){
-            awaitTasks++;
-        } 
-        if(cat == 'done'){
-            doneTasks++;
-        } 
-        if(prio == 'urgent'){
-            urgentTasks++;
-        } 
-    }
-    document.getElementById('progressTasksNr').innerHTML = progressTasks;
-    document.getElementById('waitingTasksNr').innerHTML = awaitTasks;
-    document.getElementById('toDoTasksNr').innerHTML = toDos;
-    document.getElementById('doneTasksNr').innerHTML = doneTasks;
-    document.getElementById('urgentTasksNr').innerHTML = urgentTasks;
-    */
