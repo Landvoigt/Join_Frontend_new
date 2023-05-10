@@ -4,7 +4,6 @@ async function initialize() {
     await loadTasks();
     await loadTopics();
     showMainpage();
-    debugger
     loadDate();
     checkForTaskNumbers();
 }
