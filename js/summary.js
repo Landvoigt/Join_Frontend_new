@@ -9,11 +9,11 @@ function loadDate() {
     });
     dateContainer.innerHTML = formattedDate;
     greetAccordingToTime(currenthour);
-    setUsernameToGreet()
+    setUsernameToGreet();
 }
 
 
-function greetAccordingToTime(currenthour) { 
+function greetAccordingToTime(currenthour) {
     if (currenthour > 5 && currenthour <= 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
     } if (currenthour > 12 && currenthour <= 18) {
@@ -26,9 +26,12 @@ function greetAccordingToTime(currenthour) {
 }
 
 
-function setUsernameToGreet(){
-    if(currentUser){
-       document.getElementById('userFirstName').innerHTML=`${currentUser[0]['name']}`;
+function setUsernameToGreet() {
+    if (currentUser.length == 0) {
+        document.getElementById('userFirstName').innerHTML = 'Dear Guest';
+    }
+    else {
+        document.getElementById('userFirstName').innerHTML = `${currentUser[0]['name']}`;
     }
 }
 
@@ -44,6 +47,6 @@ function checkForTaskNumbers() {
     document.getElementById('toDoTasksNr').innerHTML = toDos.length;
     document.getElementById('progressTasksNr').innerHTML = progressTasks.length;
     document.getElementById('waitingTasksNr').innerHTML = awaitFeedback.length;
-    document.getElementById('doneTasksNr').innerHTML = done.length;;
+    document.getElementById('doneTasksNr').innerHTML = done.length;
     document.getElementById('urgentTasksNr').innerHTML = urgentTasks.length;
 }
