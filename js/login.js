@@ -32,6 +32,7 @@ async function init() {
   }, 300);
 }
 
+
 /**
  * Renders the login form, loading user data beforehand.
  * @async
@@ -43,6 +44,7 @@ async function renderLogin() {
   header.classList.remove("d-none");
   await loadUsers();
 }
+
 
 /**
  * Changes the password input field icon when the user types or clears their password.
@@ -67,6 +69,7 @@ async function changePWSymbol() {
   }
 }
 
+
 /**
  * Toggles the visibility of the password input field.
  * @async
@@ -85,11 +88,11 @@ async function visibilityPass() {
   }
 }
 
+
 /**
  * Returns the HTML template for the login form.
  * @returns {string} The HTML template for the login form.
  */
-
 function loginTemplate() {
   return /*html*/`
             <div class="cardHeaderContainer">
@@ -120,6 +123,7 @@ function loginTemplate() {
   `;
 }
 
+
 /**
  * Changes the view to the sign up form
  * @function
@@ -131,12 +135,12 @@ function signUp() {
   card.innerHTML = signUpTemplate();
 }
 
+
 /**
  * Generates the HTML template for the sign up form
  * @function
  * @returns {string} - The sign up form HTML template
  */
-
 function signUpTemplate() {
   return `
           <form class="signUpForm" onsubmit="register(); return false;">
@@ -168,6 +172,8 @@ function signUpTemplate() {
           </form>
   `;
 }
+
+
 /**
  * Changes the view to the new password form
  * @function
@@ -179,12 +185,12 @@ function newPassword() {
   card.innerHTML = newPasswordTemplate();
 }
 
+
 /**
  * Generates the HTML template for the new password form
  * @function
  * @returns {string} - The new password form HTML template
  */
-
 function newPasswordTemplate() {
   return `
     <div class="signupHeaderContainer">
@@ -209,6 +215,7 @@ function newPasswordTemplate() {
   `;
 }
 
+
 /**
  * Changes the view to the reset password form
  * @function
@@ -228,6 +235,7 @@ function resetPassword() {
   currentUserForNewPassword.push(user);
   card.innerHTML = resetPasswordTemplate();
 }
+
 
 /**
  * Generates the HTML template for the reset password form
@@ -262,6 +270,7 @@ function resetPasswordTemplate() {
   `;
 }
 
+
 /**
  * Updates the user's password and saves it to the database
  * @function
@@ -285,6 +294,7 @@ async function updatePassword() {
   } 
 }
 
+
 /**
  * Displays a success message when the user's password has been reset.
  * @returns {void}
@@ -293,6 +303,7 @@ function showSuccessfullyResettedPassword(){
   createdSuccessfully();
   document.getElementById('created-successfully-logo').innerHTML='Your password has been reset!';
 }
+
 
 /**
  * Logs the user into the application.
@@ -318,6 +329,7 @@ function login() {
   forwardToMainPage();
 }
 
+
 /**
  * Creates a new user session.
  * @param {Object} user - The user object.
@@ -329,6 +341,7 @@ function createCurrentUser(user) {
   console.log(currentUser);
 }
 
+
 /**
  * Redirects the user to the main page of the application.
  * @returns {void}
@@ -336,6 +349,7 @@ function createCurrentUser(user) {
 function forwardToMainPage() {
   window.location.href = "../mainpage.html";
 }
+
 
 /**
  * Logs the user out of the application.

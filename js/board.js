@@ -7,6 +7,7 @@ async function loadTasks() {
     updateTasks();
 }
 
+
 async function loadTopics() {
     try {
         topics = JSON.parse(await getItem('topics'));
@@ -15,13 +16,16 @@ async function loadTopics() {
     }
 }
 
+
 async function setItemTasks(tasks) {
     await setItem('tasks', JSON.stringify(tasks));
 }
 
+
 async function setItemTopics(topics) {
     await setItem('topics', JSON.stringify(topics));
 }
+
 
 function updateTasks() {
     updateTaskSection('toDo');
@@ -29,6 +33,7 @@ function updateTasks() {
     updateTaskSection('awaitFeedback');
     updateTaskSection('done');
 }
+
 
 function updateTaskSection(id) {
     let cat = tasks.filter(t => t['category'] == `${id}`);
@@ -41,6 +46,7 @@ function updateTaskSection(id) {
     }
 }
 
+
 function getTaskInformationFromArray(task, taskSection) {
     let topicName = topics[task['topic']]['name'];
     let topicColor = topics[task['topic']]['color'];
@@ -50,6 +56,7 @@ function getTaskInformationFromArray(task, taskSection) {
     generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount);
     showClients(task);
 }
+
 
 function generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount) {
     taskSection.innerHTML +=
@@ -73,6 +80,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
     `;
 }
 
+
 function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
     let clientsAmount = task['clients'].length;
@@ -83,6 +91,7 @@ function showClients(task) {
         changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
     }
 }
+
 
 function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color) {
     if (i < 2) {
@@ -101,16 +110,19 @@ function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initi
     }
 }
 
+
 function generateAssignedClientHTML(clientSection, initials, color) {
     clientSection.innerHTML += `
         <div class="task-client" style="background-color:${color};">${initials}</div>
     `;
 }
 
+
 function moveClientDivLeft(clientSection) {
     clientSection.getElementsByTagName('div')[1].classList.add('m-l-negative');
     clientSection.getElementsByTagName('div')[2].classList.add('m-l-negative');
 }
+
 
 function startDragging(id) {
     currentDraggedElement = id;
@@ -120,29 +132,35 @@ function allowDrop(event) {
     event.preventDefault();
 }
 
+
 async function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
     await setItemTasks(tasks);
     updateTasks();
 }
 
+
 function showHighlight(id) {
     document.getElementById(id).classList.add('drag-over-highlight');
 }
 
+
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-over-highlight');
 }
+
 
 function changeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus_lightblue.png";
 }
 
+
 function removeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus.png";
 }
+
 
 function checkForSubtasks(task, id) {
     let subtasksAmount = task['subtasks'].length;
@@ -155,12 +173,14 @@ function checkForSubtasks(task, id) {
     }
 }
 
+
 function showDetailedTask(id) {
     checkPriority(id);
     getDetailedTaskHTML(id);
     showDetailedAssignedClients(id);
     checkForExistingSubtasks(id);
 }
+
 
 function removeDetailedTaskWindow() {
     let popupWindow = document.getElementById('popupWindow');
@@ -169,6 +189,7 @@ function removeDetailedTaskWindow() {
     popupWindow.innerHTML = '';
     setTimeout(deleteDarkBackground, 325);
 }
+
 
 function showDetailedAssignedClients(id) {
     let task = tasks[id];
@@ -188,6 +209,7 @@ function showDetailedAssignedClients(id) {
     }
 }
 
+
 function showDetailedSubtasks(task, id) {
     let subtaskSection = document.getElementById(`popupSubtaskSection${id}`);
     for (let i = 0; i < task['subtasks'].length; i++) {
@@ -202,6 +224,7 @@ function showDetailedSubtasks(task, id) {
     }
 }
 
+
 function getSubtaskHTML(subtaskSection, subtask) {
     subtaskSection.innerHTML += `
     <div class="d-flex gap-8">
@@ -211,6 +234,7 @@ function getSubtaskHTML(subtaskSection, subtask) {
     `;
 }
 
+
 function getCrossedOutSubtaskHTML(subtaskSection, subtask) {
     subtaskSection.innerHTML += `
     <div class="d-flex gap-8">
@@ -219,6 +243,7 @@ function getCrossedOutSubtaskHTML(subtaskSection, subtask) {
     </div>
     `;
 }
+
 
 function checkPriority(id) {
     let prio = tasks[id]['prioName'];
@@ -236,6 +261,7 @@ function checkPriority(id) {
     }
 }
 
+
 function editDetailedTask(id) {
     resetIDs();
     currentAssignedClients = [];
@@ -250,6 +276,7 @@ function editDetailedTask(id) {
     renderSubtasks();
 }
 
+
 function pushAssignedClientsToArray(id) {
     let clients = tasks[id]['clients'];
     for (let i = 0; i < clients.length; i++) {
@@ -258,6 +285,7 @@ function pushAssignedClientsToArray(id) {
     }
 }
 
+
 function pushAttachedSubtasksToArray(id) {
     let subtasks = tasks[id]['subtasks'];
     for (let i = 0; i < subtasks.length; i++) {
@@ -265,6 +293,7 @@ function pushAttachedSubtasksToArray(id) {
         currentSubtasks.push(subtask);
     }
 }
+
 
 function checkForExistingSubtasks(id) {
     let task = tasks[id];
@@ -276,6 +305,7 @@ function checkForExistingSubtasks(id) {
         showDetailedSubtasks(task, id);
     }
 }
+
 
 async function deleteShownTask(id) {
     try {
@@ -297,6 +327,7 @@ async function deleteShownTask(id) {
     clearVariables();
 }
 
+
 async function updateTasksID() {
     try {
         let tasks = JSON.parse(await getItem('tasks'));
@@ -308,6 +339,7 @@ async function updateTasksID() {
         console.error('Refreshing IDs error:', e);
     }
 }
+
 
 async function saveEditedTaskInformation(id) {
     if (fieldsFilledCorrectly == false) {
@@ -321,6 +353,7 @@ async function saveEditedTaskInformation(id) {
         clearVariables();
     }
 }
+
 
 async function updateTaskInformation(id, title, desc, date) {
     tasks[id] = {
@@ -340,12 +373,14 @@ async function updateTaskInformation(id, title, desc, date) {
     removeDetailedTaskWindow();
 }
 
+
 function filterTasks() {
     showFilteredTasks('toDo');
     showFilteredTasks('inProgress');
     showFilteredTasks('awaitFeedback');
     showFilteredTasks('done');
 }
+
 
 function showFilteredTasks(id) {
     let searchField = document.getElementById('searchTasks').value.toLowerCase();
@@ -366,6 +401,7 @@ function showFilteredTasks(id) {
         }
     }
 }
+
 
 function clearSearchField() {
     document.getElementById('searchTasks').value = '';

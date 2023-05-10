@@ -12,6 +12,7 @@ function loadDate() {
     setUsernameToGreet()
 }
 
+
 function greetAccordingToTime(currenthour) { 
     if (currenthour > 5 && currenthour <= 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
@@ -23,12 +24,16 @@ function greetAccordingToTime(currenthour) {
         document.getElementById('greeting').innerHTML = 'Good Night';
     }
 }
+
+
 function setUsernameToGreet(){
     if(currentUser){
        document.getElementById('userFirstName').innerHTML=`${currentUser[0]['name']}`;
     }
     
 }
+
+
 function checkForTaskNumbers() {
     let allTasks = document.getElementById('allTasksNr');
     const toDos = tasks.filter(t => t.category === 'toDo');
@@ -42,7 +47,6 @@ function checkForTaskNumbers() {
     document.getElementById('waitingTasksNr').innerHTML = awaitFeedback.length;
     document.getElementById('doneTasksNr').innerHTML = done.length;;
     document.getElementById('urgentTasksNr').innerHTML = urgentTasks.length;
-
 }
 
 /** 

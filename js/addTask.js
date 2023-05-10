@@ -34,9 +34,11 @@ function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
     currentPrioImageSource = `./img/prio_${shownPrio}.png`;
 }
 
+
 function showCurrentDate(id) {
     document.getElementById(id).value = new Date().toLocaleDateString('en-GB');
 }
+
 
 function showAddTaskWindow() {
     resetIDs();
@@ -52,6 +54,7 @@ function showAddTaskWindow() {
     emptyFieldPopupPositioning();
 }
 
+
 function getPopupContainerHTML() {
     return `
     <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
@@ -59,6 +62,7 @@ function getPopupContainerHTML() {
     </div>
     `;
 }
+
 
 function resetIDs() {
     let popupWindow = document.getElementById('popupWindow');
@@ -70,6 +74,7 @@ function resetIDs() {
     addTaskSite.innerHTML = '';
     return popupWindow
 }
+
 
 function showSelection(select, container) {
     let options = document.getElementById(`${select}`);
@@ -89,6 +94,7 @@ function showSelection(select, container) {
     }
 }
 
+
 function closeDropdown() {
     let closeOptions = document.querySelectorAll('.category-selection');
     let removeBorder = document.querySelectorAll('.dropdown');
@@ -98,6 +104,7 @@ function closeDropdown() {
     }
     showCheckBoxes = !showCheckBoxes;
 }
+
 
 function generateTaskCategories() {
     let select = document.getElementById('categorySelection');
@@ -112,6 +119,7 @@ function generateTaskCategories() {
         `;
     }
 }
+
 
 function showSelectedCategory(i) {
     let container = document.getElementById('categoryDropdown');
@@ -128,6 +136,7 @@ function showSelectedCategory(i) {
     currentPickedColor = color;
 }
 
+
 function generateContacts() {
     let select = document.getElementById('contactsSelection');
     for (let i = 0; i < contacts.length; i++) {
@@ -142,6 +151,7 @@ function generateContacts() {
     showAssignedClients();
 }
 
+
 function addOrRemoveClients(i) {
     let checkbox = document.getElementById(`contactCheckbox${i}`);
     if (checkbox.checked != true) {
@@ -153,6 +163,7 @@ function addOrRemoveClients(i) {
     }
 }
 
+
 function removeClient(i) {
     let clientID = currentAssignedClients.indexOf(`${i}`);
     currentAssignedClients.splice(clientID, 1);
@@ -161,6 +172,7 @@ function removeClient(i) {
     let client = document.getElementById(`addedClient${i}`);
     client.remove();
 }
+
 
 function showAssignedClients() {
     let dropdown = document.getElementById('addedClientsBox');
@@ -172,6 +184,7 @@ function showAssignedClients() {
         checkbox.checked = true;
     }
 }
+
 
 function createAssignedClientContainer(id) {
     let dropdown = document.getElementById('addedClientsBox');
@@ -185,6 +198,7 @@ function createAssignedClientContainer(id) {
         `;
 }
 
+
 function removeAddTaskWindow() {
     let popupWindow = document.getElementById('popupWindow');
     let popupBox = document.getElementById('popupContainer');
@@ -195,11 +209,13 @@ function removeAddTaskWindow() {
     setTimeout(deleteDarkBackground, 1200);
 }
 
+
 function deleteDarkBackground() {
     let popupWindow = document.getElementById('popupWindow');
     popupWindow.classList.add('d-none');
     popupWindow.innerHTML = '';
 }
+
 
 function createNewCategoryInAddTask() {
     currentCat = '';
@@ -233,6 +249,7 @@ function createNewCategoryInAddTask() {
     `;
 }
 
+
 function resetAddCategorySection() {
     let select = document.getElementById('categoryDropdownSection');
     select.innerHTML = `
@@ -250,6 +267,7 @@ function resetAddCategorySection() {
     showCheckBoxes = !showCheckBoxes;
 }
 
+
 function addBorderToPickedColor(id) {
     const colors = document.querySelectorAll('.dot-hover');
     for (let i = 0; i < colors.length; i++) {
@@ -258,6 +276,7 @@ function addBorderToPickedColor(id) {
     let pickedColor = document.getElementById(`${id}`);
     pickedColor.classList.add('color-dot-bg');
 }
+
 
 async function addCategory() {
     checkPickedColor();
@@ -279,9 +298,6 @@ async function addCategory() {
     currentCat = topics.length - 1;
 }
 
-async function newbubi() {
-
-}
 
 function checkPickedColor() {
     if (currentPickedColor == '') {
@@ -298,6 +314,7 @@ function checkPickedColor() {
     }
 }
 
+
 function createNewSubtask() {
     let container = document.getElementById('addSubtasksSection');
     container.innerHTML = `
@@ -313,6 +330,7 @@ function createNewSubtask() {
     `;
     getFocusOnInputField('subtaskInput');
 }
+
 
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
@@ -331,6 +349,7 @@ function renderSubtasks() {
     }
 }
 
+
 function getSubtaskBoxHTML(i, text, checkmark) {
     return `
     <div class="addTask-subtask-container">
@@ -340,17 +359,31 @@ function getSubtaskBoxHTML(i, text, checkmark) {
     `;
 }
 
+
 function addSubtask() {
     let input = document.getElementById('subtaskInput');
-    currentSubtasks.push(
-        {
-            'text': input.value,
-            'status': false
-        }
-    );
-    input.value = '';
-    clearSubtaskSection();
+    if (input.value.length > 1) {
+        currentSubtasks.push(
+            {
+                'text': input.value,
+                'status': false
+            }
+        );
+        input.value = '';
+        clearSubtaskSection();
+    }
 }
+
+
+function test(){
+    let subtaskInputField = document.getElementById('subtaskInput');
+    subtaskInputField.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {  //checks whether the pressed key is "Enter"
+            addSubtask();
+        }
+    });
+}
+
 
 function clearSubtaskSection() {
     let container = document.getElementById('addSubtasksSection');
@@ -364,6 +397,7 @@ function clearSubtaskSection() {
     renderSubtasks();
 }
 
+
 function changeSubtaskStatus(i) {
     if (currentSubtasks[i]['status'] === true) {
         currentSubtasks[i]['status'] = false;
@@ -372,6 +406,7 @@ function changeSubtaskStatus(i) {
         currentSubtasks[i]['status'] = true;
     }
 }
+
 
 function checkForEmptyFields() {
     if (currentCat.length == 0 && currentPrio.length == 0) {
@@ -393,6 +428,7 @@ function checkForEmptyFields() {
     }
 }
 
+
 function getInputsFromForm() {
     if (fieldsFilledCorrectly == false) {
         checkForEmptyFields();
@@ -404,6 +440,7 @@ function getInputsFromForm() {
         addTask(title, desc, date);
     }
 }
+
 
 async function addTask(title, desc, date) {
     tasks.push(
@@ -426,6 +463,7 @@ async function addTask(title, desc, date) {
     removeAddTaskWindow();
 }
 
+
 function showSuccessfullyCreatedLogo() {
     createdSuccessfully();
     document.getElementById('created-successfully-logo').innerHTML = 'Task added successfully';
@@ -436,6 +474,7 @@ function removeFillFieldPopup(id) {
     document.getElementById(id).classList.add('d-none');
 }
 
+
 function clearVariables() {
     currentCat = "";
     currentPrio = "";
@@ -445,12 +484,14 @@ function clearVariables() {
     fieldsFilledCorrectly = false;
 }
 
+
 function emptyFieldPopupPositioning() {
     let emptyCat = document.getElementById('emptyInputPopupCat');
     let emptyPrio = document.getElementById('emptyInputPopupPrio');
     emptyCat.classList.add('empty-field-popup-repositioning-1');
     emptyPrio.classList.add('empty-field-popup-repositioning-2');
 }
+
 
 function clearAddTaskSide() {
     clearVariables();
@@ -465,6 +506,7 @@ function clearAddTaskSide() {
     clearSubtaskSection();
 }
 
+
 function getTopicDropdownHTML() {
     return `
     <h4 class="addTask-form-headlines">Category</h4>
@@ -478,6 +520,7 @@ function getTopicDropdownHTML() {
     </div>
     `;
 }
+
 
 function getPrioContainerHTML() {
     return `

@@ -12,6 +12,7 @@ function singleContactBoxTemplate(i,id,contact,firstName,lastName){
 `;
 }
 
+
 function openContactTemplate(firstNames,lastNames,id){
     return/*html*/`
     <div class="d-flex">
