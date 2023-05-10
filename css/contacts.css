@@ -581,18 +581,6 @@
     position: absolute;
     bottom: 150px;
     right: 50px;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#delete-btn-2 {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-#edit-btn-2 {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
 }
 
 .add-contact-headlines-box {
@@ -788,5 +776,9 @@
 
     #create-btn {
         font-size: 16px;
+    }
+
+    .edit-and-delete-box-2 {
+        flex-direction: column;
     }
 }
