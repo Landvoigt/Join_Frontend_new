@@ -767,6 +767,7 @@
 @media(max-width:600px) {
     .contacts-list {
         padding-top: 60px;
+        padding-bottom: 60px;
     }
 
     #add-contact {
