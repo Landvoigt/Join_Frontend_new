@@ -9,10 +9,11 @@ function loadDate() {
     });
     dateContainer.innerHTML = formattedDate;
     greetAccordingToTime(currenthour);
-    setUsernameToGreet()
+    setUsernameToGreet();
 }
 
-function greetAccordingToTime(currenthour) { 
+
+function greetAccordingToTime(currenthour) {
     if (currenthour > 5 && currenthour <= 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
     } if (currenthour > 12 && currenthour <= 18) {
@@ -23,12 +24,18 @@ function greetAccordingToTime(currenthour) {
         document.getElementById('greeting').innerHTML = 'Good Night';
     }
 }
-function setUsernameToGreet(){
-    if(currentUser){
-       document.getElementById('userFirstName').innerHTML=`${currentUser[0]['name']}`;
+
+
+function setUsernameToGreet() {
+    if (currentUser.length == 0) {
+        document.getElementById('userFirstName').innerHTML = 'Dear Guest';
     }
-    
+    else {
+        document.getElementById('userFirstName').innerHTML = `${currentUser[0]['name']}`;
+    }
 }
+
+
 function checkForTaskNumbers() {
     let allTasks = document.getElementById('allTasksNr');
     const toDos = tasks.filter(t => t.category === 'toDo');
@@ -40,39 +47,6 @@ function checkForTaskNumbers() {
     document.getElementById('toDoTasksNr').innerHTML = toDos.length;
     document.getElementById('progressTasksNr').innerHTML = progressTasks.length;
     document.getElementById('waitingTasksNr').innerHTML = awaitFeedback.length;
-    document.getElementById('doneTasksNr').innerHTML = done.length;;
+    document.getElementById('doneTasksNr').innerHTML = done.length;
     document.getElementById('urgentTasksNr').innerHTML = urgentTasks.length;
-
 }
-
-/** 
-    let toDos = 0;
-    let progressTasks = 0;
-    let awaitTasks = 0;
-    let doneTasks = 0;
-    let urgentTasks = 0;
-    for (let i = 0; i < tasks.length; i++) {
-        let cat = tasks[i]['category'];
-        let prio = tasks[i]['prioName'];
-        if(cat == 'toDo'){
-            toDos++;
-        } 
-        if(cat == 'inProgress'){
-            progressTasks++;
-        } 
-        if(cat == 'awaitFeedback'){
-            awaitTasks++;
-        } 
-        if(cat == 'done'){
-            doneTasks++;
-        } 
-        if(prio == 'urgent'){
-            urgentTasks++;
-        } 
-    }
-    document.getElementById('progressTasksNr').innerHTML = progressTasks;
-    document.getElementById('waitingTasksNr').innerHTML = awaitTasks;
-    document.getElementById('toDoTasksNr').innerHTML = toDos;
-    document.getElementById('doneTasksNr').innerHTML = doneTasks;
-    document.getElementById('urgentTasksNr').innerHTML = urgentTasks;
-    */

@@ -7,22 +7,25 @@ async function loadTasks() {
     updateTasks();
 }
 
+
 async function loadTopics() {
     try {
         topics = JSON.parse(await getItem('topics'));
     } catch (e) {
         console.error('Loading error:', e);
     }
-    // updateTopics();
 }
+
 
 async function setItemTasks(tasks) {
     await setItem('tasks', JSON.stringify(tasks));
 }
 
+
 async function setItemTopics(topics) {
     await setItem('topics', JSON.stringify(topics));
 }
+
 
 function updateTasks() {
     updateTaskSection('toDo');
@@ -30,6 +33,7 @@ function updateTasks() {
     updateTaskSection('awaitFeedback');
     updateTaskSection('done');
 }
+
 
 function updateTaskSection(id) {
     let cat = tasks.filter(t => t['category'] == `${id}`);
@@ -42,6 +46,7 @@ function updateTaskSection(id) {
     }
 }
 
+
 function getTaskInformationFromArray(task, taskSection) {
     let topicName = topics[task['topic']]['name'];
     let topicColor = topics[task['topic']]['color'];
@@ -51,6 +56,7 @@ function getTaskInformationFromArray(task, taskSection) {
     generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount);
     showClients(task);
 }
+
 
 function generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount) {
     taskSection.innerHTML +=
@@ -74,6 +80,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
     `;
 }
 
+
 function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
     let clientsAmount = task['clients'].length;
@@ -84,6 +91,7 @@ function showClients(task) {
         changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
     }
 }
+
 
 function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color) {
     if (i < 2) {
@@ -102,16 +110,19 @@ function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initi
     }
 }
 
+
 function generateAssignedClientHTML(clientSection, initials, color) {
     clientSection.innerHTML += `
         <div class="task-client" style="background-color:${color};">${initials}</div>
     `;
 }
 
+
 function moveClientDivLeft(clientSection) {
     clientSection.getElementsByTagName('div')[1].classList.add('m-l-negative');
     clientSection.getElementsByTagName('div')[2].classList.add('m-l-negative');
 }
+
 
 function startDragging(id) {
     currentDraggedElement = id;
@@ -121,29 +132,35 @@ function allowDrop(event) {
     event.preventDefault();
 }
 
+
 async function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
     await setItemTasks(tasks);
     updateTasks();
 }
 
+
 function showHighlight(id) {
     document.getElementById(id).classList.add('drag-over-highlight');
 }
 
+
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-over-highlight');
 }
+
 
 function changeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus_lightblue.png";
 }
 
+
 function removeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus.png";
 }
+
 
 function checkForSubtasks(task, id) {
     let subtasksAmount = task['subtasks'].length;
@@ -156,180 +173,6 @@ function checkForSubtasks(task, id) {
     }
 }
 
-function showDetailedTask(id) {
-    checkPriority(id);
-    getDetailedTaskHTML(id);
-    showDetailedAssignedClients(id);
-    checkForExistingSubtasks(id);
-}
-
-function showDetailedAssignedClients(id) {
-    let task = tasks[id];
-    let clientsSection = document.getElementById(`popupClientSection${id}`);
-    for (let i = 0; i < task['clients'].length; i++) {
-        let clientNumber = task['clients'][i];
-        let initials = contacts[clientNumber]['initials'];
-        let color = contacts[clientNumber]['color'];
-        let firstName = contacts[clientNumber]['firstname'];
-        let lastName = contacts[clientNumber]['lastname'];
-        clientsSection.innerHTML += `
-            <div class="popup-client-box">
-                <div class="task-client task-client-big" style="background-color:${color};">${initials}</div>
-                <span class="popup-client-span">${firstName} ${lastName}</span>
-            </div>
-            `;
-    }
-}
-
-function showDetailedSubtasks(task, id) {
-    let subtaskSection = document.getElementById(`popupSubtaskSection${id}`);
-    for (let i = 0; i < task['subtasks'].length; i++) {
-        let subtask = task['subtasks'][i]['text'];
-        let status = task['subtasks'][i]['status'];
-        if (status == true) {
-            getCrossedOutSubtaskHTML(subtaskSection, subtask);
-        }
-        if (status == false) {
-            getSubtaskHTML(subtaskSection, subtask);
-        }
-    }
-}
-
-function getSubtaskHTML(subtaskSection, subtask) {
-    subtaskSection.innerHTML += `
-    <div class="d-flex gap-8">
-        <span>-</span>
-        <span class="popup-subtask-span">${subtask}</span>
-    </div>
-    `;
-}
-
-function getCrossedOutSubtaskHTML(subtaskSection, subtask) {
-    subtaskSection.innerHTML += `
-    <div class="d-flex gap-8">
-        <span class="opa-03">-</span>
-        <span class="popup-subtask-span line-through opa-03">${subtask}</span>
-    </div>
-    `;
-}
-
-function checkPriority(id) {
-    let prio = tasks[id]['prioName'];
-    if (prio == 'urgent') {
-        currentPrioColor = '#ff3d00';
-        currentPrio = prio;
-    }
-    if (prio == 'medium') {
-        currentPrioColor = '#ffa800';
-        currentPrio = prio;
-    }
-    if (prio == 'low') {
-        currentPrioColor = '#7ae229';
-        currentPrio = prio;
-    }
-}
-
-function editDetailedTask(id) {
-    resetIDs();
-    currentAssignedClients = [];
-    currentSubtasks = [];
-    currentCat = tasks[id]['topic'];
-    currentAssasignation = tasks[id]['category'];
-    getEditTaskHTML(id);
-    addPrioColor(currentPrio);
-    pushAssignedClientsToArray(id);
-    generateContacts();
-    pushAttachedSubtasksToArray(id);
-    renderSubtasks();
-}
-
-function pushAssignedClientsToArray(id) {
-    let clients = tasks[id]['clients'];
-    for (let i = 0; i < clients.length; i++) {
-        let contact = clients[i];
-        currentAssignedClients.push(contact);
-    }
-}
-
-function pushAttachedSubtasksToArray(id) {
-    let subtasks = tasks[id]['subtasks'];
-    for (let i = 0; i < subtasks.length; i++) {
-        let subtask = subtasks[i];
-        currentSubtasks.push(subtask);
-    }
-}
-
-function checkForExistingSubtasks(id) {
-    let task = tasks[id];
-    if (task['subtasks'].length == 0) {
-        let subtaskHL = document.getElementById(`popupSubtaskHeadline${id}`);
-        subtaskHL.classList.add('d-none');
-    }
-    else {
-        showDetailedSubtasks(task, id);
-    }
-}
-
-async function deleteShownTask(id) {
-    try {
-        let tasks = JSON.parse(await getItem('tasks'));
-        let index = tasks.findIndex(t => t.id === id);
-        if (index !== -1) {
-            tasks.splice(index, 1);
-            await setItem('tasks', JSON.stringify(tasks));
-            console.log(`task${id} has been deleted.`);
-        } else {
-            console.log(`task${id} not found.`);
-        }
-    } catch (e) {
-        console.error('Deleting error:', e);
-    }
-    removeAddTaskWindow();
-    await updateTasksID();
-    loadTasks();
-}
-
-async function updateTasksID() {
-    try {
-        let tasks = JSON.parse(await getItem('tasks'));
-        for (let i = 0; i < tasks.length; i++) {
-            tasks[i]['id'] = i;
-            await setItem('tasks', JSON.stringify(tasks));
-        }
-    } catch (e) {
-        console.error('Refreshing IDs error:', e);
-    }
-}
-
-async function saveEditedTaskInformation(id) {
-    if (fieldsFilledCorrectly == false) {
-        checkForEmptyFields();
-    }
-    if (fieldsFilledCorrectly == true) {
-        let title = document.getElementById('editTaskTitle').value;
-        let desc = document.getElementById('editTaskDesc').value;
-        let date = document.getElementById('editTaskDate').value;
-        await updateTaskInformation(id, title, desc, date);
-    }
-}
-
-async function updateTaskInformation(id, title, desc, date) {
-    tasks[id] = {
-        'id': id,
-        'category': currentAssasignation,
-        'topic': currentCat,
-        'headline': title,
-        'description': desc,
-        'date': date,
-        'subtasks': currentSubtasks,
-        'clients': currentAssignedClients,
-        'prioName': currentPrio,
-        'prioImg': currentPrioImageSource,
-    };
-    await setItemTasks(tasks);
-    updateTasks(id);
-    removeAddTaskWindow();
-}
 
 function filterTasks() {
     showFilteredTasks('toDo');
@@ -337,6 +180,7 @@ function filterTasks() {
     showFilteredTasks('awaitFeedback');
     showFilteredTasks('done');
 }
+
 
 function showFilteredTasks(id) {
     let searchField = document.getElementById('searchTasks').value.toLowerCase();
@@ -356,8 +200,4 @@ function showFilteredTasks(id) {
             checkForSubtasks(task, task['id']);
         }
     }
-}
-
-function clearSearchField() {
-    document.getElementById('searchTasks').value = '';
 }

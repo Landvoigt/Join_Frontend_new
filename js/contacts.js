@@ -1,10 +1,3 @@
-let contacts = [];
-let letters = [];
-let contactsRandomColor;
-let lastSelectedContact;
-let firstname;
-let ID;
-let mediaQuery = window.matchMedia("(max-width: 1050px)");
 async function loadContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
@@ -13,9 +6,11 @@ async function loadContacts() {
     }
 }
 
+
 async function setItemContacts(contacts) {
     await setItem('contacts', JSON.stringify(contacts));
 }
+
 
 async function pushFirstLetter() {
     await loadContacts();
@@ -45,6 +40,7 @@ async function pushFirstLetter() {
     createRandomColor();
 }
 
+
 function renderLetters() {
     let contactsList = document.getElementById('contact-list');
     contactsList.innerHTML = '';
@@ -58,6 +54,7 @@ function renderLetters() {
     }
 }
 
+
 async function renderContacts(id) {
     let letterBox = document.getElementById(`${id}`);
 
@@ -70,6 +67,8 @@ async function renderContacts(id) {
         }
     }
 }
+
+
 function openContact(id) {
     highlightSelectedContact(id)
     ID = id;
@@ -82,6 +81,8 @@ function openContact(id) {
         removeAndAddButtons();
     }
 }
+
+
 function removeAndAddButtons() {
     document.getElementById(`Create-Contact`).classList.add("d-none");
     document.getElementById('contact-card').classList.add('d-flex');
@@ -90,6 +91,8 @@ function removeAndAddButtons() {
     document.getElementById('edit-delete-box').classList.add('d-flex');
     document.getElementById('edit-contact').classList.add('d-none');
 }
+
+
 function closeContactCard() {//Responisve Design function
     if (mediaQuery.matches) {
         document.getElementById(`Create-Contact`).classList.remove("d-none");
@@ -98,6 +101,8 @@ function closeContactCard() {//Responisve Design function
         document.getElementById('edit-delete-box').classList.remove('d-flex');
     }
 }
+
+
 function highlightSelectedContact(id) {
     const currentContact = document.getElementById(`single-contact-box-${id}`);
     if (lastSelectedContact !== undefined) { //wenn lastselectedcontact nicht undefiniert wird von dem ausgewählten contact die hintergrundfarbe entfernt
@@ -107,6 +112,8 @@ function highlightSelectedContact(id) {
     lastSelectedContact = currentContact;
 
 }
+
+
 function openCreateContact() {
     let popupBG = document.getElementById('create-contact-bg');
     let contactsForm = document.getElementById('contacts-popup');
@@ -117,17 +124,18 @@ function openCreateContact() {
     popupBG.classList.remove('light');
 }
 
+
 function closeCreateContact() {
     let contactPopup = document.getElementById('contacts-popup');
     document.getElementById('create-contact-bg').classList.remove('dark');
-    contactPopup.classList.remove('move-in')
+    contactPopup.classList.remove('move-in');
     document.getElementById('create-contact-bg').classList.add('light');
     contactPopup.classList.add('move-out');
     setTimeout(function () {
         document.getElementById('create-contact-bg').classList.add('d-none');
     }, 1200);
-
 }
+
 
 async function createNewContact() {
     let Firstname = document.getElementById('contacts-firstname').value;
@@ -155,9 +163,11 @@ async function createNewContact() {
     document.getElementById('contactsSelection').innerHTML = '';
     generateContacts();
 }
+
+
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
-    banner.innerHTML='Contact Successfully Created';
+    banner.innerHTML = 'Contact Successfully Created';
     banner.classList.remove('move-down', 'd-none');
     banner.classList.add('move-up');
     setTimeout(function () {
@@ -169,6 +179,8 @@ function createdSuccessfully() {
     }, 2000);
 
 }
+
+
 function resetInputValue() {
     let addContactForms = document.querySelectorAll('.add-contact-form');
 
@@ -177,6 +189,8 @@ function resetInputValue() {
     }
 
 }
+
+
 function openEditContact(id) {
     let editBG = document.getElementById('edit-contact-bg');
     let initalsCircle = document.getElementById('initials-circle');
@@ -184,7 +198,7 @@ function openEditContact(id) {
     editBG.classList.add('dark');
     initalsCircle.style = `background-color:${contacts[id]['color']};`
     initalsCircle.innerHTML = contacts[id]['firstname'].charAt(0) + contacts[id]['lastname'].charAt(0);
-    
+
     document.getElementById('edit-contact-popup').classList.remove('move-out');
     document.getElementById('edit-contact-popup').classList.add('move-in');
     document.getElementById('edit-firstname').value = contacts[id]['firstname'];
@@ -193,6 +207,8 @@ function openEditContact(id) {
     document.getElementById('edit-mail').value = contacts[id]['mail'];
     document.getElementById('edit-phone').value = contacts[id]['phone'];
 }
+
+
 function closeEditContact() {
     document.getElementById('edit-contact-bg').classList.add('light');
     document.getElementById('edit-contact-bg').classList.remove('dark');
@@ -202,6 +218,8 @@ function closeEditContact() {
         document.getElementById('edit-contact-bg').classList.add('d-none');
     }, 1200);
 }
+
+
 async function deleteContactByFirstname(firstname) {
     if (!firstname) {
         firstname = contacts[ID]['firstname'];
@@ -226,6 +244,7 @@ async function deleteContactByFirstname(firstname) {
     closeEditContact();
     pushFirstLetter();
 }
+
 
 async function changeFirstname() {
 

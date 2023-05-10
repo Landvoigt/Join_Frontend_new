@@ -22,7 +22,13 @@ let currentPrioImageSource;
 let currentCat = "";
 let randomColor;
 let fieldsFilledCorrectly = false;
-
+let contacts = [];
+let letters = [];
+let contactsRandomColor;
+let lastSelectedContact;
+let firstname;
+let ID;
+let mediaQuery = window.matchMedia("(max-width: 1050px)");
 
 let topics = [
     {

@@ -187,6 +187,7 @@
 }
 
 .created-successfully-logo {
+    z-index: 999;
     display: flex;
     position: absolute;
     padding: 15px;
@@ -217,11 +218,11 @@
 }
 
 .move-up {
-    animation: moveUp 1s forwards;
+    animation: moveUp 525ms forwards;
 }
 
 .move-down {
-    animation: moveDown 1s forwards;
+    animation: moveDown 525ms forwards;
 }
 
 @keyframes moveUp {
@@ -261,11 +262,11 @@
 }
 
 .dark {
-    animation: darkenBackground 1s forwards;
+    animation: darkenBackground 325ms forwards;
 }
 
 .light {
-    animation: lightenBackground 1s forwards;
+    animation: lightenBackground 325ms forwards;
 }
 
 @keyframes darkenBackground {
@@ -764,8 +765,9 @@
 }
 
 @media(max-width:600px) {
-    .contacts-list {
+    .contact-list-scrollable-div{
         padding-top: 60px;
+        padding-bottom: 60px;
     }
 
     #add-contact {

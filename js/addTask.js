@@ -34,36 +34,18 @@ function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
     currentPrioImageSource = `./img/prio_${shownPrio}.png`;
 }
 
-function showCurrentDate(id) {
-    document.getElementById(id).value = new Date().toLocaleDateString('en-GB');
-}
-
-function showAddTaskWindow() {
-    resetIDs();
-    clearVariables();
-    document.getElementById('boardPage').classList.add('of-hidden');
-    popupWindow.innerHTML = `
-        <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
-            <img class="back-btn-addTask-popup" src="./img/plus.png" onclick="removeAddTaskWindow()">
-        </div>
-        `;
-    let popupBox = document.getElementById('popupContainer');
-    popupBox.innerHTML += getAddTaskHTML();
-    generateTaskCategories();
-    generateContacts();
-    renderSubtasks();
-    document.getElementById('commitButtonsBox').style.right = '65px';
-    emptyFieldPopupPositioning();
-}
 
 function resetIDs() {
     let popupWindow = document.getElementById('popupWindow');
     popupWindow.classList.remove('d-none');
+    popupWindow.classList.remove('light');
+    popupWindow.classList.add('dark');
     popupWindow.innerHTML = '';
     let addTaskSite = document.getElementById('addTaskSite');
     addTaskSite.innerHTML = '';
     return popupWindow
 }
+
 
 function showSelection(select, container) {
     let options = document.getElementById(`${select}`);
@@ -83,6 +65,7 @@ function showSelection(select, container) {
     }
 }
 
+
 function closeDropdown() {
     let closeOptions = document.querySelectorAll('.category-selection');
     let removeBorder = document.querySelectorAll('.dropdown');
@@ -92,6 +75,7 @@ function closeDropdown() {
     }
     showCheckBoxes = !showCheckBoxes;
 }
+
 
 function generateTaskCategories() {
     let select = document.getElementById('categorySelection');
@@ -106,6 +90,7 @@ function generateTaskCategories() {
         `;
     }
 }
+
 
 function showSelectedCategory(i) {
     let container = document.getElementById('categoryDropdown');
@@ -122,6 +107,7 @@ function showSelectedCategory(i) {
     currentPickedColor = color;
 }
 
+
 function generateContacts() {
     let select = document.getElementById('contactsSelection');
     for (let i = 0; i < contacts.length; i++) {
@@ -136,6 +122,7 @@ function generateContacts() {
     showAssignedClients();
 }
 
+
 function addOrRemoveClients(i) {
     let checkbox = document.getElementById(`contactCheckbox${i}`);
     if (checkbox.checked != true) {
@@ -147,14 +134,6 @@ function addOrRemoveClients(i) {
     }
 }
 
-function removeClient(i) {
-    let clientID = currentAssignedClients.indexOf(`${i}`);
-    currentAssignedClients.splice(clientID, 1);
-    let checkbox = document.getElementById(`contactCheckbox${i}`);
-    checkbox.checked = false;
-    let client = document.getElementById(`addedClient${i}`);
-    client.remove();
-}
 
 function showAssignedClients() {
     let dropdown = document.getElementById('addedClientsBox');
@@ -166,6 +145,17 @@ function showAssignedClients() {
         checkbox.checked = true;
     }
 }
+
+
+function removeClient(i) {
+    let clientID = currentAssignedClients.indexOf(`${i}`);
+    currentAssignedClients.splice(clientID, 1);
+    let checkbox = document.getElementById(`contactCheckbox${i}`);
+    checkbox.checked = false;
+    let client = document.getElementById(`addedClient${i}`);
+    client.remove();
+}
+
 
 function createAssignedClientContainer(id) {
     let dropdown = document.getElementById('addedClientsBox');
@@ -179,44 +169,6 @@ function createAssignedClientContainer(id) {
         `;
 }
 
-function removeAddTaskWindow() {
-    let popup = document.getElementById('popupWindow');
-    popup.innerHTML = '';
-    popup.classList.add('d-none');
-    document.getElementById('boardPage').classList.remove('of-hidden');
-}
-
-function createNewCategoryInAddTask() {
-    currentCat = '';
-    let dropdown = document.getElementById('categoryDropdownSection');
-    dropdown.innerHTML = `
-        <h4 class="addTask-form-headlines">Category</h4>
-        <div class="dropdown grey-text">
-            <input id="new-cat-input" class="new-cat-input" minvalue="3" maxlength="16" placeholder="New Category Name" required>
-            <div class="create-cat-icon-box">
-                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="resetAddCategorySection()">
-                <div class="gap-line"></div>
-                <img src="./img/check_mark.png" class="create-category-icon" onclick="addCategory()">
-            </div>
-        </div>
-        <div class="new-cat-color-select-box">
-            <div id="pickColor1" class="addTask-category-dot dot-hover pointer" style="background-color:red;" 
-            onclick="addBorderToPickedColor('pickColor1'); currentPickedColor = 'red'"></div>
-            <div id="pickColor2" class="addTask-category-dot dot-hover pointer" style="background-color:orange;" 
-            onclick="addBorderToPickedColor('pickColor2'); currentPickedColor = 'orange'"></div>
-            <div id="pickColor3" class="addTask-category-dot dot-hover pointer" style="background-color:lightgreen;" 
-            onclick="addBorderToPickedColor('pickColor3'); currentPickedColor = 'lightgreen'"></div>
-            <div id="pickColor4" class="addTask-category-dot dot-hover pointer" style="background-color:lightblue;" 
-            onclick="addBorderToPickedColor('pickColor4'); currentPickedColor = 'lightblue'"></div>
-            <div id="pickColor5" class="addTask-category-dot dot-hover pointer" style="background-color:yellow;" 
-            onclick="addBorderToPickedColor('pickColor5'); currentPickedColor = 'yellow'"></div>
-            <div id="pickColor6" class="addTask-category-dot dot-hover pointer" style="background-color:aqua;" 
-            onclick="addBorderToPickedColor('pickColor6'); currentPickedColor = 'aqua'"></div>
-            <div id="pickColor7" class="addTask-category-dot dot-hover pointer" style="background-color:grey;" 
-            onclick="addBorderToPickedColor('pickColor7'); currentPickedColor = 'grey'"></div>
-        </div>
-    `;
-}
 
 function resetAddCategorySection() {
     let select = document.getElementById('categoryDropdownSection');
@@ -235,6 +187,7 @@ function resetAddCategorySection() {
     showCheckBoxes = !showCheckBoxes;
 }
 
+
 function addBorderToPickedColor(id) {
     const colors = document.querySelectorAll('.dot-hover');
     for (let i = 0; i < colors.length; i++) {
@@ -244,29 +197,29 @@ function addBorderToPickedColor(id) {
     pickedColor.classList.add('color-dot-bg');
 }
 
+
 async function addCategory() {
     checkPickedColor();
     let newCat = document.getElementById('new-cat-input');
-    topics.push(
-        {
-            'name': `${newCat.value}`,
-            'color': `${currentPickedColor}`
-        }
-    );
-    await setItemTopics(topics);
-    resetAddCategorySection();
-    document.getElementById('categoryDropdown').innerHTML = `
-    <div style="display:flex; align-items:center;">
-        <span>${newCat.value}</span>
-        <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
-    </div>
-    `;
-    currentCat = topics.length - 1;
+    if (input.value.length > 1) {
+        topics.push(
+            {
+                'name': `${newCat.value}`,
+                'color': `${currentPickedColor}`
+            }
+        );
+        await setItemTopics(topics);
+        resetAddCategorySection();
+        document.getElementById('categoryDropdown').innerHTML = `
+            <div style="display:flex; align-items:center;">
+                <span>${newCat.value}</span>
+                <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
+            </div>
+        `;
+        currentCat = topics.length - 1;
+    }
 }
 
-async function newbubi() {
-
-}
 
 function checkPickedColor() {
     if (currentPickedColor == '') {
@@ -283,12 +236,13 @@ function checkPickedColor() {
     }
 }
 
+
 function createNewSubtask() {
     let container = document.getElementById('addSubtasksSection');
     container.innerHTML = `
         <h4 class="addTask-form-headlines">Assigned to</h4>
         <div class="dropdown grey-text padding-r-15">
-            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input">
+            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input" onkeydown="addSubtaskOnEnter()">
             <div class="create-cat-icon-box">
                 <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
                 <div class="gap-line"></div>
@@ -298,10 +252,7 @@ function createNewSubtask() {
     `;
     getFocusOnInputField('subtaskInput');
 }
-function showSuccessfullyCreatedLogo() {
-    createdSuccessfully();
-    document.getElementById('created-successfully-logo').innerHTML = 'Task successfully Created !';
-}
+
 
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
@@ -320,6 +271,7 @@ function renderSubtasks() {
     }
 }
 
+
 function getSubtaskBoxHTML(i, text, checkmark) {
     return `
     <div class="addTask-subtask-container">
@@ -329,17 +281,34 @@ function getSubtaskBoxHTML(i, text, checkmark) {
     `;
 }
 
+
 function addSubtask() {
     let input = document.getElementById('subtaskInput');
-    currentSubtasks.push(
-        {
-            'text': input.value,
-            'status': false
-        }
-    );
-    input.value = '';
-    clearSubtaskSection();
+    if (input.value.length > 1) {
+        currentSubtasks.push(
+            {
+                'text': input.value,
+                'status': false
+            }
+        );
+        input.value = '';
+        clearSubtaskSection();
+    }
 }
+
+
+function addSubtaskOnEnter() {
+    let subtaskInputField = document.getElementById('subtaskInput');
+    subtaskInputField.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            addSubtask();
+        }
+    });
+}
+
 
 function clearSubtaskSection() {
     let container = document.getElementById('addSubtasksSection');
@@ -353,6 +322,7 @@ function clearSubtaskSection() {
     renderSubtasks();
 }
 
+
 function changeSubtaskStatus(i) {
     if (currentSubtasks[i]['status'] === true) {
         currentSubtasks[i]['status'] = false;
@@ -362,98 +332,6 @@ function changeSubtaskStatus(i) {
     }
 }
 
-function checkForEmptyFields() {
-    if (currentCat.length == 0 && currentPrio.length == 0) {
-        document.getElementById('emptyInputPopupCat').classList.remove('d-none');
-        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
-        document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
-        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
-    }
-    else if (currentCat.length == 0) {
-        document.getElementById('emptyInputPopupCat').classList.remove('d-none');
-        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
-    }
-    else if (currentPrio.length == 0) {
-        document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
-        setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
-    }
-    else {
-        fieldsFilledCorrectly = true;
-    }
-}
-
-function getInputsFromForm() {
-    if (fieldsFilledCorrectly == false) {
-        checkForEmptyFields();
-    }
-    if (fieldsFilledCorrectly == true) {
-        let title = document.getElementById('addTask-title-input').value;
-        let desc = document.getElementById('addTask-desc-input').value;
-        let date = document.getElementById('addTaskDate').value;
-        addTask(title, desc, date);
-    }
-}
-
-async function addTask(title, desc, date) {
-    tasks.push(
-        {
-            'id': tasks.length,
-            'category': 'toDo',
-            'topic': currentCat,
-            'headline': title,
-            'description': desc,
-            'date': date,
-            'subtasks': currentSubtasks,
-            'clients': currentAssignedClients,
-            'prioName': currentPrio,
-            'prioImg': currentPrioImageSource,
-        }
-    );
-    await setItemTasks(tasks);
-    clearVariables();
-    showTaskAddedPopup();
-    showSuccessfullyCreatedLogo();
-}
-
-function showTaskAddedPopup() {
-    let popup = document.getElementById('taskAddedPopup');
-    popup.classList.add('popup-animation');
-    setTimeout((changeSite), 900, BOARD_ID);
-    setTimeout((removeAddTaskWindow), 900);
-}
-
-function removeFillFieldPopup(id) {
-    document.getElementById(id).classList.add('d-none');
-}
-
-function clearVariables() {
-    currentCat = "";
-    currentPrio = "";
-    currentPrioImageSource = "";
-    currentAssignedClients = [];
-    currentSubtasks = [];
-    fieldsFilledCorrectly = false;
-}
-
-function emptyFieldPopupPositioning() {
-    let emptyCat = document.getElementById('emptyInputPopupCat');
-    let emptyPrio = document.getElementById('emptyInputPopupPrio');
-    emptyCat.classList.add('empty-field-popup-repositioning-1');
-    emptyPrio.classList.add('empty-field-popup-repositioning-2');
-}
-
-function clearAddTaskSide() {
-    clearVariables();
-    let dropdown = document.getElementById('categoryDropdownSection');
-    let prioSelect = document.getElementById('prioContainer');
-    dropdown.innerHTML = '';
-    dropdown.innerHTML = getTopicDropdownHTML();
-    prioSelect.innerHTML = getPrioContainerHTML();
-    generateTaskCategories();
-    generateContacts();
-    document.getElementById('addedClientsBox').innerHTML = '';
-    clearSubtaskSection();
-}
 
 function getTopicDropdownHTML() {
     return `
@@ -468,6 +346,7 @@ function getTopicDropdownHTML() {
     </div>
     `;
 }
+
 
 function getPrioContainerHTML() {
     return `
