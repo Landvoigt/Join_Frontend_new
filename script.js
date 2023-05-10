@@ -92,8 +92,29 @@ function createRandomColor() {
     contactsRandomColor = currentPickedColor;
 }
 
+
+function showCurrentDate(id) {
+    document.getElementById(id).value = new Date().toLocaleDateString('en-GB');
+}
+
+
 function getFocusOnInputField(id) {
     let input = document.getElementById(`${id}`);
     input.focus();
     input.select();
+}
+
+
+function clearVariables() {
+    currentCat = "";
+    currentPrio = "";
+    currentPrioImageSource = "";
+    currentAssignedClients = [];
+    currentSubtasks = [];
+    fieldsFilledCorrectly = false;
+}
+
+
+function clearSearchField() {
+    document.getElementById('searchTasks').value = '';
 }
