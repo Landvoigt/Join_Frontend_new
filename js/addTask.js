@@ -1,28 +1,65 @@
+/**
+ * checks if the current clicked button already contains a color, then removes the highlighted icon. 
+ * @param {*ID of clicked prio button} id 
+ */
 function addPrioColor(id) {
     let element = document.getElementById(id);
     let target = element.classList.contains(`${id}-highlight`);
-    document.getElementById('urgentIcon').classList.remove('img-brightening');
-    document.getElementById('mediumIcon').classList.remove('img-brightening');
-    document.getElementById('lowIcon').classList.remove('img-brightening');
+    removeIMGBrightening();
     if (target) {
-        element.classList.remove(`${id}-highlight`);
-        currentPrio = '';
-        currentPrioImageSource = '';
+        removePrioHighlight(element, id);
     }
     else {
-        if (id == 'urgent') {
-            changePrioProperties(id, 'medium', 'low');
-        }
-        if (id == 'medium') {
-            changePrioProperties(id, 'urgent', 'low');
-        }
-        if (id == 'low') {
-            changePrioProperties(id, 'medium', 'urgent');
-        }
+        detectCurrentClickedPrio(id);
     }
 }
 
 
+/**
+ * removes highlighted Icon from all buttons
+ */
+function removeIMGBrightening() {
+    document.getElementById('urgentIcon').classList.remove('img-brightening');
+    document.getElementById('mediumIcon').classList.remove('img-brightening');
+    document.getElementById('lowIcon').classList.remove('img-brightening');
+}
+
+
+/**
+ * removes color from highlighted button and resets variables
+ * @param {*clicked prio button} element 
+ * @param {*ID of clicked prio button} id 
+ */
+function removePrioHighlight(element, id) {
+    element.classList.remove(`${id}-highlight`);
+    currentPrio = '';
+    currentPrioImageSource = '';
+}
+
+
+/**
+ * detects the right button by the ID
+ * @param {*ID of clicked prio button} id 
+ */
+function detectCurrentClickedPrio(id) {
+    if (id == 'urgent') {
+        changePrioProperties(id, 'medium', 'low');
+    }
+    if (id == 'medium') {
+        changePrioProperties(id, 'urgent', 'low');
+    }
+    if (id == 'low') {
+        changePrioProperties(id, 'medium', 'urgent');
+    }
+}
+
+
+/**
+ * adds the color to the clicked prio button and icon and removes it from the others
+ * @param {*ID of clicked prio button} shownPrio 
+ * @param {*ID of nonclicked prio button} hidingPrio1 
+ * @param {*ID of nonclicked prio button} hidingPrio2 
+ */
 function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
     let element = document.getElementById(shownPrio);
     element.classList.add(`${shownPrio}-highlight`);
@@ -35,6 +72,10 @@ function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
 }
 
 
+/**
+ * resets ID´s of popup container and addTask site
+ * @returns ID of popup container
+ */
 function resetIDs() {
     let popupWindow = document.getElementById('popupWindow');
     popupWindow.classList.remove('d-none');
@@ -47,6 +88,11 @@ function resetIDs() {
 }
 
 
+/**
+ * if dropdown gets clicked it shows the options menu otherwise it closes the options menu
+ * @param {*ID of current dropdown options} select 
+ * @param {*ID of current dropdown container} container 
+ */
 function showSelection(select, container) {
     let options = document.getElementById(`${select}`);
     let dropdown = document.getElementById(`${container}`);
@@ -66,6 +112,9 @@ function showSelection(select, container) {
 }
 
 
+/**
+ * closes all dropdowns
+ */
 function closeDropdown() {
     let closeOptions = document.querySelectorAll('.category-selection');
     let removeBorder = document.querySelectorAll('.dropdown');
@@ -77,6 +126,9 @@ function closeDropdown() {
 }
 
 
+/**
+ * generates the categories in the hidden category options menu
+ */
 function generateTaskCategories() {
     let select = document.getElementById('categorySelection');
     for (let i = 0; i < topics.length; i++) {
@@ -92,6 +144,10 @@ function generateTaskCategories() {
 }
 
 
+/**
+ * shows the clicked category in the input field with it´s color
+ * @param {ID of the clicked category} i 
+ */
 function showSelectedCategory(i) {
     let container = document.getElementById('categoryDropdown');
     let cat = topics[i]['name'];
@@ -108,6 +164,9 @@ function showSelectedCategory(i) {
 }
 
 
+/**
+ * generates your contacts in the hidden contact options menu, then shows already assigned contacts 
+ */
 function generateContacts() {
     let select = document.getElementById('contactsSelection');
     for (let i = 0; i < contacts.length; i++) {
@@ -123,6 +182,10 @@ function generateContacts() {
 }
 
 
+/**
+ * if checkbox is checked removes contact from current assigned otherwise adds contact
+ * @param {ID of clicked contact} i 
+ */
 function addOrRemoveClients(i) {
     let checkbox = document.getElementById(`contactCheckbox${i}`);
     if (checkbox.checked != true) {
@@ -135,6 +198,9 @@ function addOrRemoveClients(i) {
 }
 
 
+/**
+ * shows a little colored container with initials for every assigned contact
+ */
 function showAssignedClients() {
     let dropdown = document.getElementById('addedClientsBox');
     dropdown.innerHTML = '';
@@ -147,6 +213,10 @@ function showAssignedClients() {
 }
 
 
+/**
+ * removes clicked current assigned client container and resets checkbox
+ * @param {*ID of clicked contact} i 
+ */
 function removeClient(i) {
     let clientID = currentAssignedClients.indexOf(`${i}`);
     currentAssignedClients.splice(clientID, 1);
@@ -157,6 +227,10 @@ function removeClient(i) {
 }
 
 
+/**
+ * HTML for the assigned client container with initials and color
+ * @param {*ID of clicked contact} id 
+ */
 function createAssignedClientContainer(id) {
     let dropdown = document.getElementById('addedClientsBox');
     let initials = contacts[id]['initials'];
@@ -170,24 +244,10 @@ function createAssignedClientContainer(id) {
 }
 
 
-function resetAddCategorySection() {
-    let select = document.getElementById('categoryDropdownSection');
-    select.innerHTML = `
-            <h4 class="addTask-form-headlines">Category</h4>
-            <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
-                Select task category
-            </div>
-            <div class="category-selection" id="categorySelection">
-                <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
-                    <span>Create new category</span>
-                </label>
-            </div>
-    `;
-    generateTaskCategories();
-    showCheckBoxes = !showCheckBoxes;
-}
-
-
+/**
+ * removes borders from all colors first then adds a border to clicked color
+ * @param {*ID of picked color} id 
+ */
 function addBorderToPickedColor(id) {
     const colors = document.querySelectorAll('.dot-hover');
     for (let i = 0; i < colors.length; i++) {
@@ -198,6 +258,9 @@ function addBorderToPickedColor(id) {
 }
 
 
+/**
+ * gets the clicked color the creates new category, saves it, resets the dropdown and shows the new category 
+ */
 async function addCategory() {
     checkPickedColor();
     let newCat = document.getElementById('new-cat-input');
@@ -210,17 +273,15 @@ async function addCategory() {
         );
         await setItemTopics(topics);
         resetAddCategorySection();
-        document.getElementById('categoryDropdown').innerHTML = `
-            <div style="display:flex; align-items:center;">
-                <span>${newCat.value}</span>
-                <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
-            </div>
-        `;
+        document.getElementById('categoryDropdown').innerHTML = newGivenCategoryHTML(newCat);
         currentCat = topics.length - 1;
     }
 }
 
 
+/**
+ * if no color is chosen or color already exists it creates random color
+ */
 function checkPickedColor() {
     if (currentPickedColor == '') {
         createRandomColor();
@@ -237,23 +298,9 @@ function checkPickedColor() {
 }
 
 
-function createNewSubtask() {
-    let container = document.getElementById('addSubtasksSection');
-    container.innerHTML = `
-        <h4 class="addTask-form-headlines">Assigned to</h4>
-        <div class="dropdown grey-text padding-r-15">
-            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input" onkeydown="addSubtaskOnEnter()">
-            <div class="create-cat-icon-box">
-                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
-                <div class="gap-line"></div>
-                <img src="./img/check_mark.png" class="create-category-icon" onclick="addSubtask()">
-            </div>
-        </div>
-    `;
-    getFocusOnInputField('subtaskInput');
-}
-
-
+/**
+ * shows all subtasks and checks the boxes if already done
+ */
 function renderSubtasks() {
     let subtaskBox = document.getElementById('newSubtasksBox');
     subtaskBox.innerHTML = '';
@@ -272,16 +319,9 @@ function renderSubtasks() {
 }
 
 
-function getSubtaskBoxHTML(i, text, checkmark) {
-    return `
-    <div class="addTask-subtask-container">
-        <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus(${i})" ${checkmark}>
-        <label class="subtask-text" for="editTaskSubtask${i}">${text}</label>
-    </div>
-    `;
-}
-
-
+/**
+ * pushes a new subtask in subtask array and clears subtask container
+ */
 function addSubtask() {
     let input = document.getElementById('subtaskInput');
     if (input.value.length > 1) {
@@ -297,12 +337,13 @@ function addSubtask() {
 }
 
 
+/**
+ * if the user presses the "Enter" key on the keyboard it also adds new subtask
+ */
 function addSubtaskOnEnter() {
     let subtaskInputField = document.getElementById('subtaskInput');
     subtaskInputField.addEventListener("keypress", function (event) {
-        // If the user presses the "Enter" key on the keyboard
         if (event.key === "Enter") {
-            // Cancel the default action, if needed
             event.preventDefault();
             addSubtask();
         }
@@ -310,19 +351,9 @@ function addSubtaskOnEnter() {
 }
 
 
-function clearSubtaskSection() {
-    let container = document.getElementById('addSubtasksSection');
-    container.innerHTML = `
-        <h4 class="addTask-form-headlines">Assigned to</h4>
-        <div style="position: relative;" onclick="createNewSubtask()">
-            <input type="text" id="subtaskInput" placeholder="Add new subtask">
-            <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
-        </div>
-        `;
-    renderSubtasks();
-}
-
-
+/**
+ * changes subtask status
+ */
 function changeSubtaskStatus(i) {
     if (currentSubtasks[i]['status'] === true) {
         currentSubtasks[i]['status'] = false;
@@ -330,37 +361,4 @@ function changeSubtaskStatus(i) {
     else {
         currentSubtasks[i]['status'] = true;
     }
-}
-
-
-function getTopicDropdownHTML() {
-    return `
-    <h4 class="addTask-form-headlines">Category</h4>
-    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
-        Select task category
-    </div>
-    <div class="category-selection" id="categorySelection">
-        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
-            <span>Create new category</span>
-        </label>
-    </div>
-    `;
-}
-
-
-function getPrioContainerHTML() {
-    return `
-    <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
-        <span>Urgent</span>
-        <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
-    </div>
-    <div id="medium" class="prio" onclick="addPrioColor('medium')">
-        <span>Medium</span>
-        <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
-    </div>
-    <div id="low" class="prio" onclick="addPrioColor('low')">
-        <span>Low</span>
-        <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
-    </div>
-    `;
 }

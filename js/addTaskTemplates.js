@@ -1,3 +1,6 @@
+/**
+ * HTML for the addTask site and popup
+ */
 function getAddTaskHTML() {
     return `
         <div class="spanMainpage d-none">Kanban Project Management Tool</div>
@@ -93,4 +96,126 @@ function getAddTaskHTML() {
             <img src="./img/grid.png" class="popup-icon">
         </div>
     `;
+}
+
+
+/**
+ * HTML for the category dropdown options menu
+ */
+function getTopicDropdownHTML() {
+    return `
+    <h4 class="addTask-form-headlines">Category</h4>
+    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
+        Select task category
+    </div>
+    <div class="category-selection" id="categorySelection">
+        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
+            <span>Create new category</span>
+        </label>
+    </div>
+    `;
+}
+
+
+/**
+ * HTML for new category
+ */
+function newGivenCategoryHTML(newCat) {
+    return `
+    <div style="display:flex; align-items:center;">
+        <span>${newCat.value}</span>
+        <div class="addTask-category-dot" style="background-color:${currentPickedColor};"></div>
+    </div>
+    `;
+}
+
+
+/**
+ * resets the HTML for the category dropdown
+ */
+function resetAddCategorySection() {
+    let select = document.getElementById('categoryDropdownSection');
+    select.innerHTML = `
+            <h4 class="addTask-form-headlines">Category</h4>
+            <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
+                Select task category
+            </div>
+            <div class="category-selection" id="categorySelection">
+                <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
+                    <span>Create new category</span>
+                </label>
+            </div>
+    `;
+    generateTaskCategories();
+    showCheckBoxes = !showCheckBoxes;
+}
+
+
+/**
+ * HTML for the prio buttons
+ */
+function getPrioContainerHTML() {
+    return `
+    <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
+        <span>Urgent</span>
+        <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
+    </div>
+    <div id="medium" class="prio" onclick="addPrioColor('medium')">
+        <span>Medium</span>
+        <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
+    </div>
+    <div id="low" class="prio" onclick="addPrioColor('low')">
+        <span>Low</span>
+        <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
+    </div>
+    `;
+}
+
+
+/**
+ * HTML for subtasks
+ */
+function getSubtaskBoxHTML(i, text, checkmark) {
+    return `
+    <div class="addTask-subtask-container">
+        <input id="editTaskSubtask${i}" type="checkbox" class="subtask-checkbox" onclick="changeSubtaskStatus(${i})" ${checkmark}>
+        <label class="subtask-text" for="editTaskSubtask${i}">${text}</label>
+    </div>
+    `;
+}
+
+
+/**
+ * changes the input field container to add a new subtask
+ */
+function createNewSubtask() {
+    let container = document.getElementById('addSubtasksSection');
+    container.innerHTML = `
+        <h4 class="addTask-form-headlines">Assigned to</h4>
+        <div class="dropdown grey-text padding-r-15">
+            <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input" onkeydown="addSubtaskOnEnter()">
+            <div class="create-cat-icon-box">
+                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
+                <div class="gap-line"></div>
+                <img src="./img/check_mark.png" class="create-category-icon" onclick="addSubtask()">
+            </div>
+        </div>
+    `;
+    getFocusOnInputField('subtaskInput');
+}
+
+
+/**
+ * resets subtask input HTML and shows current subtasks
+ */
+function clearSubtaskSection() {
+    let container = document.getElementById('addSubtasksSection');
+    container.innerHTML = `
+        <h4 class="addTask-form-headlines">Assigned to</h4>
+        <div style="position: relative;" onclick="createNewSubtask()">
+            <input type="text" id="subtaskInput" placeholder="Add new subtask">
+            <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+        </div>
+        `;
+    renderSubtasks();
 }
