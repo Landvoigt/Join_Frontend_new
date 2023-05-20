@@ -1,3 +1,6 @@
+/**
+ * changes the category input field to add a new category, shows a color selection to assign a color
+ */
 function createNewCategoryInAddTask() {
     currentCat = '';
     let dropdown = document.getElementById('categoryDropdownSection');

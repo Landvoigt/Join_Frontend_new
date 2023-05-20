@@ -1,5 +1,5 @@
-function singleContactBoxTemplate(i,id,contact,firstName,lastName){
-    return/*html*/`
+function singleContactBoxTemplate(i, id, contact, firstName, lastName) {
+    return /*html*/ `
     <div class="single-contact-box" id="single-contact-box-${i}" onclick="openContact(${i})">
         <div id="initials-${i}" style="background-color:${contact['color']};" class="initials">
             ${id}${lastName.charAt(0)}
@@ -13,8 +13,8 @@ function singleContactBoxTemplate(i,id,contact,firstName,lastName){
 }
 
 
-function openContactTemplate(firstNames,lastNames,id){
-    return/*html*/`
+function openContactTemplate(firstNames, lastNames, id) {
+    return /*html*/ `
     <div class="d-flex">
          <div style="background-color:${contacts[id]['color']};" id="initialen-${id}" class="initials-big">
             ${firstNames.charAt(0)}${lastNames.charAt(0)}

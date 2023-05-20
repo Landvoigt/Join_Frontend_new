@@ -1,3 +1,6 @@
+/**
+ * loads tasks from server
+ */
 async function loadTasks() {
     try {
         tasks = JSON.parse(await getItem('tasks'));
@@ -8,6 +11,9 @@ async function loadTasks() {
 }
 
 
+/**
+ * loads task topics from server
+ */
 async function loadTopics() {
     try {
         topics = JSON.parse(await getItem('topics'));
@@ -17,16 +23,25 @@ async function loadTopics() {
 }
 
 
+/**
+ * saves tasks on the server
+ */
 async function setItemTasks(tasks) {
     await setItem('tasks', JSON.stringify(tasks));
 }
 
 
+/**
+ * saves task topics on the server
+ */
 async function setItemTopics(topics) {
     await setItem('topics', JSON.stringify(topics));
 }
 
 
+/**
+ * updates every section of the board
+ */
 function updateTasks() {
     updateTaskSection('toDo');
     updateTaskSection('inProgress');
@@ -35,6 +50,9 @@ function updateTasks() {
 }
 
 
+/**
+ * filters all the tasks by topics then shows them in the right section on the board
+ */
 function updateTaskSection(id) {
     let cat = tasks.filter(t => t['category'] == `${id}`);
     document.getElementById(`${id}`).innerHTML = '';
@@ -47,6 +65,9 @@ function updateTaskSection(id) {
 }
 
 
+/**
+ * gets some information from the tasks and shows them in the small task container 
+ */
 function getTaskInformationFromArray(task, taskSection) {
     let topicName = topics[task['topic']]['name'];
     let topicColor = topics[task['topic']]['color'];
@@ -58,6 +79,9 @@ function getTaskInformationFromArray(task, taskSection) {
 }
 
 
+/**
+ * HTML for the small task container
+ */
 function generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount) {
     taskSection.innerHTML +=
         `
@@ -81,6 +105,9 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
 }
 
 
+/**
+ * shows every assigned client of the task
+ */
 function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
     let clientsAmount = task['clients'].length;
@@ -93,6 +120,9 @@ function showClients(task) {
 }
 
 
+/**
+ * shows the style of the assigned clients different based on the amount of clients
+ */
 function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color) {
     if (i < 2) {
         generateAssignedClientHTML(clientSection, initials, color);
@@ -111,6 +141,9 @@ function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initi
 }
 
 
+/**
+ * generates the container for the clients
+ */
 function generateAssignedClientHTML(clientSection, initials, color) {
     clientSection.innerHTML += `
         <div class="task-client" style="background-color:${color};">${initials}</div>
@@ -118,21 +151,34 @@ function generateAssignedClientHTML(clientSection, initials, color) {
 }
 
 
+/**
+ * moves the circles to the left for better optic
+ */
 function moveClientDivLeft(clientSection) {
     clientSection.getElementsByTagName('div')[1].classList.add('m-l-negative');
     clientSection.getElementsByTagName('div')[2].classList.add('m-l-negative');
 }
 
 
+/**
+ * saves the task ID fro the dragging function
+ */
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
+
+/**
+ * allows the element to drop
+ */
 function allowDrop(event) {
     event.preventDefault();
 }
 
 
+/**
+ * saves the new location of the task on the server and updates the tasks after
+ */
 async function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
     await setItemTasks(tasks);
@@ -140,28 +186,43 @@ async function moveTo(category) {
 }
 
 
+/**
+ * shows a darker color when hovered over the drop container
+ */
 function showHighlight(id) {
     document.getElementById(id).classList.add('drag-over-highlight');
 }
 
 
+/**
+ * removes the hover color from the container
+ */
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-over-highlight');
 }
 
 
+/**
+ * changes the color of the small icon when hovered
+ */
 function changeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus_lightblue.png";
 }
 
 
+/**
+ * removes the hovered color of the small icon
+ */
 function removeIconColor(id) {
     let img = document.getElementById(id);
     img.src = "./img/plus.png";
 }
 
 
+/**
+ * shows the progress of the subtasks based on the amount of subtasks
+ */
 function checkForSubtasks(task, id) {
     let subtasksAmount = task['subtasks'].length;
     let progress = document.getElementById(`progressContainer${id}`);
@@ -174,6 +235,9 @@ function checkForSubtasks(task, id) {
 }
 
 
+/**
+ * shows the filtered tasks in every board section
+ */
 function filterTasks() {
     showFilteredTasks('toDo');
     showFilteredTasks('inProgress');
@@ -182,6 +246,9 @@ function filterTasks() {
 }
 
 
+/**
+ * filters the tasks by headline and/or description
+ */
 function showFilteredTasks(id) {
     let searchField = document.getElementById('searchTasks').value.toLowerCase();
     let cat = tasks.filter(t => t['category'] == `${id}`);

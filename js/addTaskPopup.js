@@ -38,7 +38,7 @@ function removeAddTaskWindow() {
     popupBox.classList.remove('move-in');
     popupBox.classList.add('move-out');
     popupWindow.classList.add('light');
-    setTimeout(deleteDarkBackground, 1200);
+    setTimeout(deleteDarkBackground, 325);
 }
 
 
