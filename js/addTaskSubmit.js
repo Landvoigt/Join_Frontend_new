@@ -1,3 +1,6 @@
+/**
+ * checks the dropdowns and the prio buttons if they are filled and shows a alert popup if not
+ */
 function checkForEmptyFields() {
     if (currentCat.length == 0 && currentPrio.length == 0) {
         document.getElementById('emptyInputPopupCat').classList.remove('d-none');
@@ -19,6 +22,9 @@ function checkForEmptyFields() {
 }
 
 
+/**
+ * if the fields are empty it refreshes the function above otherwise it runs the tasks push function
+ */
 function getInputsFromForm() {
     if (fieldsFilledCorrectly == false) {
         checkForEmptyFields();
@@ -32,6 +38,9 @@ function getInputsFromForm() {
 }
 
 
+/**
+ * pushes the task information to the server, clears the variables afterwards and shows a logo and changes the site to the board
+ */
 async function addTask(title, desc, date) {
     tasks.push(
         {
@@ -54,6 +63,9 @@ async function addTask(title, desc, date) {
 }
 
 
+/**
+ * shows a small popup
+ */
 function showSuccessfullyCreatedLogo() {
     createdSuccessfully();
     document.getElementById('created-successfully-logo').innerHTML = 'Task added successfully';
@@ -61,11 +73,17 @@ function showSuccessfullyCreatedLogo() {
 }
 
 
+/**
+ * removes the empty field popup
+ */
 function removeFillFieldPopup(id) {
     document.getElementById(id).classList.add('d-none');
 }
 
 
+/**
+ * positions the empty field popup correct 
+ */
 function emptyFieldPopupPositioning() {
     let emptyCat = document.getElementById('emptyInputPopupCat');
     let emptyPrio = document.getElementById('emptyInputPopupPrio');
@@ -74,6 +92,9 @@ function emptyFieldPopupPositioning() {
 }
 
 
+/**
+ * clear all variables and resets the already given properties of the new task to add
+ */
 function clearAddTaskSide() {
     clearVariables();
     let dropdown = document.getElementById('categoryDropdownSection');

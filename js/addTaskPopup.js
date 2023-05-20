@@ -1,3 +1,6 @@
+/**
+ * shows the popup window for adding a new task, generates all informations and effects
+ */
 function showAddTaskWindow() {
     resetIDs();
     clearVariables();
@@ -13,6 +16,9 @@ function showAddTaskWindow() {
 }
 
 
+/**
+ * extra container for the add task site to fit better in the popup
+ */
 function getPopupContainerHTML() {
     return `
     <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
@@ -22,6 +28,9 @@ function getPopupContainerHTML() {
 }
 
 
+/**
+ * removes the add task popup
+ */
 function removeAddTaskWindow() {
     let popupWindow = document.getElementById('popupWindow');
     let popupBox = document.getElementById('popupContainer');
@@ -33,6 +42,9 @@ function removeAddTaskWindow() {
 }
 
 
+/**
+ * fades the background
+ */
 function deleteDarkBackground() {
     let popupWindow = document.getElementById('popupWindow');
     popupWindow.classList.add('d-none');

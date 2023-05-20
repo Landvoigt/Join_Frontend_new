@@ -1,3 +1,6 @@
+/**
+ * runs all function to edit the task
+ */
 function editDetailedTask(id) {
     resetIDs();
     currentAssignedClients = [];
@@ -13,6 +16,9 @@ function editDetailedTask(id) {
 }
 
 
+/**
+ * gets all assigned clients for the clicked task and pushes them in an array to edit them easier
+ */
 function pushAssignedClientsToArray(id) {
     let clients = tasks[id]['clients'];
     for (let i = 0; i < clients.length; i++) {
@@ -22,6 +28,9 @@ function pushAssignedClientsToArray(id) {
 }
 
 
+/**
+ * gets all subtasks for the clicked task and pushes them in an array to edit them easier
+ */
 function pushAttachedSubtasksToArray(id) {
     let subtasks = tasks[id]['subtasks'];
     for (let i = 0; i < subtasks.length; i++) {
@@ -31,6 +40,9 @@ function pushAttachedSubtasksToArray(id) {
 }
 
 
+/**
+ * checks the number of subtasks if there is none its hide the subtasks container
+ */
 function checkForExistingSubtasks(id) {
     let task = tasks[id];
     if (task['subtasks'].length == 0) {
@@ -43,6 +55,9 @@ function checkForExistingSubtasks(id) {
 }
 
 
+/**
+ * deletes the clicked task from the server then closes the window, loads the tasks again and clears variables
+ */
 async function deleteShownTask(id) {
     try {
         let tasks = JSON.parse(await getItem('tasks'));
@@ -64,6 +79,9 @@ async function deleteShownTask(id) {
 }
 
 
+/**
+ * puts the ID´s on the server in the right order after deleting one
+ */
 async function updateTasksID() {
     try {
         let tasks = JSON.parse(await getItem('tasks'));
@@ -77,6 +95,9 @@ async function updateTasksID() {
 }
 
 
+/**
+ * after checking if the input fields are filled it pushes the edited information to the task
+ */
 async function saveEditedTaskInformation(id) {
     if (fieldsFilledCorrectly == false) {
         checkForEmptyFields();
@@ -91,6 +112,9 @@ async function saveEditedTaskInformation(id) {
 }
 
 
+/**
+ * gets all information and saves them on the server
+ */
 async function updateTaskInformation(id, title, desc, date) {
     tasks[id] = {
         'id': id,

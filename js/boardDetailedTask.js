@@ -1,3 +1,6 @@
+/**
+ * runs the functions to show the detailed clicked task
+ */
 function showDetailedTask(id) {
     checkPriority(id);
     getDetailedTaskHTML(id);
@@ -6,6 +9,9 @@ function showDetailedTask(id) {
 }
 
 
+/**
+ * gets the prio from the clicked task pushes it into a variable and specifies the color
+ */
 function checkPriority(id) {
     let prio = tasks[id]['prioName'];
     if (prio == 'urgent') {
@@ -23,6 +29,9 @@ function checkPriority(id) {
 }
 
 
+/**
+ * get some task information, shows the popup window then shows the detailed task HTML
+ */
 function getDetailedTaskHTML(id) {
     let task = tasks[id];
     let topicName = topics[task['topic']]['name'];
@@ -36,6 +45,9 @@ function getDetailedTaskHTML(id) {
 }
 
 
+/**
+ * removes the popup window
+ */
 function removeDetailedTaskWindow() {
     let popupWindow = document.getElementById('popupWindow');
     popupWindow.classList.add('light');
@@ -45,6 +57,9 @@ function removeDetailedTaskWindow() {
 }
 
 
+/**
+ * shows a small circle for every assigned client of the detailed task
+ */
 function showDetailedAssignedClients(id) {
     let task = tasks[id];
     let clientsSection = document.getElementById(`popupClientSection${id}`);
@@ -64,6 +79,9 @@ function showDetailedAssignedClients(id) {
 }
 
 
+/**
+ * gets the subtask and either shows them normal or crossed out if already done
+ */
 function showDetailedSubtasks(task, id) {
     let subtaskSection = document.getElementById(`popupSubtaskSection${id}`);
     for (let i = 0; i < task['subtasks'].length; i++) {
@@ -79,6 +97,9 @@ function showDetailedSubtasks(task, id) {
 }
 
 
+/**
+ * HTML for open subtasks
+ */
 function getSubtaskHTML(subtaskSection, subtask) {
     subtaskSection.innerHTML += `
     <div class="d-flex gap-8">
@@ -89,6 +110,9 @@ function getSubtaskHTML(subtaskSection, subtask) {
 }
 
 
+/**
+ * HTML for done subtasks
+ */
 function getCrossedOutSubtaskHTML(subtaskSection, subtask) {
     subtaskSection.innerHTML += `
     <div class="d-flex gap-8">
