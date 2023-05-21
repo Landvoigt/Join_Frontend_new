@@ -163,6 +163,11 @@ function showSuccessfullyResettedPassword(){
   document.getElementById('created-successfully-logo').innerHTML='Your password has been reset!';
 }
 
+function showSuccessfullyCreatedUser() {
+  createdSuccessfully();
+  document.getElementById('created-successfully-logo').innerHTML='User created successfully!';
+}
+
 /**
  * Logs the user into the application.
  * @returns {void}
