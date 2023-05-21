@@ -1,0 +1,43 @@
+<div class="create-contact-bg d-none" id="create-contact-bg">
+    <div id="contacts-popup" class="contacts-popup">
+        <div class="contacts-popup-left">
+            <div class="flex-column add-contact-span">
+                <img src="./img/join-for-add-contacts.png" alt="">
+                <div class="add-contact-headlines-box">
+                    <span id="add-contact">Add Contact</span>
+                    <span>Tasks are better with a team!</span>
+                </div>
+            </div>
+        </div>
+        <div class="contacts-popup-right">
+            <img class="close-popup" onclick="closeCreateContact()" src="./img/close.png" alt="">
+            <div class="add-contact-img">
+                <img src="./img/profile.png" alt="" class="mt-100negative">
+            </div>
+            <form class="add-contact-form-container" onsubmit="createNewContact(); return false">
+                <div style="position: relative;">
+                    <input required class="add-contact-form" id="contacts-firstname" placeholder="Firstname"
+                        type="text">
+                    <img class="input-icon" src="./img/human-profile.png" alt="">
+                </div>
+                <div style="position: relative;">
+                    <input required class="add-contact-form" id="contacts-lastname" placeholder="Lastname" type="text">
+                    <img class="input-icon" src="./img/human-profile.png" alt="">
+                </div>
+                <div style="position: relative;">
+                    <input required class="add-contact-form" id="contacts-mail" placeholder="Email" type="email">
+                    <img class="input-icon" src="./img/mail-icon.png" id="mail-icon" alt="">
+                </div>
+                <div style="position: relative;">
+                    <input required class="add-contact-form" id="contacts-phone" placeholder="Phone" type="number">
+                    <img class="input-icon" src="./img/phone-icon.png" alt="">
+                </div>
+                <div class="add-btn-container">
+                    <div onclick="closeCreateContact()" class="cancel-btn">Cancel <img src="" alt=""></div>
+                    <button id="create-btn">Create Contact <img src="" alt=""></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="created-successfully-logo" class="created-successfully-logo d-none"></div>
