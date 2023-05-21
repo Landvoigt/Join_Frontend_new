@@ -37,6 +37,7 @@ async function init() {
  * @async
  */
 async function renderLogin() {
+  document.title = 'Join | Log in';
   let card = document.getElementById('loginForm');
   card.innerHTML = loginTemplate();
   let header = document.getElementById('loginHeaderRight');
@@ -90,6 +91,7 @@ async function visibilityPass() {
  * @function
  */
 function signUp() {
+  document.title = 'Join | Sign Up';
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
@@ -101,6 +103,7 @@ function signUp() {
  * @function
  */
 function newPassword() {
+  document.title = 'Join | Reset Password';
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
@@ -112,6 +115,7 @@ function newPassword() {
  * @function
  */
 function resetPassword() {
+  document.title = 'Join | Reset Password';
   let header = document.getElementById('loginHeaderRight');
   header.classList.add("d-none");
   let card = document.getElementById('loginForm');
