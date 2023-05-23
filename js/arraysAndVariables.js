@@ -28,7 +28,7 @@ let contactsRandomColor;
 let lastSelectedContact;
 let firstname;
 let ID;
-let contactID = 0;
+let contactID;
 let mediaQuery = window.matchMedia("(max-width: 1050px)");
 
 let topics = [

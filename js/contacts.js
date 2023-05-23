@@ -144,6 +144,7 @@ async function createNewContact() {
     Lastname = Lastname.charAt(0).toUpperCase() + Lastname.slice(1);
     let Mail = document.getElementById('contacts-mail').value;
     let Phone = document.getElementById('contacts-phone').value;
+    checkForExistingID();
     contacts.push(
         {
             'ID': contactID,
@@ -155,7 +156,6 @@ async function createNewContact() {
             'color': contactsRandomColor
         }
     )
-    contactID++;
     await setItemContacts(contacts);
     closeCreateContact();
     pushFirstLetter();
@@ -163,6 +163,11 @@ async function createNewContact() {
     createdSuccessfully();
     document.getElementById('contactsSelection').innerHTML = '';
     generateContacts();
+}
+
+
+function checkForExistingID() {
+    contactID = contacts.length;
 }
 
 
