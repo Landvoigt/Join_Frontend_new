@@ -112,10 +112,15 @@ function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
     let clientsAmount = task['clients'].length;
     for (let i = 0; i < clientsAmount; i++) {
-        let clientNumber = task['clients'][i];
-        let initials = contacts[clientNumber]['initials'];
-        let color = contacts[clientNumber]['color'];
-        changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
+        if (task['clients'][i] > contacts.length) {
+            return
+        }
+        else {
+            let clientNumber = task['clients'][i];
+            let initials = contacts[clientNumber]['initials'];
+            let color = contacts[clientNumber]['color'];
+            changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
+        }
     }
 }
 

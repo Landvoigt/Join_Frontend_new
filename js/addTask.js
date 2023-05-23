@@ -264,7 +264,7 @@ function addBorderToPickedColor(id) {
 async function addCategory() {
     checkPickedColor();
     let newCat = document.getElementById('new-cat-input');
-    if (input.value.length > 1) {
+    if (newCat.value.length > 1) {
         topics.push(
             {
                 'name': `${newCat.value}`,
