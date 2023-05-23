@@ -231,7 +231,6 @@ async function deleteContactByFirstname(firstname) {
         if (index !== -1) {
             contacts.splice(index, 1);
             await setItem('contacts', JSON.stringify(contacts));
-            alert(`Contact with firstname ${firstname} has been deleted.`);
         }
     } catch (e) {
         console.error('Deleting error:', e);
