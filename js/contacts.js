@@ -146,6 +146,7 @@ async function createNewContact() {
     let Phone = document.getElementById('contacts-phone').value;
     contacts.push(
         {
+            'ID': contactID,
             'firstname': Firstname,
             'lastname': Lastname,
             'initials': Firstname.charAt(0) + Lastname.charAt(0),
@@ -154,7 +155,7 @@ async function createNewContact() {
             'color': contactsRandomColor
         }
     )
-
+    contactID++;
     await setItemContacts(contacts);
     closeCreateContact();
     pushFirstLetter();
