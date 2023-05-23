@@ -8,6 +8,7 @@ const LEGALNOTICE_ID = 'legalNoticePage'
 const HELP_ID = 'helpPage'
 
 let currentPage = SUMMARY_ID;
+let users = [];
 let previousPage;
 let previousBackground = 'summarySidebar';
 let currentDraggedElement;

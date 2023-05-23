@@ -1,6 +1,9 @@
-let users = [];
-
-
+/**
+ * Loads users from the storage.
+ * @async
+ * @function
+ * @returns {Promise<void>} Resolves when users are loaded or an error is logged.
+ */
 async function loadUsers() {
   try {
     users = JSON.parse(await getItem('users'));
@@ -9,7 +12,12 @@ async function loadUsers() {
   }
 }
 
-
+/**
+ * Registers a new user, checks if a user with the same email exists before registration.
+ * @async
+ * @function
+ * @returns {Promise<void>} Resolves when the user is registered, an error message is shown, or the form is reset.
+ */
 async function register() {
   let registerBtn = document.getElementById('registerBtn');
   registerBtn.disabled = true;
@@ -36,20 +44,20 @@ async function register() {
   renderLogin();
 }
 
-
+/**
+ * Deletes a user from the storage by email.
+ * @async
+ * @function
+ * @param {string} email - The email of the user to be deleted.
+ * @returns {Promise<void>} Resolves when the user is deleted, not found, or an error is logged.
+ */
 async function deleteUser(email) {
   try {
-    // das Array aus dem Backend abrufen
     let users = JSON.parse(await getItem('users'));
-
-    // das Element mit der übergebenen E-Mail-Adresse finden
     let index = users.findIndex(user => user.email === email);
 
     if (index !== -1) {
-      // das Element aus dem Array entfernen
       users.splice(index, 1);
-
-      // das aktualisierte Array zurück in den Speicher schreiben
       await setItem('users', JSON.stringify(users));
       console.log(`User with email ${email} has been deleted.`);
     } else {
