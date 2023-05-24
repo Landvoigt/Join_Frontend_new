@@ -36,11 +36,10 @@ function getDetailedTaskHTML(id) {
     let task = tasks[id];
     let topicName = topics[task['topic']]['name'];
     let topicColor = topics[task['topic']]['color'];
-    let popup = document.getElementById('popupWindow');
+    let popup = document.getElementById('popupDetailedTaskBG');
     popup.classList.remove('d-none');
     popup.classList.remove('light');
     popup.classList.add('dark');
-    popup.innerHTML = '';
     popup.innerHTML = detailedTaskHTML(task, id, topicName, topicColor);
 }
 
@@ -49,11 +48,11 @@ function getDetailedTaskHTML(id) {
  * removes the popup window
  */
 function removeDetailedTaskWindow() {
-    let popupWindow = document.getElementById('popupWindow');
+    let popupWindow = document.getElementById('popupDetailedTaskBG');
     popupWindow.classList.add('light');
     popupWindow.classList.remove('dark');
     popupWindow.innerHTML = '';
-    setTimeout(deleteDarkBackground, 325);
+    setTimeout(deleteDarkBackground, 325, popupWindow);
 }
 
 
