@@ -34,7 +34,7 @@
                             <img class="input-icon" src="./img/phone-icon.png" alt="">
                         </div>
                         <div class="add-btn-container">
-                            <div onclick="deleteContactByFirstname(firstname)" class="cancel-btn">Delete <img src="" alt=""></div>
+                            <div onclick="deleteContactByFirstname(firstname); deleteAssignedContactsAfterRemove()" class="cancel-btn">Delete <img src="" alt=""></div>
                             <button onclick="changeFirstname()" id="save-btn">Save</button>
                         </div>
                     </form>
@@ -52,7 +52,7 @@
     <div id="contact-card" class="contact-card flex-column ">
         <img id="close-X" onclick="closeContactCard()" class="close-X" src="./img/close.png" alt="">
         <div class="edit-and-delete-box-2 d-none" id="edit-delete-box">
-            <img class="delete-btn" id="delete-btn-2" src="./img/delete.png" onclick="deleteContactByFirstname(firstname)">
+            <img class="delete-btn" id="delete-btn-2" src="./img/delete.png" onclick="deleteContactByFirstname(firstname); deleteAssignedContactsAfterRemove()">
             <img class="edit-btn" id="edit-btn-2" src="./img/pencil_white.png" onclick="openEditContact(ID)">
         </div>
         <div class="contacts-headline">

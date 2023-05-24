@@ -32,6 +32,7 @@ let ID;
 let contactID;
 let mediaQuery = window.matchMedia("(max-width: 1050px)");
 
+
 let topics = [
     {
         'name': 'Sales',

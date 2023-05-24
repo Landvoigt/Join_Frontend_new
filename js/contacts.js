@@ -208,6 +208,9 @@ function openEditContact(id) {
     document.getElementById('edit-contact-popup').classList.add('move-in');
     document.getElementById('edit-firstname').value = contacts[id]['firstname'];
     firstname = contacts[id]['firstname'];
+
+    contactID = contacts[id]['ID'];  /// erstmal nicht löschen bitte 
+
     document.getElementById('edit-lastname').value = contacts[id]['lastname'];
     document.getElementById('edit-mail').value = contacts[id]['mail'];
     document.getElementById('edit-phone').value = contacts[id]['phone'];
@@ -219,6 +222,9 @@ function closeEditContact() {
     document.getElementById('edit-contact-bg').classList.remove('dark');
     document.getElementById('edit-contact-popup').classList.remove('move-in');
     document.getElementById('edit-contact-popup').classList.add('move-out');
+
+    contactID = '';
+
     setTimeout(function () {
         document.getElementById('edit-contact-bg').classList.add('d-none');
     }, 1200);
@@ -248,7 +254,6 @@ async function deleteContactByFirstname(firstname) {
     loadContacts();
     closeEditContact();
     pushFirstLetter();
-    deleteAssignedContactsAfterRemove();
 }
 
 
@@ -275,6 +280,17 @@ async function changeFirstname() {
 
 
 
-function deleteAssignedContactsAfterRemove(){
+async function deleteAssignedContactsAfterRemove() {
+    for (let i = 0; i < tasks.length; i++) {
+        let clients = tasks[i]['clients'];
 
+        for (let k = 0; k < clients.length; k++) {
+            let contactToDelete = clients[k];
+
+            if (contactToDelete == contactID) {
+                clients.splice(k, 1);
+                await setItemTasks(tasks);
+            }
+        }
+    }
 }
