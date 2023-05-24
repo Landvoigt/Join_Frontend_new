@@ -111,16 +111,13 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
 function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
     let clientsAmount = task['clients'].length;
-    for (let i = 0; i < clientsAmount; i++) {
-        if (task['clients'][i] > contacts.length) {
-            return
-        }
-        else {
-            let clientNumber = task['clients'][i];
-            let initials = contacts[clientNumber]['initials'];
-            let color = contacts[clientNumber]['color'];
-            changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
-        }
+    let clients = task['clients'];
+    for (let i = 0; i < clients.length; i++) {
+        let clientID = clients[i];
+        let id = contacts.findIndex(c => c['ID'] == clientID);
+        let initials = contacts[id]['initials'];
+        let color = contacts[id]['color'];
+        changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
     }
 }
 

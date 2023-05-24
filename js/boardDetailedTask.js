@@ -62,13 +62,15 @@ function removeDetailedTaskWindow() {
  */
 function showDetailedAssignedClients(id) {
     let task = tasks[id];
+    let clients = task['clients'];
     let clientsSection = document.getElementById(`popupClientSection${id}`);
-    for (let i = 0; i < task['clients'].length; i++) {
-        let clientNumber = task['clients'][i];
-        let initials = contacts[clientNumber]['initials'];
-        let color = contacts[clientNumber]['color'];
-        let firstName = contacts[clientNumber]['firstname'];
-        let lastName = contacts[clientNumber]['lastname'];
+    for (let i = 0; i < clients.length; i++) {
+        let clientID = clients[i];
+        let id = contacts.findIndex(c => c['ID'] == clientID);
+        let initials = contacts[id]['initials'];
+        let color = contacts[id]['color'];
+        let firstName = contacts[id]['firstname'];
+        let lastName = contacts[id]['lastname'];
         clientsSection.innerHTML += `
             <div class="popup-client-box">
                 <div class="task-client task-client-big" style="background-color:${color};">${initials}</div>
