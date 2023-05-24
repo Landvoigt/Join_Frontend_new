@@ -61,6 +61,7 @@ function updateTaskSection(id) {
         let task = cat[i];
         getTaskInformationFromArray(task, taskSection);
         checkForSubtasks(task, task['id']);
+        showClients(task);
     }
 }
 
@@ -75,7 +76,6 @@ function getTaskInformationFromArray(task, taskSection) {
     let progress = doneSubtasks.length;
     let subtasksAmount = task['subtasks'].length;
     generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount);
-    showClients(task);
 }
 
 

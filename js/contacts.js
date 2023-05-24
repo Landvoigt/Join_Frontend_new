@@ -232,11 +232,11 @@ async function deleteContactByFirstname(firstname) {
     try {
         let contacts = JSON.parse(await getItem('contacts'));
         let index = contacts.findIndex(contact => contact.firstname === firstname);
-
+        // console.log(index);
         if (index !== -1) {
             contacts.splice(index, 1);
             await setItem('contacts', JSON.stringify(contacts));
-            alert(`Contact with firstname ${firstname} has been deleted.`);
+            // alert(`Contact with firstname ${firstname} has been deleted.`);
         }
     } catch (e) {
         console.error('Deleting error:', e);
@@ -248,6 +248,7 @@ async function deleteContactByFirstname(firstname) {
     loadContacts();
     closeEditContact();
     pushFirstLetter();
+    deleteAssignedContactsAfterRemove();
 }
 
 
@@ -264,10 +265,16 @@ async function changeFirstname() {
         contacts[index].phone = document.getElementById('edit-phone').value;
 
         await setItemContacts(contacts);
-        alert(`Die Änderungen für den aufgerufenen Kontakt wurden erfolgreich gespeichert.`);
+        // alert(`Die Änderungen für den aufgerufenen Kontakt wurden erfolgreich gespeichert.`);
     }
     document.getElementById('card-popup').innerHTML = '';
     loadContacts();
     closeEditContact();
     pushFirstLetter();
+}
+
+
+
+function deleteAssignedContactsAfterRemove(){
+
 }

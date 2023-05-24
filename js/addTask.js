@@ -174,7 +174,7 @@ function generateContacts() {
         select.innerHTML += `
         <label class="label-hover">
             <span>${contact['firstname']} ${contact['lastname']}</span>
-            <input id="contactCheckbox${i}" type="checkbox" class="checkbox" name="${i}" onclick="addOrRemoveClients(${i})">
+            <input id="contactCheckbox${contact['ID']}" type="checkbox" class="checkbox" onclick="addOrRemoveClients(${contact['ID']})">
         </label>
         `;
     }
@@ -192,8 +192,9 @@ function addOrRemoveClients(i) {
         removeClient(i);
     }
     else {
-        currentAssignedClients.push(`${i}`);
-        showAssignedClients();
+        currentAssignedClients.push(i);
+        // showAssignedClients();
+        createAssignedClientContainer(i);
     }
 }
 
@@ -229,18 +230,22 @@ function removeClient(i) {
 
 /**
  * HTML for the assigned client container with initials and color
- * @param {*ID of clicked contact} id 
+ * @param {*ID of clicked contact} i 
  */
-function createAssignedClientContainer(id) {
+function createAssignedClientContainer(i) {
     let dropdown = document.getElementById('addedClientsBox');
-    let initials = contacts[id]['initials'];
-    let color = contacts[id]['color'];
-    dropdown.innerHTML += `
-        <div style="display:flex;">
-            <div id="addedClient${id}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
-            onclick="removeClient(${id})">${initials}</div>
-        <div>
+    let contact = contacts.filter(c => c['ID'] == `${i}`);
+    for (let j = 0; j < contact.length; j++) {
+        const element = contact[j];
+        let initials = element['initials'];
+        let color = element['color'];
+        dropdown.innerHTML += `
+            <div style="display:flex;">
+                <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
+                onclick="removeClient(${i})">${initials}</div>
+            <div>
         `;
+    }
 }
 
 
