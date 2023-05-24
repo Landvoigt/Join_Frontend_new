@@ -133,7 +133,7 @@ function closeCreateContact() {
     contactPopup.classList.add('move-out');
     setTimeout(function () {
         document.getElementById('create-contact-bg').classList.add('d-none');
-    }, 1200);
+    }, 325);
 }
 
 
@@ -227,7 +227,7 @@ function closeEditContact() {
 
     setTimeout(function () {
         document.getElementById('edit-contact-bg').classList.add('d-none');
-    }, 1200);
+    }, 325);
 }
 
 

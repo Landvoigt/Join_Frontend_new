@@ -1,5 +1,5 @@
-<div class="create-contact-bg d-none" id="create-contact-bg">
-    <div id="contacts-popup" class="contacts-popup">
+<div class="create-contact-bg d-none" id="create-contact-bg" onclick="closeCreateContact()">
+    <div id="contacts-popup" class="contacts-popup" onclick="stopPropagation(event)">
         <div class="contacts-popup-left">
             <div class="flex-column add-contact-span">
                 <img src="./img/join-for-add-contacts.png" alt="">
