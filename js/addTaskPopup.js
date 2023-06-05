@@ -38,15 +38,14 @@ function removeAddTaskWindow() {
     popupBox.classList.remove('move-in');
     popupBox.classList.add('move-out');
     popupWindow.classList.add('light');
-    setTimeout(deleteDarkBackground, 325);
+    setTimeout(deleteDarkBackground, 325, popupWindow);
 }
 
 
 /**
  * fades the background
  */
-function deleteDarkBackground() {
-    let popupWindow = document.getElementById('popupWindow');
-    popupWindow.classList.add('d-none');
-    popupWindow.innerHTML = '';
+function deleteDarkBackground(backgroundID) {
+    backgroundID.classList.add('d-none');
+    backgroundID.innerHTML = '';
 }

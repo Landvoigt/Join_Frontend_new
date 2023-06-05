@@ -133,7 +133,7 @@ function closeCreateContact() {
     contactPopup.classList.add('move-out');
     setTimeout(function () {
         document.getElementById('create-contact-bg').classList.add('d-none');
-    }, 1200);
+    }, 325);
 }
 
 
@@ -161,7 +161,10 @@ async function createNewContact() {
     pushFirstLetter();
     resetInputValue();
     createdSuccessfully();
+<<<<<<< HEAD
     // document.getElementById('contactsSelection').innerHTML = '';
+=======
+>>>>>>> ac2800e0f0a4d643831240a058ee86394b00c20b
     // generateContacts();
 }
 
@@ -209,6 +212,9 @@ function openEditContact(id) {
     document.getElementById('edit-contact-popup').classList.add('move-in');
     document.getElementById('edit-firstname').value = contacts[id]['firstname'];
     firstname = contacts[id]['firstname'];
+
+    contactID = contacts[id]['ID'];  /// erstmal nicht löschen bitte 
+
     document.getElementById('edit-lastname').value = contacts[id]['lastname'];
     document.getElementById('edit-mail').value = contacts[id]['mail'];
     document.getElementById('edit-phone').value = contacts[id]['phone'];
@@ -220,9 +226,12 @@ function closeEditContact() {
     document.getElementById('edit-contact-bg').classList.remove('dark');
     document.getElementById('edit-contact-popup').classList.remove('move-in');
     document.getElementById('edit-contact-popup').classList.add('move-out');
+
+    contactID = '';
+
     setTimeout(function () {
         document.getElementById('edit-contact-bg').classList.add('d-none');
-    }, 1200);
+    }, 325);
 }
 
 
@@ -233,10 +242,14 @@ async function deleteContactByFirstname(firstname) {
     try {
         let contacts = JSON.parse(await getItem('contacts'));
         let index = contacts.findIndex(contact => contact.firstname === firstname);
-
+        // console.log(index);
         if (index !== -1) {
             contacts.splice(index, 1);
             await setItem('contacts', JSON.stringify(contacts));
+<<<<<<< HEAD
+=======
+            // alert(`Contact with firstname ${firstname} has been deleted.`);
+>>>>>>> ac2800e0f0a4d643831240a058ee86394b00c20b
         }
     } catch (e) {
         console.error('Deleting error:', e);
@@ -264,10 +277,27 @@ async function changeFirstname() {
         contacts[index].phone = document.getElementById('edit-phone').value;
 
         await setItemContacts(contacts);
-        alert(`Die Änderungen für den aufgerufenen Kontakt wurden erfolgreich gespeichert.`);
+        // alert(`Die Änderungen für den aufgerufenen Kontakt wurden erfolgreich gespeichert.`);
     }
     document.getElementById('card-popup').innerHTML = '';
     loadContacts();
     closeEditContact();
     pushFirstLetter();
+}
+
+
+
+async function deleteAssignedContactsAfterRemove() {
+    for (let i = 0; i < tasks.length; i++) {
+        let clients = tasks[i]['clients'];
+
+        for (let k = 0; k < clients.length; k++) {
+            let contactToDelete = clients[k];
+
+            if (contactToDelete == contactID) {
+                clients.splice(k, 1);
+                await setItemTasks(tasks);
+            }
+        }
+    }
 }

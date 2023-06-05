@@ -8,6 +8,7 @@ const LEGALNOTICE_ID = 'legalNoticePage'
 const HELP_ID = 'helpPage'
 
 let currentPage = SUMMARY_ID;
+let users = [];
 let previousPage;
 let previousBackground = 'summarySidebar';
 let currentDraggedElement;
@@ -30,6 +31,7 @@ let firstname;
 let ID;
 let contactID;
 let mediaQuery = window.matchMedia("(max-width: 1050px)");
+
 
 let topics = [
     {

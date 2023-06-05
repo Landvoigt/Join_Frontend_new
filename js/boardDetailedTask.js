@@ -36,11 +36,10 @@ function getDetailedTaskHTML(id) {
     let task = tasks[id];
     let topicName = topics[task['topic']]['name'];
     let topicColor = topics[task['topic']]['color'];
-    let popup = document.getElementById('popupWindow');
+    let popup = document.getElementById('popupDetailedTaskBG');
     popup.classList.remove('d-none');
     popup.classList.remove('light');
     popup.classList.add('dark');
-    popup.innerHTML = '';
     popup.innerHTML = detailedTaskHTML(task, id, topicName, topicColor);
 }
 
@@ -49,11 +48,11 @@ function getDetailedTaskHTML(id) {
  * removes the popup window
  */
 function removeDetailedTaskWindow() {
-    let popupWindow = document.getElementById('popupWindow');
+    let popupWindow = document.getElementById('popupDetailedTaskBG');
     popupWindow.classList.add('light');
     popupWindow.classList.remove('dark');
     popupWindow.innerHTML = '';
-    setTimeout(deleteDarkBackground, 325);
+    setTimeout(deleteDarkBackground, 325, popupWindow);
 }
 
 
@@ -62,13 +61,15 @@ function removeDetailedTaskWindow() {
  */
 function showDetailedAssignedClients(id) {
     let task = tasks[id];
+    let clients = task['clients'];
     let clientsSection = document.getElementById(`popupClientSection${id}`);
-    for (let i = 0; i < task['clients'].length; i++) {
-        let clientNumber = task['clients'][i];
-        let initials = contacts[clientNumber]['initials'];
-        let color = contacts[clientNumber]['color'];
-        let firstName = contacts[clientNumber]['firstname'];
-        let lastName = contacts[clientNumber]['lastname'];
+    for (let i = 0; i < clients.length; i++) {
+        let clientID = clients[i];
+        let id = contacts.findIndex(c => c['ID'] == clientID);
+        let initials = contacts[id]['initials'];
+        let color = contacts[id]['color'];
+        let firstName = contacts[id]['firstname'];
+        let lastName = contacts[id]['lastname'];
         clientsSection.innerHTML += `
             <div class="popup-client-box">
                 <div class="task-client task-client-big" style="background-color:${color};">${initials}</div>
