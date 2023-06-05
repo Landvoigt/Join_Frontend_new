@@ -1,3 +1,6 @@
+/**
+ * loads Contacts from the Backend server
+ */
 async function loadContacts() {
     try {
         contacts = JSON.parse(await getItem('contacts'));
@@ -7,11 +10,19 @@ async function loadContacts() {
 }
 
 
+/**
+ * saves Contacts on the server
+ * @param {JSON} contacts - Data of created Contact or edited Contact
+ */
 async function setItemContacts(contacts) {
     await setItem('contacts', JSON.stringify(contacts));
 }
 
 
+/**
+ * pushes every first character (if not already included) of the firstname from each contact in the letters Array
+ * and sorts it alphabeticallly
+ */
 async function pushFirstLetter() {
     await loadContacts();
     letters = [];
@@ -24,7 +35,6 @@ async function pushFirstLetter() {
         }
     }
 
-    // Sortiere das letters-Array alphabetisch
     letters.sort(function (a, b) {
         var letterA = a.toLowerCase();
         var letterB = b.toLowerCase();
@@ -41,6 +51,9 @@ async function pushFirstLetter() {
 }
 
 
+/**
+ * Shows the Letters sorted in the Contactslist
+ */
 function renderLetters() {
     let contactsList = document.getElementById('contact-list');
     contactsList.innerHTML = '';
@@ -55,6 +68,10 @@ function renderLetters() {
 }
 
 
+/**
+ * Shows every single Contact (First-Lastname, Mail) sorted to each Letter in the Contactslist
+ * @param {string} id - First Char from each Contact 
+ */
 async function renderContacts(id) {
     let letterBox = document.getElementById(`${id}`);
 
@@ -69,6 +86,10 @@ async function renderContacts(id) {
 }
 
 
+/**
+ * opens at side detailed information of the chosen Contact
+ * @param {number} id - The ID number of the selected Contact 
+ */
 function openContact(id) {
     highlightSelectedContact(id)
     ID = id;
@@ -77,12 +98,15 @@ function openContact(id) {
     let contactPopup = document.getElementById('card-popup');
     contactPopup.innerHTML = '';
     contactPopup.innerHTML += openContactTemplate(firstNames, lastNames, id);
-    if (mediaQuery.matches) {///Responsive Design removed Buttons
+    if (mediaQuery.matches) {///Responsive view, removes Buttons
         removeAndAddButtons();
     }
 }
 
 
+/**
+ * Removes and Adds buttons at a certain resolution
+ */
 function removeAndAddButtons() {
     document.getElementById(`Create-Contact`).classList.add("d-none");
     document.getElementById('contact-card').classList.add('d-flex');
@@ -93,7 +117,10 @@ function removeAndAddButtons() {
 }
 
 
-function closeContactCard() {//Responisve Design function
+/**
+ * closes a popup window at a certain resolution
+ */
+function closeContactCard() {
     if (mediaQuery.matches) {
         document.getElementById(`Create-Contact`).classList.remove("d-none");
         document.getElementById('contact-card').classList.remove('d-flex');
@@ -103,6 +130,10 @@ function closeContactCard() {//Responisve Design function
 }
 
 
+/**
+ * Gives the selected Contact a background color
+ * @param {number} id - The ID number of the selected Contact 
+ */
 function highlightSelectedContact(id) {
     const currentContact = document.getElementById(`single-contact-box-${id}`);
     if (lastSelectedContact !== undefined) { //wenn lastselectedcontact nicht undefiniert wird von dem ausgewählten contact die hintergrundfarbe entfernt
@@ -114,6 +145,9 @@ function highlightSelectedContact(id) {
 }
 
 
+/**
+ * Opens up the Popup to create a new Contact
+ */
 function openCreateContact() {
     let popupBG = document.getElementById('create-contact-bg');
     let contactsForm = document.getElementById('contacts-popup');
@@ -125,6 +159,9 @@ function openCreateContact() {
 }
 
 
+/**
+ * Closes the Popup for creating a new Contact
+ */
 function closeCreateContact() {
     let contactPopup = document.getElementById('contacts-popup');
     document.getElementById('create-contact-bg').classList.remove('dark');
@@ -137,6 +174,9 @@ function closeCreateContact() {
 }
 
 
+/**
+ * Creates a new Contact in the Backend Server, and closes the Popup
+ */
 async function createNewContact() {
     let Firstname = document.getElementById('contacts-firstname').value;
     Firstname = Firstname.charAt(0).toUpperCase() + Firstname.slice(1);
@@ -165,11 +205,17 @@ async function createNewContact() {
 }
 
 
+/**
+ * checks if the ID already exists to assign a new ID
+ */
 function checkForExistingID() {
     contactID = contacts.length;
 }
 
 
+/**
+ * After adding a new Contact a feedback banner shows up to inform that the task was Successfull
+ */
 function createdSuccessfully() {
     let banner = document.getElementById('created-successfully-logo');
     banner.innerHTML = 'Contact Successfully Created';
@@ -186,9 +232,11 @@ function createdSuccessfully() {
 }
 
 
+/**
+ * Resets all the Inputform values after adding contact  
+ */
 function resetInputValue() {
     let addContactForms = document.querySelectorAll('.add-contact-form');
-
     for (let i = 0; i < addContactForms.length; i++) {
         addContactForms[i].value = '';
     }
@@ -196,6 +244,10 @@ function resetInputValue() {
 }
 
 
+/**
+ * Opens up the Edit Contact Popup 
+ * @param {number} id - The ID number of the selected Contact
+ */
 function openEditContact(id) {
     let editBG = document.getElementById('edit-contact-bg');
     let initalsCircle = document.getElementById('initials-circle');
@@ -216,7 +268,9 @@ function openEditContact(id) {
     document.getElementById('edit-phone').value = contacts[id]['phone'];
 }
 
-
+/**
+ * Closes the edit contact Popup
+ */
 function closeEditContact() {
     document.getElementById('edit-contact-bg').classList.add('light');
     document.getElementById('edit-contact-bg').classList.remove('dark');
@@ -231,6 +285,10 @@ function closeEditContact() {
 }
 
 
+/**
+ * Deletes the selected Contact with the Firstname 
+ * @param {string} firstname - The Firstname of the Contact
+ */
 async function deleteContactByFirstname(firstname) {
     if (!firstname) {
         firstname = contacts[ID]['firstname'];
@@ -257,8 +315,10 @@ async function deleteContactByFirstname(firstname) {
 }
 
 
-async function changeFirstname() {
-
+/**
+ * Updates the selected Contact's Data 
+ */
+async function changeContactsData() {
     const newFirstname = document.getElementById('edit-firstname').value;
     await loadContacts();
     const index = contacts.findIndex(contact => contact.firstname === firstname);
@@ -279,7 +339,9 @@ async function changeFirstname() {
 }
 
 
-
+/**
+ * Deletes Taskst after removing Contacts
+ */
 async function deleteAssignedContactsAfterRemove() {
     for (let i = 0; i < tasks.length; i++) {
         let clients = tasks[i]['clients'];
