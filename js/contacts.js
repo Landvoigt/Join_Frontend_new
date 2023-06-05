@@ -161,8 +161,8 @@ async function createNewContact() {
     pushFirstLetter();
     resetInputValue();
     createdSuccessfully();
-    document.getElementById('contactsSelection').innerHTML = '';
-    generateContacts();
+    // document.getElementById('contactsSelection').innerHTML = '';
+    // generateContacts();
 }
 
 
