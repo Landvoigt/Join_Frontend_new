@@ -161,10 +161,6 @@ async function createNewContact() {
     pushFirstLetter();
     resetInputValue();
     createdSuccessfully();
-<<<<<<< HEAD
-    // document.getElementById('contactsSelection').innerHTML = '';
-=======
->>>>>>> ac2800e0f0a4d643831240a058ee86394b00c20b
     // generateContacts();
 }
 
@@ -246,10 +242,7 @@ async function deleteContactByFirstname(firstname) {
         if (index !== -1) {
             contacts.splice(index, 1);
             await setItem('contacts', JSON.stringify(contacts));
-<<<<<<< HEAD
-=======
             // alert(`Contact with firstname ${firstname} has been deleted.`);
->>>>>>> ac2800e0f0a4d643831240a058ee86394b00c20b
         }
     } catch (e) {
         console.error('Deleting error:', e);
