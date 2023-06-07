@@ -1,3 +1,6 @@
+/**
+ * Shows the current Date
+ */
 function loadDate() {
     const currentDate = new Date();
     let dateContainer = document.getElementById('date');
@@ -12,7 +15,10 @@ function loadDate() {
     setUsernameToGreet();
 }
 
-
+/**
+ * This function is to greet with the right form 
+ * @param {number} currenthour 
+ */
 function greetAccordingToTime(currenthour) {
     if (currenthour > 5 && currenthour <= 12) {
         document.getElementById('greeting').innerHTML = 'Good Morning';
@@ -25,7 +31,9 @@ function greetAccordingToTime(currenthour) {
     }
 }
 
-
+/**
+ * Greets according the Username
+ */
 function setUsernameToGreet() {
     if (currentUser.length == 0) {
         document.getElementById('userFirstName').innerHTML = 'Dear Guest';
@@ -35,7 +43,9 @@ function setUsernameToGreet() {
     }
 }
 
-
+/**
+ * Show the number of Tasks in Summary
+ */
 function checkForTaskNumbers() {
     let allTasks = document.getElementById('allTasksNr');
     const toDos = tasks.filter(t => t.category === 'toDo');
