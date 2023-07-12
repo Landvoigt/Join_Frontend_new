@@ -211,23 +211,20 @@ function newGivenCategoryHTML(newCat) {
 
 
 /**
- * resets the HTML for the category dropdown
+ * HTML to reset the category input
  */
-function resetAddCategorySection() {
-    let select = document.getElementById('categoryDropdownSection');
-    select.innerHTML = `
-            <h4 class="addTask-form-headlines">Category</h4>
-            <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
-                Select task category
-            </div>
-            <div class="category-selection" id="categorySelection">
-                <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
-                    <span>Create new category</span>
-                </label>
-            </div>
+function categoryDropdownHTML() {
+    return `
+    <h4 class="addTask-form-headlines">Category</h4>
+    <div id="categoryDropdown" class="dropdown" onclick="showSelection('categorySelection','categoryDropdown')">
+        Select task category
+    </div>
+    <div class="category-selection" id="categorySelection">
+        <label class="addTask-category-label label-hover" onclick="createNewCategoryInAddTask()">
+            <span>Create new category</span>
+        </label>
+    </div>
     `;
-    generateTaskCategories();
-    showCheckBoxes = !showCheckBoxes;
 }
 
 

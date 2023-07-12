@@ -64,9 +64,6 @@ async function deleteShownTask(id) {
         if (index !== -1) {
             tasks.splice(index, 1);
             await setItem('tasks', JSON.stringify(tasks));
-            console.log(`task${id} has been deleted.`);
-        } else {
-            console.log(`task${id} not found.`);
         }
     } catch (e) {
         console.error('Deleting error:', e);
@@ -129,5 +126,5 @@ async function updateTaskInformation(id, title, desc, date) {
     closePopupWindow();
     showSuccessBanner('Task edited');
     await setItemTasks(tasks);
-    updateTasks(id);
+    await loadTasks();
 }

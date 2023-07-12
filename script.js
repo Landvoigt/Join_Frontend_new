@@ -51,6 +51,7 @@ function changeSite(id) {
     previousPage = currentPage;
     currentPage = id;
     currentAssignedClients = [];
+    addTaskSideCreateContact = false;
     updateTasks();
     clearSearchField();
     deleteBackgroundColors();

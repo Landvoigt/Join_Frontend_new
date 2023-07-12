@@ -2,6 +2,7 @@
  * runs the functions to show the detailed clicked task
  */
 function showDetailedTask(id) {
+    resetAddTaskID();
     checkPriority(id);
     getDetailedTaskHTML(id);
     showDetailedAssignedClients(id);

@@ -7,16 +7,13 @@ function checkForEmptyFields() {
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
         document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
-    }
-    else if (currentCat.length == 0) {
+    } else if (currentCat.length == 0) {
         document.getElementById('emptyInputPopupCat').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupCat');
-    }
-    else if (currentPrio.length == 0) {
+    } else if (currentPrio.length == 0) {
         document.getElementById('emptyInputPopupPrio').classList.remove('d-none');
         setTimeout(removeFillFieldPopup, 2000, 'emptyInputPopupPrio');
-    }
-    else {
+    } else {
         fieldsFilledCorrectly = true;
     }
 }
@@ -25,13 +22,13 @@ function checkForEmptyFields() {
 /**
  * if the fields are empty it refreshes the function above otherwise it runs the tasks push function
  */
-function getInputsFromForm() {
+async function getInputsFromForm() {
     checkForEmptyFields();
     if (fieldsFilledCorrectly) {
         let title = document.getElementById('addTask-title-input').value;
         let desc = document.getElementById('addTask-desc-input').value;
         let date = document.getElementById('addTaskDate').value;
-        addTask(title, desc, date);
+        await addTask(title, desc, date);
     }
 }
 

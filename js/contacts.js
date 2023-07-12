@@ -235,13 +235,24 @@ async function deleteContact(id) {
     for (let i = 0; i < contacts.length; i++) {
         let selectedContactID = contacts[i]['ID'];
         if (selectedContactID == id) {
-            contacts.splice(i, 1);
-            await setItemContacts(contacts);
             await removeDeletedClientsFromTasks(id);
+            contacts.splice(i, 1);
+            await updateContactIDs();
+            await setItemContacts(contacts);
         }
     }
     refreshContactPage();
     showSuccessBanner('Contact deleted');
+}
+
+
+/**
+ * puts the ID´s on the server in the right order after deleting one
+ */
+async function updateContactIDs() {
+    for (let i = 0; i < contacts.length; i++) {
+        contacts[i]['ID'] = i;
+    }
 }
 
 

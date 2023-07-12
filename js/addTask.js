@@ -42,8 +42,7 @@ function addPrioColor(id) {
     removeIMGBrightening();
     if (target) {
         removePrioHighlight(element, id);
-    }
-    else {
+    } else {
         detectCurrentClickedPrio(id);
     }
 }
@@ -78,11 +77,9 @@ function removePrioHighlight(element, id) {
 function detectCurrentClickedPrio(id) {
     if (id == 'urgent') {
         changePrioProperties(id, 'medium', 'low');
-    }
-    if (id == 'medium') {
+    } if (id == 'medium') {
         changePrioProperties(id, 'urgent', 'low');
-    }
-    if (id == 'low') {
+    } if (id == 'low') {
         changePrioProperties(id, 'medium', 'urgent');
     }
 }
@@ -281,7 +278,7 @@ async function addCategory() {
     if (newCat.value.length > 1) {
         await pushNewTopic(newCat);
         resetAddCategorySection();
-        showNewCreatedTopic();
+        showNewCreatedTopic(newCat);
     }
 }
 
@@ -301,9 +298,20 @@ async function pushNewTopic(newCat) {
 
 
 /**
+ * resets the HTML for the category dropdown
+ */
+function resetAddCategorySection() {
+    let select = document.getElementById('categoryDropdownSection');
+    select.innerHTML = categoryDropdownHTML();
+    generateTaskCategories();
+    showCheckBoxes = !showCheckBoxes;
+}
+
+
+/**
  * shows the new given category in the input field
  */
-function showNewCreatedTopic() {
+function showNewCreatedTopic(newCat) {
     let dropdown = document.getElementById('categoryDropdown');
     dropdown.innerHTML = newGivenCategoryHTML(newCat);
     currentCat = topics.length - 1;
