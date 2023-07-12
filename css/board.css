@@ -445,6 +445,7 @@
     }
 
     .edit-and-delete-box {
+        position: fixed;
         bottom: 48px;
         right: 65px;
     }
@@ -516,5 +517,22 @@
         padding: 5px;
         padding-left: 8px;
         padding-right: 8px;
+    }
+}
+
+@media (max-width: 350px) {
+    .edit-and-delete-box {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .popup-span {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .popup-prio {
+        align-self: flex-start;
     }
 }

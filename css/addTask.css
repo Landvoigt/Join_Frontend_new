@@ -717,6 +717,7 @@ label input {
     }
 
     .back-btn {
+        position: fixed;
         top: 140px;
         right: 65px;
     }
@@ -826,5 +827,16 @@ label input {
     .prio-img {
         height: 10px;
         width: 14px;
+    }
+}
+
+@media (max-width: 350px) {
+    .back-btn {
+        right: 20px;
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #ffffffd9;
     }
 }

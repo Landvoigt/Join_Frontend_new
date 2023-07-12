@@ -50,7 +50,7 @@ function openContactTemplate(i) {
         <b>Phone</b>
         <span>${contacts[i]['phone']}</span>
     </div> 
-    <div id="editContactBtnBox" class="edit-contact-btn-box">
+    <div id="editContactBtnBox" class="edit-and-delete-box">
         <img src="../img/delete.png" class="delete-btn" 
             onclick="deleteContact(${contacts[i]['ID']})">
         <img src="../img/pencil_white.png" class="edit-btn" onclick="openEditContact(${i})">

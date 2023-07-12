@@ -89,6 +89,7 @@
 }
 
 .contact-card {
+    z-index: 9;
     background-color: #F6F7F8;
     display: flex;
     align-items: flex-start;
@@ -208,6 +209,7 @@
 .create-contact-btn {
     display: flex;
     position: absolute;
+    z-index: 30;
     padding: 15px;
     background-color: #2A3647;
     border-radius: 10px;
@@ -487,21 +489,6 @@
     color: white;
 }
 
-.close-contact-card-btn {
-    position: fixed;
-    top: 120px;
-    right: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-
-.edit-contact-btn-box {
-    display: flex;
-    position: absolute;
-    bottom: 150px;
-    right: 50px;
-}
-
 .add-contact-headline {
     display: flex;
     flex-direction: column;
@@ -557,7 +544,7 @@
 }
 
 @media (min-width:1050px) {
-    .edit-contact-btn-box {
+    .edit-and-delete-box {
         display: none !important;
     }
 
@@ -565,7 +552,6 @@
         display: none !important;
     }
 }
-
 
 @media(max-width:1050px) {
     .contacts-side {
@@ -588,6 +574,7 @@
     }
 
     .contact-list-container {
+        min-width: initial !important;
         width: 100%;
     }
 
@@ -611,6 +598,7 @@
         flex-direction: column;
         margin-top: 180px;
         border-radius: 0;
+        overflow: auto;
     }
 
     .initials-big {
@@ -625,6 +613,7 @@
         justify-content: center;
         align-items: center;
         padding: 0;
+        margin-bottom: 65px;
     }
 
     .contacts-popup-right-content {
@@ -682,10 +671,15 @@
         padding-top: 164px;
         padding-left: 8%;
         padding-right: 8%;
+        overflow: auto;
+        padding-bottom: 65px;
     }
 }
 
 @media(max-width:600px) {
+    .add-contact-headline {
+        text-align: center;
+    }
 
     .add-contact-headline-top,
     .edit-contact-headline-top {
@@ -732,13 +726,16 @@
         font-size: 16px;
     }
 
-    .edit-contact-btn-box {
-        flex-direction: column;
-    }
-
     .add-contact-popup-right,
     .edit-contact-popup-right {
         height: auto;
         padding-bottom: 35px;
+    }
+}
+
+@media (max-width: 400px) {
+    .contact-box {
+        padding: 10px;
+        gap: 15px;
     }
 }
