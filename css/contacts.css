@@ -209,7 +209,7 @@
 .create-contact-btn {
     display: flex;
     position: absolute;
-    z-index: 30;
+    z-index: 9;
     padding: 15px;
     background-color: #2A3647;
     border-radius: 10px;
@@ -286,7 +286,7 @@
 .add-contact-popup,
 .edit-contact-popup {
     position: fixed;
-    z-index: 104;
+    z-index: 40;
     height: 500px;
     width: 80%;
     background-color: #fff;
@@ -544,7 +544,7 @@
 }
 
 @media (min-width:1050px) {
-    .edit-and-delete-box {
+    .edit-and-delete-box-adjustment {
         display: none !important;
     }
 

@@ -13,7 +13,6 @@
     top: 0px;
     background: #2A3647;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 0px;
 }
 
 .sidebarMenu {
@@ -21,13 +20,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0px;
-    gap: 15px;
-    width: 232px;
+    gap: 12px;
+    width: 100%;
     height: 229px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
     margin-top: -80px;
 }
 
@@ -37,12 +32,9 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    width: 232px;
-    height: 46px;
+    width: 100%;
+    padding: 12px;
     background: #091931;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .spanSidebar {
@@ -54,9 +46,6 @@
     font-size: 16px;
     line-height: 120%;
     color: #FFFFFF;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 
 .spanSidebarBoard {
@@ -68,9 +57,6 @@
     font-size: 16px;
     line-height: 120%;
     color: #CDCDCD;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 
 .spanImpressumSidebar {
@@ -89,15 +75,13 @@
 .boardSidebar {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: #CDCDCD;
     gap: 20px;
-    width: 232px;
+    width: 100%;
     height: 46px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+    padding-left: 25%;
 }
 
 .impressumContainer {
@@ -109,15 +93,12 @@
     width: 100%;
     height: 120px;
     flex: none;
-    order: 2;
-    flex-grow: 0;
 }
 
 .privacyPolicyLogo {
     width: 20px;
     height: 22px;
     object-fit: contain;
-    margin-right: 10px;
 }
 
 .rotate {
@@ -129,8 +110,8 @@
     align-items: center;
     justify-content: start;
     width: 100%;
-    gap: 5px;
-    padding-left: 20%;
+    gap: 20px;
+    padding-left: 15%;
 }
 
 .bgdHover:hover {
@@ -152,35 +133,35 @@
         right: 0;
         height: 100px;
         padding: 0;
-        position: fixed;
         flex-direction: row;
-        display: flex;
         justify-content: space-evenly;
         top: auto;
         width: auto;
     }
+
     .LogoImageSidebar {
         display: none;
     }
+
     .impressumContainer {
         display: none;
     }
+
     .sidebarMenu {
-        display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         height: auto;
         align-items: center;
         text-align: center;
         gap: 0;
-        width: 100%;
         margin-top: 0;
     }
+
     .boardSidebar {
-        display: flex;
         flex-direction: column;
+        justify-content: center;
         height: 100px;
-        padding: 5px;
+        padding: 12px;
         width: auto;
     }
 }

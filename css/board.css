@@ -518,6 +518,10 @@
         padding-left: 8px;
         padding-right: 8px;
     }
+
+    .m-b-45 {
+        margin-bottom: 0;
+    }
 }
 
 @media (max-width: 350px) {

@@ -9,7 +9,7 @@ function firstLetterHTML(letter) {
 
 function contactBoxHTML(contact, i) {
     return `
-    <div id="contactBox${i}" class="contact-box" onclick="openDetailedContactCard(${i}); stopPropagation(event)">
+    <div id="contactBox${i}" class="contact-box" onclick="stopPropagation(event); openDetailedContactCard(${i})">
         <div id="contactBoxInitials${i}" class="contact-box-initials" style="background-color:${contact['color']};">
             ${contact['initials']}
         </div>
@@ -50,7 +50,7 @@ function openContactTemplate(i) {
         <b>Phone</b>
         <span>${contacts[i]['phone']}</span>
     </div> 
-    <div id="editContactBtnBox" class="edit-and-delete-box">
+    <div id="editContactBtnBox" class="edit-and-delete-box edit-and-delete-box-adjustment">
         <img src="../img/delete.png" class="delete-btn" 
             onclick="deleteContact(${contacts[i]['ID']})">
         <img src="../img/pencil_white.png" class="edit-btn" onclick="openEditContact(${i})">

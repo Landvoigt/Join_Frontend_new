@@ -227,6 +227,10 @@ b {
 }
 
 @media (max-width: 600px) {
+    .incl-cont-side {
+        padding-top: 150px;
+    }
+
     h2 {
         font-size: 2.7em;
     }

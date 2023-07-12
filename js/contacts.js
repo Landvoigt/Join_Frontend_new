@@ -133,6 +133,7 @@ function closeContactCard() {
         document.getElementById('closeContactCardBtn').classList.remove('d-flex');
         document.getElementById('editContactBtnBox').classList.add('d-none');
     }
+    removeAllHighlightsFromContacts();
 }
 
 

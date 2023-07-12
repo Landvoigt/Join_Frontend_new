@@ -783,6 +783,10 @@ label input {
         padding-right: 35px;
     }
 
+    .popup-container h2 {
+        margin-bottom: 0;
+    }
+
     .back-btn {
         top: 140px;
         right: 35px;
@@ -799,6 +803,7 @@ label input {
 
     .addTask-commit-buttons {
         right: 35px !important;
+        margin-top: 30px;
     }
 
     .pos-1 {

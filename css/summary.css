@@ -286,7 +286,7 @@
 
 @media(max-width:600px) {
     .summary-headline-container {
-        margin-bottom: 35px;
+        margin-bottom: 0;
     }
 
     .summary-headline-container span {
