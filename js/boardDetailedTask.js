@@ -33,26 +33,10 @@ function checkPriority(id) {
  * get some task information, shows the popup window then shows the detailed task HTML
  */
 function getDetailedTaskHTML(id) {
-    let task = tasks[id];
-    let topicName = topics[task['topic']]['name'];
-    let topicColor = topics[task['topic']]['color'];
-    let popup = document.getElementById('popupDetailedTaskBG');
-    popup.classList.remove('d-none');
-    popup.classList.remove('light');
-    popup.classList.add('dark');
-    popup.innerHTML = detailedTaskHTML(task, id, topicName, topicColor);
-}
-
-
-/**
- * removes the popup window
- */
-function removeDetailedTaskWindow() {
-    let popupWindow = document.getElementById('popupDetailedTaskBG');
-    popupWindow.classList.add('light');
-    popupWindow.classList.remove('dark');
-    popupWindow.innerHTML = '';
-    setTimeout(deleteDarkBackground, 325, popupWindow);
+    shownTaskID = id;
+    currentPopupStyle = 'fade';
+    let template = detailedTaskHTML();
+    fadeInPopupWindow(template);
 }
 
 
@@ -88,10 +72,9 @@ function showDetailedSubtasks(task, id) {
     for (let i = 0; i < task['subtasks'].length; i++) {
         let subtask = task['subtasks'][i]['text'];
         let status = task['subtasks'][i]['status'];
-        if (status == true) {
+        if (status) {
             getCrossedOutSubtaskHTML(subtaskSection, subtask);
-        }
-        if (status == false) {
+        } else {
             getSubtaskHTML(subtaskSection, subtask);
         }
     }

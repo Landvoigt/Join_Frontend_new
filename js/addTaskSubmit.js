@@ -26,10 +26,8 @@ function checkForEmptyFields() {
  * if the fields are empty it refreshes the function above otherwise it runs the tasks push function
  */
 function getInputsFromForm() {
-    if (fieldsFilledCorrectly == false) {
-        checkForEmptyFields();
-    }
-    if (fieldsFilledCorrectly == true) {
+    checkForEmptyFields();
+    if (fieldsFilledCorrectly) {
         let title = document.getElementById('addTask-title-input').value;
         let desc = document.getElementById('addTask-desc-input').value;
         let date = document.getElementById('addTaskDate').value;
@@ -58,17 +56,10 @@ async function addTask(title, desc, date) {
     );
     await setItemTasks(tasks);
     clearVariables();
-    showSuccessfullyCreatedLogo();
-    removeAddTaskWindow();
-}
-
-
-/**
- * shows a small popup
- */
-function showSuccessfullyCreatedLogo() {
-    createdSuccessfully();
-    document.getElementById('created-successfully-logo').innerHTML = 'Task added successfully';
+    if(!(currentPage == ADDTASK_ID)){
+        closePopupWindow();
+    }
+    showSuccessBanner('Task created');
     changeSite(BOARD_ID);
 }
 
@@ -93,17 +84,34 @@ function emptyFieldPopupPositioning() {
 
 
 /**
- * clear all variables and resets the already given properties of the new task to add
+ * clear all variables and resets the already given properties of the new task
  */
 function clearAddTaskSide() {
+    document.getElementById('addedClientsBox').innerHTML = '';
+    document.getElementById('contactsSelection').innerHTML = '';
     clearVariables();
-    let dropdown = document.getElementById('categoryDropdownSection');
-    let prioSelect = document.getElementById('prioContainer');
-    dropdown.innerHTML = '';
-    dropdown.innerHTML = getTopicDropdownHTML();
-    prioSelect.innerHTML = getPrioContainerHTML();
+    clearDropDownSection();
+    clearPrioSection();
+    clearSubtaskSection();
     generateTaskCategories();
     generateContacts();
-    document.getElementById('addedClientsBox').innerHTML = '';
-    clearSubtaskSection();
+}
+
+
+/**
+ * clears the task category selection and renews it
+ */
+function clearDropDownSection() {
+    let dropdown = document.getElementById('categoryDropdownSection');
+    dropdown.innerHTML = '';
+    dropdown.innerHTML = getTopicDropdownHTML();
+}
+
+
+/**
+ * clears the task prio selection and renews it
+ */
+function clearPrioSection() {
+    let prioSelect = document.getElementById('prioContainer');
+    prioSelect.innerHTML = getPrioContainerHTML();
 }

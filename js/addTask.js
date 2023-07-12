@@ -1,6 +1,40 @@
 /**
- * checks if the current clicked button already contains a color, then removes the highlighted icon. 
- * @param {*ID of clicked prio button} id 
+ * gets the add task template, shows it, makes some css adjustments
+ */
+function showAddTaskSite() {
+    let addTaskSite = document.getElementById('addTaskSite');
+    addTaskSite.innerHTML = getAddTaskHTML();
+    let popupContainer = document.getElementById('popupContainer');
+    popupContainer.classList.add('add-task-adjustment');
+    let backButton = document.getElementById('popupContainerBackButton');
+    backButton.classList.add('d-none');
+    addTaskSideCreateContact = true;
+}
+
+
+/**
+ * shows the popup window for adding a new task, generates all informations and effects
+ */
+function showAddTaskWindow() {
+    resetAddTaskID();
+    currentPopupStyle = 'slide';
+    popupContentID = 'popupContainer'
+    let template = getAddTaskHTML();
+
+    slideInContent(template, popupContentID);
+    clearVariables();
+    generateTaskCategories();
+    generateContacts();
+    renderSubtasks();
+    document.getElementById('commitButtonsBox').style.right = '65px';
+    emptyFieldPopupPositioning();
+    addTaskSideCreateContact = true;
+}
+
+
+/**
+ * checks if the current clicked button already contains a color, removes the highlighted icon
+ * @param {string} id - ID of the clicked priority button
  */
 function addPrioColor(id) {
     let element = document.getElementById(id);
@@ -26,9 +60,9 @@ function removeIMGBrightening() {
 
 
 /**
- * removes color from highlighted button and resets variables
- * @param {*clicked prio button} element 
- * @param {*ID of clicked prio button} id 
+ * removes color from the highlighted button and resets variables
+ * @param {HTMLElement} element - clicked priority button
+ * @param {string} id - ID of the clicked priority button
  */
 function removePrioHighlight(element, id) {
     element.classList.remove(`${id}-highlight`);
@@ -39,7 +73,7 @@ function removePrioHighlight(element, id) {
 
 /**
  * detects the right button by the ID
- * @param {*ID of clicked prio button} id 
+ * @param {string} id - ID of the clicked priority button
  */
 function detectCurrentClickedPrio(id) {
     if (id == 'urgent') {
@@ -55,10 +89,10 @@ function detectCurrentClickedPrio(id) {
 
 
 /**
- * adds the color to the clicked prio button and icon and removes it from the others
- * @param {*ID of clicked prio button} shownPrio 
- * @param {*ID of nonclicked prio button} hidingPrio1 
- * @param {*ID of nonclicked prio button} hidingPrio2 
+ * adds the color to the clicked priority button and icon and removes it from the others
+ * @param {string} shownPrio - ID of the clicked priority button
+ * @param {string} hidingPrio1 - ID of the non-clicked priority button
+ * @param {string} hidingPrio2 - ID of the non-clicked priority button
  */
 function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
     let element = document.getElementById(shownPrio);
@@ -68,44 +102,35 @@ function changePrioProperties(shownPrio, hidingPrio1, hidingPrio2) {
     let icon = document.getElementById(`${shownPrio}Icon`);
     icon.classList.add('img-brightening');
     currentPrio = shownPrio;
-    currentPrioImageSource = `./img/prio_${shownPrio}.png`;
+    currentPrioImageSource = `../img/prio_${shownPrio}.png`;
 }
 
 
 /**
- * resets ID´s of popup container and addTask site
- * @returns ID of popup container
+ * resets ID of addTask site
  */
-function resetIDs() {
-    let popupWindow = document.getElementById('popupWindow');
-    popupWindow.classList.remove('d-none');
-    popupWindow.classList.remove('light');
-    popupWindow.classList.add('dark');
-    popupWindow.innerHTML = '';
+function resetAddTaskID() {
     let addTaskSite = document.getElementById('addTaskSite');
     addTaskSite.innerHTML = '';
-    return popupWindow
 }
 
 
 /**
- * if dropdown gets clicked it shows the options menu otherwise it closes the options menu
- * @param {*ID of current dropdown options} select 
- * @param {*ID of current dropdown container} container 
+ * shows the options menu if the dropdown is clicked; otherwise, closes the options menu
+ * @param {string} select - ID of the current dropdown options
+ * @param {string} container - ID of the current dropdown container
  */
 function showSelection(select, container) {
     let options = document.getElementById(`${select}`);
     let dropdown = document.getElementById(`${container}`);
     let closeOptions = document.querySelectorAll('.category-selection');
-    let removeBorder = document.querySelectorAll('.dropdown');
     if (showCheckBoxes) {
         options.style.display = "flex";
         showCheckBoxes = !showCheckBoxes;
         dropdown.classList.add('selection-border-align');
     } else {
         for (let i = 0; i < closeOptions.length; i++) {
-            closeOptions[i].style.display = "none";
-            removeBorder[i].classList.remove('selection-border-align');
+            closeDropdown(closeOptions, i);
         }
         showCheckBoxes = !showCheckBoxes;
     }
@@ -115,14 +140,22 @@ function showSelection(select, container) {
 /**
  * closes all dropdowns
  */
-function closeDropdown() {
+function closeAllDropdowns() {
     let closeOptions = document.querySelectorAll('.category-selection');
-    let removeBorder = document.querySelectorAll('.dropdown');
     for (let i = 0; i < closeOptions.length; i++) {
-        closeOptions[i].style.display = "none";
-        removeBorder[i].classList.remove('selection-border-align');
+        closeDropdown(closeOptions, i);
     }
     showCheckBoxes = !showCheckBoxes;
+}
+
+
+/**
+ * closes one specific dropdown
+ */
+function closeDropdown(closeOptions, i) {
+    let removeBorder = document.querySelectorAll('.dropdown');
+    closeOptions[i].style.display = "none";
+    removeBorder[i].classList.remove('selection-border-align');
 }
 
 
@@ -134,30 +167,20 @@ function generateTaskCategories() {
     for (let i = 0; i < topics.length; i++) {
         let cat = topics[i]['name'];
         let color = topics[i]['color'];
-        select.innerHTML += `
-        <label class="addTask-category-label label-hover" onclick="showSelectedCategory(${i})">
-            <span>${cat}</span>
-            <div class="addTask-category-dot" style="background-color:${color};"></div>
-        </label>
-        `;
+        select.innerHTML += taskCategoryHTML(i, cat, color);
     }
 }
 
 
 /**
- * shows the clicked category in the input field with it´s color
- * @param {ID of the clicked category} i 
+ * shows the clicked category in the input field with its color
+ * @param {number} i - ID of the clicked category
  */
 function showSelectedCategory(i) {
     let container = document.getElementById('categoryDropdown');
     let cat = topics[i]['name'];
     let color = topics[i]['color'];
-    container.innerHTML = `
-    <div style="display:flex; align-items:center;">
-        <span>${cat}</span>
-        <div class="addTask-category-dot" style="background-color:${color};"></div>
-    </div>
-    `;
+    container.innerHTML = selectedCategoryHTML(cat, color);
     showSelection('categorySelection', 'categoryDropdown');
     currentCat = i;
     currentPickedColor = color;
@@ -171,29 +194,22 @@ function generateContacts() {
     let select = document.getElementById('contactsSelection');
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        select.innerHTML += `
-        <label class="label-hover">
-            <span>${contact['firstname']} ${contact['lastname']}</span>
-            <input id="contactCheckbox${contact['ID']}" type="checkbox" class="checkbox" onclick="addOrRemoveClients(${contact['ID']})">
-        </label>
-        `;
+        select.innerHTML += contactHTML(contact);
     }
     showAssignedClients();
 }
 
 
 /**
- * if checkbox is checked removes contact from current assigned otherwise adds contact
- * @param {ID of clicked contact} i 
+ * if the checkbox is checked, removes the contact from the current assigned; otherwise, adds the contact
+ * @param {number} i - ID of clicked contact
  */
 function addOrRemoveClients(i) {
     let checkbox = document.getElementById(`contactCheckbox${i}`);
-    if (checkbox.checked != true) {
+    if (!checkbox.checked) {
         removeClient(i);
-    }
-    else {
+    } else {
         currentAssignedClients.push(i);
-        // showAssignedClients();
         createAssignedClientContainer(i);
     }
 }
@@ -215,8 +231,8 @@ function showAssignedClients() {
 
 
 /**
- * removes clicked current assigned client container and resets checkbox
- * @param {*ID of clicked contact} i 
+ * removes the clicked current assigned client container and resets the checkbox
+ * @param {number} i - ID of clicked contact
  */
 function removeClient(i) {
     let clientID = currentAssignedClients.indexOf(`${i}`);
@@ -230,28 +246,21 @@ function removeClient(i) {
 
 /**
  * HTML for the assigned client container with initials and color
- * @param {*ID of clicked contact} i 
+ * @param {number} i - ID of clicked container
  */
 function createAssignedClientContainer(i) {
     let dropdown = document.getElementById('addedClientsBox');
     let contact = contacts.filter(c => c['ID'] == `${i}`);
     for (let j = 0; j < contact.length; j++) {
-        const element = contact[j];
-        let initials = element['initials'];
-        let color = element['color'];
-        dropdown.innerHTML += `
-            <div style="display:flex;">
-                <div id="addedClient${i}" class="task-client task-client-big added-client-style pointer" style="background-color:${color};" 
-                onclick="removeClient(${i})">${initials}</div>
-            <div>
-        `;
+        let element = contact[j];
+        dropdown.innerHTML += assignedClientContainerHTML(element, i);
     }
 }
 
 
 /**
- * removes borders from all colors first then adds a border to clicked color
- * @param {*ID of picked color} id 
+ * removes borders from all colors first, then adds a border to the clicked color
+ * @param {string} id - ID of picked color
  */
 function addBorderToPickedColor(id) {
     const colors = document.querySelectorAll('.dot-hover');
@@ -264,23 +273,40 @@ function addBorderToPickedColor(id) {
 
 
 /**
- * gets the clicked color the creates new category, saves it, resets the dropdown and shows the new category 
+ * gets the clicked color then creates new category, saves it, resets the dropdown and shows the new category 
  */
 async function addCategory() {
     checkPickedColor();
     let newCat = document.getElementById('new-cat-input');
     if (newCat.value.length > 1) {
-        topics.push(
-            {
-                'name': `${newCat.value}`,
-                'color': `${currentPickedColor}`
-            }
-        );
-        await setItemTopics(topics);
+        await pushNewTopic(newCat);
         resetAddCategorySection();
-        document.getElementById('categoryDropdown').innerHTML = newGivenCategoryHTML(newCat);
-        currentCat = topics.length - 1;
+        showNewCreatedTopic();
     }
+}
+
+
+/**
+ * saves the new category on the server
+ */
+async function pushNewTopic(newCat) {
+    topics.push(
+        {
+            'name': `${newCat.value}`,
+            'color': `${currentPickedColor}`
+        }
+    );
+    await setItemTopics(topics);
+}
+
+
+/**
+ * shows the new given category in the input field
+ */
+function showNewCreatedTopic() {
+    let dropdown = document.getElementById('categoryDropdown');
+    dropdown.innerHTML = newGivenCategoryHTML(newCat);
+    currentCat = topics.length - 1;
 }
 
 
@@ -290,15 +316,13 @@ async function addCategory() {
 function checkPickedColor() {
     if (currentPickedColor == '') {
         createRandomColor();
-    }
-    else {
+    } else {
         for (let i = 0; i < topics.length; i++) {
             const element = topics[i]['color'];
             if (currentPickedColor == element) {
                 createRandomColor();
             }
         }
-        return
     }
 }
 
@@ -312,14 +336,8 @@ function renderSubtasks() {
     for (let i = 0; i < currentSubtasks.length; i++) {
         let text = currentSubtasks[i]['text'];
         let status = currentSubtasks[i]['status'];
-        if (status == true) {
-            checkmark = 'checked';
-            subtaskBox.innerHTML += getSubtaskBoxHTML(i, text, checkmark);
-        }
-        if (status == false) {
-            checkmark = '';
-            subtaskBox.innerHTML += getSubtaskBoxHTML(i, text, checkmark);
-        }
+        checkmark = status ? 'checked' : '';
+        subtaskBox.innerHTML += getSubtaskBoxHTML(i, text, checkmark);
     }
 }
 
@@ -330,15 +348,23 @@ function renderSubtasks() {
 function addSubtask() {
     let input = document.getElementById('subtaskInput');
     if (input.value.length > 1) {
-        currentSubtasks.push(
-            {
-                'text': input.value,
-                'status': false
-            }
-        );
-        input.value = '';
+        pushNewSubtask(input);
         clearSubtaskSection();
     }
+}
+
+
+/**
+ * adds a new subtask to the array and clears the input
+ */
+function pushNewSubtask(input) {
+    currentSubtasks.push(
+        {
+            'text': input.value,
+            'status': false
+        }
+    );
+    input.value = '';
 }
 
 
@@ -358,12 +384,8 @@ function addSubtaskOnEnter() {
 
 /**
  * changes subtask status
+ * @param {number} i - Index of the subtask
  */
 function changeSubtaskStatus(i) {
-    if (currentSubtasks[i]['status'] === true) {
-        currentSubtasks[i]['status'] = false;
-    }
-    else {
-        currentSubtasks[i]['status'] = true;
-    }
+    currentSubtasks[i]['status'] = !currentSubtasks[i]['status'];
 }

@@ -80,32 +80,6 @@ function getTaskInformationFromArray(task, taskSection) {
 
 
 /**
- * HTML for the small task container
- */
-function generateTask(task, taskSection, topicName, topicColor, progress, subtasksAmount) {
-    taskSection.innerHTML +=
-        `
-        <div class="task-box" draggable="true" ondragstart="startDragging(${task['id']})" onclick="showDetailedTask(${task['id']})">
-            <span class="task-category" style="background-color: ${topicColor}">${topicName}</span>
-            <span class="task-headline">${task['headline']}</span>
-            <span class="task-description">${task['description']}</span>
-            <div id="progressContainer${task['id']}" class="progress-container">
-                <div class="progress-box">
-                    <div class="progress-bar" style="width:${progress / subtasksAmount * 100}%"></div>
-                  </div>
-                <span>${progress}/${subtasksAmount} Done</span>
-            </div>
-            <div class="task-assignment-section">
-                <div id="taskClientSection${task['id']}" class="task-clients-container">
-                </div>
-                <img src="${task['prioImg']}" class="task-prio-icon">
-            </div>
-        </div>
-    `;
-}
-
-
-/**
  * shows every assigned client of the task
  */
 function showClients(task) {
@@ -114,10 +88,12 @@ function showClients(task) {
     let clients = task['clients'];
     for (let i = 0; i < clients.length; i++) {
         let clientID = clients[i];
-        let id = contacts.findIndex(c => c['ID'] == clientID);
-        let initials = contacts[id]['initials'];
-        let color = contacts[id]['color'];
-        changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
+        let index = contacts.findIndex(c => c['ID'] == clientID);
+        if (index !== -1) {
+            let initials = contacts[index]['initials'];
+            let color = contacts[index]['color'];
+            changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initials, color);
+        }
     }
 }
 
@@ -263,8 +239,7 @@ function showFilteredTasks(id) {
         if (filterHeadline) {
             getTaskInformationFromArray(task, taskSection);
             checkForSubtasks(task, task['id']);
-        }
-        else if (filterDescription) {
+        } else if (filterDescription) {
             getTaskInformationFromArray(task, taskSection);
             checkForSubtasks(task, task['id']);
         }

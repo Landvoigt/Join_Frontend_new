@@ -40,7 +40,7 @@ async function register() {
   };
 
   await setItem('users', JSON.stringify(users));
-  showSuccessfullyCreatedUser();
+  showSuccessBanner('New user created');
   renderLogin();
 }
 

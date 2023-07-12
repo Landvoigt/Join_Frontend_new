@@ -3,12 +3,12 @@
  */
 async function initialize() {
     await includeHTML();
-    await pushFirstLetter();
-    await loadTasks();
     await loadTopics();
-    showMainpage();
+    await loadTasks();
+    await showContactsFirstLetters();
     loadDate();
-    checkForTaskNumbers();
+    getTaskNumbers();
+    showMainpage();
 }
 
 
@@ -54,7 +54,7 @@ function changeSite(id) {
     updateTasks();
     clearSearchField();
     deleteBackgroundColors();
-    checkForTaskNumbers();
+    getTaskNumbers();
 }
 
 
@@ -63,8 +63,7 @@ function changeSite(id) {
  */
 function changeToAddTaskSite(id) {
     changeSite(id);
-    let addTaskSite = document.getElementById('addTaskSite');
-    addTaskSite.innerHTML = getAddTaskHTML();
+    showAddTaskSite();
     generateTaskCategories();
     generateContacts();
 }
@@ -78,8 +77,10 @@ function showLogoutPopup() {
     popup.classList.remove('d-none');
     let overlay = document.getElementById('overlay');
     overlay.classList.remove('d-none');
-    let newContactBtn = document.getElementById('Create-Contact');
-    newContactBtn.classList.add('d-none');
+    if (mediaQuery.matches) {
+        let newContactBtn = document.getElementById('createContactBtn');
+        newContactBtn.classList.add('d-none');
+    }
 }
 
 
@@ -99,8 +100,10 @@ function closeLogoutPopup() {
     popup.classList.add('d-none');
     let overlay = document.getElementById('overlay');
     overlay.classList.add('d-none');
-    let newContactBtn = document.getElementById('Create-Contact');
-    newContactBtn.classList.remove('d-none');
+    if (mediaQuery.matches) {
+        let newContactBtn = document.getElementById('createContactBtn');
+        newContactBtn.classList.remove('d-none');
+    }
 }
 
 
@@ -137,7 +140,7 @@ function deleteBackgroundColors() {
  */
 function createRandomColor() {
     currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    contactsRandomColor = currentPickedColor;
+    randomContactColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 
@@ -177,4 +180,95 @@ function clearVariables() {
  */
 function clearSearchField() {
     document.getElementById('searchTasks').value = '';
+}
+
+
+/**
+ * fades in a popup with dark background, inserts the content
+ * @param {*template} - content to show
+ */
+function fadeInPopupWindow(template) {
+    let popupWindow = document.getElementById('popupWindow');
+    popupWindow.classList.remove('d-none');
+    popupWindow.classList.remove('light');
+    popupWindow.classList.add('dark');
+    popupWindow.innerHTML = template;
+}
+
+
+/**
+ * slides in content into a popup window
+ * @param {template} template - content to show
+ * @param {string} id - ID of the element to slide in the content
+ */
+function slideInContent(template, id) {
+    fadeInPopupWindow(template);
+    let content = document.getElementById(`${id}`);
+    content.classList.remove('move-out');
+    content.classList.add('move-in');
+}
+
+/**
+ * if the popup is a fading one it closes it by fading out, otherwise by sliding out
+ */
+function closePopupWindow() {
+    if (currentPopupStyle == 'fade') {
+        let popupWindow = document.getElementById('popupWindow');
+        popupWindow.classList.add('light');
+        popupWindow.classList.remove('dark');
+        popupWindow.innerHTML = '';
+        setTimeout(deleteDarkBackground, 325, popupWindow);
+    } else {
+        slideOutContent();
+    }
+}
+
+
+/**
+ * slides out the content from the popup window
+ */
+function slideOutContent() {
+    let popupWindow = document.getElementById('popupWindow');
+    popupWindow.classList.add('light');
+    popupWindow.classList.remove('dark');
+    let content = document.getElementById(`${popupContentID}`);
+    content.classList.remove('move-in');
+    content.classList.add('move-out');
+    setTimeout(deleteContent, 325, popupWindow);
+}
+
+
+/**
+ * deletes the dark background
+ */
+function deleteDarkBackground(popupWindow) {
+    popupWindow.classList.add('d-none');
+}
+
+
+/**
+ * deletes the content of the popup window
+ * @param {HTMLElement} popupWindow - popup window element
+ */
+function deleteContent(popupWindow) {
+    popupWindow.innerHTML = '';
+    deleteDarkBackground(popupWindow);
+}
+
+
+/**
+ * shows feedback banner after done action
+ */
+function showSuccessBanner(text) {
+    let banner = document.getElementById('successBanner');
+    banner.innerHTML = `${text}`;
+    banner.classList.remove('move-down', 'd-none');
+    banner.classList.add('move-up');
+    setTimeout(function () {
+        banner.classList.remove('move-up');
+        banner.classList.add('move-down');
+    }, 1500);
+    setTimeout(function () {
+        banner.classList.add('d-none');
+    }, 2000);
 }

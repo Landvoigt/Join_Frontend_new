@@ -2,7 +2,6 @@
  * runs all function to edit the task
  */
 function editDetailedTask(id) {
-    resetIDs();
     currentAssignedClients = [];
     currentSubtasks = [];
     currentCat = tasks[id]['topic'];
@@ -72,9 +71,10 @@ async function deleteShownTask(id) {
     } catch (e) {
         console.error('Deleting error:', e);
     }
-    removeDetailedTaskWindow();
+    closePopupWindow();
+    showSuccessBanner('Task deleted');
     await updateTasksID();
-    loadTasks();
+    await loadTasks();
     clearVariables();
 }
 
@@ -99,10 +99,8 @@ async function updateTasksID() {
  * after checking if the input fields are filled it pushes the edited information to the task
  */
 async function saveEditedTaskInformation(id) {
-    if (fieldsFilledCorrectly == false) {
-        checkForEmptyFields();
-    }
-    if (fieldsFilledCorrectly == true) {
+    checkForEmptyFields();
+    if (fieldsFilledCorrectly) {
         let title = document.getElementById('editTaskTitle').value;
         let desc = document.getElementById('editTaskDesc').value;
         let date = document.getElementById('editTaskDate').value;
@@ -128,7 +126,8 @@ async function updateTaskInformation(id, title, desc, date) {
         'prioName': currentPrio,
         'prioImg': currentPrioImageSource,
     };
+    closePopupWindow();
+    showSuccessBanner('Task edited');
     await setItemTasks(tasks);
     updateTasks(id);
-    removeDetailedTaskWindow();
 }

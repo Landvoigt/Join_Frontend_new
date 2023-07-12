@@ -10,40 +10,33 @@
     flex-direction: column;
 }
 
-.headline-summary {
+.summary-headline-container {
     display: flex;
     align-items: center;
     margin-bottom: 65px;
     margin-top: -10px;
 }
 
-.summary-headline {
+.summary-headline-container h2 {
     margin-bottom: 0 !important;
 }
 
-.vertical-line {
+.summary-headline-container span {
+    font-size: 27px;
+}
+
+.vertical-line-summary {
     border-left: 4px solid #29ABE2;
     height: 70px;
     margin-left: 30px;
     margin-right: 30px;
 }
 
-.task-container {
-    display: flex;
-}
-
-.tasks {
-    display: flex;
-    flex-direction: column;
-}
-
-.first-row {
-    display: flex;
+.task-count-boxes-top-row {
     gap: 35px;
-
 }
 
-.single-task {
+.task-count-box {
     height: 170px;
     width: 170px;
     border-radius: 30px;
@@ -57,24 +50,19 @@
     transition: all 150ms ease-in-out;
 }
 
-.single-task:hover {
+.task-count-box:hover {
     background-color: #2A3647;
     transform: scale(1.1);
     color: white;
     cursor: pointer;
 }
 
-.tasks-in-board-nr {
-    font-size: 64px;
-    font-weight: 700;
-}
-
-.single-task-description {
+.task-count-box-description {
     font-size: 20px;
     text-align: center;
 }
 
-.second-row {
+.urgent-tasks-box {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -89,36 +77,36 @@
     transition: all 150ms ease-in-out;
 }
 
-.second-row:hover {
+.urgent-tasks-box:hover {
     background-color: #2A3647;
     transform: scale(1.06);
     color: white;
     cursor: pointer;
 }
 
-.second-row img {
+.urgent-tasks-box img {
     height: 58px;
     margin-right: 12px;
 }
 
-.vertical-line-2 {
+.urgent-tasks-box-parting-line {
     border-left: 2px solid lightgray;
     height: 115px;
 }
 
-.second-row-right {
+.deadline {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#date {
+.deadline b {
     font-size: 21px;
     margin-bottom: 14px;
 }
 
-.third-row {
+.task-count-boxes-bottom-row {
     display: flex;
     align-items: center;
     gap: 35px;
@@ -127,7 +115,8 @@
     margin-top: 40px;
 }
 
-.to-do-status {
+.tasks-to-do-box,
+.tasks-done-box {
     height: 150px;
     width: 272px;
     background-color: white;
@@ -141,89 +130,78 @@
     transition: all 150ms ease-in-out;
 }
 
-.to-do-status:hover {
+.tasks-to-do-box:hover,
+.tasks-done-box:hover {
     background-color: #2A3647;
     transform: scale(1.1);
     color: white;
     cursor: pointer;
 }
 
-.to-do-status img {
+.tasks-to-do-box img,
+.tasks-done-box img {
     height: 60px;
 }
 
-.name {
+.greet-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 45px;
+    padding-left: 45px;
+}
+
+.greet-text {
+    font-weight: 600;
+    font-size: 3.3em;
+}
+
+.greet-name {
     color: #29ABE2;
     font-weight: 700;
     font-size: 3.5em;
     margin-bottom: 20px;
 }
 
-.greeting {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-top: 110px;
-    padding-left: 65px;
+.urgent-tasks-count {
+    font-size: 47px;
+    text-align: center;
 }
 
-#greeting {
-    font-weight: 600;
-    font-size: 3.3em;
+.summary-todo-tasks-box,
+.summary-done-tasks-box {
+    font-weight: 500;
+    font-size: 21px;
 }
 
-.line {
-    width: 100px;
-    border-bottom: 4px solid #29ABE2;
-    margin-top: 35px;
-}
-
-.urgent-nr {
-    display: flex;
-    align-items: center;
-}
-
-.doneTasksNr {
+.summary-todo-tasks-box span,
+.summary-done-tasks-box span,
+.task-count-box span {
     font-size: 64px;
+    font-weight: 600;
     text-align: center;
 }
 
 @media (max-width: 1500px) {
-    #greeting {
-        font-size: 2.6em;
+    .greet-text {
+        font-size: 2.4em;
     }
 
-    .name {
-        font-size: 3em;
-    }
-
-}
-
-@media (max-width: 1410px) {
-    .greeting {
-        margin-top: 85px;
-        padding-left: 35px;
-    }
-
-    #greeting {
-        font-size: 2em;
-    }
-
-    .name {
-        font-size: 2.3em;
+    .greet-name {
+        font-size: 2.7em;
     }
 
 }
 
-@media (max-width: 1300px) {
-    .greeting {
+@media (max-width: 1160px) {
+    .greet-container {
         display: none;
     }
 }
 
 @media(max-width:1050px) {
-    .headline-summary {
+    .summary-headline-container {
         display: flex;
         width: 100%;
         align-items: flex-start;
@@ -231,47 +209,44 @@
         flex-direction: column;
     }
 
-    .vertical-line {
-        display: none;
+    .vertical-line-summary {
+        transform: rotate(90deg);
+        order: 2;
+        margin-left: 34px;
     }
 
-    .line {
-        display: block !important;
-    }
-
-    #nutshell-text {
+    .summary-headline-container span {
         margin-top: 15px;
     }
 
-    .tasks-in-board-nr {
-        font-size: 47px;
-        font-weight: 600;
-    }
-
-    .single-task-description {
-        font-size: 15px;
-    }
-
-    .single-task {
+    .task-count-box {
         height: 130px;
         width: 130px;
     }
 
-    .second-row {
+    .task-count-box-description {
+        font-size: 15px;
+    }
+
+    .urgent-tasks-box {
         margin-top: 30px;
         width: 460px;
         height: 130px;
     }
 
-    .second-row img {
+    .urgent-tasks-box img {
         height: 50px;
     }
 
-    .second-row-right {
+    .urgent-tasks-box-parting-line {
+        height: 105px !important;
+    }
+
+    .deadline {
         font-size: 14px;
     }
 
-    #date {
+    .deadline b {
         font-size: 16px;
     }
 
@@ -281,127 +256,120 @@
         align-items: flex-start;
     }
 
-    .third-row {
+    .task-count-boxes-bottom-row {
         width: 460px;
         height: 130px;
-        margin-top: 21px
+        margin-top: 24px;
     }
 
-    #To-Do {
-        font-size: 15px !important;
-    }
-
-    #toDoTasksNr {
-        font-size: 47px !important;
-    }
-
-    .to-do-status {
+    .tasks-to-do-box,
+    .tasks-done-box {
         height: 110px;
     }
 
-    .to-do-status img {
+    .tasks-to-do-box img,
+    .tasks-done-box img {
         height: 40px;
     }
 
-    #done-span {
+    .summary-todo-tasks-box,
+    .summary-done-tasks-box {
         font-size: 15px !important;
     }
 
-    #doneTasksNr {
-        font-size: 47px !important;
+    .summary-todo-tasks-box span,
+    .summary-done-tasks-box span,
+    .task-count-box span {
+        font-size: 49px !important;
     }
 }
 
 @media(max-width:600px) {
-    #nutshell-text {
-        font-size: 21px !important;
-        margin-top: 7px;
-    }
-
-    .line {
-        margin-top: 15px;
-    }
-
-    .headline-summary {
+    .summary-headline-container {
         margin-bottom: 35px;
     }
 
-    .to-do-status:hover,
-    .single-task:hover,
-    .second-row:hover {
-        transform: none;
+    .summary-headline-container span {
+        margin-top: 30px;
+        font-size: 19px !important;
     }
 
-    .single-task {
+    .task-count-box {
         height: 110px;
         width: 110px;
     }
 
-    .first-row {
+    .tasks-to-do-box:hover,
+    .tasks-done-box:hover,
+    .task-count-box:hover,
+    .urgent-tasks-box:hover {
+        transform: none;
+    }
+
+    .task-count-boxes-top-row {
         gap: 15px;
     }
 
-    #nutshell-text {
-        font-size: 19px !important;
-    }
-
-    .second-row {
+    .urgent-tasks-box {
         margin-top: 24px;
         width: 360px;
         height: 110px;
     }
 
-    .third-row {
+    .urgent-tasks-box-parting-line {
+        height: 90px !important;
+    }
+
+    .task-count-boxes-bottom-row {
         width: 360px;
         height: 110px;
     }
 
-    .to-do-status {
+    .tasks-to-do-box,
+    .tasks-done-box {
         width: 170px;
+    }
+
+    .summary-todo-tasks-box span,
+    .summary-done-tasks-box span,
+    .urgent-tasks-count,
+    .task-count-box span {
+        font-size: 43px !important;
     }
 }
 
 @media(max-width:420px) {
-    .first-row {
+
+    .task-count-boxes-top-row,
+    .task-count-boxes-bottom-row {
         gap: 12px;
         width: 300px;
         height: 100px;
     }
 
-    .second-row {
-        margin-top: 24px;
+    .urgent-tasks-box {
+        margin-top: 28px;
         width: 300px;
-        height: 100px;
+        height: 90px;
     }
 
-    .third-row {
-        width: 300px;
-        height: 100px;
-        gap: 12px;
+    .urgent-tasks-box-parting-line {
+        height: 70px !important;
     }
 
-    .to-do-status {
+    .tasks-to-do-box,
+    .tasks-done-box {
         width: 170px;
     }
 
-    #urgentTasksNr {
-        font-size: 40px !important;
+    .summary-todo-tasks-box span,
+    .summary-done-tasks-box span,
+    .urgent-tasks-count,
+    .task-count-box span {
+        font-size: 35px !important;
     }
 
-    #doneTasksNr {
-        font-size: 40px !important;
-    }
-
-    #toDoTasksNr {
-        font-size: 40px !important;
-    }
-
-    .tasks-in-board-nr {
-        font-size: 40px;
-        font-weight: 600;
-    }
-
-    .vertical-line-2 {
+    .urgent-tasks-box-parting-line {
         height: 100px;
     }
 }

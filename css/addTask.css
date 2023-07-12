@@ -179,7 +179,7 @@ textarea:focus-visible {
     height: 55px;
     padding-left: 15px;
     padding-right: 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #2a3647;
     background-color: white;
     font-size: 1.2em;
@@ -192,10 +192,9 @@ textarea:focus-visible {
 .add-task-button {
     height: 45px;
     width: 200px;
-    border-radius: 8px;
+    border-radius: 10px;
     gap: 8px;
     border: 1px solid #2a3647;
-    background-color: white;
     font-size: 1.3em;
     font-weight: 600;
     color: rgba(0, 0, 59, 0.8);
@@ -208,11 +207,18 @@ textarea:focus-visible {
     transition: 150ms all ease-in-out;
 }
 
+.add-task-adjustment {
+    min-height: 100% !important;
+    width: 100% !important;
+    background-color: initial !important;
+    padding: 0px !important;
+}
+
 .submit-btn {
     height: 55px;
     padding-left: 15px;
     padding-right: 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #2a3647;
     background-color: white;
     font-size: 1.2em;
@@ -224,15 +230,9 @@ textarea:focus-visible {
     transition: 150ms all ease-in-out;
 }
 
-.submit-btn:hover {
-    background-color: #29abe2 !important;
-    border: 1px solid transparent;
-    box-shadow:
-        1px 4px 3px -1px rgba(0, 0, 0, 0.16),
-        -1px 4px 3px -1px rgba(0, 0, 0, 0.16);
-}
-
-.add-task-button:hover {
+.submit-btn:hover,
+.add-task-button:hover,
+.add-contact:hover {
     background-color: #29abe2 !important;
     border: 1px solid transparent;
     box-shadow:
@@ -300,7 +300,6 @@ select {
     padding: 65px;
     position: relative;
     display: grid;
-    overflow-x: auto;
 }
 
 .popup-container::-webkit-scrollbar {
@@ -353,7 +352,6 @@ select {
     background-color: white;
     border-radius: 8px;
     border: 1px solid lightgrey;
-    /* display: inline-block; */
     box-sizing: border-box;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -701,12 +699,10 @@ label input {
     }
 
     .popup-container {
-        height: 100%;
+        min-height: 100%;
         width: 100%;
         border-radius: 0;
-        overflow: auto;
-        overflow-x: hidden;
-        padding-top: 163px;
+        padding-top: 493px;
         background-color: rgb(249, 249, 249);
     }
 
@@ -726,7 +722,7 @@ label input {
     }
 
     .back-btn-addTask-popup {
-        top: 142px;
+        top: 472px;
         right: 65px;
     }
 
@@ -807,7 +803,7 @@ label input {
     .pos-1 {
         bottom: 13% !important;
     }
-    
+
     .pos-2 {
         bottom: 45% !important;
     }
