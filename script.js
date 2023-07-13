@@ -279,3 +279,21 @@ function showSuccessBanner(text) {
         banner.classList.add('d-none');
     }, 2000);
 }
+
+
+/**
+ * shows alert banner when something isnt working
+ */
+function showFailureBanner(text) {
+    let banner = document.getElementById('failureBanner');
+    banner.innerHTML = `${text}`;
+    banner.classList.remove('light-banner', 'd-none');
+    banner.classList.add('dark-banner');
+    setTimeout(function () {
+        banner.classList.remove('dark-banner');
+        banner.classList.add('light-banner');
+    }, 2000);
+    setTimeout(function () {
+        banner.classList.add('d-none');
+    }, 2400);
+}

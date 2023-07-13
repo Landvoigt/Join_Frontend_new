@@ -164,14 +164,15 @@ b {
 }
 
 .success-banner,
-.success-banner-login {
+.success-banner-login,
+.failure-banner {
     z-index: 999;
     display: flex;
     position: fixed;
     padding: 20px;
     padding-left: 60px;
     padding-right: 60px;
-    background-color: #2A3647;
+    background-color: rgb(42, 54, 71);
     border-radius: 18px;
     bottom: -100px;
     color: white;
@@ -179,14 +180,135 @@ b {
     align-items: center;
     font-size: 20px;
     font-weight: 400;
+    text-align: center;
 }
 
 .success-banner-adjustment {
     margin-left: calc(28% + 232px);
 }
 
-.success-banner-login-adjustment {
-    min-width: 30%;
+.failure-banner-adjustment {
+    bottom: initial !important;
+    top: 65px; 
+}
+
+.move-up {
+    animation: moveUp 525ms forwards;
+}
+
+.move-down {
+    animation: moveDown 525ms forwards;
+}
+
+@keyframes moveUp {
+    from {
+        bottom: -100px;
+        transform: translateY(200%);
+    }
+
+    to {
+        bottom: 150px;
+    }
+}
+
+@keyframes moveDown {
+    from {
+        bottom: 150px;
+    }
+
+    to {
+        bottom: -100px;
+        transform: translateY(200%);
+    }
+}
+
+.dark {
+    animation: darkenBackground 325ms forwards;
+}
+
+.light {
+    animation: lightenBackground 325ms forwards;
+}
+
+@keyframes darkenBackground {
+    from {
+        background-color: rgba(0, 0, 0, 0.0);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+
+@keyframes lightenBackground {
+    from {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    to {
+        background-color: rgba(0, 0, 0, 0.0);
+    }
+}
+
+
+.move-in {
+    animation: moveIn 525ms ease-in-out forwards;
+}
+
+.move-out {
+    animation: moveOut 525ms ease-in-out forwards;
+}
+
+@keyframes moveIn {
+    from {
+        right: -90%;
+        transform: translateX(200%);
+    }
+
+    to {
+        right: unset;
+        transform: none;
+    }
+}
+
+@keyframes moveOut {
+    from {
+        right: unset;
+        transform: none;
+    }
+
+    to {
+        right: -100%;
+        transform: translateX(200%);
+    }
+}
+
+.dark-banner {
+    animation: darkenBanner 325ms forwards;
+}
+
+.light-banner {
+    animation: lightenBanner 325ms forwards;
+}
+
+@keyframes darkenBanner {
+    from {
+        background-color: rgba(42, 54, 71, 0.0);
+    }
+
+    to {
+        background-color: rgba(42, 54, 71, 1);
+    }
+}
+
+@keyframes lightenBanner {
+    from {
+        background-color: rgba(42, 54, 71, 1);
+    }
+
+    to {
+        background-color: rgba(42, 54, 71, 0.0);
+    }
 }
 
 @media (max-width: 1300px) {
@@ -213,11 +335,12 @@ b {
     }
 
     .success-banner,
-    .success-banner-login {
+    .success-banner-login,
+    .failure-banner {
         left: 35%;
         right: 35%;
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 8px;
+        padding-right: 8px;
         border-radius: 18px;
     }
 
@@ -236,12 +359,17 @@ b {
     }
 
     .success-banner,
-    .success-banner-login {
+    .success-banner-login,
+    .failure-banner {
         left: 30%;
         right: 30%;
         font-size: 15px;
-        padding: 12px 0;
+        padding: 12px 8px;
         border-radius: 10px;
+    }
+
+    .failure-banner-adjustment {
+        top: 35px;
     }
 
     .back-arrow-abs {

@@ -130,7 +130,7 @@ function resetPassword() {
     let user = users.find(user => user.email === email);
 
     if (!user) {
-        // alert('User not found');
+        showFailureBanner('User not found!');
         return;
     }
 
@@ -149,7 +149,7 @@ async function updatePassword() {
     let newPasswordConfirmation = document.getElementById('passwordResetConfirm').value;
 
     if (newPassword !== newPasswordConfirmation) {
-        // alert('Passwords do not match. Please try again.');
+        showFailureBanner(`Passwords dont match!<br>Try again`);
     }
 
     const userIndex = users.findIndex(user => user.email === currentUserForNewPassword[0].email);
@@ -174,10 +174,12 @@ function login() {
     let password = document.getElementById('passwordInput').value;
     let user = users.find((user) => user.email === email);
     if (!user) {
+        showFailureBanner('User not found!');
         loginBtn.disabled = false;
         return;
     }
     if (password !== user.password) {
+        showFailureBanner('Invalid password!');
         loginBtn.disabled = false;
         return;
     }

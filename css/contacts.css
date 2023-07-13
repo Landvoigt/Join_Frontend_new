@@ -225,64 +225,6 @@
     border: 1px solid white;
 }
 
-.move-up {
-    animation: moveUp 525ms forwards;
-}
-
-.move-down {
-    animation: moveDown 525ms forwards;
-}
-
-@keyframes moveUp {
-    from {
-        bottom: -100px;
-        transform: translateY(200%);
-    }
-
-    to {
-        bottom: 150px;
-    }
-}
-
-@keyframes moveDown {
-    from {
-        bottom: 150px;
-    }
-
-    to {
-        bottom: -100px;
-        transform: translateY(200%);
-    }
-}
-
-.dark {
-    animation: darkenBackground 325ms forwards;
-}
-
-.light {
-    animation: lightenBackground 325ms forwards;
-}
-
-@keyframes darkenBackground {
-    from {
-        background-color: rgba(0, 0, 0, 0.0);
-    }
-
-    to {
-        background-color: rgba(0, 0, 0, 0.2);
-    }
-}
-
-@keyframes lightenBackground {
-    from {
-        background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    to {
-        background-color: rgba(0, 0, 0, 0.0);
-    }
-}
-
 .add-contact-popup,
 .edit-contact-popup {
     position: fixed;
@@ -294,39 +236,6 @@
     border-radius: 29px;
     right: -90%;
 }
-
-.move-in {
-    animation: moveIn 525ms ease-in-out forwards;
-}
-
-.move-out {
-    animation: moveOut 525ms ease-in-out forwards;
-}
-
-@keyframes moveIn {
-    from {
-        right: -90%;
-        transform: translateX(200%);
-    }
-
-    to {
-        right: unset;
-        transform: none;
-    }
-}
-
-@keyframes moveOut {
-    from {
-        right: unset;
-        transform: none;
-    }
-
-    to {
-        right: -100%;
-        transform: translateX(200%);
-    }
-}
-
 
 .add-contact-popup-left,
 .edit-contact-popup-left {
