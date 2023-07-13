@@ -245,3 +245,11 @@ function showFilteredTasks(id) {
         }
     }
 }
+
+
+/**
+ * sets the current assigned category
+ */
+function setAssignment(id) {
+    currentAssignment = id;
+}

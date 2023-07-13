@@ -17,7 +17,7 @@
         <div class="board-section-category">
             <h3>To Do</h3>
             <img id="plus1" src="../img/plus.png" class="board-plus-icon" onmouseover="changeIconColor('plus1')"
-                onmouseleave="removeIconColor('plus1')" onclick="showAddTaskWindow()">
+                onmouseleave="removeIconColor('plus1')" onclick="setAssignment('toDo'); showAddTaskWindow()">
         </div>
         <div class="drag-drop-area" id="toDo" ondrop="moveTo('toDo'); removeHighlight('toDo')"
             ondragover="allowDrop(event); showHighlight('toDo')" ondragleave="removeHighlight('toDo')">
@@ -27,7 +27,7 @@
         <div class="board-section-category">
             <h3>In Progress</h3>
             <img id="plus2" src="../img/plus.png" class="board-plus-icon" onmouseover="changeIconColor('plus2')"
-                onmouseleave="removeIconColor('plus2')" onclick="showAddTaskWindow()">
+                onmouseleave="removeIconColor('plus2')" onclick="setAssignment('inProgress'); showAddTaskWindow()">
         </div>
         <div class="drag-drop-area" id="inProgress" ondrop="moveTo('inProgress'); removeHighlight('inProgress')"
             ondragover="allowDrop(event); showHighlight('inProgress')" ondragleave="removeHighlight('inProgress')">
@@ -37,7 +37,7 @@
         <div class="board-section-category">
             <h3>Awaiting Feedback</h3>
             <img id="plus3" src="../img/plus.png" class="board-plus-icon" onmouseover="changeIconColor('plus3')"
-                onmouseleave="removeIconColor('plus3')" onclick="showAddTaskWindow()">
+                onmouseleave="removeIconColor('plus3')" onclick="setAssignment('awaitFeedback'); showAddTaskWindow()">
         </div>
         <div class="drag-drop-area" id="awaitFeedback"
             ondrop="moveTo('awaitFeedback'); removeHighlight('awaitFeedback')"
@@ -49,7 +49,7 @@
         <div class="board-section-category">
             <h3>Done</h3>
             <img id="plus4" src="../img/plus.png" class="board-plus-icon" onmouseover="changeIconColor('plus4')"
-                onmouseleave="removeIconColor('plus4')" onclick="showAddTaskWindow()">
+                onmouseleave="removeIconColor('plus4')" onclick="setAssignment('done'); showAddTaskWindow()">
         </div>
         <div class="drag-drop-area" id="done" ondrop="moveTo('done'); removeHighlight('done')"
             ondragover="allowDrop(event); showHighlight('done')" ondragleave="removeHighlight('done')">

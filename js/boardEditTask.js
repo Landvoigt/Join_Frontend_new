@@ -5,7 +5,7 @@ function editDetailedTask(id) {
     currentAssignedClients = [];
     currentSubtasks = [];
     currentCat = tasks[id]['topic'];
-    currentAssasignation = tasks[id]['category'];
+    currentAssignment = tasks[id]['category'];
     getEditTaskHTML(id);
     addPrioColor(currentPrio);
     pushAssignedClientsToArray(tasks[id]['clients']);
@@ -111,7 +111,7 @@ async function saveEditedTaskInformation(id) {
 async function updateTaskInformation(id, title, desc, date) {
     tasks[id] = {
         'id': id,
-        'category': currentAssasignation,
+        'category': currentAssignment,
         'topic': currentCat,
         'headline': title,
         'description': desc,

@@ -167,9 +167,9 @@ function getFocusOnInputField(id) {
  * resets variables 
  */
 function clearVariables() {
-    currentCat = "";
-    currentPrio = "";
-    currentPrioImageSource = "";
+    currentCat = '';
+    currentPrio = '';
+    currentPrioImageSource = '';
     currentAssignedClients = [];
     currentSubtasks = [];
     fieldsFilledCorrectly = false;
@@ -227,6 +227,7 @@ function closePopupWindow() {
             setTimeout(loadTaskCache, 350);
         }
     }
+    currentAssignment = 'toDo';
 }
 
 

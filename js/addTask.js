@@ -30,7 +30,7 @@ function showAddTaskWindow() {
     document.getElementById('commitButtonsBox').style.right = '65px';
     emptyFieldPopupPositioning();
     addTaskSideCreateContact = true;
-    
+
     inAddTaskPopup = true;
 }
 
@@ -322,18 +322,11 @@ function showNewCreatedTopic(newCat) {
 
 
 /**
- * if no color is chosen or color already exists it creates random color
+ * if no color is chosen it creates a random color
  */
 function checkPickedColor() {
     if (currentPickedColor == '') {
         createRandomColor();
-    } else {
-        for (let i = 0; i < topics.length; i++) {
-            const element = topics[i]['color'];
-            if (currentPickedColor == element) {
-                createRandomColor();
-            }
-        }
     }
 }
 

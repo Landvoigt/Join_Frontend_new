@@ -40,7 +40,7 @@ async function addTask(title, desc, date) {
     tasks.push(
         {
             'id': tasks.length,
-            'category': 'toDo',
+            'category': currentAssignment,
             'topic': currentCat,
             'headline': title,
             'description': desc,

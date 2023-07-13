@@ -13,7 +13,7 @@ let previousPage;
 let previousBackground = 'summarySidebar';
 let currentDraggedElement;
 let currentPrioColor;
-let currentAssasignation;
+let currentAssignment;
 let currentAssignedClients = [];
 let currentSubtasks = [];
 let showCheckBoxes = true;
