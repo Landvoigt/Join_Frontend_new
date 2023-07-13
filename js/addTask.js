@@ -123,16 +123,14 @@ function resetAddTaskID() {
 function showSelection(select, container) {
     let options = document.getElementById(`${select}`);
     let dropdown = document.getElementById(`${container}`);
-    let closeOptions = document.querySelectorAll('.category-selection');
+    let overflow = document.getElementById('addedClientsBox');
     if (showCheckBoxes) {
         options.style.display = "flex";
         showCheckBoxes = !showCheckBoxes;
         dropdown.classList.add('selection-border-align');
+        overflow.classList.add('hide-dropdown-overflow');
     } else {
-        for (let i = 0; i < closeOptions.length; i++) {
-            closeDropdown(closeOptions, i);
-        }
-        showCheckBoxes = !showCheckBoxes;
+        closeAllDropdowns();
     }
 }
 
@@ -142,10 +140,12 @@ function showSelection(select, container) {
  */
 function closeAllDropdowns() {
     let closeOptions = document.querySelectorAll('.category-selection');
+    let overflow = document.getElementById('addedClientsBox');
     for (let i = 0; i < closeOptions.length; i++) {
         closeDropdown(closeOptions, i);
     }
     showCheckBoxes = !showCheckBoxes;
+    overflow.classList.remove('hide-dropdown-overflow');
 }
 
 

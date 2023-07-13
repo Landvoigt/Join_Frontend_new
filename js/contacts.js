@@ -313,9 +313,6 @@ function refreshContactPage() {
     showContactsFirstLetters();
 
     if (addTaskSideCreateContact) {
-        closeAllDropdowns();
-        document.getElementById('contactsSelection').innerHTML = '';
-        generateContacts();
         addTaskSideCreateContact = false;
     }
 }

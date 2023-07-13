@@ -120,7 +120,7 @@ function clearPrioSection() {
 function saveCurrentInput() {
     newTaskCache.push(
         {
-            'category': 'toDo',
+            'category': currentAssignment,
             'topic': currentCat,
             'headline': document.getElementById('addTask-title-input').value,
             'description': document.getElementById('addTask-desc-input').value,
@@ -153,6 +153,7 @@ function loadCurrentVariablesFromCache(task) {
     currentCat = task['topic'];
     currentPrio = task['prioName'];
     currentPrioImageSource = task['prioImg'];
+    currentAssignment = task['category'];
 }
 
 
@@ -184,7 +185,7 @@ function showLoadedText(task) {
 function showLoadedPrioAndCat() {
     if (currentPrio) {
         addPrioColor(`${currentPrio}`);
-    } if (currentCat) {
+    } if (currentCat || currentCat === 0) {
         showSelectedCategory(currentCat);
     }
 }
