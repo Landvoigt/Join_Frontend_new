@@ -9,6 +9,7 @@ function showAddTaskSite() {
     let backButton = document.getElementById('popupContainerBackButton');
     backButton.classList.add('d-none');
     addTaskSideCreateContact = true;
+    clearVariables();
 }
 
 
@@ -29,6 +30,8 @@ function showAddTaskWindow() {
     document.getElementById('commitButtonsBox').style.right = '65px';
     emptyFieldPopupPositioning();
     addTaskSideCreateContact = true;
+    
+    inAddTaskPopup = true;
 }
 
 

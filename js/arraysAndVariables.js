@@ -18,9 +18,9 @@ let currentAssignedClients = [];
 let currentSubtasks = [];
 let showCheckBoxes = true;
 let currentPickedColor = '';
-let currentPrio = "";
+let currentPrio = '';
 let currentPrioImageSource;
-let currentCat = "";
+let currentCat = '';
 let shownTaskID;
 let shownContactIndex;
 let currentPopupStyle;
@@ -31,42 +31,10 @@ let contacts = [];
 let firstLetters = [];
 let randomContactColor;
 let addTaskSideCreateContact = false;
+let inAddTaskPopup = false;
+let taskSavedInCache = false;
 let contactID;
 let mediaQuery = window.matchMedia("(max-width: 1050px)");
 let tasks = [];
 let topics = [];
-
-// let topics = [
-//     {
-//         'name': 'Sales',
-//         'color': 'aqua'
-//     },
-//     {
-//         'name': 'Design',
-//         'color': 'orange'
-//     },
-//     {
-//         'name': 'Backoffice',
-//         'color': 'purple'
-//     },
-//     {
-//         'name': 'Media',
-//         'color': 'lightgreen'
-//     },
-//     {
-//         'name': 'Marketing',
-//         'color': 'blue'
-//     },
-//     {
-//         'name': 'Frontend',
-//         'color': 'red'
-//     },
-//     {
-//         'name': 'Test',
-//         'color': 'yellow'
-//     },
-//     {
-//         'name': 'Test2',
-//         'color': 'blue'
-//     }
-// ];
+let newTaskCache = [];

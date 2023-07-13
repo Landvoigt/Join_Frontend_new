@@ -299,6 +299,19 @@ function clearSubtaskSection() {
 
 
 /**
+ * the HTML for creating a new contact in the add task contact selection dropdown menu
+ */
+function createContactInAddTaskHTML() {
+    return `
+    <label onclick="openCreateContact()" class="label-hover">
+        <span>Create new contact</span>
+        <img src="./img/add_user.png" class="addTask-new-contact-img">
+    </label>
+    `;
+}
+
+
+/**
  * the HTML for a contact in the add task contact selection dropdown menu
  * @param {*string} contact 
  */

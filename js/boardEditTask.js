@@ -8,9 +8,9 @@ function editDetailedTask(id) {
     currentAssasignation = tasks[id]['category'];
     getEditTaskHTML(id);
     addPrioColor(currentPrio);
-    pushAssignedClientsToArray(id);
+    pushAssignedClientsToArray(tasks[id]['clients']);
     generateContacts();
-    pushAttachedSubtasksToArray(id);
+    pushAttachedSubtasksToArray(tasks[id]['subtasks']);
     renderSubtasks();
 }
 
@@ -18,8 +18,7 @@ function editDetailedTask(id) {
 /**
  * gets all assigned clients for the clicked task and pushes them in an array to edit them easier
  */
-function pushAssignedClientsToArray(id) {
-    let clients = tasks[id]['clients'];
+function pushAssignedClientsToArray(clients) {
     for (let i = 0; i < clients.length; i++) {
         let contact = clients[i];
         currentAssignedClients.push(contact);
@@ -30,8 +29,7 @@ function pushAssignedClientsToArray(id) {
 /**
  * gets all subtasks for the clicked task and pushes them in an array to edit them easier
  */
-function pushAttachedSubtasksToArray(id) {
-    let subtasks = tasks[id]['subtasks'];
+function pushAttachedSubtasksToArray(subtasks) {
     for (let i = 0; i < subtasks.length; i++) {
         let subtask = subtasks[i];
         currentSubtasks.push(subtask);

@@ -221,6 +221,11 @@ function closePopupWindow() {
         setTimeout(deleteDarkBackground, 325, popupWindow);
     } else {
         slideOutContent();
+        inAddTaskPopup = false;
+        if (taskSavedInCache) {
+            setTimeout(showAddTaskWindow, 350);
+            setTimeout(loadTaskCache, 350);
+        }
     }
 }
 

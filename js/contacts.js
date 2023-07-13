@@ -164,6 +164,21 @@ function removeAllHighlightsFromContacts() {
  * opens up the popup to create a new contact
  */
 function openCreateContact() {
+    if (inAddTaskPopup) {
+        saveCurrentInput();
+        closePopupWindow();
+        taskSavedInCache = true;
+        setTimeout(slideInCreateContact, 350);
+    } else {
+        slideInCreateContact();
+    }
+}
+
+
+/**
+ * slides in the contact template
+ */
+function slideInCreateContact() {
     currentPopupStyle = 'slide';
     popupContentID = 'addContactPopup';
     let template = addContactTemplate();

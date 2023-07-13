@@ -55,12 +55,12 @@ function loginTemplate() {
                   <input class="loginCheckbox margin-left-rifht-5 margin pointer" type="checkbox"> 
                   <p class="rememberMe margin-left-rifht-5 margin">Remember me</p>
               </div>  
-              <p class="forgotPass margin-left-rifht-5 margin pointer" onclick="newPassword()">Forgot my Password</p> 
+              <p class="forgotPass margin-left-rifht-5 margin pointer" onclick="newPassword()">Forgot Password ?</p> 
           </div>
       </div>
       <div class="loginFooterBtns">
-          <button id="loginBtn" class="loginBtn pointer" onclick="login()">Log in</button>
-          <button class="guestBtn pointer" onclick="forwardToMainPage()">Guest Log in</button>
+          <button id="loginBtn" class="loginBtn pointer" onclick="login()">Login</button>
+          <button class="guestBtn pointer" onclick="forwardToMainPage()">Guest Login</button>
       </div>
       `;
 }
@@ -109,10 +109,10 @@ function signUpTemplate() {
 function newPasswordTemplate() {
   return `
       <div class="signupHeaderContainer">
-          <div class="backImgContainer">  
-              <img onclick="renderLogin()" class="backImg pointer" src="../img/arrow-left.png" alt="Back">
+          <div class="backImgContainer">
+              <img src="../img/arrow-left.png" onclick="renderLogin()" class="backImg pointer" alt="Back">
           </div> 
-          <h1 class="loginH1">I forgot my password</h1>
+          <h1 class="loginH1">Forgot Password</h1>
           <span class="underlineForH1"></span>
       </div>
       <div class="loginInputFields">
@@ -120,12 +120,12 @@ function newPasswordTemplate() {
               <span class="subheaderNewPassword">Don't worry! We will send you an email with the instructions to reset your password.</span>
           </div>
           <div class="loginInputField">
-              <input class="loginE-Mail" type="email" id="resetEmail" required placeholder="Email">
-              <img class="inputImg" src="../img/email.svg" alt="E-Mail">
+              <input id="resetEmail" class="loginE-Mail" type="email" placeholder="Email" required>
+              <img src="../img/email.svg" class="inputImg" alt="E-Mail">
           </div>
       </div>
       <div class="signupFooterBtn">
-          <button class="loginBtn pointer" onclick="resetPassword()">Send me the email</button>
+          <button class="loginBtn pointer" onclick="resetPassword()">Send Email</button>
       </div>
       `;
 }

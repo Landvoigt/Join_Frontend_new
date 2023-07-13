@@ -53,7 +53,7 @@ async function addTask(title, desc, date) {
     );
     await setItemTasks(tasks);
     clearVariables();
-    if(!(currentPage == ADDTASK_ID)){
+    if (!(currentPage == ADDTASK_ID)) {
         closePopupWindow();
     }
     showSuccessBanner('Task created');
@@ -111,4 +111,106 @@ function clearDropDownSection() {
 function clearPrioSection() {
     let prioSelect = document.getElementById('prioContainer');
     prioSelect.innerHTML = getPrioContainerHTML();
+}
+
+
+/**
+ * saves the inputs of the new task the user wants to create when the create contact popup is called
+ */
+function saveCurrentInput() {
+    newTaskCache.push(
+        {
+            'category': 'toDo',
+            'topic': currentCat,
+            'headline': document.getElementById('addTask-title-input').value,
+            'description': document.getElementById('addTask-desc-input').value,
+            'date': document.getElementById('addTaskDate').value,
+            'subtasks': currentSubtasks,
+            'clients': currentAssignedClients,
+            'prioName': currentPrio,
+            'prioImg': currentPrioImageSource,
+        }
+    );
+}
+
+
+/**
+ * loads the task informations again from the cache after create contact popup is closed
+ */
+function loadTaskCache() {
+    let task = newTaskCache[0];
+    loadCurrentVariablesFromCache(task);
+    showLoadedTaskCache(task);
+    resetTaskCache();
+}
+
+
+/**
+ * saves variables from loaded task global
+ * @param {*string} task - task infos from cache
+ */
+function loadCurrentVariablesFromCache(task) {
+    currentCat = task['topic'];
+    currentPrio = task['prioName'];
+    currentPrioImageSource = task['prioImg'];
+}
+
+
+/**
+ * loads the functions to show the presaved task
+ * @param {*string} task - task infos from cache
+ */
+function showLoadedTaskCache(task) {
+    showLoadedText(task);
+    showLoadedPrioAndCat();
+    showLoadedClientsAndSubtasks(task);
+}
+
+
+/**
+ * shows the task information in the input fields
+ * @param {*string} task - task infos from cache 
+ */
+function showLoadedText(task) {
+    document.getElementById('addTask-title-input').value = task['headline'];
+    document.getElementById('addTask-desc-input').value = task['description'];
+    document.getElementById('addTaskDate').value = task['date'];
+}
+
+
+/**
+ * shows task prio and category if already given
+ */
+function showLoadedPrioAndCat() {
+    if (currentPrio) {
+        addPrioColor(`${currentPrio}`);
+    } if (currentCat) {
+        showSelectedCategory(currentCat);
+    }
+}
+
+
+/**
+ * shows task assigned clients and subtasks if already given
+ * @param {*string} task - task infos from cache 
+ */
+function showLoadedClientsAndSubtasks(task) {
+    let contactMenu = document.getElementById('contactsSelection');
+    if (task['clients']) {
+        contactMenu.innerHTML = createContactInAddTaskHTML();
+        pushAssignedClientsToArray(task['clients']);
+        generateContacts();
+    } if (task['subtasks']) {
+        pushAttachedSubtasksToArray(task['subtasks']);
+        renderSubtasks();
+    }
+}
+
+
+/**
+ * resets task cache variables
+ */
+function resetTaskCache() {
+    taskSavedInCache = false;
+    newTaskCache = [];
 }
