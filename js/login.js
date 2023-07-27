@@ -1,34 +1,24 @@
 /**
- * Whether or not the password input field is visible.
- * @type {boolean}
- */
-let inputPass = false;
-
-/**
  * The key used to store the current user in localStorage.
- * @type {string}
  */
 const CURRENT_USER_KEY = 'currentUser';
 
 /**
  * The current user, obtained from localStorage, or an empty array if no user is found.
- * @type {Array.<Object>}
  */
 let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
 
 /**
  * An array containing the current user when they request to change their password.
- * @type {Array.<Object>}
  */
 let currentUserForNewPassword = [];
 
 
 /**
  * Initializes the app by rendering the login form after a 300ms delay.
- * @async
  */
 async function init() {
-    setTimeout(function() {
+    setTimeout(function () {
         renderLogin()
     }, 300);
 }
@@ -36,7 +26,6 @@ async function init() {
 
 /**
  * Renders the login form, loading user data beforehand.
- * @async
  */
 async function renderLogin() {
     document.title = 'Join | Log in';
@@ -50,42 +39,39 @@ async function renderLogin() {
 
 /**
  * Changes the password input field icon when the user types or clears their password.
- * @async
  */
-async function changePWSymbol() {
-    let inputField = document.getElementById("passwordInput");
-    let symbol = document.getElementById("passwordImg");
-    if (inputField.value == "") {
+function changePWSymbol(id) {
+    let parentDiv = document.getElementById(`${id}`);
+    let input = parentDiv.querySelector("input");
+    let symbol = parentDiv.querySelector("img");
+    if (input.value == "") {
         symbol.src = "../assets/icons/password.svg";
-        symbol.classList.remove("pointer", "opacity");
-        inputField.type = "password";
-        inputPass = false;
-    } else if ((inputField.type = "password")) {
+        symbol.classList.remove("pointer", "opa-05");
+        input.type = "password";
+    } else if ((input.type = "password")) {
         symbol.src = "../assets/icons/privacy.png";
-        symbol.classList.add("pointer", "opacity");
-        inputPass = true;
+        symbol.classList.add("pointer", "opa-05");
     } else {
         symbol.src = "../assets/icons/visibility.png";
-        symbol.classList.add("pointer", "opacity");
-        inputPass = true;
+        symbol.classList.add("pointer", "opa-05");
     }
 }
 
 
 /**
  * Toggles the visibility of the password input field.
- * @async
  */
-async function visibilityPass() {
-    let password = document.getElementById("passwordInput");
-    let passSymbol = document.getElementById("passwordImg");
-    if (inputPass === true) {
-        if (password.type === "password") {
-            password.type = "text";
-            passSymbol.src = "../assets/icons/visibility.png";
+function showPassword(id) {
+    let parentDiv = document.getElementById(`${id}`);
+    let input = parentDiv.querySelector("input");
+    let symbol = parentDiv.querySelector("img");
+    if (input.value.length > 0) {
+        if (input.type === "password") {
+            input.type = "text";
+            symbol.src = "../assets/icons/visibility.png";
         } else {
-            password.type = "password";
-            passSymbol.src = "../assets/icons/privacy.png";
+            input.type = "password";
+            symbol.src = "../assets/icons/privacy.png";
         }
     }
 }
@@ -93,7 +79,6 @@ async function visibilityPass() {
 
 /**
  * Changes the view to the sign up form
- * @function
  */
 function signUp() {
     document.title = 'Join | Sign Up';
@@ -106,7 +91,6 @@ function signUp() {
 
 /**
  * Changes the view to the new password form
- * @function
  */
 function newPassword() {
     document.title = 'Join | Reset Password';
@@ -119,7 +103,6 @@ function newPassword() {
 
 /**
  * Changes the view to the reset password form
- * @function
  */
 function resetPassword() {
     document.title = 'Join | Reset Password';
@@ -141,8 +124,6 @@ function resetPassword() {
 
 /**
  * Updates the user's password and saves it to the database
- * @function
- * @async
  */
 async function updatePassword() {
     let newPassword = document.getElementById('passwordReset').value;
@@ -159,13 +140,12 @@ async function updatePassword() {
         currentUserForNewPassword = [];
         showSuccessBanner('Password resetted');
         renderLogin();
-    } 
+    }
 }
 
 
 /**
  * Logs the user into the application.
- * @returns {void}
  */
 function login() {
     let loginBtn = document.getElementById('loginBtn');
@@ -191,7 +171,6 @@ function login() {
 /**
  * Creates a new user session.
  * @param {Object} user - The user object.
- * @returns {void}
  */
 function createCurrentUser(user) {
     currentUser.push(user);
@@ -201,16 +180,14 @@ function createCurrentUser(user) {
 
 /**
  * Redirects the user to the main page of the application.
- * @returns {void}
  */
 function forwardToMainPage() {
-    window.location.href = "../mainpage.html";
+    window.location.href = "../html/mainpage.html";
 }
 
 
 /**
  * Logs the user out of the application.
- * @returns {void}
  */
 function logOut() {
     localStorage.removeItem(CURRENT_USER_KEY);
