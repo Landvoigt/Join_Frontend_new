@@ -56,8 +56,8 @@ function showDetailedAssignedClients(id) {
         let firstName = contacts[id]['firstname'];
         let lastName = contacts[id]['lastname'];
         clientsSection.innerHTML += `
-            <div class="popup-client-box">
-                <div class="task-client task-client-big" style="background-color:${color};">${initials}</div>
+            <div class="popup-client-box d-flex a-i-center">
+                <div class="task-client f-center task-client-big" style="background-color:${color};">${initials}</div>
                 <span class="popup-client-span">${firstName} ${lastName}</span>
             </div>
             `;

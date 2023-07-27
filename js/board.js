@@ -124,7 +124,7 @@ function changeDesignBasedOnClientsAmount(i, clientSection, clientsAmount, initi
  */
 function generateAssignedClientHTML(clientSection, initials, color) {
     clientSection.innerHTML += `
-        <div class="task-client" style="background-color:${color};">${initials}</div>
+        <div class="task-client f-center" style="background-color:${color};">${initials}</div>
     `;
 }
 

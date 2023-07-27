@@ -1,37 +1,45 @@
-<div class="sidebar-content">
-    <img class="LogoImageSidebar pointer" src="../assets/images/logo_white.svg" alt="Logo-Join" onclick="showMainpage()">
-    <div class="sidebarMenu">
-        <div class="boardSidebar pointer bgdHover" id="summarySidebar"
+<div class="sidebar-content f-column a-i-center">
+    <img class="sidebar-logo pointer" src="../assets/images/logo_white.svg" onclick="showMainpage()">
+    <div class="sidebarMenu f-column">
+        <div class="boardSidebar f-center j-start f-row pointer bgdHover" id="summarySidebar"
             onclick="changeSite(SUMMARY_ID); addBackgroundColorForMainPages('summarySidebar')">
-            <img src="../assets/icons/web_grid.svg" alt="summary logo">
-            <span class="spanSidebarBoard">Summary</span>
+            <div class="sidebar-img-box f-center">
+                <img src="../assets/icons/web_grid.svg">
+            </div>
+            <span class="spanSidebarBoard f-center">Summary</span>
         </div>
-        <div class="boardSidebar pointer bgdHover" id="boardSidebar"
+        <div class="boardSidebar f-center j-start f-row pointer bgdHover" id="boardSidebar"
             onclick="changeSite(BOARD_ID); addBackgroundColorForMainPages('boardSidebar')">
-            <img src="../assets/icons/board.svg" alt="Board logo">
-            <span class="spanSidebarBoard">Board</span>
+            <div class="sidebar-img-box f-center">
+                <img src="../assets/icons/board.svg">
+            </div>
+            <span class="spanSidebarBoard f-center">Board</span>
         </div>
-        <div class="boardSidebar pointer bgdHover" id="addTaskSidebar"
+        <div class="boardSidebar f-center j-start f-row pointer bgdHover" id="addTaskSidebar"
             onclick="changeToAddTaskSite(ADDTASK_ID); addBackgroundColorForMainPages('addTaskSidebar')">
-            <img src="../assets/icons/add_task.svg" alt="Add Task logo">
-            <span class="spanSidebarBoard">Add Task</span>
+            <div class="sidebar-img-box f-center">
+                <img src="../assets/icons/add_task.svg">
+            </div>
+            <span class="spanSidebarBoard f-center">Add Task</span>
         </div>
-        <div class="boardSidebar pointer bgdHover" id="contactsSidebar"
+        <div class="boardSidebar f-center j-start f-row pointer bgdHover" id="contactsSidebar"
             onclick="changeSite(CONTACTS_ID); addBackgroundColorForMainPages('contactsSidebar')">
-            <img src="../assets/icons/contacts.svg" alt="Contacts logo">
-            <span class="spanSidebarBoard">Contacts</span>
+            <div class="sidebar-img-box f-center">
+                <img src="../assets/icons/contacts.svg">
+            </div>
+            <span class="spanSidebarBoard f-center">Contacts</span>
         </div>
     </div>
-    <div class="impressumContainer">
-        <div class="legalNoticeContainer pointer bgdHover" id="legalNoticeSidebar">
-            <img class="privacyPolicyLogo rotate pointer" src="../assets/icons/legal_notice.png" alt="Impressum logo">
+    <div class="sidebar-bottom f-center f-column">
+        <div class="legalNoticeContainer f-center j-start pointer bgdHover" id="legalNoticeSidebar">
+            <img class="privacyPolicyLogo rotate pointer" src="../assets/icons/legal_notice.png">
             <span onclick="changeSite(LEGALNOTICE_ID); addBackgroundColorForSpecialPages('legalNoticeSidebar')"
-                class="spanImpressumSidebar pointer">Legal notice</span>
+                class="spanImpressumSidebar f-center pointer">Legal notice</span>
         </div>
-        <div class="legalNoticeContainer pointer bgdHover" id="privacyPolicySidebar">
-            <img class="privacyPolicyLogo pointer" src="../assets/icons/privacy_policy.png" alt="Impressum logo">
+        <div class="legalNoticeContainer f-center j-start pointer bgdHover" id="privacyPolicySidebar">
+            <img class="privacyPolicyLogo pointer" src="../assets/icons/privacy_policy.png">
             <span onclick="changeSite(PRIVACY_ID); addBackgroundColorForSpecialPages('privacyPolicySidebar')"
-                class="spanImpressumSidebar pointer">Privacy policy</span>
+                class="spanImpressumSidebar f-center pointer">Privacy policy</span>
         </div>
     </div>
 </div>

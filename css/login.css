@@ -1,16 +1,9 @@
 .loginBody {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background-color: rgba(211, 211, 211, 0.2);
     height: 100vh;
 }
 
 .loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 35px 0px;
     gap: 35px;
     min-width: 652px;
@@ -26,8 +19,6 @@
 
 
 .loginHeader {
-    display: flex;
-    justify-content: flex-end;
     width: 100%;
     margin-left: 25px;
     margin-right: 25px;
@@ -77,12 +68,9 @@
 }
 
 .loginBodyCenter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
     height: 100%;
     width: 100%;
-    position: absolute;
 }
 
 @keyframes hideShowSignUpContainer {
@@ -164,8 +152,6 @@
 }
 
 .loginHeaderRight {
-    display: flex;
-    align-items: center;
     z-index: 3;
     margin-top: 35px;
     margin-right: 65px;
@@ -194,9 +180,6 @@
 }
 
 .cardHeaderContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-top: 30px;
     margin-bottom: 10px;
 }
@@ -208,9 +191,6 @@
 }
 
 .login-input-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     position: relative;
     padding: 0px;
     gap: 8px;
@@ -270,14 +250,11 @@
     font-size: 21px;
     line-height: 120%;
     text-align: center;
-    display: flex;
-    justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 40px;
 }
 
 .loginFooterBtns {
-    display: flex;
     margin-bottom: 30px;
     margin-top: 20px;
     gap: 10px;
@@ -285,7 +262,6 @@
 
 .loginBtn,
 .guestBtn {
-    font-style: normal;
     font-weight: 700;
     font-size: 21px;
     line-height: 120%;
@@ -323,9 +299,6 @@
 .backImgContainer,
 .backImgSignUp,
 .backImgResetContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
     z-index: 44;
     left: 3%;
@@ -342,18 +315,12 @@
 }
 
 .signupHeaderContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
     margin-bottom: 10px;
     width: 100%;
 }
 
 .sign-up-btn-container {
     margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
 }
 
 @media (max-width: 1050px) {

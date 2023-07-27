@@ -111,14 +111,14 @@ function resetPassword() {
     let card = document.getElementById('loginForm');
     let email = document.getElementById('resetEmail').value;
     let user = users.find(user => user.email === email);
-
     if (!user) {
         showFailureBanner('User not found!');
         return;
+    } else {
+        currentUserForNewPassword.push(user);
+        card.innerHTML = resetPasswordTemplate();
+        showSuccessBanner('New password send');
     }
-
-    currentUserForNewPassword.push(user);
-    card.innerHTML = resetPasswordTemplate();
 }
 
 
@@ -126,10 +126,12 @@ function resetPassword() {
  * Updates the user's password and saves it to the database
  */
 async function updatePassword() {
-    let newPassword = document.getElementById('passwordReset').value;
-    let newPasswordConfirmation = document.getElementById('passwordResetConfirm').value;
+    let parentDiv = document.getElementById('passwordReset');
+    let newPassword = parentDiv.querySelector("Input").value;
+    let parentDivConfirm = document.getElementById('passwordResetConfirm');
+    let newPasswordConfirm = parentDivConfirm.querySelector("Input").value;
 
-    if (newPassword !== newPasswordConfirmation) {
+    if (newPassword !== newPasswordConfirm) {
         showFailureBanner(`Passwords dont match!<br>Try again`);
     }
 
