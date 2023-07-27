@@ -64,7 +64,7 @@ function addContactTemplate() {
     <div id="addContactPopup" class="add-contact-popup" onclick="stopPropagation(event)">
         <div class="add-contact-popup-left">
             <div class="flex-column add-contact-headline-container">
-                <img src="../assets/images/logo/join.png">
+                <img src="../assets/images/join.png">
                 <div class="add-contact-headline">
                     <span class="add-contact-headline-top">Add Contact</span>
                     <span>Tasks are better with a team!</span>
@@ -91,7 +91,7 @@ function addContactTemplate() {
                 </div>
                 <div class="p-relative">
                     <input required id="createContactPhone" class="add-contact-form" placeholder="Phone" type="number">
-                    <img src="../assets/icons/phone.png" class="input-icon">
+                    <img src="../assets/icons/phone.png" class="input-icon input-icon-phone">
                 </div>
                 <div class="add-btn-container">
                     <div class="cancel-create-contact-btn" onclick="closePopupWindow()">Cancel</div>
@@ -138,7 +138,7 @@ function editContactTemplate() {
                 <div class="p-relative">
                     <input required id="editContactPhone" class="add-contact-form" placeholder="Phone" 
                         type="number" value="${contacts[shownContactIndex]['phone']}">
-                    <img src="../assets/icons/phone.png" class="input-icon">
+                    <img src="../assets/icons/phone.png" class="input-icon input-icon-phone">
                 </div>
                 <div class="add-btn-container">
                     <div class="delete-contact-btn" onclick="deleteContact(${contacts[shownContactIndex]['ID']})">Delete</div>

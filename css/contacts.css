@@ -289,8 +289,13 @@
 
 .input-icon {
     position: absolute;
-    top: 7px;
+    top: 10px;
     right: 17px;
+}
+
+.input-icon-phone {
+    top: 8px !important;
+    right: 15px !important;
 }
 
 .add-btn-container {
