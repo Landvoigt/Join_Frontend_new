@@ -185,7 +185,7 @@ function removeHighlight(id) {
  */
 function changeIconColor(id) {
     let img = document.getElementById(id);
-    img.src = "./img/plus_lightblue.png";
+    img.src = "../assets/icons/plus_lightblue.png";
 }
 
 
@@ -194,7 +194,7 @@ function changeIconColor(id) {
  */
 function removeIconColor(id) {
     let img = document.getElementById(id);
-    img.src = "./img/plus.png";
+    img.src = "../assets/icons/plus_blue.png";
 }
 
 

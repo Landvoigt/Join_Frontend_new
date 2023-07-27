@@ -19,7 +19,6 @@ let currentSubtasks = [];
 let showCheckBoxes = true;
 let currentPickedColor = '';
 let currentPrio = '';
-let currentPrioImageSource;
 let currentCat = '';
 let shownTaskID;
 let shownContactIndex;

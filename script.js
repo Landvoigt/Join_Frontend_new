@@ -169,7 +169,6 @@ function getFocusOnInputField(id) {
 function clearVariables() {
     currentCat = '';
     currentPrio = '';
-    currentPrioImageSource = '';
     currentAssignedClients = [];
     currentSubtasks = [];
     fieldsFilledCorrectly = false;

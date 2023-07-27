@@ -17,7 +17,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
             <div class="task-assignment-section">
                 <div id="taskClientSection${task['id']}" class="task-clients-container">
                 </div>
-                <img src="${task['prioImg']}" class="task-prio-icon">
+                <img src="../assets/icons/prio_${task['prio']}.png" class="task-prio-icon">
             </div>
         </div>
     `;
@@ -30,7 +30,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
 function getAddTaskHTML() {
     return `
     <div id="popupContainer" class="popup-container" onclick="stopPropagation(event)">
-        <img id="popupContainerBackButton" class="back-btn-addTask-popup" src="./img/plus.png" onclick="closePopupWindow()">
+        <img id="popupContainerBackButton" class="back-btn-addTask-popup" src="../assets/icons/plus_blue.png" onclick="closePopupWindow()">
         <div class="spanMainpage d-none">Kanban Project Management Tool</div>
         <h2>Add Task</h2>
         <form class="addTask-form" onsubmit="getInputsFromForm(); return false" onclick="closeAllDropdowns()">
@@ -62,7 +62,7 @@ function getAddTaskHTML() {
                     <div class="category-selection" id="contactsSelection">
                         <label onclick="openCreateContact()" class="label-hover">
                             <span>Create new contact</span>
-                            <img src="./img/add_user.png" class="addTask-new-contact-img">
+                            <img src="../assets/icons/add_user.png" class="addTask-new-contact-img">
                         </label>
                     </div>
                     <div id="addedClientsBox" class="added-clients-box"></div>
@@ -72,7 +72,7 @@ function getAddTaskHTML() {
                 <div>
                     <h4 class="addTask-form-headlines">Due date</h4>
                     <div style="position: relative;">
-                        <img class="calendar-icon" src="./img/calendar.png"></img>
+                        <img class="calendar-icon" src="../assets/icons/calendar.png"></img>
                         <input type="text" class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" onclick="showCurrentDate('addTaskDate')" required>
                     </div>
                 </div>
@@ -81,15 +81,15 @@ function getAddTaskHTML() {
                     <div id="prioContainer" class="addTask-prio-container" required>
                         <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
                             <span>Urgent</span>
-                            <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
+                            <img id="urgentIcon" src="../assets/icons/prio_urgent.png" class="prio-img">
                         </div>
                         <div id="medium" class="prio" onclick="addPrioColor('medium')">
                             <span>Medium</span>
-                            <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
+                            <img id="mediumIcon" src="../assets/icons/prio_medium.png" class="prio-img extra">
                         </div>
                         <div id="low" class="prio" onclick="addPrioColor('low')">
                             <span>Low</span>
-                            <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
+                            <img id="lowIcon" src="../assets/icons/prio_low.png" class="prio-img">
                         </div>
                     </div>
                 </div>
@@ -97,13 +97,13 @@ function getAddTaskHTML() {
                     <h4 class="addTask-form-headlines">Assigned to</h4>
                     <div id="emptyInputPopupPrio" style="position: absolute;" class="pos-1 d-none">
                         <div class="exclamation-box">
-                            <img src="./img/exclamation.png" class="exclamation">
+                            <img src="../assets/icons/exclamation.png" class="exclamation">
                          </div>
                         <div class="empty-input-popup">Wähle die Priorität.</div>
                     </div>
                     <div style="position: relative;" onclick="createNewSubtask()">
                         <input type="text" id="subtaskInput" placeholder="Add new subtask">
-                        <img class="subtask-plus-icon pointer" src="./img/plus.png"> </img>
+                        <img class="subtask-plus-icon pointer" src="../assets/icons/plus_blue.png"> </img>
                     </div>
                 </div>
                 <div id="newSubtasksBox" class="new-subtask-box"></div>
@@ -114,14 +114,14 @@ function getAddTaskHTML() {
             </div>
             <div id="emptyInputPopupCat" style="position: absolute;" class="pos-2 d-none">
                 <div class="exclamation-box">
-                    <img src="./img/exclamation.png" class="exclamation">
+                    <img src="../assets/icons/exclamation.png" class="exclamation">
                 </div>
                 <div class="empty-input-popup">Wähle eine Kategorie.</div>
             </div>
         </form>
         <div id="taskAddedPopup" class="task-added-popup-container d-none">
             <span>Task added to board</span>
-            <img src="./img/grid.png" class="popup-icon">
+            <img src="../assets/icons/grid.png" class="popup-icon">
         </div>
     </div>
     `;
@@ -172,9 +172,9 @@ function createNewCategoryInAddTask() {
         <div class="dropdown grey-text">
             <input id="new-cat-input" class="new-cat-input" minvalue="3" maxlength="16" placeholder="New Category Name" required>
             <div class="create-cat-icon-box">
-                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="resetAddCategorySection()">
+                <img src="../assets/icons/plus_blue.png" class="create-category-icon resize-icon" onclick="resetAddCategorySection()">
                 <div class="gap-line"></div>
-                <img src="./img/check_mark.png" class="create-category-icon" onclick="addCategory()">
+                <img src="../assets/icons/checkmark.png" class="create-category-icon" onclick="addCategory()">
             </div>
         </div>
         <div class="new-cat-color-select-box">
@@ -235,15 +235,15 @@ function getPrioContainerHTML() {
     return `
     <div id="urgent" class="prio" onclick="addPrioColor('urgent')">
         <span>Urgent</span>
-        <img id="urgentIcon" src="./img/prio_urgent.png" class="prio-img">
+        <img id="urgentIcon" src="../assets/icons/prio_urgent.png" class="prio-img">
     </div>
     <div id="medium" class="prio" onclick="addPrioColor('medium')">
         <span>Medium</span>
-        <img id="mediumIcon" src="./img/prio_medium.png" class="prio-img extra">
+        <img id="mediumIcon" src="../assets/icons/prio_medium.png" class="prio-img extra">
     </div>
     <div id="low" class="prio" onclick="addPrioColor('low')">
         <span>Low</span>
-        <img id="lowIcon" src="./img/prio_low.png" class="prio-img">
+        <img id="lowIcon" src="../assets/icons/prio_low.png" class="prio-img">
     </div>
     `;
 }
@@ -272,9 +272,9 @@ function createNewSubtask() {
         <div class="dropdown grey-text padding-r-15">
             <input type="text" id="subtaskInput" maxlength="32" class="new-cat-input" onkeydown="addSubtaskOnEnter()">
             <div class="create-cat-icon-box">
-                <img src="./img/plus.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
+                <img src="../assets/icons/plus_blue.png" class="create-category-icon resize-icon" onclick="clearSubtaskSection()">
                 <div class="gap-line"></div>
-                <img src="./img/check_mark.png" class="create-category-icon" onclick="addSubtask()">
+                <img src="../assets/icons/checkmark.png" class="create-category-icon" onclick="addSubtask()">
             </div>
         </div>
     `;
@@ -291,7 +291,7 @@ function clearSubtaskSection() {
         <h4 class="addTask-form-headlines">Assigned to</h4>
         <div style="position: relative;" onclick="createNewSubtask()">
             <input type="text" id="subtaskInput" placeholder="Add new subtask">
-            <img class="subtask-plus-icon pointer" src="./img/plus.png"></img>
+            <img class="subtask-plus-icon pointer" src="../assets/icons/plus_blue.png"></img>
         </div>
         `;
     renderSubtasks();
@@ -305,7 +305,7 @@ function createContactInAddTaskHTML() {
     return `
     <label onclick="openCreateContact()" class="label-hover">
         <span>Create new contact</span>
-        <img src="./img/add_user.png" class="addTask-new-contact-img">
+        <img src="../assets/icons/add_user.png" class="addTask-new-contact-img">
     </label>
     `;
 }

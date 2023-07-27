@@ -14,7 +14,7 @@ function showDetailedTask(id) {
  * gets the prio from the clicked task pushes it into a variable and specifies the color
  */
 function checkPriority(id) {
-    let prio = tasks[id]['prioName'];
+    let prio = tasks[id]['prio'];
     if (prio == 'urgent') {
         currentPrioColor = '#ff3d00';
         currentPrio = prio;

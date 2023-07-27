@@ -56,16 +56,16 @@ async function changePWSymbol() {
     let inputField = document.getElementById("passwordInput");
     let symbol = document.getElementById("passwordImg");
     if (inputField.value == "") {
-        symbol.src = "../img/pasword.svg";
+        symbol.src = "../assets/icons/password.svg";
         symbol.classList.remove("pointer", "opacity");
         inputField.type = "password";
         inputPass = false;
     } else if ((inputField.type = "password")) {
-        symbol.src = "../img/privacy.png";
+        symbol.src = "../assets/icons/privacy.png";
         symbol.classList.add("pointer", "opacity");
         inputPass = true;
     } else {
-        symbol.src = "../img/visibility.svg";
+        symbol.src = "../assets/icons/visibility.png";
         symbol.classList.add("pointer", "opacity");
         inputPass = true;
     }
@@ -82,10 +82,10 @@ async function visibilityPass() {
     if (inputPass === true) {
         if (password.type === "password") {
             password.type = "text";
-            passSymbol.src = "../img/visibility.png";
+            passSymbol.src = "../assets/icons/visibility.png";
         } else {
             password.type = "password";
-            passSymbol.src = "../img/privacy.png";
+            passSymbol.src = "../assets/icons/privacy.png";
         }
     }
 }
