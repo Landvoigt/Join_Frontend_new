@@ -5,10 +5,8 @@
     <div class="profileImageHeader d-flex f-row a-i-center">
         <img class="headerHelp pointer" src="../assets/icons/questionmark.svg" alt="You need a Help?"
             onclick="changeSite(HELP_ID)">
-        <div class="profilePictureContainer d-flex f-row a-i-center p-relative pointer">
-            <img class="ChristinaProfileImage"
-                src="../assets/images/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.jpeg" alt="Christina"
-                onclick="showLogoutPopup()">
+        <div class="profile-picture-container f-center p-relative pointer">
+            <img class="profile-picture" src="../assets/images/user_avatar.png" onclick="showLogoutPopup()">
             <div onclick="stopPropagation(event)" class="logoutBtn f-center pointer d-none" id="logoutPopup">
                 <span
                     onclick="changeSite(LEGALNOTICE_ID); addBackgroundColorForSpecialPages('legalNoticeSidebar'); closeLogoutPopup()"
