@@ -111,9 +111,7 @@
         flex-direction: column;
         justify-content: center;
         height: 100px;
-        padding: 12px;
-        padding-top: 20px;
-        width: auto;
+        width: 25%;
     }
     
     .spanSidebarBoard {

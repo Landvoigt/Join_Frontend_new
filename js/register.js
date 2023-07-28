@@ -10,34 +10,41 @@ async function loadUsers() {
     }
 }
 
+
 /**
  * Registers a new user, checks if a user with the same email exists before registration.
  * @returns {Promise<void>} Resolves when the user is registered, an error message is shown, or the form is reset.
  */
 async function register() {
-    let registerBtn = document.getElementById('registerBtn');
-    registerBtn.disabled = true;
-
+    disableBtn('registerBtn');
     let name = document.getElementById('signUpName').value;
     let email = document.getElementById('emailSignUp').value;
-    let password = document.getElementById('passwordSignUp').value;
-
+    let parentDiv = document.getElementById('passwordSignUp');
+    let password = parentDiv.querySelector("input").value;
     let userExists = users.some((user) => user.email === email);
     if (userExists) {
         showFailureBanner('User already exists!');
-        registerBtn.disabled = false;
-        return;
+        enableBtn('registerBtn');
     } else {
-        users.push({
-            name: name,
-            email: email,
-            password: password,
-        });
-        await setItem('users', JSON.stringify(users));
-        showSuccessBanner('New user created');
-        renderLogin();
+        await createNewUser(name, email, password);
     }
 }
+
+
+/**
+ * pushes new user to the users array and shows feedback
+ */
+async function createNewUser(name, email, password) {
+    users.push({
+        name: name,
+        email: email,
+        password: password,
+    });
+    await setItem('users', JSON.stringify(users));
+    showSuccessBanner('New user created');
+    renderLogin();
+}
+
 
 /**
  * Deletes a user from the storage by email.

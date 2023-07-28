@@ -17,7 +17,7 @@ let currentUserForNewPassword = [];
 /**
  * Initializes the app by rendering the login form after a 300ms delay.
  */
-async function init() {
+function init() {
     setTimeout(function () {
         renderLogin()
     }, 300);
@@ -81,9 +81,7 @@ function showPassword(id) {
  * Changes the view to the sign up form
  */
 function signUp() {
-    document.title = 'Join | Sign Up';
-    let header = document.getElementById('loginHeaderRight');
-    header.classList.add("d-none");
+    adjustHeader('Join | Sign Up');
     let card = document.getElementById('loginForm');
     card.innerHTML = signUpTemplate();
 }
@@ -93,9 +91,7 @@ function signUp() {
  * Changes the view to the new password form
  */
 function newPassword() {
-    document.title = 'Join | Reset Password';
-    let header = document.getElementById('loginHeaderRight');
-    header.classList.add("d-none");
+    adjustHeader('Join | Reset Password');
     let card = document.getElementById('loginForm');
     card.innerHTML = newPasswordTemplate();
 }
@@ -105,9 +101,7 @@ function newPassword() {
  * Changes the view to the reset password form
  */
 function resetPassword() {
-    document.title = 'Join | Reset Password';
-    let header = document.getElementById('loginHeaderRight');
-    header.classList.add("d-none");
+    adjustHeader('Join | Reset Password');
     let card = document.getElementById('loginForm');
     let email = document.getElementById('resetEmail').value;
     let user = users.find(user => user.email === email);
@@ -123,26 +117,31 @@ function resetPassword() {
 
 
 /**
- * Updates the user's password and saves it to the database
+ * checks if the new given password input is correct
  */
 async function updatePassword() {
     let parentDiv = document.getElementById('passwordReset');
     let newPassword = parentDiv.querySelector("Input").value;
     let parentDivConfirm = document.getElementById('passwordResetConfirm');
     let newPasswordConfirm = parentDivConfirm.querySelector("Input").value;
-
+    const userIndex = users.findIndex(user => user.email === currentUserForNewPassword[0].email);
     if (newPassword !== newPasswordConfirm) {
         showFailureBanner(`Passwords dont match!<br>Try again`);
+    } else if (userIndex > -1) {
+        await setNewPassword(userIndex, newPassword);
     }
+}
 
-    const userIndex = users.findIndex(user => user.email === currentUserForNewPassword[0].email);
-    if (userIndex > -1) {
-        users[userIndex].password = newPassword;
-        await setItem('users', JSON.stringify(users));
-        currentUserForNewPassword = [];
-        showSuccessBanner('Password resetted');
-        renderLogin();
-    }
+
+/**
+ * saves the new password on the server and shows feedback
+ */
+async function setNewPassword(userIndex, newPassword) {
+    users[userIndex].password = newPassword;
+    await setItem('users', JSON.stringify(users));
+    currentUserForNewPassword = [];
+    showSuccessBanner('Password resetted');
+    renderLogin();
 }
 
 
@@ -150,23 +149,20 @@ async function updatePassword() {
  * Logs the user into the application.
  */
 function login() {
-    let loginBtn = document.getElementById('loginBtn');
-    loginBtn.disabled = true;
+    disableBtn('loginBtn');
     let email = document.getElementById('emailInput').value;
     let password = document.getElementById('passwordInput').value;
     let user = users.find((user) => user.email === email);
     if (!user) {
         showFailureBanner('User not found!');
-        loginBtn.disabled = false;
-        return;
-    }
-    if (password !== user.password) {
+        enableBtn('loginBtn');
+    } else if (password !== user.password) {
         showFailureBanner('Invalid password!');
-        loginBtn.disabled = false;
-        return;
+        enableBtn('loginBtn');
+    } else {
+        createCurrentUser(user);
+        forwardToMainPage();
     }
-    createCurrentUser(user);
-    forwardToMainPage();
 }
 
 
@@ -194,4 +190,34 @@ function forwardToMainPage() {
 function logOut() {
     localStorage.removeItem(CURRENT_USER_KEY);
     window.location.href = "../index.html";
+}
+
+
+/**
+ * hides the header and adjusts the document title
+ */
+function adjustHeader(text) {
+    document.title = `${text}`;
+    let header = document.getElementById('loginHeaderRight');
+    header.classList.add("d-none");
+}
+
+
+/**
+ * disables a specific button
+ * @param {*string} btnID - Id of button
+ */
+function disableBtn(btnID) {
+    let button = document.getElementById(`${btnID}`);
+    button.disabled = true;
+}
+
+
+/**
+ * enables a specific button
+ * @param {*string} btnID - Id of button
+ */
+function enableBtn(btnID) {
+    let button = document.getElementById(`${btnID}`);
+    button.disabled = false;
 }

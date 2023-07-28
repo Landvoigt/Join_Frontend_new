@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     justify-content: space-between;
-    padding: 20px 36px 20px 320px;
+    padding: 20px 35px 20px 320px;
     gap: 34px;
     height: 89px;
     background: #FFFFFF;
@@ -38,9 +38,6 @@
     border-radius: 100%;
     width: 49px;
     height: 49px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 }
 
 .ChristinaProfileImage {
@@ -61,9 +58,6 @@
     font-size: 21px;
     line-height: 120%;
     color: #000000;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .logoutBtn {
@@ -103,9 +97,8 @@
     }
 
     .header-content {
-        padding: 25px;
-        padding-right: 75px;
-        padding-left: 75px;
+        padding-right: 8%;
+        padding-left: 8%;
     }
 
     .spanHeader {
@@ -127,14 +120,6 @@
         justify-content: space-evenly;
         font-weight: 400;
         font-size: 16px;
-    }
-}
-
-@media (max-width: 550px) {
-    .header-content {
-        padding: 25px;
-        padding-right: 50px;
-        padding-left: 50px;
     }
 }
 
