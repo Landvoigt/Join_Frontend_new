@@ -29,7 +29,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
  */
 function getAddTaskHTML() {
     return `
-    <div id="popupContainer" class="popup-container p-relative" onclick="stopPropagation(event)">
+    <div id="popupContainer" class="popup-container p-relative" onclick="stopPropagation(event); closeLogoutPopup()">
         <img id="popupContainerBackButton" class="back-btn-addTask-popup pointer" src="../assets/icons/plus_blue.png" onclick="closePopupWindow()">
         <div class="spanMainpage d-none">Kanban Project Management Tool</div>
         <h2>Add Task</h2>

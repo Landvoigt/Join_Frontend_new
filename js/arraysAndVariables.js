@@ -33,6 +33,7 @@ let addTaskSideCreateContact = false;
 let inAddTaskPopup = false;
 let taskSavedInCache = false;
 let contactID;
+let onContactCard = false;
 let mediaQuery = window.matchMedia("(max-width: 1050px)");
 let tasks = [];
 let topics = [];
