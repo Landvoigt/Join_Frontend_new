@@ -52,8 +52,6 @@
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
-    line-height: 120%;
-    color: #000000;
 }
 
 .logoutBtn {
@@ -66,23 +64,10 @@
     width: 130px;
     height: 53px;
     font-size: 16px;
-    line-height: 120%;
     text-align: center;
     color: #CDCDCD;
     border: unset;
     z-index: 9999;
-}
-
-.overlay {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    opacity: 0;
-    z-index: 999;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
 }
 
 @media (max-width: 1050px) {
