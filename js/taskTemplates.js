@@ -19,6 +19,10 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
                 </div>
                 <img src="../assets/icons/prio_${task['prio']}.png" class="task-prio-icon">
             </div>
+            <div class="switch-category">
+                <img src="/assets/icons/up_arrow.png" onclick="stopPropagation(event); upCategory(${task['id']})">
+                <img src="/assets/icons/up_arrow.png" onclick="stopPropagation(event); downCategory(${task['id']})">
+            </div>
         </div>
     `;
 }
@@ -71,9 +75,9 @@ function getAddTaskHTML() {
             <div class="addTask-form-right-container">
                 <div>
                     <h4 class="addTask-form-headlines">Due date</h4>
-                    <div style="position: relative;">
-                        <img class="calendar-icon" src="../assets/icons/calendar.png"></img>
-                        <input type="text" class="pointer" id="addTaskDate" placeholder="dd/mm/yyyy" onclick="showCurrentDate('addTaskDate')" required>
+                    <div class="p-relative" onclick="showCurrentDate('addTaskDate')">
+                        <img class="calendar-icon pointer" src="../assets/icons/calendar.png"></img>
+                        <input type="text" class="text-cursor" id="addTaskDate" placeholder="dd/mm/yyyy" required>
                     </div>
                 </div>
                 <div>
@@ -95,13 +99,13 @@ function getAddTaskHTML() {
                 </div>
                 <div id="addSubtasksSection">
                     <h4 class="addTask-form-headlines">Assigned to</h4>
-                    <div id="emptyInputPopupPrio" style="position: absolute;" class="pos-1 d-none">
+                    <div id="emptyInputPopupPrio" class="p-absolute pos-1 d-none">
                         <div class="exclamation-box f-center">
                             <img src="../assets/icons/exclamation.png" class="exclamation">
                          </div>
                         <div class="empty-input-popup">Wähle die Priorität.</div>
                     </div>
-                    <div style="position: relative;" onclick="createNewSubtask()">
+                    <div class="p-relative" onclick="createNewSubtask()">
                         <input type="text" id="subtaskInput" placeholder="Add new subtask">
                         <img class="subtask-plus-icon pointer" src="../assets/icons/plus_blue.png"> </img>
                     </div>
@@ -112,7 +116,7 @@ function getAddTaskHTML() {
                 <button class="addTask-clear-btn" type="reset" onclick="clearAddTaskSide()">Clear x</button>
                 <button class="submit-btn pointer" type="submit">Create Task ✓</button>
             </div>
-            <div id="emptyInputPopupCat" style="position: absolute;" class="pos-2 d-none">
+            <div id="emptyInputPopupCat" class="p-absolute pos-2 d-none">
                 <div class="exclamation-box f-center">
                     <img src="../assets/icons/exclamation.png" class="exclamation">
                 </div>
@@ -285,7 +289,7 @@ function clearSubtaskSection() {
     let container = document.getElementById('addSubtasksSection');
     container.innerHTML = `
         <h4 class="addTask-form-headlines">Assigned to</h4>
-        <div style="position: relative;" onclick="createNewSubtask()">
+        <div class="p-relative" onclick="createNewSubtask()">
             <input type="text" id="subtaskInput" placeholder="Add new subtask">
             <img class="subtask-plus-icon pointer" src="../assets/icons/plus_blue.png"></img>
         </div>

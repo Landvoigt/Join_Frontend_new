@@ -165,6 +165,36 @@ async function moveTo(category) {
 
 
 /**
+ * Moves the selected task to the category above it.
+ * @param {number} elementId - The ID of the task to be moved.
+ */
+async function upCategory(elementId) {
+    let currentTask = tasks[elementId];
+    let currentCategoryIndex = categoriesOrder.indexOf(currentTask.category);
+    if (currentCategoryIndex > 0) {
+        currentTask.category = categoriesOrder[currentCategoryIndex - 1];
+        await setItemTasks(tasks);
+        updateTasks(); 
+    }
+}
+
+
+/**
+ * Moves the selected task to the category below it.
+ * @param {number} elementId - The ID of the task to be moved.
+ */
+async function downCategory(elementId) {
+    let currentTask = tasks[elementId];
+    let currentCategoryIndex = categoriesOrder.indexOf(currentTask.category);
+    if (currentCategoryIndex < categoriesOrder.length - 1) {
+        currentTask.category = categoriesOrder[currentCategoryIndex + 1];
+        await setItemTasks(tasks);
+        updateTasks(); 
+    }
+}
+
+
+/**
  * shows a darker color when hovered over the drop container
  */
 function showHighlight(id) {

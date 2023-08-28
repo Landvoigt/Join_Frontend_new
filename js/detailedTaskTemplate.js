@@ -56,7 +56,7 @@ function getEditTaskHTML() {
             </div>
             <div class="popup-text-boxes">
                 <h4 class="addTask-form-headlines">Due date</h4>
-                <div style="position: relative;">
+                <div class="p-relative">
                     <img class="calendar-icon" src="../assets/icons/calendar.png"></img>
                     <input type="text" class="pointer" id="editTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}" onclick="showCurrentDate('editTaskDate')" required>
                 </div>
@@ -77,7 +77,7 @@ function getEditTaskHTML() {
                         <img id="lowIcon" src="../assets/icons/prio_low.png" class="prio-img prio-img-small">
                     </div>
                 </div>
-                <div id="emptyInputPopupPrio" style="position: absolute;" class="pos-3 d-none">
+                <div id="emptyInputPopupPrio" class="p-absolute pos-3 d-none">
                     <div class="exclamation-box f-center">
                         <img src="../assets/icons/exclamation.png" class="exclamation">
                     </div>

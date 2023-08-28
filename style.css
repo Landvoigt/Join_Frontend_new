@@ -19,6 +19,10 @@ body::-webkit-scrollbar {
     position: relative;
 }
 
+.p-absolute {
+    position: absolute;
+}
+
 .d-flex {
     display: flex !important;
 }
@@ -64,6 +68,10 @@ body::-webkit-scrollbar {
 
 .pointer {
     cursor: pointer;
+}
+
+.text-cursor{
+    cursor: text;
 }
 
 .btn-absolute {
