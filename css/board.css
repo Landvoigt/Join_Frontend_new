@@ -477,11 +477,6 @@
         width: 180px;
     }
 
-    .drag-drop-area {
-        flex-direction: column;
-        overflow: hidden;
-    }
-
     .popup-prio {
         font-size: 0.8em;
         padding: 5px;
