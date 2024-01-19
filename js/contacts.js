@@ -3,19 +3,10 @@
  */
 async function loadContacts() {
     try {
-        contacts = JSON.parse(await getItem('contacts'));
+        contacts = await getItem('contacts');
     } catch (e) {
         console.error('Loading error:', e);
     }
-}
-
-
-/**
- * saves Contacts on the server
- * @param {JSON} contacts - Data of created Contact or edited Contact
- */
-async function setItemContacts(contacts) {
-    await setItem('contacts', JSON.stringify(contacts));
 }
 
 
@@ -37,7 +28,7 @@ async function showContactsFirstLetters() {
 function getFirstLetters() {
     firstLetters = [];
     for (let i = 0; i < contacts.length; i++) {
-        let name = contacts[i]['firstname'];
+        let name = contacts[i]['first_name'];
         let firstLetter = name.charAt(0);
 
         if (!firstLetters.includes(firstLetter)) {
@@ -87,7 +78,7 @@ async function renderContacts(id) {
     let contactContainer = document.getElementById(`${id}`);
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        let firstName = contact['firstname'];
+        let firstName = contact['first_name'];
         if (firstName.startsWith(id)) {
             contactContainer.innerHTML += contactBoxHTML(contact, i);
         }
@@ -103,7 +94,7 @@ function openDetailedContactCard(i) {
     onContactCard = true;
     let contactPopup = document.getElementById('contactInfo');
     contactPopup.innerHTML = openContactTemplate(i);
-    if (mediaQuery.matches) { //Responsive view, removes Buttons
+    if (mediaQuery.matches) {   //Responsive view, removes Buttons
         adjustStyleForResponsiveView();
     } else {
         highlightSelectedContact(i);
@@ -199,8 +190,7 @@ async function createNewContact() {
     createRandomColor();
 
     await pushNewContact(firstname, lastname, mail, phone);
-
-    refreshContactPage();
+    await refreshContactPage();
     showSuccessBanner('Contact created');
 }
 
@@ -209,18 +199,15 @@ async function createNewContact() {
  * creates a new contact
  */
 async function pushNewContact(firstname, lastname, mail, phone) {
-    contacts.push(
-        {
-            'ID': contactID,
-            'firstname': firstname,
-            'lastname': lastname,
-            'initials': firstname.charAt(0) + lastname.charAt(0),
-            'mail': mail,
-            'phone': phone,
-            'color': randomContactColor
-        }
-    );
-    await setItemContacts(contacts);
+    let newContact = {
+        "first_name": firstname,
+        "last_name": lastname,
+        "initials": firstname.charAt(0) + lastname.charAt(0),
+        "email": mail,
+        "phone": phone,
+        "color": randomContactColor
+    };
+    await saveNewItem('contacts', newContact);
 }
 
 
@@ -249,16 +236,10 @@ function openEditContact(i) {
  * deletes the selected contact
  */
 async function deleteContact(id) {
-    for (let i = 0; i < contacts.length; i++) {
-        let selectedContactID = contacts[i]['ID'];
-        if (selectedContactID == id) {
-            await removeDeletedClientsFromTasks(id);
-            contacts.splice(i, 1);
-            await updateContactIDs();
-            await setItemContacts(contacts);
-        }
-    }
-    refreshContactPage();
+    let contactToDelete = { 'id': id }
+    await deleteItem('contacts', contactToDelete);
+    await loadContacts();
+    await refreshContactPage();
     showSuccessBanner('Contact deleted');
 }
 
@@ -268,7 +249,7 @@ async function deleteContact(id) {
  */
 async function updateContactIDs() {
     for (let i = 0; i < contacts.length; i++) {
-        contacts[i]['ID'] = i;
+        contacts[i]['id'] = i;
     }
 }
 
@@ -277,37 +258,27 @@ async function updateContactIDs() {
  * updates the selected contact's data 
  */
 async function changeContactsData(id) {
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let selectedContactID = contact['ID'];
-        if (selectedContactID == id) {
-            getEditedContactData(contact);
-            await setItemContacts(contacts);
-        }
+    let updatedContact = {
+        "id": id,
+        "first_name": document.getElementById('editContactFirstname').value,
+        "last_name": document.getElementById('editContactSurname').value,
+        "initials": document.getElementById('editContactFirstname').value.charAt(0) + document.getElementById('editContactSurname').value.charAt(0),
+        "email": document.getElementById('editContactMail').value,
+        "phone": document.getElementById('editContactPhone').value,
     }
-    refreshContactPage();
+    await updateItem('contacts', updatedContact);
+    await refreshContactPage();
     showSuccessBanner('Contact edited');
-}
-
-
-/**
- * gets the new added informations from the inputs
- */
-function getEditedContactData(contact) {
-    contact['firstname'] = document.getElementById('editContactFirstname').value;
-    contact['lastname'] = document.getElementById('editContactSurname').value;
-    contact['mail'] = document.getElementById('editContactMail').value;
-    contact['phone'] = document.getElementById('editContactPhone').value;
-    contact['initials'] = document.getElementById('editContactFirstname').value.charAt(0) + document.getElementById('editContactSurname').value.charAt(0);
 }
 
 
 /**
  * closes the contact informations card and popup window, refreshs the contact list
  */
-function refreshContactPage() {
+async function refreshContactPage() {
     if (mediaQuery.matches) {
         closeContactCard();
+        await generateContacts();
     }
 
     closePopupWindow();
@@ -315,25 +286,5 @@ function refreshContactPage() {
 
     if (addTaskSideCreateContact) {
         addTaskSideCreateContact = false;
-    }
-}
-
-
-/**
- * removes the deleted contact from all tasks it was assigned to
- * @param {*number} id - ID of the deleted contact
- */
-async function removeDeletedClientsFromTasks(id) {
-    for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];
-        let taskClients = task['clients'];
-        for (let j = 0; j < taskClients.length; j++) {
-            let taskClient = taskClients[j];
-            if (taskClient == id) {
-                taskClients.splice(j, 1);
-                await setItemTasks(tasks);
-                await loadTasks();
-            }
-        }
     }
 }

@@ -15,15 +15,15 @@ function detailedTaskHTML() {
             <img class="edit-btn pointer" src="../assets/icons/pencil_white.png" onclick="editDetailedTask(${shownTaskID})">
         </div>
         <span class="task-category popup-category" 
-            style="background-color: ${topics[tasks[shownTaskID]['topic']]['color']}">
-            ${topics[tasks[shownTaskID]['topic']]['name']}</span>
-        <h2 class="popup-headline">${tasks[shownTaskID]['headline']}</h2>
-        <span class="popup-span">${tasks[shownTaskID]['description']}</span>
-        <span class="popup-span"><b>Due date:</b>${tasks[shownTaskID]['date']}</span>
+            style="background-color: ${getTopic(shownTaskID)['color']}">
+            ${getTopic(shownTaskID)['title']}</span>
+        <h2 class="popup-headline">${getTask(shownTaskID)['title']}</h2>
+        <span class="popup-span">${getTask(shownTaskID)['description']}</span>
+        <span class="popup-span"><b>Due date:</b>${reverseDateFormat(getTask(shownTaskID)['date'])}</span>
         <div class="popup-span" style="display:flex; align-items:center">
             <span><b>Priority:</b></span>
             <span class="task-category popup-prio" style="background-color: ${currentPrioColor}">${currentPrio}
-                <img src="../assets/icons/prio_${tasks[shownTaskID]['prio']}.png" class="popup-prio-icon img-brightening">
+                <img src="../assets/icons/prio_${getTask(shownTaskID)['prio']}.png" class="popup-prio-icon img-brightening">
             </span>
         </div>
         <span class="popup-span"><b>Assigned to:</b></span>
@@ -40,7 +40,7 @@ function detailedTaskHTML() {
  * HTML for edit task information of clicked task
  */
 function getEditTaskHTML() {
-    let task = tasks[shownTaskID];
+    let task = getTask(shownTaskID);
     let popup = document.getElementById('popupWindow');
     popup.innerHTML = `
     <div class="popup-task f-column p-relative" onclick="stopPropagation(event); closeAllDropdowns()">
@@ -48,7 +48,7 @@ function getEditTaskHTML() {
             <img class="back-btn pointer back-btn-popup back-btn-none" src="../assets/icons/plus_blue.png" onclick="stopPropagation(event); closePopupWindow(); clearVariables()">
             <div class="popup-text-boxes">
                 <h4 class="addTask-form-headlines">Title</h4>
-                <input id="editTaskTitle" placeholder="Enter a title" maxlength="40" value="${task['headline']}" required>
+                <input id="editTaskTitle" placeholder="Enter a title" maxlength="40" value="${task['title']}" required>
             </div>
             <div class="popup-text-boxes">
                 <h4 class="addTask-form-headlines">Description</h4>
@@ -58,7 +58,7 @@ function getEditTaskHTML() {
                 <h4 class="addTask-form-headlines">Due date</h4>
                 <div class="p-relative">
                     <img class="calendar-icon" src="../assets/icons/calendar.png"></img>
-                    <input type="text" class="pointer" id="editTaskDate" placeholder="dd/mm/yyyy" value="${task['date']}" onclick="showCurrentDate('editTaskDate')" required>
+                    <input type="text" class="pointer" id="editTaskDate" placeholder="dd/mm/yyyy" value="${reverseDateFormat(task['date'])}" onclick="showCurrentDate('editTaskDate')" required>
                 </div>
             </div>
             <div class="popup-text-boxes p-relative">

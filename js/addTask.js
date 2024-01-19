@@ -16,7 +16,7 @@ function showAddTaskSite() {
 /**
  * shows the popup window for adding a new task, generates all informations and effects
  */
-function showAddTaskWindow() {
+async function showAddTaskWindow() {
     resetAddTaskID();
     currentPopupStyle = 'slide';
     popupContentID = 'popupContainer'
@@ -25,7 +25,7 @@ function showAddTaskWindow() {
     slideInContent(template, popupContentID);
     clearVariables();
     generateTaskCategories();
-    generateContacts();
+    await generateContacts();
     renderSubtasks();
     document.getElementById('commitButtonsBox').style.right = '65px';
     emptyFieldPopupPositioning();
@@ -69,7 +69,6 @@ function removeIMGBrightening() {
 function removePrioHighlight(element, id) {
     element.classList.remove(`${id}-highlight`);
     currentPrio = '';
-    // currentPrioImageSource = '';
 }
 
 
@@ -164,7 +163,7 @@ function closeDropdown(closeOptions, i) {
 function generateTaskCategories() {
     let select = document.getElementById('categorySelection');
     for (let i = 0; i < topics.length; i++) {
-        let cat = topics[i]['name'];
+        let cat = topics[i]['title'];
         let color = topics[i]['color'];
         select.innerHTML += taskCategoryHTML(i, cat, color);
     }
@@ -177,7 +176,7 @@ function generateTaskCategories() {
  */
 function showSelectedCategory(i) {
     let container = document.getElementById('categoryDropdown');
-    let cat = topics[i]['name'];
+    let cat = topics[i]['title'];
     let color = topics[i]['color'];
     container.innerHTML = selectedCategoryHTML(cat, color);
     showSelection('categorySelection', 'categoryDropdown');
@@ -189,11 +188,12 @@ function showSelectedCategory(i) {
 /**
  * generates your contacts in the hidden contact options menu, then shows already assigned contacts 
  */
-function generateContacts() {
+async function generateContacts() {
+    await loadContacts();
+    closeAllDropdowns();
     let select = document.getElementById('contactsSelection');
     for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        select.innerHTML += contactHTML(contact);
+        select.innerHTML += contactHTML(i);
     }
     showAssignedClients();
 }
@@ -249,7 +249,7 @@ function removeClient(i) {
  */
 function createAssignedClientContainer(i) {
     let dropdown = document.getElementById('addedClientsBox');
-    let contact = contacts.filter(c => c['ID'] == `${i}`);
+    let contact = contacts.filter(c => c['id'] == `${i}`);
     for (let j = 0; j < contact.length; j++) {
         let element = contact[j];
         dropdown.innerHTML += assignedClientContainerHTML(element, i);
@@ -279,6 +279,7 @@ async function addCategory() {
     let newCat = document.getElementById('new-cat-input');
     if (newCat.value.length > 1) {
         await pushNewTopic(newCat);
+        await loadTopics();
         resetAddCategorySection();
         showNewCreatedTopic(newCat);
     }
@@ -289,13 +290,11 @@ async function addCategory() {
  * saves the new category on the server
  */
 async function pushNewTopic(newCat) {
-    topics.push(
-        {
-            'name': `${newCat.value}`,
-            'color': `${currentPickedColor}`
-        }
-    );
-    await setItemTopics(topics);
+    let newTopic = {
+        'title': `${newCat.value}`,
+        'color': `${currentPickedColor}`
+    };
+    await saveNewItem('topics', newTopic);
 }
 
 

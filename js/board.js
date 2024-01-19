@@ -3,7 +3,7 @@
  */
 async function loadTasks() {
     try {
-        tasks = JSON.parse(await getItem('tasks'));
+        tasks = await getItem('tasks');
     } catch (e) {
         console.error('Loading error:', e);
     }
@@ -16,26 +16,10 @@ async function loadTasks() {
  */
 async function loadTopics() {
     try {
-        topics = JSON.parse(await getItem('topics'));
+        topics = await getItem('topics');
     } catch (e) {
         console.error('Loading error:', e);
     }
-}
-
-
-/**
- * saves tasks on the server
- */
-async function setItemTasks(tasks) {
-    await setItem('tasks', JSON.stringify(tasks));
-}
-
-
-/**
- * saves task topics on the server
- */
-async function setItemTopics(topics) {
-    await setItem('topics', JSON.stringify(topics));
 }
 
 
@@ -70,8 +54,10 @@ function updateTaskSection(id) {
  * gets some information from the tasks and shows them in the small task container 
  */
 function getTaskInformationFromArray(task, taskSection) {
-    let topicName = topics[task['topic']]['name'];
-    let topicColor = topics[task['topic']]['color'];
+    let topicId = task['topic'];
+    let matchingTopic = topics.find(topic => topic.id === topicId);
+    let topicName = matchingTopic.title;
+    let topicColor = matchingTopic.color;
     let doneSubtasks = task['subtasks'].filter(s => s.status === true);
     let progress = doneSubtasks.length;
     let subtasksAmount = task['subtasks'].length;
@@ -84,11 +70,11 @@ function getTaskInformationFromArray(task, taskSection) {
  */
 function showClients(task) {
     let clientSection = document.getElementById(`taskClientSection${task['id']}`);
-    let clientsAmount = task['clients'].length;
-    let clients = task['clients'];
+    let clientsAmount = task['assigned_clients'].length;
+    let clients = task['assigned_clients'];
     for (let i = 0; i < clients.length; i++) {
         let clientID = clients[i];
-        let index = contacts.findIndex(c => c['ID'] == clientID);
+        let index = contacts.findIndex(c => c['id'] == clientID);
         if (index !== -1) {
             let initials = contacts[index]['initials'];
             let color = contacts[index]['color'];
@@ -158,9 +144,13 @@ function allowDrop(event) {
  * saves the new location of the task on the server and updates the tasks after
  */
 async function moveTo(category) {
-    tasks[currentDraggedElement]['category'] = category;
-    await setItemTasks(tasks);
+    getTask(currentDraggedElement)['category'] = category;
     updateTasks();
+    let taskToUpdate = {
+        "id": currentDraggedElement,
+        "category": category
+    }
+    await updateItem('tasks', taskToUpdate);
 }
 
 
@@ -169,12 +159,16 @@ async function moveTo(category) {
  * @param {number} elementId - The ID of the task to be moved.
  */
 async function upCategory(elementId) {
-    let currentTask = tasks[elementId];
+    let currentTask = getTask(elementId);
     let currentCategoryIndex = categoriesOrder.indexOf(currentTask.category);
     if (currentCategoryIndex > 0) {
         currentTask.category = categoriesOrder[currentCategoryIndex - 1];
-        await setItemTasks(tasks);
-        updateTasks(); 
+        updateTasks();
+        let taskToUpdate = {
+            "id": elementId,
+            "category": currentTask.category
+        }
+        await updateItem('tasks', taskToUpdate);
     }
 }
 
@@ -184,12 +178,16 @@ async function upCategory(elementId) {
  * @param {number} elementId - The ID of the task to be moved.
  */
 async function downCategory(elementId) {
-    let currentTask = tasks[elementId];
+    let currentTask = getTask(elementId);
     let currentCategoryIndex = categoriesOrder.indexOf(currentTask.category);
     if (currentCategoryIndex < categoriesOrder.length - 1) {
         currentTask.category = categoriesOrder[currentCategoryIndex + 1];
-        await setItemTasks(tasks);
-        updateTasks(); 
+        updateTasks();
+        let taskToUpdate = {
+            "id": elementId,
+            "category": currentTask.category
+        }
+        await updateItem('tasks', taskToUpdate);
     }
 }
 
@@ -264,7 +262,7 @@ function showFilteredTasks(id) {
     for (let i = 0; i < cat.length; i++) {
         let taskSection = document.getElementById(`${id}`);
         let task = cat[i];
-        let filterHeadline = task.headline.toLowerCase().includes(searchField);
+        let filterHeadline = task.title.toLowerCase().includes(searchField);
         let filterDescription = task.description.toLowerCase().includes(searchField);
         if (filterHeadline) {
             getTaskInformationFromArray(task, taskSection);
@@ -282,4 +280,28 @@ function showFilteredTasks(id) {
  */
 function setAssignment(id) {
     currentAssignment = id;
+}
+
+
+/**
+ * Retrieves a task by its ID from the tasks array.
+ * @param {number} taskID - The ID of the task to retrieve.
+ * @returns {?Object} - The task object if found, or null if not found.
+ */
+function getTask(taskID) {
+    let foundTask = tasks.find(task => task.id === taskID);
+    return foundTask;
+}
+
+
+/**
+ * Retrieves the topic associated with a task by its ID from the topics array.
+ * @param {number} taskID - The ID of the task to retrieve the topic for.
+ * @returns {?Object} - The topic object if found, or null if not found.
+ */
+function getTopic(taskID) {
+    let task = tasks.find(task => task.id === taskID);
+    let topicID = task['topic'];
+    let foundTopic = topics.find(topic => topic.id === topicID);
+    return foundTopic;
 }

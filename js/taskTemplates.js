@@ -6,7 +6,7 @@ function generateTask(task, taskSection, topicName, topicColor, progress, subtas
         `
         <div class="task-box f-column pointer" draggable="true" ondragstart="startDragging(${task['id']})" onclick="showDetailedTask(${task['id']})">
             <span class="task-category" style="background-color: ${topicColor}">${topicName}</span>
-            <span class="task-headline">${task['headline']}</span>
+            <span class="task-headline">${task['title']}</span>
             <span class="task-description">${task['description']}</span>
             <div id="progressContainer${task['id']}" class="progress-container d-flex a-i-center">
                 <div class="progress-box">
@@ -315,11 +315,11 @@ function createContactInAddTaskHTML() {
  * the HTML for a contact in the add task contact selection dropdown menu
  * @param {*string} contact 
  */
-function contactHTML(contact) {
+function contactHTML(i) {
     return `
     <label class="label-hover">
-        <span>${contact['firstname']} ${contact['lastname']}</span>
-        <input id="contactCheckbox${contact['ID']}" type="checkbox" class="checkbox" onclick="addOrRemoveClients(${contact['ID']})">
+        <span>${contacts[i]['first_name']} ${contacts[i]['last_name']}</span>
+        <input id="contactCheckbox${contacts[i]['id']}" type="checkbox" class="checkbox" onclick="addOrRemoveClients(${contacts[i]['id']})">
     </label>
     `;
 }

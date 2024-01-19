@@ -37,26 +37,47 @@ async function getInputsFromForm() {
  * pushes the task information to the server, clears the variables afterwards and shows a logo and changes the site to the board
  */
 async function addTask(title, desc, date) {
-    tasks.push(
-        {
-            'id': tasks.length,
-            'category': currentAssignment,
-            'topic': currentCat,
-            'headline': title,
-            'description': desc,
-            'date': date,
-            'subtasks': currentSubtasks,
-            'clients': currentAssignedClients,
-            'prio': currentPrio
-        }
-    );
-    await setItemTasks(tasks);
+    let newTask = {
+        "category": currentAssignment,
+        "title": title,
+        "description": desc,
+        "date": convertDateFormat(date),
+        "subtasks": currentSubtasks,
+        "prio": currentPrio,
+        "topic": topics[currentCat]['id'],
+        "assigned_clients": currentAssignedClients,
+    };
+    await saveNewItem('tasks', newTask);
     clearVariables();
     if (!(currentPage == ADDTASK_ID)) {
         closePopupWindow();
     }
     showSuccessBanner('Task created');
     changeSite(BOARD_ID);
+}
+
+
+/**
+ * Converts a date from the format "DD/MM/YYYY" to "YYYY-MM-DD".
+ * @param {string} inputDate - The input date in "DD/MM/YYYY" format.
+ * @returns {string} The converted date in "YYYY-MM-DD" format.
+ */
+function convertDateFormat(inputDate) {
+    const dateParts = inputDate.split('/');
+    const convertedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+    return convertedDate;
+}
+
+
+/**
+ * Reverses a date from the format "YYYY-MM-DD" to "DD/MM/YYYY".
+ * @param {string} inputDate - The input date in "YYYY-MM-DD" format.
+ * @returns {string} The reversed date in "DD/MM/YYYY" format.
+ */
+function reverseDateFormat(inputDate) {
+    const dateParts = inputDate.split('-');
+    const reversedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+    return reversedDate;
 }
 
 
@@ -82,7 +103,7 @@ function emptyFieldPopupPositioning() {
 /**
  * clear all variables and resets the already given properties of the new task
  */
-function clearAddTaskSide() {
+async function clearAddTaskSide() {
     document.getElementById('addedClientsBox').innerHTML = '';
     document.getElementById('contactsSelection').innerHTML = '';
     clearVariables();
@@ -90,7 +111,7 @@ function clearAddTaskSide() {
     clearPrioSection();
     clearSubtaskSection();
     generateTaskCategories();
-    generateContacts();
+    await generateContacts();
 }
 
 
@@ -121,11 +142,11 @@ function saveCurrentInput() {
         {
             'category': currentAssignment,
             'topic': currentCat,
-            'headline': document.getElementById('addTask-title-input').value,
+            'titel': document.getElementById('addTask-title-input').value,
             'description': document.getElementById('addTask-desc-input').value,
             'date': document.getElementById('addTaskDate').value,
             'subtasks': currentSubtasks,
-            'clients': currentAssignedClients,
+            'assigned_clients': currentAssignedClients,
             'prio': currentPrio
         }
     );
@@ -135,10 +156,10 @@ function saveCurrentInput() {
 /**
  * loads the task informations again from the cache after create contact popup is closed
  */
-function loadTaskCache() {
+async function loadTaskCache() {
     let task = newTaskCache[0];
     loadCurrentVariablesFromCache(task);
-    showLoadedTaskCache(task);
+    await showLoadedTaskCache(task);
     resetTaskCache();
 }
 
@@ -158,10 +179,10 @@ function loadCurrentVariablesFromCache(task) {
  * loads the functions to show the presaved task
  * @param {*string} task - task infos from cache
  */
-function showLoadedTaskCache(task) {
+async function showLoadedTaskCache(task) {
     showLoadedText(task);
     showLoadedPrioAndCat();
-    showLoadedClientsAndSubtasks(task);
+    await showLoadedClientsAndSubtasks(task);
 }
 
 
@@ -170,7 +191,7 @@ function showLoadedTaskCache(task) {
  * @param {*string} task - task infos from cache 
  */
 function showLoadedText(task) {
-    document.getElementById('addTask-title-input').value = task['headline'];
+    document.getElementById('addTask-title-input').value = task['title'];
     document.getElementById('addTask-desc-input').value = task['description'];
     document.getElementById('addTaskDate').value = task['date'];
 }
@@ -192,12 +213,11 @@ function showLoadedPrioAndCat() {
  * shows task assigned clients and subtasks if already given
  * @param {*string} task - task infos from cache 
  */
-function showLoadedClientsAndSubtasks(task) {
+async function showLoadedClientsAndSubtasks(task) {
     let contactMenu = document.getElementById('contactsSelection');
-    if (task['clients']) {
+    if (task['assigned_clients']) {
         contactMenu.innerHTML = createContactInAddTaskHTML();
-        pushAssignedClientsToArray(task['clients']);
-        generateContacts();
+        pushAssignedClientsToArray(task['assigned_clients']);
     } if (task['subtasks']) {
         pushAttachedSubtasksToArray(task['subtasks']);
         renderSubtasks();

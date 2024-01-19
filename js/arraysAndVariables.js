@@ -1,3 +1,5 @@
+const API = 'http://timvoigt1996.pythonanywhere.com';
+
 const LOGIN_ID = 'loginPage'
 const SUMMARY_ID = 'summaryPage'
 const BOARD_ID = 'boardPage'
@@ -13,7 +15,7 @@ let previousPage;
 let previousBackground = 'summarySidebar';
 let currentDraggedElement;
 let currentPrioColor;
-let currentAssignment;
+let currentAssignment = "toDo";
 let currentAssignedClients = [];
 let currentSubtasks = [];
 let showCheckBoxes = true;

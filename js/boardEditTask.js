@@ -1,16 +1,16 @@
 /**
  * runs all function to edit the task
  */
-function editDetailedTask(id) {
+async function editDetailedTask(id) {
     currentAssignedClients = [];
     currentSubtasks = [];
-    currentCat = tasks[id]['topic'];
-    currentAssignment = tasks[id]['category'];
+    currentCat = getTask(id)['topic'];
+    currentAssignment = getTask(id)['category'];
     getEditTaskHTML(id);
     addPrioColor(currentPrio);
-    pushAssignedClientsToArray(tasks[id]['clients']);
-    generateContacts();
-    pushAttachedSubtasksToArray(tasks[id]['subtasks']);
+    pushAssignedClientsToArray(getTask(id)['assigned_clients']);
+    await generateContacts();
+    pushAttachedSubtasksToArray(getTask(id)['subtasks']);
     renderSubtasks();
 }
 
@@ -41,7 +41,7 @@ function pushAttachedSubtasksToArray(subtasks) {
  * checks the number of subtasks if there is none its hide the subtasks container
  */
 function checkForExistingSubtasks(id) {
-    let task = tasks[id];
+    let task = getTask(id);
     if (task['subtasks'].length == 0) {
         let subtaskHL = document.getElementById(`popupSubtaskHeadline${id}`);
         subtaskHL.classList.add('d-none');
@@ -56,37 +56,12 @@ function checkForExistingSubtasks(id) {
  * deletes the clicked task from the server then closes the window, loads the tasks again and clears variables
  */
 async function deleteShownTask(id) {
-    try {
-        let tasks = JSON.parse(await getItem('tasks'));
-        let index = tasks.findIndex(t => t.id === id);
-        if (index !== -1) {
-            tasks.splice(index, 1);
-            await setItem('tasks', JSON.stringify(tasks));
-        }
-    } catch (e) {
-        console.error('Deleting error:', e);
-    }
+    let taskToDelete = { "id": id };
+    await deleteItem('tasks', taskToDelete);
     closePopupWindow();
     showSuccessBanner('Task deleted');
-    await updateTasksID();
     await loadTasks();
     clearVariables();
-}
-
-
-/**
- * puts the ID´s on the server in the right order after deleting one
- */
-async function updateTasksID() {
-    try {
-        let tasks = JSON.parse(await getItem('tasks'));
-        for (let i = 0; i < tasks.length; i++) {
-            tasks[i]['id'] = i;
-            await setItem('tasks', JSON.stringify(tasks));
-        }
-    } catch (e) {
-        console.error('Refreshing IDs error:', e);
-    }
 }
 
 
@@ -109,19 +84,19 @@ async function saveEditedTaskInformation(id) {
  * gets all information and saves them on the server
  */
 async function updateTaskInformation(id, title, desc, date) {
-    tasks[id] = {
+    let updatedTask = {
         'id': id,
         'category': currentAssignment,
-        'topic': currentCat,
-        'headline': title,
+        'title': title,
         'description': desc,
-        'date': date,
+        'date': convertDateFormat(date),
         'subtasks': currentSubtasks,
-        'clients': currentAssignedClients,
-        'prio': currentPrio
+        'prio': currentPrio,
+        'topic': currentCat,
+        'assigned_clients': currentAssignedClients,
     };
+    await updateItem('tasks', updatedTask);
     closePopupWindow();
     showSuccessBanner('Task edited');
-    await setItemTasks(tasks);
     await loadTasks();
 }

@@ -33,7 +33,6 @@ async function renderLogin() {
     card.innerHTML = loginTemplate();
     let header = document.getElementById('loginHeaderRight');
     header.classList.remove("d-none");
-    await loadUsers();
 }
 
 
@@ -98,20 +97,32 @@ function newPassword() {
 
 
 /**
- * Changes the view to the reset password form
+ * Sends a password reset request to the server.
  */
-function resetPassword() {
+async function resetPassword() {
     adjustHeader('Join | Reset Password');
-    let card = document.getElementById('loginForm');
-    let email = document.getElementById('resetEmail').value;
-    let user = users.find(user => user.email === email);
-    if (!user) {
-        showFailureBanner('User not found!');
-        return;
-    } else {
-        currentUserForNewPassword.push(user);
-        card.innerHTML = resetPasswordTemplate();
-        showSuccessBanner('New password send');
+    const email = document.getElementById('resetEmail').value;
+    const resetPasswordUrl = API + '/api/password_reset/';
+
+    try {
+        const response = await fetch(resetPasswordUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.json();
+            showFailureBanner('User not found!');
+            throw new Error('Fehler beim Zurücksetzen des Passworts');
+        }
+
+        showSuccessBanner('Link to reset password sent!');
+        setTimeout(renderLogin, 300);
+    } catch (error) {
+        console.error('Fehler beim Zurücksetzen des Passworts:', error.message);
     }
 }
 
@@ -147,22 +158,66 @@ async function setNewPassword(userIndex, newPassword) {
 
 /**
  * Logs the user into the application.
+ * @throws {Error} If an unexpected error occurs during login.
  */
-function login() {
+async function login() {
     disableBtn('loginBtn');
+    try {
+        let user = await getUser();
+        if (user) {
+            localStorage.setItem('token', user.token);
+            createCurrentUser(user);
+            forwardToMainPage();
+        }
+    } catch (error) {
+        showFailureBanner('An unexpected error occurred. Please try again.');
+        enableBtn('loginBtn');
+    }
+}
+
+
+/**
+ * Fetches user data from the server.
+ * @returns {Promise<?Object>} The user object if successful, or null if there is an error.
+ */
+async function getUser() {
     let email = document.getElementById('emailInput').value;
     let password = document.getElementById('passwordInput').value;
-    let user = users.find((user) => user.email === email);
-    if (!user) {
-        showFailureBanner('User not found!');
-        enableBtn('loginBtn');
-    } else if (password !== user.password) {
-        showFailureBanner('Invalid password!');
-        enableBtn('loginBtn');
-    } else {
-        createCurrentUser(user);
-        forwardToMainPage();
+    let loginData = {
+        "email": email,
+        "password": password
+    };
+
+    let response = await fetch(API + '/login/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+    });
+
+    if (!response.ok) {
+        const errorMessage = await response.json();
+        handleLoginError(errorMessage.error);
+        return null;
     }
+    return await response.json();
+}
+
+
+/**
+ * Handles login errors and displays appropriate banners.
+ * @param {string} error - The error message received from the server.
+ */
+function handleLoginError(error) {
+    if (error === 'Email doesnt exist.') {
+        showFailureBanner('User not found!');
+    } else if (error === 'Invalid password.') {
+        showFailureBanner('Invalid password!');
+    } else {
+        showFailureBanner('An unexpected error occurred. Please try again.');
+    }
+    enableBtn('loginBtn');
 }
 
 

@@ -43,7 +43,7 @@ function showMainpage() {
  * changes the site, shows some effects and resets some variables
  * @param {number} id - ID of the page you want to go to
  */
-function changeSite(id) {
+async function changeSite(id) {
     let pageToShow = document.getElementById(id);
     let currentShownPage = document.getElementById(currentPage);
     currentShownPage.classList.add('d-none');
@@ -52,7 +52,7 @@ function changeSite(id) {
     currentPage = id;
     currentAssignedClients = [];
     addTaskSideCreateContact = false;
-    updateTasks();
+    await loadTasks();
     clearSearchField();
     deleteBackgroundColors();
     getTaskNumbers();
@@ -62,11 +62,11 @@ function changeSite(id) {
 /**
  * changes the site to the add new task site and generates the dropdowns
  */
-function changeToAddTaskSite(id) {
+async function changeToAddTaskSite(id) {
     changeSite(id);
     showAddTaskSite();
     generateTaskCategories();
-    generateContacts();
+    await generateContacts();
 }
 
 

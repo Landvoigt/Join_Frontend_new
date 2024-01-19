@@ -13,8 +13,9 @@ function showDetailedTask(id) {
 /**
  * gets the prio from the clicked task pushes it into a variable and specifies the color
  */
-function checkPriority(id) {
-    let prio = tasks[id]['prio'];
+function checkPriority(taskID) {
+    let matchingTasks = tasks.find(task => task.id === taskID);
+    let prio = matchingTasks['prio'];
     if (prio == 'urgent') {
         currentPrioColor = '#ff3d00';
         currentPrio = prio;
@@ -45,16 +46,16 @@ function getDetailedTaskHTML(id) {
  * shows a small circle for every assigned client of the detailed task
  */
 function showDetailedAssignedClients(id) {
-    let task = tasks[id];
-    let clients = task['clients'];
+    let task = getTask(id);
+    let clients = task['assigned_clients'];
     let clientsSection = document.getElementById(`popupClientSection${id}`);
     for (let i = 0; i < clients.length; i++) {
         let clientID = clients[i];
-        let id = contacts.findIndex(c => c['ID'] == clientID);
+        let id = contacts.findIndex(c => c['id'] == clientID);
         let initials = contacts[id]['initials'];
         let color = contacts[id]['color'];
-        let firstName = contacts[id]['firstname'];
-        let lastName = contacts[id]['lastname'];
+        let firstName = contacts[id]['first_name'];
+        let lastName = contacts[id]['last_name'];
         clientsSection.innerHTML += `
             <div class="popup-client-box d-flex a-i-center">
                 <div class="task-client f-center task-client-big" style="background-color:${color};">${initials}</div>

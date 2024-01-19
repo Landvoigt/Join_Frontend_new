@@ -14,8 +14,8 @@ function contactBoxHTML(contact, i) {
             ${contact['initials']}
         </div>
         <div class="contact-box-name">
-            ${contact['firstname']} ${contact['lastname']}<br>
-            <a href="mailto:${contact['mail']}">${contact['mail']}</a>
+            ${contact['first_name']} ${contact['last_name']}<br>
+            <a href="mailto:${contact['email']}">${contact['email']}</a>
         </div>
     </div>
     `;
@@ -29,7 +29,7 @@ function openContactTemplate(i) {
             ${contacts[i]['initials']}
         </div>
         <div class="contact-name-big f-center f-column">
-            ${contacts[i]['firstname']} ${contacts[i]['lastname']}
+            ${contacts[i]['first_name']} ${contacts[i]['last_name']}
             <div class="add-task-btn d-flex j-start a-i-center pointer" onclick="showAddTaskWindow()"> 
                 <img src="../assets/icons/plus_lightblue.png">
                 <span>Add Task</span> 
@@ -44,7 +44,7 @@ function openContactTemplate(i) {
     </div>
     <div class="contact-email f-column">
         <b>Email</b>
-        <a href="mailto:${contacts[i]['mail']}">${contacts[i]['mail']}</a>
+        <a href="mailto:${contacts[i]['email']}">${contacts[i]['email']}</a>
     </div>
     <div class="contact-phone f-column">
         <b>Phone</b>
@@ -52,7 +52,7 @@ function openContactTemplate(i) {
     </div> 
     <div id="editContactBtnBox" class="edit-and-delete-box d-flex edit-and-delete-box-adjustment">
         <img src="../assets/icons/delete.png" class="delete-btn pointer" 
-            onclick="deleteContact(${contacts[i]['ID']})">
+            onclick="deleteContact(${contacts[i]['id']})">
         <img src="../assets/icons/pencil_white.png" class="edit-btn pointer" onclick="openEditContact(${i})">
     </div>
     `;
@@ -119,20 +119,20 @@ function editContactTemplate() {
                     ${contacts[shownContactIndex]['initials']}
                 </div>
             </div>
-            <form class="edit-contact-form-container f-column j-center" onsubmit="changeContactsData(${contacts[shownContactIndex]['ID']}); return false">
+            <form class="edit-contact-form-container f-column j-center" onsubmit="changeContactsData(${contacts[shownContactIndex]['id']}); return false">
                 <div class="p-relative">
                     <input required id="editContactFirstname" class="add-contact-form" placeholder="Firstname" 
-                        type="text" value="${contacts[shownContactIndex]['firstname']}">
+                        type="text" value="${contacts[shownContactIndex]['first_name']}">
                     <img src="../assets/icons/person.png" class="input-icon">
                 </div>
                 <div class="p-relative">
                     <input required id="editContactSurname" class="add-contact-form" placeholder="Lastname"
-                        type="text" value="${contacts[shownContactIndex]['lastname']}">
+                        type="text" value="${contacts[shownContactIndex]['last_name']}">
                     <img src="../assets/icons/person.png" class="input-icon">
                 </div>
                 <div class="p-relative">
                     <input required id="editContactMail" class="add-contact-form" placeholder="Email" 
-                        type="email" value="${contacts[shownContactIndex]['mail']}">
+                        type="email" value="${contacts[shownContactIndex]['email']}">
                     <img src="../assets/icons/mail.png" class="input-icon mail-icon-adjustment">
                 </div>
                 <div class="p-relative">
@@ -141,7 +141,7 @@ function editContactTemplate() {
                     <img src="../assets/icons/phone.png" class="input-icon input-icon-phone">
                 </div>
                 <div class="add-btn-container d-flex">
-                    <div class="delete-contact-btn d-flex a-i-center pointer" onclick="deleteContact(${contacts[shownContactIndex]['ID']})">Delete</div>
+                    <div class="delete-contact-btn d-flex a-i-center pointer" onclick="deleteContact(${contacts[shownContactIndex]['id']})">Delete</div>
                     <button class="edit-contact-btn d-flex a-i-center pointer" type="submit">Save</button>
                 </div>
             </form>
