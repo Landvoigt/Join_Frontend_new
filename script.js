@@ -44,6 +44,7 @@ function showMainpage() {
  * @param {number} id - ID of the page you want to go to
  */
 async function changeSite(id) {
+    await loadTasks();
     let pageToShow = document.getElementById(id);
     let currentShownPage = document.getElementById(currentPage);
     currentShownPage.classList.add('d-none');
@@ -52,7 +53,6 @@ async function changeSite(id) {
     currentPage = id;
     currentAssignedClients = [];
     addTaskSideCreateContact = false;
-    await loadTasks();
     clearSearchField();
     deleteBackgroundColors();
     getTaskNumbers();

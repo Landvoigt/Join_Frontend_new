@@ -98,5 +98,5 @@ async function updateTaskInformation(id, title, desc, date) {
     await updateItem('tasks', updatedTask);
     closePopupWindow();
     showSuccessBanner('Task edited');
-    await loadTasks();
+    await changeSite(BOARD_ID);
 }

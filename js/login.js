@@ -136,7 +136,6 @@ async function login() {
         "password": password
     };
     try {
-        debugger
         let response = await fetch(API + '/login/', {
             method: 'POST',
             headers: {
@@ -185,7 +184,7 @@ async function guestLogin() {
     let guestLoginData = {
         "email": "guestlogin@email.com",
         "password": "Guest12345",
-        "token": "c0a9adba3ffd550a7ada34339827c036719ce385"
+        "token": "c0a9adba3ffd550a7ada34339827c036719ce385",
     };
 
     try {

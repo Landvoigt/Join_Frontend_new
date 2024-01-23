@@ -53,7 +53,7 @@ async function addTask(title, desc, date) {
         closePopupWindow();
     }
     showSuccessBanner('Task created');
-    changeSite(BOARD_ID);
+    await changeSite(BOARD_ID);
 }
 
 
