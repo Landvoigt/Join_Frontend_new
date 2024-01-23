@@ -1,4 +1,4 @@
-const API = 'http://timvoigt1996.pythonanywhere.com';
+const API = 'https://timvoigt1996.pythonanywhere.com';
 
 const LOGIN_ID = 'loginPage'
 const SUMMARY_ID = 'summaryPage'
@@ -10,6 +10,7 @@ const LEGALNOTICE_ID = 'legalNoticePage'
 const HELP_ID = 'helpPage'
 
 let currentPage = SUMMARY_ID;
+let passwordResetToken;
 let users = [];
 let previousPage;
 let previousBackground = 'summarySidebar';

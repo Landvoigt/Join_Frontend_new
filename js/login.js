@@ -3,15 +3,11 @@
  */
 const CURRENT_USER_KEY = 'currentUser';
 
+
 /**
  * The current user, obtained from localStorage, or an empty array if no user is found.
  */
 let currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || [];
-
-/**
- * An array containing the current user when they request to change their password.
- */
-let currentUserForNewPassword = [];
 
 
 /**
@@ -124,35 +120,6 @@ async function resetPassword() {
     } catch (error) {
         console.error('Fehler beim Zurücksetzen des Passworts:', error.message);
     }
-}
-
-
-/**
- * checks if the new given password input is correct
- */
-async function updatePassword() {
-    let parentDiv = document.getElementById('passwordReset');
-    let newPassword = parentDiv.querySelector("Input").value;
-    let parentDivConfirm = document.getElementById('passwordResetConfirm');
-    let newPasswordConfirm = parentDivConfirm.querySelector("Input").value;
-    const userIndex = users.findIndex(user => user.email === currentUserForNewPassword[0].email);
-    if (newPassword !== newPasswordConfirm) {
-        showFailureBanner(`Passwords dont match!<br>Try again`);
-    } else if (userIndex > -1) {
-        await setNewPassword(userIndex, newPassword);
-    }
-}
-
-
-/**
- * saves the new password on the server and shows feedback
- */
-async function setNewPassword(userIndex, newPassword) {
-    users[userIndex].password = newPassword;
-    await setItem('users', JSON.stringify(users));
-    currentUserForNewPassword = [];
-    showSuccessBanner('Password resetted');
-    renderLogin();
 }
 
 

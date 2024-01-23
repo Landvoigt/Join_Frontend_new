@@ -1,35 +1,4 @@
 /**
- * Generates the HTML template for the reset password form
- * @returns {string} - The reset password form HTML template
- */
-function resetPasswordTemplate() {
-    return `
-    <form class="reset-pw-form f-center f-column" onsubmit="updatePassword(); return false;">
-        <div class="login-headline-container f-center">  
-            <img onclick="newPassword()" class="pointer" src="../assets/icons/back_arrow_lightblue.png">
-            <h1>Reset your password</h1>
-        </div> 
-        <div class="login-design-line"></div>
-        <div class="login-input-container f-column a-i-center">
-            <span class="login-headline-span d-flex j-center">Change your account password</span>
-            <div class="login-input f-center" id="passwordReset">
-                <input class="loginE-Mail" type="password" minlength="8" placeholder="New password" required onkeydown="changePWSymbol('passwordReset')">
-                <img src="../assets/icons/password.svg" class="inputImg password-img" onclick="showPassword('passwordReset')">
-            </div>
-            <div class="login-input f-center" id="passwordResetConfirm">
-                <input class="loginE-Mail" type="password" minlength="8" required placeholder="Confirm password" onkeydown="changePWSymbol('passwordResetConfirm')">
-                <img id="passwordConfirmImg" class="inputImg password-img" src="../assets/icons/password.svg" onclick="showPassword('passwordResetConfirm')">
-            </div>
-        </div>
-        <div class="sign-up-btn-container d-flex j-center">
-            <button class="reset-pw-btn pointer" type="submit">Continue</button>
-        </div>
-    </form>
-    `;
-}
-
-
-/**
  * Returns the HTML template for the login form.
  * @returns {string} The HTML template for the login form.
  */
