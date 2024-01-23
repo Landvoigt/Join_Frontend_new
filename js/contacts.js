@@ -187,9 +187,10 @@ async function createNewContact() {
     let mail = document.getElementById('createContactMail').value;
     let phone = document.getElementById('createContactPhone').value;
     checkForExistingID();
-    createRandomColor();
+    let randomContactColor = createRandomColor();
 
-    await pushNewContact(firstname, lastname, mail, phone);
+    await pushNewContact(firstname, lastname, mail, phone, randomContactColor);
+    await loadContacts();
     await refreshContactPage();
     showSuccessBanner('Contact created');
 }
@@ -198,7 +199,7 @@ async function createNewContact() {
 /**
  * creates a new contact
  */
-async function pushNewContact(firstname, lastname, mail, phone) {
+async function pushNewContact(firstname, lastname, mail, phone, randomContactColor) {
     let newContact = {
         "first_name": firstname,
         "last_name": lastname,

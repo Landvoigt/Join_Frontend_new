@@ -141,7 +141,18 @@ function deleteBackgroundColors() {
  */
 function createRandomColor() {
     currentPickedColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-    randomContactColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+
+/**
+ * Creates a random color for a contact.
+ */
+function createRandomColor() {
+    let color;
+    do {
+        color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    } while (color === '#ffffff');
+    return color;
 }
 
 

@@ -31,7 +31,6 @@ let randomColor;
 let fieldsFilledCorrectly = false;
 let contacts = [];
 let firstLetters = [];
-let randomContactColor;
 let addTaskSideCreateContact = false;
 let inAddTaskPopup = false;
 let taskSavedInCache = false;
