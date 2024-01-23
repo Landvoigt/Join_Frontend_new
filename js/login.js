@@ -96,7 +96,7 @@ function newPassword() {
  * Sends a password reset request to the server.
  */
 async function resetPassword() {
-    adjustHeader('Join | Reset Password');
+    disableBtn('sendMailBtn');
     const email = document.getElementById('resetEmail').value;
     const resetPasswordUrl = API + '/api/password_reset/';
 
@@ -106,19 +106,19 @@ async function resetPassword() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ "email": email }),
         });
 
         if (!response.ok) {
             const errorMessage = await response.json();
             showFailureBanner('User not found!');
-            throw new Error('Fehler beim Zurücksetzen des Passworts');
         }
 
         showSuccessBanner('Link to reset password sent!');
-        setTimeout(renderLogin, 300);
+        setTimeout(renderLogin, 500);
     } catch (error) {
-        console.error('Fehler beim Zurücksetzen des Passworts:', error.message);
+        showFailureBanner('An unexpected error occurred. Please try again.');
+        enableBtn('sendMailBtn');
     }
 }
 
@@ -129,46 +129,36 @@ async function resetPassword() {
  */
 async function login() {
     disableBtn('loginBtn');
-    try {
-        let user = await getUser();
-        if (user) {
-            localStorage.setItem('token', user.token);
-            createCurrentUser(user);
-            forwardToMainPage();
-        }
-    } catch (error) {
-        showFailureBanner('An unexpected error occurred. Please try again.');
-        enableBtn('loginBtn');
-    }
-}
-
-
-/**
- * Fetches user data from the server.
- * @returns {Promise<?Object>} The user object if successful, or null if there is an error.
- */
-async function getUser() {
     let email = document.getElementById('emailInput').value;
     let password = document.getElementById('passwordInput').value;
     let loginData = {
         "email": email,
         "password": password
     };
+    try {
+        debugger
+        let response = await fetch(API + '/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
 
-    let response = await fetch(API + '/login/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-    });
-
-    if (!response.ok) {
-        const errorMessage = await response.json();
-        handleLoginError(errorMessage.error);
-        return null;
+        if (response.ok) {
+            let user = await response.json();
+            localStorage.setItem('token', user.token);
+            createCurrentUser(user);
+            forwardToMainPage();
+        } else {
+            const errorMessage = await response.json();
+            handleLoginError(errorMessage.error);
+        }
+    } catch (error) {
+        showFailureBanner('An unexpected error occurred. Please try again.');
+    } finally {
+        enableBtn('loginBtn');
     }
-    return await response.json();
 }
 
 
@@ -177,7 +167,7 @@ async function getUser() {
  * @param {string} error - The error message received from the server.
  */
 function handleLoginError(error) {
-    if (error === 'Email doesnt exist.') {
+    if (error === 'Email does not exist.') {
         showFailureBanner('User not found!');
     } else if (error === 'Invalid password.') {
         showFailureBanner('Invalid password!');
@@ -185,6 +175,38 @@ function handleLoginError(error) {
         showFailureBanner('An unexpected error occurred. Please try again.');
     }
     enableBtn('loginBtn');
+}
+
+
+/**
+ * Handles the guest login.
+ */
+async function guestLogin() {
+    let guestLoginData = {
+        "email": "guestlogin@email.com",
+        "password": "Guest12345",
+        "token": "c0a9adba3ffd550a7ada34339827c036719ce385"
+    };
+
+    try {
+        let response = await fetch(API + '/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(guestLoginData),
+        });
+
+        if (response.ok) {
+            let user = await response.json();
+            createCurrentUser(user);
+            forwardToMainPage();
+        } else {
+            showFailureBanner('Error, please try again');
+        }
+    } catch (error) {
+        showFailureBanner('Error, please try again');
+    }
 }
 
 

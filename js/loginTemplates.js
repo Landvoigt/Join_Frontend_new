@@ -28,7 +28,7 @@ function loginTemplate() {
       </div>
       <div class="sign-up-btn-container d-flex j-center gap-35">
           <button id="loginBtn" class="login-btn pointer" type="submit">Log in</button>
-          <button class="guest-login-btn pointer" onclick="forwardToMainPage()" type="button">Guest Log in</button>
+          <button class="guest-login-btn pointer" onclick="guestLogin()" type="button">Guest Log in</button>
       </div>
     </form>
     `;
@@ -89,7 +89,7 @@ function newPasswordTemplate() {
             </div>
         </div>
         <div class="sign-up-btn-container d-flex j-center">
-            <button class="new-pw-btn pointer" type="submit">Send Email</button>
+            <button class="new-pw-btn pointer" type="submit" id="sendMailBtn">Send Email</button>
         </div>
     </form>
     `;

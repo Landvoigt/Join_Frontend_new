@@ -4,10 +4,12 @@
 async function loadTasks() {
     try {
         tasks = await getItem('tasks');
+        if (tasks) {
+            updateTasks();
+        }
     } catch (e) {
         console.error('Loading error:', e);
     }
-    updateTasks();
 }
 
 

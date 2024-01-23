@@ -1,3 +1,6 @@
+/**
+ * Checks if a token is provided.
+ */
 document.addEventListener("DOMContentLoaded", function () {
     passwordResetToken = new URLSearchParams(window.location.search).get('token');
     if (!passwordResetToken) {
@@ -30,13 +33,17 @@ async function updatePassword() {
  */
 async function setNewPassword(newPassword) {
     const changePasswordUrl = API + '/api/password_reset/confirm/';
+    let newPwBody = {
+        "token": passwordResetToken,
+        "password": newPassword
+    }
     try {
         const response = await fetch(changePasswordUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ token: passwordResetToken, password: newPassword }),
+            body: JSON.stringify(newPwBody),
         });
 
         if (!response.ok) {
